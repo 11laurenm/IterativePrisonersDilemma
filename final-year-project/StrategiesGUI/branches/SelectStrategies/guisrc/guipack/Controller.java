@@ -1,10 +1,15 @@
 package guipack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import guipack.Main;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
+import strategiespack.RoundRobin;
 import strategiespack.Strategy;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -33,6 +38,14 @@ public class Controller {
 	public void setMain(Main Mainclass) {
         this.mainn = Mainclass;
         strategyTable.setItems(mainn.getStrategyData());
+    }
+	
+	@FXML
+    private void handleRunTournament() {
+		ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
+		ArrayList<Strategy> ALSelectedItems = new ArrayList<Strategy>(selectedItems);
+		RoundRobin tournament = new RoundRobin(ALSelectedItems, 4);
+		tournament.runTournament();
     }
 
 }

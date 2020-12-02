@@ -47,7 +47,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            ;
         }
     }
 
@@ -63,7 +63,7 @@ public class Main extends Application {
             controller.initialize(this);
             
         } catch (IOException e) {
-            e.printStackTrace();
+            ;
         }
     }
 	

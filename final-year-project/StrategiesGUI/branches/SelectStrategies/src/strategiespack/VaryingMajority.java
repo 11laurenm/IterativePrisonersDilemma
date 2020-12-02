@@ -46,8 +46,11 @@ public class VaryingMajority extends Strategy{
 			iterations = rounds;
 		}
 		
-		for(int i = 0; i<iterations; i++) {
-			if(History.get(size - i) == 'd') {
+		for(int i = 1; i<iterations + 1; i++) {
+			int getIndex = size - i;
+			System.out.print("CONSIDERING ROUND ");
+			System.out.println(i);
+			if(History.get(getIndex) == 'd') {
 				defects++;
 			} else {
 				coops++;

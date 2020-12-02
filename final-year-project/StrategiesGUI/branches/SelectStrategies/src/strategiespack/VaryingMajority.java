@@ -79,5 +79,10 @@ public class VaryingMajority extends Strategy{
 		  round.setValue(Integer.toString(rounds));
 		  return round;
 	}
+	
+	@Override
+	public void setRounds(int round) {
+		this.rounds = round;
+	}
 
 }

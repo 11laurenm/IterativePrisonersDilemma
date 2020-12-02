@@ -15,9 +15,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 public class Controller {
 	@FXML
@@ -59,7 +61,9 @@ public class Controller {
 		strategyTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("name"));
 		probabilityColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("probability"));
+		probabilityColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		roundsColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("rounds"));
+		roundsColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 	
 	public void setMain(Main Mainclass) {
@@ -86,13 +90,22 @@ public class Controller {
 		}
 		try {
 			RoundRobin tournament = new RoundRobin(ALSelectedItems, Integer.parseInt(Rounds.getText()), payoffs);
-			tournament.runTournament();
+			try {
+				tournament.runTournament();
+			} catch (Exception e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setContentText("Error running tournament");
+				alert.showAndWait();
+			}
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setContentText("Round length must be an integer");
 			alert.showAndWait();
 		}
+		
+		
     }
 	
 	@FXML
@@ -134,5 +147,17 @@ public class Controller {
 	private void DD2Edited() {
 		DD1.setText(DD2.getText());
 	}
-
+	
+	@FXML
+	private void probabilityEdited() {
+		;
+	}
+	
+	@FXML
+	private void roundsEdited(CellEditEvent<Strategy,String> event) {
+	        String newValue = event.getNewValue();
+	        Strategy strat = event.getRowValue();
+	        strat.setRounds(Integer.parseInt(newValue));
+	}
 }
+

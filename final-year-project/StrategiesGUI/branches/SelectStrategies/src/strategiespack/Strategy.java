@@ -15,13 +15,11 @@ public class Strategy {
 	 * The total amount of points the strategy has gained.
 	 */
     int points;
-    
     /**
      * Initialise the strategy with 0 points.
      */
     public Strategy() {
         int points = 0;
-        //this.StrategyName = getName();
     }
     
     /**
@@ -54,6 +52,14 @@ public class Strategy {
      */
 	public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
 		return 'n';
+	}
+	
+	public void setProbability(float prob) {
+		;
+	}
+	
+	public void setRounds(int round) {
+		;
 	}
 
 }

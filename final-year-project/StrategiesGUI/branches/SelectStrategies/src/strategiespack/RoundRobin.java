@@ -18,6 +18,8 @@ public class RoundRobin {
 		int first = varyLength.getFirstSet();
 		int second = varyLength.getSecondSet();
 		int third = varyLength.getThirdSet();
+		
+		
 		for(int i = 0; i < strategies.size(); i++) {
 			for(int j = i; j < strategies.size(); j++) {
 				Game game1 = new Game(strategies.get(i), strategies.get(j), first, payoffList);
@@ -28,6 +30,7 @@ public class RoundRobin {
 				game3.playGame();
 			}
 		}
+		System.out.println("Tournament concluded");
 	}
 
 }

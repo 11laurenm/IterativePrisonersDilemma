@@ -24,6 +24,7 @@ public class Game {
     char strategy2move;
     int length;
     boolean dummyStrat;
+    ArrayList<Integer> payoffs;
     
     /**
      * 
@@ -31,7 +32,7 @@ public class Game {
      * @param strat2 the other strategy being played
      * @param rounds the amount of rounds to be played
      */
-    public Game(Strategy strat1, Strategy strat2, int rounds) {
+    public Game(Strategy strat1, Strategy strat2, int rounds, ArrayList<Integer> payoffList) {
         HistoryStrategy1 = new ArrayList<>();
         HistoryStrategy2 = new ArrayList<>();
         RoundScores = new ArrayList<>();
@@ -39,6 +40,7 @@ public class Game {
         strategy2 = strat2;
         length = rounds;
         dummyStrat = false;
+        payoffs = payoffList;
     }
     
     /**
@@ -98,19 +100,19 @@ public class Game {
         ArrayList<Integer> scores = new ArrayList();
         if(decision1 == 'c') {
             if(decision2 == 'c') {
-                scores.add(3);
-                scores.add(3); 
+                scores.add(payoffs.get(0));
+                scores.add(payoffs.get(0));
             } else {
-                scores.add(0);
-                scores.add(5);
+            	scores.add(payoffs.get(2));
+                scores.add(payoffs.get(1));
             }
         } else {
             if(decision2 == 'c') {
-                scores.add(5);
-                scores.add(0);  
+            	scores.add(payoffs.get(1));
+            	scores.add(payoffs.get(2));  
             } else {
-                scores.add(1);
-                scores.add(1);
+            	scores.add(payoffs.get(3));
+            	scores.add(payoffs.get(3));
             } 
         }
         

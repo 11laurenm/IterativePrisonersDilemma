@@ -6,9 +6,11 @@ public class RoundRobin {
 	
 	ArrayList<Strategy> strategies;
 	int totalRounds;
-	public RoundRobin(ArrayList<Strategy> strats, int rounds) {
+	ArrayList<Integer> payoffList;
+	public RoundRobin(ArrayList<Strategy> strats, int rounds, ArrayList<Integer> Payoffs) {
 		totalRounds = rounds;
 		strategies = strats;
+		payoffList = Payoffs;
 	}
 	
 	public void runTournament() {
@@ -18,11 +20,11 @@ public class RoundRobin {
 		int third = varyLength.getThirdSet();
 		for(int i = 0; i < strategies.size(); i++) {
 			for(int j = i; j < strategies.size(); j++) {
-				Game game1 = new Game(strategies.get(i), strategies.get(j), first);
+				Game game1 = new Game(strategies.get(i), strategies.get(j), first, payoffList);
 				game1.playGame();
-				Game game2 = new Game(strategies.get(i), strategies.get(j), second);
+				Game game2 = new Game(strategies.get(i), strategies.get(j), second, payoffList);
 				game2.playGame();
-				Game game3 = new Game(strategies.get(i), strategies.get(j), third);
+				Game game3 = new Game(strategies.get(i), strategies.get(j), third, payoffList);
 				game3.playGame();
 			}
 		}

@@ -62,7 +62,14 @@ public class Controller {
     private void handleRunTournament() {
 		ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
 		ArrayList<Strategy> ALSelectedItems = new ArrayList<Strategy>(selectedItems);
-		RoundRobin tournament = new RoundRobin(ALSelectedItems, 4);
+		
+		ArrayList<Integer> payoffs = new ArrayList<>();
+		payoffs.add(Integer.parseInt(CC1.getText()));
+		payoffs.add(Integer.parseInt(DC1.getText()));
+		payoffs.add(Integer.parseInt(DC2.getText()));
+		payoffs.add(Integer.parseInt(DD1.getText()));
+		
+		RoundRobin tournament = new RoundRobin(ALSelectedItems, 4, payoffs);
 		tournament.runTournament();
     }
 	

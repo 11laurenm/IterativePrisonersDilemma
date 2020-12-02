@@ -3,6 +3,7 @@ package testspack;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +31,8 @@ class GameTests {
     void testCreateGame() {
         AlwaysCooperate strategy1 = new AlwaysCooperate();
         AlwaysDefect strategy2 = new AlwaysDefect();
-        Game game = new Game(strategy1, strategy2, 3);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 3, payoffs);
     }
     
     /**
@@ -43,7 +45,8 @@ class GameTests {
     void testgetLastMoveNoMoves() {
         AlwaysCooperate strategy1 = new AlwaysCooperate();
         AlwaysDefect strategy2 = new AlwaysDefect();
-        Game game = new Game(strategy1, strategy2, 3);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 3, payoffs);
         char last = game.getLastMove(game.HistoryStrategy1);
         assertEquals(last, 'n', "getLastMove not returning correctly when 0 moves");
     }
@@ -57,7 +60,8 @@ class GameTests {
     void testgetLastMove() {
         AlwaysCooperate strategy1 = new AlwaysCooperate();
         AlwaysDefect strategy2 = new AlwaysDefect();
-        Game game = new Game(strategy1, strategy2, 3);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 3, payoffs);
         game.setLastMove('c', game.HistoryStrategy1);
         char last = game.getLastMove(game.HistoryStrategy1);
         assertEquals(last, 'c', "getLastMove not returning correctly");
@@ -72,7 +76,8 @@ class GameTests {
     void testsetLastMove() {
         AlwaysCooperate strategy1 = new AlwaysCooperate();
         AlwaysDefect strategy2 = new AlwaysDefect();
-        Game game = new Game(strategy1, strategy2, 3);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 3, payoffs);
         game.setLastMove('c', game.HistoryStrategy1);
         game.setLastMove('d', game.HistoryStrategy1);
         game.setLastMove('d', game.HistoryStrategy1);
@@ -93,7 +98,8 @@ class GameTests {
     void testPlayGameHistory() {
         AlwaysCooperate strategy1 = new AlwaysCooperate();
         AlwaysDefect strategy2 = new AlwaysDefect();
-        Game game = new Game(strategy1, strategy2, 3);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 3, payoffs);
         game.playGame();
         assertEquals('c', game.getLastMove(game.HistoryStrategy1), "strategy1 getLastMove not working in playGame method");
         assertEquals('d', game.getLastMove(game.HistoryStrategy2), "strategy2 getLastMove not working in playGame method");
@@ -108,7 +114,8 @@ class GameTests {
     void testCalculateScoresCooperate() {
         AlwaysCooperate strategy1 = new AlwaysCooperate();
         AlwaysCooperate strategy2 = new AlwaysCooperate();
-        Game game = new Game(strategy1, strategy2, 1);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 1, payoffs);
         game.playGame();
         assertEquals(3, strategy1.getPoints(), "calculateScores not functioning correctly");
         assertEquals(3, strategy2.getPoints(), "calculateScores not functioning correctly");
@@ -122,7 +129,8 @@ class GameTests {
     void testCalculateScoresDefect() {
         AlwaysDefect strategy1 = new AlwaysDefect();
         AlwaysDefect strategy2 = new AlwaysDefect();
-        Game game = new Game(strategy1, strategy2, 3);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 3, payoffs);
         ArrayList<Integer> actualscores = game.calculateScores(strategy1.getDecision(), strategy2.getDecision());
         ArrayList<Integer> testscores = new ArrayList();
         testscores.add(1);
@@ -138,7 +146,8 @@ class GameTests {
     void testCalculateScoresCooperateDefect() {
         AlwaysCooperate strategy1 = new AlwaysCooperate();
         AlwaysDefect strategy2 = new AlwaysDefect();
-        Game game = new Game(strategy1, strategy2, 1);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 1, payoffs);
         game.playGame();
         assertEquals(0, strategy1.getPoints(), "calculateScores not functioning correctly");
         assertEquals(5, strategy2.getPoints(), "calculateScores not functioning correctly");
@@ -152,7 +161,8 @@ class GameTests {
     void testCalculateScoresDefectCooperate() {
         AlwaysDefect strategy1 = new AlwaysDefect();
         AlwaysCooperate strategy2 = new AlwaysCooperate();
-        Game game = new Game(strategy1, strategy2, 1);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 1, payoffs);
         game.playGame();
         assertEquals(5, strategy1.getPoints(), "calculateScores not functioning correctly");
         assertEquals(0, strategy2.getPoints(), "calculateScores not functioning correctly");
@@ -167,7 +177,8 @@ class GameTests {
     void testPlayCorrectNumberRounds() {
     	AlwaysDefect strategy1 = new AlwaysDefect();
         AlwaysCooperate strategy2 = new AlwaysCooperate();
-        Game game = new Game(strategy1, strategy2, 3);
+        ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy1, strategy2, 3, payoffs);
         game.playGame();
         assertEquals(strategy1.getPoints(), 15, "Point values not correct, possibly not playing correct number of rounds");
         assertEquals(strategy2.getPoints(), 0, "Point values not correct, possibly not playing correct number of rounds");
@@ -176,7 +187,8 @@ class GameTests {
     @Test
     void testEqualStrategies() {
     	AlwaysCooperate strategy = new AlwaysCooperate();
-    	Game game = new Game(strategy, strategy, 1);
+    	ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+        Game game = new Game(strategy, strategy, 1, payoffs);
     	game.playGame();
     	assertEquals(strategy.getPoints(), 3, "Game not recognising should be dummy strategy");
     }

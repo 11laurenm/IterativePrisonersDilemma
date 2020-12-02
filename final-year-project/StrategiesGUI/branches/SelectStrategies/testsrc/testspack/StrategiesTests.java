@@ -3,6 +3,7 @@ package testspack;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 import strategiespack.AlwaysCooperate;
@@ -85,7 +86,8 @@ class StrategiesTests {
   void testTitForTatNoHistory() {
 	  TitForTat testStrat = new TitForTat();
 	  AlwaysDefect testStrat2 = new AlwaysDefect();
-	  Game game = new Game(testStrat, testStrat2, 1);
+	  ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 1, payoffs);
 	  int points = testStrat.getPoints();
 	  assertEquals(points, 0, "tit for tat not returning c when no history");
   }
@@ -98,7 +100,8 @@ class StrategiesTests {
   void testTitForTatWithHistoryCooperate() {
 	  TitForTat testStrat = new TitForTat();
 	  AlwaysCooperate testStrat2 = new AlwaysCooperate();
-	  Game game = new Game(testStrat, testStrat2, 2);
+	  ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 2, payoffs);
 	  game.playGame();
 	  int points = testStrat.getPoints();
 	  assertEquals(points, 6, "tit for tat not returning correctly against cooperating opponent"); 
@@ -112,7 +115,8 @@ class StrategiesTests {
   void testTitForTatWithHistoryDefect() {
 	  TitForTat testStrat = new TitForTat();
 	  AlwaysDefect testStrat2 = new AlwaysDefect();
-	  Game game = new Game(testStrat, testStrat2, 2);
+	  ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 2, payoffs);
 	  game.playGame();
 	  int points = testStrat.getPoints();
 	  assertEquals(points, 1, "tit for tat not returning correctly against defecting opponent"); 
@@ -127,7 +131,8 @@ class StrategiesTests {
    void testVaryingMajorityNoHistory() {
 	 VaryingMajority testStrat = new VaryingMajority(3);
 	 AlwaysDefect testStrat2 = new AlwaysDefect();
-	 Game game = new Game(testStrat, testStrat2, 1);
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 1, payoffs);
 	 game.playGame();
 	 int points = testStrat.getPoints();
 	 assertEquals(points, 0, "varyingMajority not returning c when no history");
@@ -144,7 +149,8 @@ class StrategiesTests {
  void testVaryingMajorityWithNotEnoughHistory() {
 	 VaryingMajority testStrat = new VaryingMajority(3);
 	 AlwaysDefect testStrat2 = new AlwaysDefect();
-	 Game game = new Game(testStrat, testStrat2, 2);
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 2, payoffs);
 	 game.playGame();
 	 int points = testStrat.getPoints();
 	 assertEquals(points, 1, "varyingMajority not returning correctly with insufficient history");
@@ -159,7 +165,8 @@ class StrategiesTests {
  void testVaryingMajorityWithTooMuchHistory() {
 	 VaryingMajority testStrat = new VaryingMajority(3);
 	 AlwaysDefect testStrat2 = new AlwaysDefect();
-	 Game game = new Game(testStrat, testStrat2, 5);
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 5, payoffs);
 	 game.playGame();
 	 int points = testStrat.getPoints();
 	 assertEquals(points, 4, "varyingMajority not returning correctly with too much history");
@@ -167,92 +174,102 @@ class StrategiesTests {
  
  @Test
  void testSpitefulAlwaysCooperate() {
-	 AlwaysCooperate strategy1 = new AlwaysCooperate();
-	 Spiteful strategy2 = new Spiteful();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysCooperate testStrat = new AlwaysCooperate();
+	 Spiteful testStrat2 = new Spiteful();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 9, "Spiteful strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 9, "Spiteful strategy not functioning correctly");
  }
  
  @Test
  void testSpitefulAlwaysDefect() {
-	 AlwaysDefect strategy1 = new AlwaysDefect();
-	 Spiteful strategy2 = new Spiteful();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysDefect testStrat = new AlwaysDefect();
+	 Spiteful testStrat2 = new Spiteful();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 2, "Spiteful strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 2, "Spiteful strategy not functioning correctly");
  }
  
  @Test
  void testMistrustAlwaysCooperate() {
-	 AlwaysCooperate strategy1 = new AlwaysCooperate();
-	 Mistrust strategy2 = new Mistrust();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysCooperate testStrat = new AlwaysCooperate();
+	 Mistrust testStrat2 = new Mistrust();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 11, "Mistrust strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 11, "Mistrust strategy not functioning correctly");
  }
  
  @Test
  void testMistrustAlwaysDefect() {
-	 AlwaysDefect strategy1 = new AlwaysDefect();
-	 Mistrust strategy2 = new Mistrust();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysDefect testStrat = new AlwaysDefect();
+	 Mistrust testStrat2 = new Mistrust();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 3, "Mistrust strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 3, "Mistrust strategy not functioning correctly");
  }
  
  @Test
  void testPavlovAlwaysCooperate() {
-	 AlwaysCooperate strategy1 = new AlwaysCooperate();
-	 Pavlov strategy2 = new Pavlov();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysCooperate testStrat = new AlwaysCooperate();
+	 Pavlov testStrat2 = new Pavlov();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	  Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 9, "Pavlov strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 9, "Pavlov strategy not functioning correctly");
  }
  
  @Test
  void testPavlovAlwaysDefect() {
-	 AlwaysDefect strategy1 = new AlwaysDefect();
-	 Pavlov strategy2 = new Pavlov();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysDefect testStrat = new AlwaysDefect();
+	 Pavlov testStrat2 = new Pavlov();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 1, "Pavlov strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 1, "Pavlov strategy not functioning correctly");
  }
  
  @Test
  void testSoftMajorityAlwaysCooperate() {
-	 AlwaysCooperate strategy1 = new AlwaysCooperate();
-	 SoftMajority strategy2 = new SoftMajority();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysCooperate testStrat = new AlwaysCooperate();
+	 SoftMajority testStrat2 = new SoftMajority();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 9, "SoftMajority strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 9, "SoftMajority strategy not functioning correctly");
  }
  
  @Test
  void testSoftMajorityAlwaysDefect() {
-	 AlwaysDefect strategy1 = new AlwaysDefect();
-	 SoftMajority strategy2 = new SoftMajority();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysDefect testStrat = new AlwaysDefect();
+	 SoftMajority testStrat2 = new SoftMajority();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 2, "SoftMajority strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 2, "SoftMajority strategy not functioning correctly");
  }
  
  @Test
  void testHardMajorityAlwaysCooperate() {
-	 AlwaysCooperate strategy1 = new AlwaysCooperate();
-	 HardMajority strategy2 = new HardMajority();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysCooperate testStrat = new AlwaysCooperate();
+	 HardMajority testStrat2 = new HardMajority();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 11, "HardMajority strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 11, "HardMajority strategy not functioning correctly");
  }
  
  @Test
  void testHardMajorityAlwaysDefect() {
-	 AlwaysDefect strategy1 = new AlwaysDefect();
-	 HardMajority strategy2 = new HardMajority();
-	 Game game = new Game(strategy1, strategy2, 3);
+	 AlwaysDefect testStrat = new AlwaysDefect();
+	 HardMajority testStrat2 = new HardMajority();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(strategy2.getPoints(), 3, "HardMajority strategy not functioning correctly");
+	 assertEquals(testStrat2.getPoints(), 3, "HardMajority strategy not functioning correctly");
  }
 
 }

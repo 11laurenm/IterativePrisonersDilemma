@@ -12,12 +12,11 @@ import javafx.beans.property.StringProperty;
  */
 
 public class AlwaysDefect extends Strategy{
-
+	
   /**
     * Constructor for an instance of the strategy, needs no inputs.
   */
   public AlwaysDefect() {
-	  //StrategyName = getName();
   }
 
   /**
@@ -35,6 +34,18 @@ public class AlwaysDefect extends Strategy{
 	  SimpleStringProperty StrategyName = new SimpleStringProperty();
 	  StrategyName.setValue("AlwaysDefect");
 	  return StrategyName;
+  }
+  
+  public StringProperty probabilityProperty() {
+	  SimpleStringProperty prob = new SimpleStringProperty();
+	  prob.setValue("-");
+	  return prob;
+  }
+  
+  public StringProperty roundsProperty() {
+	  SimpleStringProperty round = new SimpleStringProperty();
+	  round.setValue("-");
+	  return round;
   }
 
 }

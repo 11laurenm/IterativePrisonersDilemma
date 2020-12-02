@@ -12,12 +12,11 @@ import javafx.beans.property.StringProperty;
  */
 
 public class AlwaysCooperate extends Strategy{
-  
+	
   /**
     * Constructor for an instance of the strategy, needs no inputs.
    */
   public AlwaysCooperate() {
-	  //this.StrategyName = getName();
   }
 
   /**
@@ -34,6 +33,18 @@ public class AlwaysCooperate extends Strategy{
   public StringProperty nameProperty() {
 	  SimpleStringProperty StrategyName = new SimpleStringProperty();
 	  StrategyName.setValue("AlwaysCooperate");
+	  return StrategyName;
+  }
+  
+  public StringProperty probabilityProperty() {
+	  SimpleStringProperty StrategyName = new SimpleStringProperty();
+	  StrategyName.setValue("-");
+	  return StrategyName;
+  }
+  
+  public StringProperty roundsProperty() {
+	  SimpleStringProperty StrategyName = new SimpleStringProperty();
+	  StrategyName.setValue("-");
 	  return StrategyName;
   }
  

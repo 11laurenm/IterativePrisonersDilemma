@@ -24,7 +24,10 @@ public class Controller {
     private TableView<Strategy> strategyTable;
     @FXML
     private TableColumn<Strategy, String> strategyColumn;
-	
+    @FXML
+    private TableColumn<Strategy, String> probabilityColumn;
+    @FXML
+    private TableColumn<Strategy, String> roundsColumn;
     @FXML
     private TextField CC1;
     @FXML
@@ -55,6 +58,8 @@ public class Controller {
 		setMain(main);
 		strategyTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("name"));
+		probabilityColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("probability"));
+		roundsColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("rounds"));
     }
 	
 	public void setMain(Main Mainclass) {

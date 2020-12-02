@@ -11,6 +11,8 @@ import strategiespack.Strategy;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,6 +41,8 @@ public class Controller {
     private TextField DD1;
     @FXML
     private TextField DD2;
+    @FXML
+    private TextField Rounds;
     
 	private Main mainn;
 	
@@ -64,13 +68,26 @@ public class Controller {
 		ArrayList<Strategy> ALSelectedItems = new ArrayList<Strategy>(selectedItems);
 		
 		ArrayList<Integer> payoffs = new ArrayList<>();
-		payoffs.add(Integer.parseInt(CC1.getText()));
-		payoffs.add(Integer.parseInt(DC1.getText()));
-		payoffs.add(Integer.parseInt(DC2.getText()));
-		payoffs.add(Integer.parseInt(DD1.getText()));
-		
-		RoundRobin tournament = new RoundRobin(ALSelectedItems, 4, payoffs);
-		tournament.runTournament();
+		try {
+			payoffs.add(Integer.parseInt(CC1.getText()));
+			payoffs.add(Integer.parseInt(DC1.getText()));
+			payoffs.add(Integer.parseInt(DC2.getText()));
+			payoffs.add(Integer.parseInt(DD1.getText()));
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setContentText("Payoff values must be integers");
+			alert.showAndWait();
+		}
+		try {
+			RoundRobin tournament = new RoundRobin(ALSelectedItems, Integer.parseInt(Rounds.getText()), payoffs);
+			tournament.runTournament();
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setContentText("Round length must be an integer");
+			alert.showAndWait();
+		}
     }
 	
 	@FXML

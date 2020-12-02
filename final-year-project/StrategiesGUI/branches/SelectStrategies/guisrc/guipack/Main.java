@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
 import strategiespack.Strategy;
+import strategiespack.VaryingMajority;
 
 public class Main extends Application {
 
@@ -74,6 +75,7 @@ public class Main extends Application {
 	public Main() {
 		strategyData.add(new AlwaysCooperate());
 		strategyData.add(new AlwaysDefect());
+		strategyData.add(new VaryingMajority(5));
 	}
 	
 	public static void main(String[] args) {

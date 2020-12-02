@@ -2,6 +2,9 @@ package strategiespack;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  * A strategy that returns the decision made the majority of times by its opponent.
  * The amount of previous rounds it considers can be decided upon construction
@@ -18,7 +21,7 @@ public class VaryingMajority extends Strategy{
 	 * opponent's previous moves it considers.
 	 */
 	public VaryingMajority(int rounds) {
-		
+		this.rounds = rounds;
 	}
 	
 	/**
@@ -57,6 +60,24 @@ public class VaryingMajority extends Strategy{
 		return 'd';
 		
 		
+	}
+	
+	public StringProperty nameProperty() {
+		  SimpleStringProperty StrategyName = new SimpleStringProperty();
+		  StrategyName.setValue("VaryingMajority");
+		  return StrategyName;
+	  }
+	  
+	public StringProperty probabilityProperty() {
+		  SimpleStringProperty prob = new SimpleStringProperty();
+		  prob.setValue("-");
+		  return prob;
+	}
+	  
+	public StringProperty roundsProperty() {
+		  SimpleStringProperty round = new SimpleStringProperty();
+		  round.setValue(Integer.toString(rounds));
+		  return round;
 	}
 
 }

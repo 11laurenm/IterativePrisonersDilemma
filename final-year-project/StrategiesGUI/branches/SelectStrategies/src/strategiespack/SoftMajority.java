@@ -2,6 +2,8 @@ package strategiespack;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import strategiespack.Strategy;
 
 public class SoftMajority extends Strategy{
@@ -35,5 +37,23 @@ public class SoftMajority extends Strategy{
 		
 		
 	}
+	
+	public StringProperty nameProperty() {
+		  SimpleStringProperty StrategyName = new SimpleStringProperty();
+		  StrategyName.setValue("SoftMajority");
+		  return StrategyName;
+	  }
+	  
+	  public StringProperty probabilityProperty() {
+		  SimpleStringProperty prob = new SimpleStringProperty();
+		  prob.setValue("-");
+		  return prob;
+	  }
+	  
+	  public StringProperty roundsProperty() {
+		  SimpleStringProperty round = new SimpleStringProperty();
+		  round.setValue("-");
+		  return round;
+	  }
 
 }

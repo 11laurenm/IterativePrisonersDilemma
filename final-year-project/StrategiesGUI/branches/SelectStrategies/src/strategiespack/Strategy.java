@@ -71,6 +71,6 @@ public class Strategy {
 		  SimpleStringProperty pos = new SimpleStringProperty();
 		  pos.setValue(Integer.toString(tournamentPosition));
 		  return pos;
-	  }
+	}
 
 }

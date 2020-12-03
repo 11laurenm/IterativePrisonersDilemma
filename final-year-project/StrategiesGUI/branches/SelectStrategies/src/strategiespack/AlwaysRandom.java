@@ -3,6 +3,9 @@ package strategiespack;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /** A strategy that always makes a random decision.
  * 
  * @author Lauren Moore
@@ -35,6 +38,24 @@ public class AlwaysRandom extends Strategy{
       return 'c';
     }
     return 'd';
+  }
+  
+  public StringProperty nameProperty() {
+	  SimpleStringProperty StrategyName = new SimpleStringProperty();
+	  StrategyName.setValue("AlwaysRandom");
+	  return StrategyName;
+  }
+  
+  public StringProperty probabilityProperty() {
+	  SimpleStringProperty prob = new SimpleStringProperty();
+	  prob.setValue("-");
+	  return prob;
+  }
+  
+  public StringProperty roundsProperty() {
+	  SimpleStringProperty round = new SimpleStringProperty();
+	  round.setValue("-");
+	  return round;
   }
 
 }

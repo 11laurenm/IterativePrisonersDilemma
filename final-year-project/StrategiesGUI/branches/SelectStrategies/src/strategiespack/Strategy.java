@@ -2,6 +2,7 @@ package strategiespack;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -15,11 +16,15 @@ public class Strategy {
 	 * The total amount of points the strategy has gained.
 	 */
     int points;
+    
+    int tournamentPosition;
+    
     /**
      * Initialise the strategy with 0 points.
      */
     public Strategy() {
         int points = 0;
+        tournamentPosition = 0;
     }
     
     /**
@@ -61,5 +66,11 @@ public class Strategy {
 	public void setRounds(int round) {
 		;
 	}
+	
+	public StringProperty positionProperty() {
+		  SimpleStringProperty pos = new SimpleStringProperty();
+		  pos.setValue(Integer.toString(tournamentPosition));
+		  return pos;
+	  }
 
 }

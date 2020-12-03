@@ -92,6 +92,8 @@ public class Controller {
 			RoundRobin tournament = new RoundRobin(ALSelectedItems, Integer.parseInt(Rounds.getText()), payoffs);
 			try {
 				tournament.runTournament();
+				System.out.println("TOURNAMENT RUN");
+				mainn.displayResults(tournament.returnResults());
 			} catch (Exception e) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Dialog");

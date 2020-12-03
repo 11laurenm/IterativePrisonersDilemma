@@ -1,6 +1,7 @@
 package guipack;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
@@ -81,4 +83,24 @@ public class Main extends Application {
 		launch(args);
 	}
 	
+	public void displayResults(ArrayList<Strategy> results) {
+		try {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(Main.class.getResource("OutputResults.fxml"));
+	        AnchorPane page;
+			page = (AnchorPane) loader.load();
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Tournament results");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	        dialogStage.initOwner(primaryStage);
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        ResultsController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	        controller.setResults(results);
+	        dialogStage.showAndWait();
+		} catch (IOException e) {
+			;
+		}
+	}
 }

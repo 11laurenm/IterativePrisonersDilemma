@@ -48,8 +48,6 @@ public class VaryingMajority extends Strategy{
 		
 		for(int i = 1; i<iterations + 1; i++) {
 			int getIndex = size - i;
-			System.out.print("CONSIDERING ROUND ");
-			System.out.println(i);
 			if(History.get(getIndex) == 'd') {
 				defects++;
 			} else {

@@ -150,8 +150,10 @@ public class Controller {
 	}
 	
 	@FXML
-	private void probabilityEdited() {
-		;
+	private void probabilityEdited(CellEditEvent<Strategy,String> event) {
+		String newValue = event.getNewValue();
+        Strategy strat = event.getRowValue();
+        strat.setProbability(Integer.parseInt(newValue));
 	}
 	
 	@FXML

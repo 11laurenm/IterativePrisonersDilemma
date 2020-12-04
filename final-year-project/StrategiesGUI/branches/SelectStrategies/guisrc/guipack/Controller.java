@@ -101,8 +101,9 @@ public class Controller {
 			RoundRobin tournament = new RoundRobin(ALSelectedItems, Integer.parseInt(Rounds.getText()), payoffs);
 			try {
 				tournament.runTournament();
-				mainn.displayResults(tournament.returnResults());
+				mainn.displayResults(tournament.returnResults(), tournament.returnScores());
 			} catch (Exception e) {
+				e.printStackTrace();
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Dialog");
 				alert.setContentText("Error running tournament");

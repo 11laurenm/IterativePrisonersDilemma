@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -84,5 +85,26 @@ public class ResultsController {
 		mainn.launchDetailedResults();
 	}
 	
-
+	void constructGrid(ArrayList<Strategy> results, ArrayList<Integer> scores) {
+		
+		for(int i = 0; i < results.size(); i++) {
+			Label label = new Label();
+			label.setText(results.get(i).nameProperty());
+		}
+		
+		int pos = 0;
+		for(int i = 0; i < results.size(); i++) {
+			for(int j = i; j < results.size(); j++) {
+				Label label = new Label();
+				label.setText(Integer.toString(scores.get(pos)) + ", " + Integer.toString(scores.get(pos + 1)));
+				resultsGrid.add(label, i, j);
+				if(i != j) {
+					Label label2 = new Label();
+					label2.setText(Integer.toString(scores.get(pos + 1)) + ", " + Integer.toString(scores.get(pos)));
+					resultsGrid.add(label2, j, i);
+				}
+				pos = pos + 2;
+			}
+		}
+	}
 }

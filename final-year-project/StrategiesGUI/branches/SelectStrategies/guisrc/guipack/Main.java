@@ -85,7 +85,7 @@ public class Main extends Application {
 		launch(args);
 	}
 	
-	public void displayResults(ArrayList<Strategy> results) {
+	public void displayResults(ArrayList<Strategy> results, ArrayList<Integer> scores) {
 		try {
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(Main.class.getResource("OutputResults.fxml"));
@@ -98,12 +98,13 @@ public class Main extends Application {
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 	        ResultsController controller = loader.getController();
+	        controller.constructGrid(results, scores);
 	        controller.setResults(results);
 	        controller.initialize();
 	        controller.setMain(this);
 	        dialogStage.showAndWait();
 		} catch (IOException e) {
-			;
+			e.printStackTrace();
 		}
 	}
 	

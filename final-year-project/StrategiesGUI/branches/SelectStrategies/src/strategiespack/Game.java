@@ -25,6 +25,8 @@ public class Game {
     int length;
     boolean dummyStrat;
     ArrayList<Integer> payoffs;
+    int player1InitialScore = 0;
+    int player2InitialScore = 0;
     
     /**
      * 
@@ -41,6 +43,8 @@ public class Game {
         length = rounds;
         dummyStrat = false;
         payoffs = payoffList;
+        player1InitialScore = strat1.getPoints();
+        player2InitialScore = strat2.getPoints();
     }
     
     /**
@@ -124,6 +128,14 @@ public class Game {
     		return true;
     	}
     	return false;
+    }
+    
+    public int getPlayer1Score(){
+    	return strategy1.getPoints() - player1InitialScore;
+    }
+    
+    public int getPlayer2Score(){
+    	return strategy2.getPoints() - player2InitialScore;
     }
    
 }

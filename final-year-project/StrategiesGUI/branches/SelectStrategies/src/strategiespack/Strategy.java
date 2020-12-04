@@ -72,5 +72,11 @@ public class Strategy {
 		  pos.setValue(Integer.toString(tournamentPosition));
 		  return pos;
 	}
+	
+	public StringProperty nameProperty() {
+		  SimpleStringProperty name = new SimpleStringProperty();
+		  name.setValue("Strategy name");
+		  return name;
+	}
 
 }

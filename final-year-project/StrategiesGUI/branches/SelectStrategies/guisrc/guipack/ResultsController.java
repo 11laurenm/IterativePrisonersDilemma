@@ -89,12 +89,16 @@ public class ResultsController {
 		
 		for(int i = 0; i < results.size(); i++) {
 			Label label = new Label();
-			label.setText(results.get(i).nameProperty());
+			label.setText(results.get(i).nameProperty().getValue());
+			resultsGrid.add(label, 0, i + 1);
+			Label label2 = new Label();
+			label2.setText(results.get(i).nameProperty().getValue());
+			resultsGrid.add(label2, i + 1, 0);
 		}
 		
 		int pos = 0;
-		for(int i = 0; i < results.size(); i++) {
-			for(int j = i; j < results.size(); j++) {
+		for(int i = 1; i < results.size() + 1; i++) {
+			for(int j = i; j < results.size() + 1; j++) {
 				Label label = new Label();
 				label.setText(Integer.toString(scores.get(pos)) + ", " + Integer.toString(scores.get(pos + 1)));
 				resultsGrid.add(label, i, j);

@@ -1,5 +1,6 @@
 package guipack;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +12,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import strategiespack.Strategy;
@@ -29,10 +35,13 @@ public class ResultsController {
     private TableColumn<Strategy, String> strategyColumn;
     @FXML
     private TableColumn<Strategy, String> pointsColumn;
+    @FXML
+    private GridPane resultsGrid;
 	
+    private Main mainn;
+    
     private ObservableList<Strategy> resultsList = FXCollections.observableArrayList();
     
-	private Stage dialogStage;
 	
 	@FXML void initialize() {
 		resultsTable.setItems(resultsList);
@@ -44,10 +53,6 @@ public class ResultsController {
 		});  
 		strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("name"));
 		pointsColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("points"));
-    }
-	
-	public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
     }
 	
 	public void setResults(ArrayList<Strategy> results) {
@@ -63,6 +68,20 @@ public class ResultsController {
 			results.remove(highestpos);
 		}
 		resultsList = FXCollections.observableArrayList(sortedResults);
+	}
+	
+	public void setMain(Main Mainclass) {
+        this.mainn = Mainclass;
+    }
+	
+	@FXML
+    private void handleBackButton() {
+		mainn.closeResults();
+	}
+	
+	@FXML
+	private void detailedResultsButton() {
+		mainn.launchDetailedResults();
 	}
 	
 

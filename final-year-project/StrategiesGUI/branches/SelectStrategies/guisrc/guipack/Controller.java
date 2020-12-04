@@ -77,6 +77,15 @@ public class Controller {
 		ArrayList<Strategy> ALSelectedItems = new ArrayList<Strategy>(selectedItems);
 		
 		ArrayList<Integer> payoffs = new ArrayList<>();
+		
+		if(ALSelectedItems.size() < 2) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setContentText("At least two strategies must be selected");
+			alert.showAndWait();
+			return;
+		}
+		
 		try {
 			payoffs.add(Integer.parseInt(CC1.getText()));
 			payoffs.add(Integer.parseInt(DC1.getText()));

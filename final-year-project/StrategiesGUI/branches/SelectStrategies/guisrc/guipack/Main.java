@@ -26,6 +26,8 @@ public class Main extends Application {
 	private BorderPane rootLayout;
 	private ObservableList<Strategy> strategyData = FXCollections.observableArrayList();
 	
+	public Stage dialogStage;
+	
 	public ObservableList<Strategy> getStrategyData() {
 		return strategyData;
 	}
@@ -89,16 +91,41 @@ public class Main extends Application {
 	        loader.setLocation(Main.class.getResource("OutputResults.fxml"));
 	        AnchorPane page;
 			page = (AnchorPane) loader.load();
-	        Stage dialogStage = new Stage();
+			dialogStage = new Stage();
 	        dialogStage.setTitle("Tournament results");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
 	        dialogStage.initOwner(primaryStage);
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 	        ResultsController controller = loader.getController();
-	        controller.setDialogStage(dialogStage);
 	        controller.setResults(results);
 	        controller.initialize();
+	        controller.setMain(this);
+	        dialogStage.showAndWait();
+		} catch (IOException e) {
+			;
+		}
+	}
+	
+	public void closeResults() {
+		dialogStage.close();
+	}
+	
+	public void launchDetailedResults() {
+		try {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(Main.class.getResource("OutputDetailedResults.fxml"));
+	        AnchorPane page;
+			page = (AnchorPane) loader.load();
+			dialogStage = new Stage();
+	        dialogStage.setTitle("Detailed Tournament Results");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	        dialogStage.initOwner(primaryStage);
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        DetailedResultsController controller = loader.getController();
+	        controller.initialize();
+	        controller.setMain(this);
 	        dialogStage.showAndWait();
 		} catch (IOException e) {
 			;

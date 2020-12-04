@@ -17,8 +17,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
+import strategiespack.AlwaysRandom;
+import strategiespack.HardMajority;
+import strategiespack.Mistrust;
+import strategiespack.Pavlov;
+import strategiespack.RoundRobin;
+import strategiespack.SoftMajority;
+import strategiespack.Spiteful;
 import strategiespack.Strategy;
+import strategiespack.TitForTat;
 import strategiespack.VaryingMajority;
+import strategiespack.VaryingRandom;
 
 public class Main extends Application {
 
@@ -27,7 +36,7 @@ public class Main extends Application {
 	private ObservableList<Strategy> strategyData = FXCollections.observableArrayList();
 	
 	public Stage dialogStage;
-	
+	public RoundRobin tournament;
 	public ObservableList<Strategy> getStrategyData() {
 		return strategyData;
 	}
@@ -79,13 +88,23 @@ public class Main extends Application {
 		strategyData.add(new AlwaysCooperate());
 		strategyData.add(new AlwaysDefect());
 		strategyData.add(new VaryingMajority(5));
+		strategyData.add(new AlwaysRandom());
+		strategyData.add(new HardMajority());
+		strategyData.add(new Mistrust());
+		strategyData.add(new Pavlov());
+		strategyData.add(new SoftMajority());
+		strategyData.add(new Spiteful());
+		strategyData.add(new TitForTat());
+		strategyData.add(new VaryingRandom(0.5));
 	}
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
-	public void displayResults(ArrayList<Strategy> results, ArrayList<Integer> scores) {
+	public void displayResults() {
+		ArrayList<Strategy> results = tournament.returnResults();
+		ArrayList<Integer> scores = tournament.returnScores();
 		try {
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(Main.class.getResource("OutputResults.fxml"));
@@ -127,9 +146,14 @@ public class Main extends Application {
 	        DetailedResultsController controller = loader.getController();
 	        controller.initialize();
 	        controller.setMain(this);
+	        controller.setResults(tournament.returnDecisions(), tournament.returnPoints(), tournament.returnResults(), tournament.returnGameLengths());
 	        dialogStage.showAndWait();
 		} catch (IOException e) {
 			;
 		}
+	}
+	
+	public void setTournament(RoundRobin tourn) {
+		tournament = tourn;
 	}
 }

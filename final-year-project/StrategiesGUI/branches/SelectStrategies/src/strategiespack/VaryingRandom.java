@@ -8,9 +8,9 @@ import javafx.beans.property.StringProperty;
 public class VaryingRandom extends Strategy{
   
   Random random = new Random();
-  float probability;	
+  double probability;	
  
-  public VaryingRandom(float prob) {
+  public VaryingRandom(double prob) {
      probability = prob;
   }
   
@@ -31,7 +31,7 @@ public class VaryingRandom extends Strategy{
   
   public StringProperty probabilityProperty() {
 	  SimpleStringProperty prob = new SimpleStringProperty();
-	  prob.setValue(Float.toString(probability));
+	  prob.setValue(Double.toString(probability));
 	  return prob;
   }
   
@@ -42,7 +42,7 @@ public class VaryingRandom extends Strategy{
   }
   
   @Override
-  public void setProbability(float prob) {
+  public void setProbability(double prob) {
 		this.probability = prob;
   }
 }

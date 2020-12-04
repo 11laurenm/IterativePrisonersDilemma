@@ -27,7 +27,8 @@ public class Game {
     ArrayList<Integer> payoffs;
     int player1InitialScore = 0;
     int player2InitialScore = 0;
-    
+    ArrayList<Character> decisions;
+    ArrayList<Integer> points;
     /**
      * 
      * @param strat1 a strategy being played
@@ -38,6 +39,8 @@ public class Game {
         HistoryStrategy1 = new ArrayList<>();
         HistoryStrategy2 = new ArrayList<>();
         RoundScores = new ArrayList<>();
+        decisions = new ArrayList<>();
+        points = new ArrayList<>();
         strategy1 = strat1;
         strategy2 = strat2;
         length = rounds;
@@ -78,6 +81,9 @@ public class Game {
 	        strategy1move = strategy1.getDecision(getLastMove(HistoryStrategy2), HistoryStrategy2, getLastMove(HistoryStrategy1));
 	        strategy2move = strategy2.getDecision(getLastMove(HistoryStrategy1), HistoryStrategy1, getLastMove(HistoryStrategy2));
 	        
+	        decisions.add(strategy1move);
+	        decisions.add(strategy2move);
+	
 	        setLastMove(strategy1move, HistoryStrategy1);
 	        setLastMove(strategy2move, HistoryStrategy2);
 	        
@@ -88,6 +94,8 @@ public class Game {
 	        	strategy2.addPoints(RoundScores.get(1));
 	        }
 	        
+	        points.add(RoundScores.get(0));
+	        points.add(RoundScores.get(1));
 	        
 	        RoundScores.clear();
     	}
@@ -136,6 +144,14 @@ public class Game {
     
     public int getPlayer2Score(){
     	return strategy2.getPoints() - player2InitialScore;
+    }
+    
+    public ArrayList<Character> getAllDecisions(){
+    	return decisions;
+    }
+    
+    public ArrayList<Integer> getAllScores(){
+    	return points;
     }
    
 }

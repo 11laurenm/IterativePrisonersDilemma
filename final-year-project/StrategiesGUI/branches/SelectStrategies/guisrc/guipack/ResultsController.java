@@ -58,15 +58,20 @@ public class ResultsController {
 	
 	public void setResults(ArrayList<Strategy> results) {
 		ArrayList<Strategy> sortedResults = new ArrayList<>();
-		while(results.size() > 0) {
+		ArrayList<Strategy> tempResults = new ArrayList<>();
+		for(int i = 0; i < results.size(); i++) {
+			tempResults.add(results.get(i));
+		}
+		
+		while(tempResults.size() > 0) {
 			int highestpos = 0;
-			for(int i = 0; i < results.size(); i++) {
-				if(results.get(i).getPoints() > results.get(highestpos).getPoints()) {
+			for(int i = 0; i < tempResults.size(); i++) {
+				if(tempResults.get(i).getPoints() > tempResults.get(highestpos).getPoints()) {
 					highestpos = i;
 				}
 			}
-			sortedResults.add(results.get(highestpos));
-			results.remove(highestpos);
+			sortedResults.add(tempResults.get(highestpos));
+			tempResults.remove(highestpos);
 		}
 		resultsList = FXCollections.observableArrayList(sortedResults);
 	}

@@ -59,7 +59,7 @@ public class Strategy {
 		return 'n';
 	}
 	
-	public void setProbability(float prob) {
+	public void setProbability(double prob) {
 		;
 	}
 	

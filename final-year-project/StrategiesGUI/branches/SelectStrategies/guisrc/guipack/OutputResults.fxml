@@ -22,7 +22,7 @@
       </TableView>
       <Button layoutX="274.0" layoutY="354.0" mnemonicParsing="false" onAction="#handleBackButton" text="Close" />
       <Button layoutX="373.0" layoutY="354.0" mnemonicParsing="false" onAction="#detailedResultsButton" text="Detailed Results" />
-      <GridPane fx:id="resultsGrid" gridLinesVisible="true" layoutX="310.0" layoutY="155.0">
+      <GridPane fx:id="resultsGrid" gridLinesVisible="true" layoutX="249.0" layoutY="140.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -3,14 +3,20 @@ package guipack;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import strategiespack.Strategy;
 
 public class ResultsController {
@@ -28,10 +34,14 @@ public class ResultsController {
     
 	private Stage dialogStage;
 	
-	@FXML
-    private void initialize() {
+	@FXML void initialize() {
 		resultsTable.setItems(resultsList);
-		placeColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("position"));
+
+		placeColumn.setCellValueFactory(new Callback<CellDataFeatures<Strategy, String>, ObservableValue<String>>() {
+			  @Override public ObservableValue<String> call(CellDataFeatures<Strategy, String> p) {
+			    return new ReadOnlyObjectWrapper(resultsTable.getItems().indexOf(p.getValue()) + 1);
+			  }
+		});  
 		strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("name"));
 		pointsColumn.setCellValueFactory(new PropertyValueFactory<Strategy,String>("points"));
     }
@@ -41,7 +51,18 @@ public class ResultsController {
     }
 	
 	public void setResults(ArrayList<Strategy> results) {
-		resultsList = FXCollections.observableArrayList(results);
+		ArrayList<Strategy> sortedResults = new ArrayList<>();
+		while(results.size() > 0) {
+			int highestpos = 0;
+			for(int i = 0; i < results.size(); i++) {
+				if(results.get(i).getPoints() > results.get(highestpos).getPoints()) {
+					highestpos = i;
+				}
+			}
+			sortedResults.add(results.get(highestpos));
+			results.remove(highestpos);
+		}
+		resultsList = FXCollections.observableArrayList(sortedResults);
 	}
 	
 

@@ -98,6 +98,7 @@ public class Main extends Application {
 	        ResultsController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
 	        controller.setResults(results);
+	        controller.initialize();
 	        dialogStage.showAndWait();
 		} catch (IOException e) {
 			;

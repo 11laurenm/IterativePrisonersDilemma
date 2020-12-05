@@ -10,6 +10,7 @@ import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
 import strategiespack.Game;
 import strategiespack.HardMajority;
+import strategiespack.HardTitForTat;
 import strategiespack.Mistrust;
 import strategiespack.Pavlov;
 import strategiespack.PeriodicCCD;
@@ -19,6 +20,7 @@ import strategiespack.RoundRobin;
 import strategiespack.SoftMajority;
 import strategiespack.Spiteful;
 import strategiespack.TitForTat;
+import strategiespack.TitForTwoTats;
 import strategiespack.VaryingMajority;
 
 /** Tests relating to the functionality of the strategy classes.
@@ -306,6 +308,28 @@ class StrategiesTests {
 	 Game game = new Game(testStrat, testStrat2, 2, payoffs);
 	 game.playGame();
 	 assertEquals(game.HistoryStrategy1, expected, "PeriodicCD strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testTitForTwoTats() {
+	 TitForTwoTats testStrat = new TitForTwoTats();
+	 AlwaysDefect testStrat2 = new AlwaysDefect();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd', 'd'));
+	 Game game = new Game(testStrat, testStrat2, 4, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "TitForTwoTats strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testHardTitForTat() {
+	 HardTitForTat testStrat = new HardTitForTat();
+	 PeriodicCD testStrat2 = new PeriodicCD();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd'));
+	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "HardTitForTat strategy not functioning correctly");
  }
 
 }

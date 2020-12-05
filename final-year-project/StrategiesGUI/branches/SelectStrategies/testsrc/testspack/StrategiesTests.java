@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
 import strategiespack.Game;
+import strategiespack.Gradual;
 import strategiespack.HardMajority;
 import strategiespack.HardTitForTat;
 import strategiespack.Mistrust;
@@ -330,6 +331,28 @@ class StrategiesTests {
 	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
 	 assertEquals(game.HistoryStrategy1, expected, "HardTitForTat strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testGradualFirst() {
+	 Gradual testStrat = new Gradual();
+	 PeriodicCCD testStrat2 = new PeriodicCCD();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'c', 'd', 'c', 'c', 'd', 'd', 'c', 'c'));
+	 Game game = new Game(testStrat, testStrat2, 10, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "Gradual strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testGradualSecond() {
+	 Gradual testStrat = new Gradual();
+	 PeriodicCD testStrat2 = new PeriodicCD();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd', 'c', 'c', 'c', 'd', 'd'));
+	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "Gradual strategy not functioning correctly");
  }
 
 }

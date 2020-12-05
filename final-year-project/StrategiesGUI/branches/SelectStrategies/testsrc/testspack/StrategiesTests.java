@@ -12,6 +12,7 @@ import strategiespack.Game;
 import strategiespack.HardMajority;
 import strategiespack.Mistrust;
 import strategiespack.Pavlov;
+import strategiespack.PeriodicDDC;
 import strategiespack.RoundRobin;
 import strategiespack.SoftMajority;
 import strategiespack.Spiteful;
@@ -270,6 +271,17 @@ class StrategiesTests {
 	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
 	 assertEquals(testStrat2.getPoints(), 3, "HardMajority strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testPeriodicDDC() {
+	 PeriodicDDC testStrat = new PeriodicDDC();
+	 AlwaysDefect testStrat2 = new AlwaysDefect();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('d', 'd', 'c'));
+	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "HardMajority strategy not functioning correctly");
  }
 
 }

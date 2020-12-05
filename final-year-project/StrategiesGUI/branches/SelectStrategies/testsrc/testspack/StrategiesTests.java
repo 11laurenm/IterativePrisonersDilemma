@@ -17,6 +17,7 @@ import strategiespack.Pavlov;
 import strategiespack.PeriodicCCD;
 import strategiespack.PeriodicCD;
 import strategiespack.PeriodicDDC;
+import strategiespack.Prober;
 import strategiespack.RoundRobin;
 import strategiespack.SoftMajority;
 import strategiespack.Spiteful;
@@ -353,6 +354,28 @@ class StrategiesTests {
 	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
 	 game.playGame();
 	 assertEquals(game.HistoryStrategy1, expected, "Gradual strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testProberFirst() {
+	 Prober testStrat = new Prober();
+	 AlwaysCooperate testStrat2 = new AlwaysCooperate();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('d', 'c', 'c', 'd', 'd'));
+	 Game game = new Game(testStrat, testStrat2, 5, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "Prober strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testProberSecond() {
+	 Prober testStrat = new Prober();
+	 PeriodicCD testStrat2 = new PeriodicCD();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('d', 'c', 'c', 'c', 'd'));
+	 Game game = new Game(testStrat, testStrat2, 5, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "Prober strategy not functioning correctly");
  }
 
 }

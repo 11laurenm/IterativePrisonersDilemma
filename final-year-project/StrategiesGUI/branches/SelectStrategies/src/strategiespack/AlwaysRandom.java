@@ -33,7 +33,7 @@ public class AlwaysRandom extends Strategy{
    * @return the character c for cooperate if the random bool is true, otherwise return d
   */
   @Override
-  public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
+  public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
     if (booleanGenerator.nextBoolean()) {
       return 'c';
     }

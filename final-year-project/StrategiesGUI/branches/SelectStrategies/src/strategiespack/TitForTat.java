@@ -26,7 +26,7 @@ public class TitForTat extends Strategy{
 	 * @return the strategy's move for the current round
 	 */
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
 	   if(lastMove == 'd') {
 		   return 'd';
 	   }

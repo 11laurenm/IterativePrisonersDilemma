@@ -55,7 +55,7 @@ public class Strategy {
      * Gets the decision made by the strategy for a particular round.
      * @return the decision made.
      */
-	public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
 		return 'n';
 	}
 	

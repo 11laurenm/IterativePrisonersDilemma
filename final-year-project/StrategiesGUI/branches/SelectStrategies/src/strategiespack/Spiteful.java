@@ -12,8 +12,8 @@ public class Spiteful extends Strategy{
 	}
 	
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
-		if(History.contains('d')){
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
+		if(opponentHistory.contains('d')){
 			return 'd';
 		}
 		return 'c';

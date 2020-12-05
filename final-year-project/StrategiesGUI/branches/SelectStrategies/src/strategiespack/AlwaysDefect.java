@@ -26,7 +26,7 @@ public class AlwaysDefect extends Strategy{
    * @return the character d for defect
   */
   @Override
-  public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
+  public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
     return 'd';
   }
   

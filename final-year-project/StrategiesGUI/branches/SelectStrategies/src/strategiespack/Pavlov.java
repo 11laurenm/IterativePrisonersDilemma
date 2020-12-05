@@ -12,7 +12,7 @@ public class Pavlov extends Strategy{
 	}
 	
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
 	   if(lastMove == myLastMove) {
 		   return 'c';
 	   }

@@ -12,6 +12,7 @@ import strategiespack.Game;
 import strategiespack.HardMajority;
 import strategiespack.Mistrust;
 import strategiespack.Pavlov;
+import strategiespack.PeriodicCCD;
 import strategiespack.PeriodicDDC;
 import strategiespack.RoundRobin;
 import strategiespack.SoftMajority;
@@ -35,7 +36,7 @@ class StrategiesTests {
   void testAlwaysCooperate() {
     AlwaysCooperate testStrat = new AlwaysCooperate();
     ArrayList<Character> testHistory = new ArrayList<>();
-    assertEquals(testStrat.getDecision('n', testHistory, 'n'), 'c', 
+    assertEquals(testStrat.getDecision('n', testHistory, testHistory, 'n'), 'c', 
             "AlwaysCooperate strategy not returning correct decision");
   }
 
@@ -47,7 +48,7 @@ class StrategiesTests {
   void testAlwaysDefect() {
     AlwaysDefect testStrat = new AlwaysDefect();
     ArrayList<Character> testHistory = new ArrayList<>();
-    assertEquals(testStrat.getDecision('n', testHistory, 'n'), 'd', 
+    assertEquals(testStrat.getDecision('n', testHistory, testHistory, 'n'), 'd', 
             "AlwaysDefect strategy not returning correct decision");
   }
   
@@ -281,7 +282,18 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('d', 'd', 'c'));
 	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "HardMajority strategy not functioning correctly");
+	 assertEquals(game.HistoryStrategy1, expected, "PeriodicDDC strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testPeriodicCCD() {
+	 PeriodicCCD testStrat = new PeriodicCCD();
+	 AlwaysDefect testStrat2 = new AlwaysDefect();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd'));
+	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "PeriodicCCD strategy not functioning correctly");
  }
 
 }

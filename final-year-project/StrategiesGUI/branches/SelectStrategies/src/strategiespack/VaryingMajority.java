@@ -32,8 +32,8 @@ public class VaryingMajority extends Strategy{
 	 * @return the strategy's move for the current round
 	 */
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
-		int size = History.size();
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
+		int size = opponentHistory.size();
 		int iterations;
 		int defects = 0;
 		int coops = 0;
@@ -48,7 +48,7 @@ public class VaryingMajority extends Strategy{
 		
 		for(int i = 1; i<iterations + 1; i++) {
 			int getIndex = size - i;
-			if(History.get(getIndex) == 'd') {
+			if(opponentHistory.get(getIndex) == 'd') {
 				defects++;
 			} else {
 				coops++;

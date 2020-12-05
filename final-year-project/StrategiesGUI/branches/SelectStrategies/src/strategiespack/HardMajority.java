@@ -13,8 +13,8 @@ public class HardMajority extends Strategy{
 	}
 	
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
-		int size = History.size();
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
+		int size = opponentHistory.size();
 		int defects = 0;
 		int coops = 0;
 		
@@ -23,7 +23,7 @@ public class HardMajority extends Strategy{
 		}
 		
 		for(int i = 0; i<size; i++) {
-			if(History.get(i) == 'd') {
+			if(opponentHistory.get(i) == 'd') {
 				defects++;
 			} else {
 				coops++;

@@ -5,26 +5,26 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class PeriodicDDC extends Strategy{
+public class PeriodicCCD extends Strategy{
 	
-	public PeriodicDDC() {
+	public PeriodicCCD() {
 	}
 	
 	@Override
 	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
 		if(myHistory.size() == 0 || myHistory.size() == 1) {
-			return 'd';
+			return 'c';
 		}
 		char secondToLastMove = myHistory.get(myHistory.size() - 2);
-	    if(myLastMove == 'd' && secondToLastMove == 'd') {
-	    	return 'c';
+	    if(myLastMove == 'c' && secondToLastMove == 'c') {
+	    	return 'd';
 	    }
-	    return 'd';
+	    return 'c';
 	}
 	
 	public StringProperty nameProperty() {
 		  SimpleStringProperty StrategyName = new SimpleStringProperty();
-		  StrategyName.setValue("PeriodicDDC");
+		  StrategyName.setValue("PeriodicCCD");
 		  return StrategyName;
 	}
 	  

@@ -26,7 +26,7 @@ public class AlwaysCooperate extends Strategy{
    * @return the character c for cooperate
   */
   @Override
-  public char getDecision(char lastMove, ArrayList<Character> History, char myLastMove) {
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
     return 'c';
   }
   

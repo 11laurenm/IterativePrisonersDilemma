@@ -12,6 +12,7 @@ import strategiespack.Game;
 import strategiespack.Gradual;
 import strategiespack.HardMajority;
 import strategiespack.HardTitForTat;
+import strategiespack.Mem2;
 import strategiespack.Mistrust;
 import strategiespack.Pavlov;
 import strategiespack.PeriodicCCD;
@@ -376,6 +377,39 @@ class StrategiesTests {
 	 Game game = new Game(testStrat, testStrat2, 5, payoffs);
 	 game.playGame();
 	 assertEquals(game.HistoryStrategy1, expected, "Prober strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testMem2First() {
+	 Mem2 testStrat = new Mem2();
+	 PeriodicCD testStrat2 = new PeriodicCD();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd', 'd', 'd', 'd', 'd', 'd'));
+	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "Mem2 strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testMem2Second() {
+	 Mem2 testStrat = new Mem2();
+	 AlwaysCooperate testStrat2 = new AlwaysCooperate();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'));
+	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "Mem2 strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testMem2Third() {
+	 Mem2 testStrat = new Mem2();
+	 PeriodicCCD testStrat2 = new PeriodicCCD();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'c', 'd', 'c', 'c', 'd', 'd'));
+	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "Mem2 strategy not functioning correctly");
  }
 
 }

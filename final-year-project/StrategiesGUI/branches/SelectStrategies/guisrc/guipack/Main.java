@@ -44,7 +44,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-        
+		primaryStage.setMinWidth(900);
+		primaryStage.setMinHeight(500);
         initRootLayout();
 
         showOverview();
@@ -111,6 +112,8 @@ public class Main extends Application {
 	        AnchorPane page;
 			page = (AnchorPane) loader.load();
 			dialogStage = new Stage();
+			dialogStage.setMinWidth(900);
+			dialogStage.setMinHeight(500);
 	        dialogStage.setTitle("Tournament results");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
 	        dialogStage.initOwner(primaryStage);

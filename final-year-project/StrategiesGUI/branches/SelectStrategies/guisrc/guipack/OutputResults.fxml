@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guipack.ResultsController">
+<AnchorPane minHeight="500.0" minWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guipack.ResultsController">
    <children>
-      <TableView fx:id="resultsTable" prefHeight="400.0" prefWidth="241.0">
+      <TableView fx:id="resultsTable" prefHeight="400.0" prefWidth="241.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
         <columns>
           <TableColumn fx:id="placeColumn" prefWidth="75.0" text="Place" />
           <TableColumn fx:id="strategyColumn" prefWidth="75.0" text="Strategy" />
@@ -20,9 +20,9 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="274.0" layoutY="354.0" mnemonicParsing="false" onAction="#handleBackButton" text="Close" />
-      <Button layoutX="373.0" layoutY="354.0" mnemonicParsing="false" onAction="#detailedResultsButton" text="Detailed Results" />
-      <GridPane fx:id="resultsGrid" gridLinesVisible="true" layoutX="249.0" layoutY="140.0">
+      <Button layoutX="284.0" layoutY="373.0" mnemonicParsing="false" onAction="#detailedResultsButton" text="Detailed Results" AnchorPane.bottomAnchor="15.0" />
+      <Button layoutX="520.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleBackButton" text="Close" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="30.0" />
+      <GridPane fx:id="resultsGrid" gridLinesVisible="true" layoutX="268.0" layoutY="122.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

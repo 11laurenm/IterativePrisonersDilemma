@@ -16,7 +16,7 @@ public class VaryingRandom extends Strategy{
   
   @Override
   public char getDecision() {
-    int randomValue = random.nextInt(10);
+    double randomValue = random.nextDouble();
     if(randomValue < probability) {
     	return 'c';
     }

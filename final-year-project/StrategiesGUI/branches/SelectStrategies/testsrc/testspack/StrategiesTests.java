@@ -23,6 +23,7 @@ import strategiespack.RoundRobin;
 import strategiespack.SoftMajority;
 import strategiespack.Spiteful;
 import strategiespack.TitForTat;
+import strategiespack.TitForTatWithForgiveness;
 import strategiespack.TitForTwoTats;
 import strategiespack.VaryingMajority;
 

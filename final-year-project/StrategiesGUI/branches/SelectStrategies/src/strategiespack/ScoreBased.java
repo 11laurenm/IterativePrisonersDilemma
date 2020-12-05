@@ -5,31 +5,23 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Prober extends Strategy{
+public class ScoreBased extends Strategy{
 	
-	public Prober() {
+	public ScoreBased() {
 	}
 	
 	@Override
 	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
-	    if(myHistory.size() == 0) {
+	    if(this.getPoints() == opponentPoints || this.getPoints() - opponentPoints < 9) {
 	    	return 'd';
 	    }
-	    if(myHistory.size() == 1 || myHistory.size() == 2) {
-	    	return 'c';
-	    }
-	    if(opponentHistory.get(1) == 'c' && opponentHistory.get(2) == 'c') {
-	    	return 'd';
-	    }
-	    if(lastMove == 'c') {
-	    	return 'c';
-	    }
-	    return 'd';
+	    System.out.println(this.getPoints() + " " + opponentPoints);
+	    return 'c';
 	}
 	
 	public StringProperty nameProperty() {
 		  SimpleStringProperty StrategyName = new SimpleStringProperty();
-		  StrategyName.setValue("Prober");
+		  StrategyName.setValue("ScoreBased");
 		  return StrategyName;
 	}
 	  

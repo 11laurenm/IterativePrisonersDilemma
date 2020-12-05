@@ -16,7 +16,7 @@ public class TitForTatWithForgiveness extends Strategy{
 	}
 	
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
 	    if(lastMove == 'd') {
 	    	double randomValue = random.nextDouble();
 	    	if(randomValue < probability) {

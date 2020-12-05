@@ -78,8 +78,8 @@ public class Game {
     public void playGame() {
     	
     	for(int round = 0; round<length; round++) {
-	        strategy1move = strategy1.getDecision(getLastMove(HistoryStrategy2), HistoryStrategy2, HistoryStrategy1, getLastMove(HistoryStrategy1));
-	        strategy2move = strategy2.getDecision(getLastMove(HistoryStrategy1), HistoryStrategy1, HistoryStrategy2, getLastMove(HistoryStrategy2));
+	        strategy1move = strategy1.getDecision(getLastMove(HistoryStrategy2), HistoryStrategy2, HistoryStrategy1, getLastMove(HistoryStrategy1), strategy2.getPoints());
+	        strategy2move = strategy2.getDecision(getLastMove(HistoryStrategy1), HistoryStrategy1, HistoryStrategy2, getLastMove(HistoryStrategy2), strategy1.getPoints());
 	        
 	        decisions.add(strategy1move);
 	        decisions.add(strategy2move);

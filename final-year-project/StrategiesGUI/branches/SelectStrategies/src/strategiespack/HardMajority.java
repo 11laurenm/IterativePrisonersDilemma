@@ -13,7 +13,7 @@ public class HardMajority extends Strategy{
 	}
 	
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
 		int size = opponentHistory.size();
 		int defects = 0;
 		int coops = 0;

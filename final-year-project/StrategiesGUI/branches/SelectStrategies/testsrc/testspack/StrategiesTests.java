@@ -20,6 +20,7 @@ import strategiespack.PeriodicCD;
 import strategiespack.PeriodicDDC;
 import strategiespack.Prober;
 import strategiespack.RoundRobin;
+import strategiespack.ScoreBased;
 import strategiespack.SoftMajority;
 import strategiespack.Spiteful;
 import strategiespack.TitForTat;
@@ -43,7 +44,7 @@ class StrategiesTests {
   void testAlwaysCooperate() {
     AlwaysCooperate testStrat = new AlwaysCooperate();
     ArrayList<Character> testHistory = new ArrayList<>();
-    assertEquals(testStrat.getDecision('n', testHistory, testHistory, 'n'), 'c', 
+    assertEquals(testStrat.getDecision('n', testHistory, testHistory, 'n', 0), 'c', 
             "AlwaysCooperate strategy not returning correct decision");
   }
 
@@ -55,7 +56,7 @@ class StrategiesTests {
   void testAlwaysDefect() {
     AlwaysDefect testStrat = new AlwaysDefect();
     ArrayList<Character> testHistory = new ArrayList<>();
-    assertEquals(testStrat.getDecision('n', testHistory, testHistory, 'n'), 'd', 
+    assertEquals(testStrat.getDecision('n', testHistory, testHistory, 'n', 0), 'd', 
             "AlwaysDefect strategy not returning correct decision");
   }
   
@@ -411,6 +412,17 @@ class StrategiesTests {
 	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
 	 game.playGame();
 	 assertEquals(game.HistoryStrategy1, expected, "Mem2 strategy not functioning correctly");
+ }
+ 
+ @Test
+ void testScoreBased() {
+	 ScoreBased testStrat = new ScoreBased();
+	 AlwaysCooperate testStrat2 = new AlwaysCooperate();
+	 ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
+	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('d', 'd', 'c'));
+	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
+	 game.playGame();
+	 assertEquals(game.HistoryStrategy1, expected, "ScoreBased strategy not functioning correctly");
  }
 
 }

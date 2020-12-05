@@ -11,7 +11,7 @@ public class PeriodicCCD extends Strategy{
 	}
 	
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
 		if(myHistory.size() == 0 || myHistory.size() == 1) {
 			return 'c';
 		}

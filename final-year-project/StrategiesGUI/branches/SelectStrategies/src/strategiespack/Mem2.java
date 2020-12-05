@@ -13,7 +13,7 @@ public class Mem2 extends Strategy{
 	}
 	
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
 	    if(myHistory.size() == 0) {
 	    	following = "titForTat";
 	    	return 'c';

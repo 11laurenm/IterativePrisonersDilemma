@@ -32,7 +32,7 @@ public class VaryingMajority extends Strategy{
 	 * @return the strategy's move for the current round
 	 */
 	@Override
-	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove) {
+	public char getDecision(char lastMove, ArrayList<Character> opponentHistory, ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
 		int size = opponentHistory.size();
 		int iterations;
 		int defects = 0;

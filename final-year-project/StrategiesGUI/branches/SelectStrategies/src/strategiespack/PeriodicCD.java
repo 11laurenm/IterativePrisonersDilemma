@@ -6,9 +6,21 @@ import javafx.beans.property.StringProperty;
 
 public class PeriodicCD extends Strategy {
 
+  /**
+   * Constructor for an instance of the strategy, needs no inputs.
+  */
   public PeriodicCD() {
   }
 
+  /**
+   * returns the decision made by the strategy for the turn in which it is called.
+   * @param lastMove - the last move made by its opponent
+   * @param opponentHistory - all previous moves made by its opponent in this game
+   * @param myHistory - all previous moves made by the strategy
+   * @param myLastMove - last move made by the strategy
+   * @param opponentPoints - score of opponent
+   * @return c then d, then begins again
+  */
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
           ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {

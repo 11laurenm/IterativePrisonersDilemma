@@ -6,9 +6,21 @@ import javafx.beans.property.StringProperty;
 
 public class TitForTwoTats extends Strategy {
 
+  /**
+   * Constructor for an instance of the strategy, needs no inputs.
+  */  
   public TitForTwoTats() {
   }
 
+  /**
+   * returns the decision made by the strategy for the turn in which it is called.
+   * @param lastMove - the last move made by its opponent
+   * @param opponentHistory - all previous moves made by its opponent in this game
+   * @param myHistory - all previous moves made by the strategy
+   * @param myLastMove - last move made by the strategy
+   * @param opponentPoints - score of opponent
+   * @return c on first two moves, then d if opponent defected on both of previous two moves
+  */
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
         ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {

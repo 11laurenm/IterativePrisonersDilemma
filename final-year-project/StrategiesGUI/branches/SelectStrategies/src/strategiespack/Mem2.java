@@ -8,9 +8,22 @@ public class Mem2 extends Strategy {
 
   String following = "titForTat";
 
+  /**
+   * Constructor for an instance of the strategy, needs no inputs.
+  */
   public Mem2() {
   }
 
+  /**
+   * returns the decision made by the strategy for the turn in which it is called.
+   * @param lastMove - the last move made by its opponent
+   * @param opponentHistory - all previous moves made by its opponent in this game
+   * @param myHistory - all previous moves made by the strategy
+   * @param myLastMove - last move made by the strategy
+   * @param opponentPoints - score of opponent
+   * @return c, then opponent's previous move, then follows one of three strategies 
+   *      based on opponent's decisions
+  */
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
           ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {

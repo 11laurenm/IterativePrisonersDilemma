@@ -6,10 +6,22 @@ import javafx.beans.property.StringProperty;
 
 public class Spiteful extends Strategy {
 
+  /**
+   * Constructor for an instance of the strategy, needs no inputs.
+  */  
   public Spiteful() {
 
   }
 
+  /**
+   * returns the decision made by the strategy for the turn in which it is called.
+   * @param lastMove - the last move made by its opponent
+   * @param opponentHistory - all previous moves made by its opponent in this game
+   * @param myHistory - all previous moves made by the strategy
+   * @param myLastMove - last move made by the strategy
+   * @param opponentPoints - score of opponent
+   * @return d if the opponent has ever played d
+  */
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
           ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {

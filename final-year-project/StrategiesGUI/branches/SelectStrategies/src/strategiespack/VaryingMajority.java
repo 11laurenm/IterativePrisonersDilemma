@@ -93,6 +93,10 @@ public class VaryingMajority extends Strategy {
     return roundsProp;
   }
   
+  /**
+   * Sets the value of the variable rounds to the value of round, 
+   *      which is provided by the user through the GUI.
+   */
   @Override
   public void setRounds(int round) {
     this.rounds = round;

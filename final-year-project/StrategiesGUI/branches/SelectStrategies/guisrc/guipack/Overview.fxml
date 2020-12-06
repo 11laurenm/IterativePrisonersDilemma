@@ -18,7 +18,7 @@
       <TableView fx:id="strategyTable" editable="true" layoutX="39.0" layoutY="37.0" prefHeight="326.0" prefWidth="438.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
         <columns>
           <TableColumn fx:id="strategyColumn" editable="false" prefWidth="75.0" text="Strategy" />
-            <TableColumn fx:id="probabilityColumn" prefWidth="75.0" text="Probability" />
+            <TableColumn fx:id="probabilityColumn" onEditCommit="#probabilityEdited" prefWidth="75.0" text="Probability" />
             <TableColumn fx:id="roundsColumn" onEditCommit="#roundsEdited" prefWidth="75.0" text="Rounds" />
         </columns>
          <columnResizePolicy>

@@ -95,5 +95,25 @@ public class Strategy {
     name.setValue("Strategy name");
     return name;
   }
+  
+  /**
+   * Method that provides the strategy's probability (if one exists).
+   * @return the value of the probability variable of the strategy as a SimpleStringProperty
+   */
+  public StringProperty probabilityProperty() {
+    SimpleStringProperty prob = new SimpleStringProperty();
+    prob.setValue("-");
+    return prob;
+  }
+  
+  /**
+   * Method that provides the number of rounds the strategy considers (if one exists).
+   * @return the value of the rounds variable of the strategy as a SimpleStringProperty
+   */
+  public StringProperty roundsProperty() {
+    SimpleStringProperty roundsProp = new SimpleStringProperty();
+    roundsProp.setValue("-");
+    return roundsProp;
+  }
 
 }

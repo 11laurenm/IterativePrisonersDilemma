@@ -64,6 +64,7 @@ public class VaryingRandom extends Strategy {
    * Method that provides the strategy's probability (if one exists).
    * @return the value of the probability variable of the strategy as a SimpleStringProperty
    */
+  @Override
   public StringProperty probabilityProperty() {
     SimpleStringProperty prob = new SimpleStringProperty();
     prob.setValue(Double.toString(probability));
@@ -74,6 +75,7 @@ public class VaryingRandom extends Strategy {
    * Method that provides the number of rounds the strategy considers (if one exists).
    * @return the value of the rounds variable of the strategy as a SimpleStringProperty
    */
+  @Override
   public StringProperty roundsProperty() {
     SimpleStringProperty rounds = new SimpleStringProperty();
     rounds.setValue("-");

@@ -78,6 +78,7 @@ public class VaryingMajority extends Strategy {
    * Method that provides the strategy's probability (if one exists).
    * @return the value of the probability variable of the strategy as a SimpleStringProperty
    */
+  @Override
   public StringProperty probabilityProperty() {
     SimpleStringProperty prob = new SimpleStringProperty();
     prob.setValue("-");
@@ -88,6 +89,7 @@ public class VaryingMajority extends Strategy {
    * Method that provides the number of rounds the strategy considers (if one exists).
    * @return the value of the rounds variable of the strategy as a SimpleStringProperty
    */
+  @Override
   public StringProperty roundsProperty() {
     SimpleStringProperty roundsProp = new SimpleStringProperty();
     roundsProp.setValue(Integer.toString(rounds));

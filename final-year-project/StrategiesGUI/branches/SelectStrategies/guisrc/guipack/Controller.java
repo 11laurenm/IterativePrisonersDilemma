@@ -243,7 +243,15 @@ public class Controller {
   private void probabilityEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
-    strat.setProbability(Integer.parseInt(newValue));
+    System.out.println(event.getOldValue());
+    if (strat.probabilityProperty().getValue() != "-") {
+      strat.setProbability(Integer.parseInt(newValue));
+    } else {
+      Alert alert = new Alert(AlertType.WARNING);
+      alert.setTitle("Warning Dialog");
+      alert.setContentText("Cells containing - are not editable");
+      alert.showAndWait();
+    }
   }
 
   /**
@@ -256,7 +264,15 @@ public class Controller {
   private void roundsEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
-    strat.setRounds(Integer.parseInt(newValue));
+    if (strat.roundsProperty().getValue() != "-") {
+      strat.setRounds(Integer.parseInt(newValue));
+    } else {
+      Alert alert = new Alert(AlertType.WARNING);
+      alert.setTitle("Warning Dialog");
+      alert.setContentText("Cells containing - are not editable");
+      alert.showAndWait();
+    }
   }
+  
 }
 

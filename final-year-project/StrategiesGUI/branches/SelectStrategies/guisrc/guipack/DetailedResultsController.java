@@ -3,6 +3,7 @@ package guipack;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import strategiespack.Strategy;
 
 /**
@@ -25,6 +26,12 @@ public class DetailedResultsController {
   @FXML
   private Label resultsLabel;
 
+  /**
+   * ScrollPane allows the user to scroll through content in the page.
+   */
+  @FXML
+  private ScrollPane scrollPane;
+  
   /**
    * Sets the value of the main variable so the main class can be accessed.
    * @param mainclass - an instance of the Main class
@@ -60,6 +67,7 @@ public class DetailedResultsController {
     labelText = labelText + " Length of game 2: " + Integer.toString(lengths.get(1));
     labelText = labelText + " Length of game 3: " + Integer.toString(lengths.get(2));
     labelText = labelText + "\n";
+    labelText = labelText + "\n";
 
     for (int i = 0; i < strats.size(); i++) {
       for (int j = i; j < strats.size(); j++) {
@@ -88,8 +96,10 @@ public class DetailedResultsController {
           labelText = labelText + "\n";
         }
       }
+      labelText = labelText + "\n";
     }
 
     resultsLabel.setText(labelText);
+    scrollPane.setContent(resultsLabel);
   }
 }

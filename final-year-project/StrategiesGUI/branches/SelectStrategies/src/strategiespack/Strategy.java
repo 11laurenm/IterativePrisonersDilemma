@@ -59,20 +59,37 @@ public class Strategy {
     return 'n';
   }
 
+  /**
+   * Sets the value of the strategy's probability variable if it exists.
+   * @param prob - the new probability value
+   */
   public void setProbability(double prob) {
     ;
   }
 
+  /**
+   * Sets the value of the strategy's rounds variable if it exists.
+   * @param round - the new rounds value
+   */
   public void setRounds(int round) {
     ;
   }
 
+  /**
+   * Returns a stringProperty that allows the program to create 
+   * a numbered table of results.
+   * @return the number to be shown associated with this strategy
+   */
   public StringProperty positionProperty() {
     SimpleStringProperty pos = new SimpleStringProperty();
     pos.setValue(Integer.toString(tournamentPosition));
     return pos;
   }
 
+  /**
+   * Method that provides the strategy's name.
+   * @return the name of the strategy as a SimpleStringProperty
+   */
   public StringProperty nameProperty() {
     SimpleStringProperty name = new SimpleStringProperty();
     name.setValue("Strategy name");

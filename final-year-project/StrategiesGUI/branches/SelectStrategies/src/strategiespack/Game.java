@@ -10,31 +10,67 @@ import java.util.ArrayList;
 public class Game {
     
   /**
-   * Each strategy has: a history - an arraylist of every decision made in this game.
-   * a move - the move selected for this round
-   * RoundScores is each strategy's score for the current round
-   * length is the amount of rounds to be played
+   * Each strategy has a history - an arraylist of every decision made in this game.
    */
   public ArrayList<Character> historyStrategy1;
   public ArrayList<Character> historyStrategy2;
+  
+  /**
+   * The scores for a particular round.
+   */
   public ArrayList<Integer> roundScores;
+  
+  /**
+   * Each strategy is a strategy participating in the game.
+   */
   Strategy strategy1;
   Strategy strategy2;
+  
+  /**
+   * Each strategy has a move - the move selected for this round.
+   */
   char strategy1move;
   char strategy2move;
+  
+  /**
+   * length is the length of the game i.e. the number 
+   * of rounds to be played
+   */
   int length;
+  
+  /**
+   * Whether or not a copy (dummy strat) is participating.
+   */
   boolean dummyStrat;
+  
+  /**
+   * The scores earned for each combination of decisions.
+   */
   ArrayList<Integer> payoffs;
+  
+  /**
+   * Each strategy has an initial score - its total score before this game.
+   */
   int player1InitialScore = 0;
   int player2InitialScore = 0;
+  
+  /**
+   * All decisions made in the game.
+   */
   ArrayList<Character> decisions;
+  
+  /**
+   * All points earned in the game.
+   */
   ArrayList<Integer> points;
   
   /**
-   * 
+   * This method is responsible for running a game (made up of multiple rounds) of 
+   * the Prisoner's Dilemma.
    * @param strat1 a strategy being played
    * @param strat2 the other strategy being played
    * @param rounds the amount of rounds to be played
+   * @param payoffList the scores earned for each combination of decisions
    */
   public Game(Strategy strat1, Strategy strat2, int rounds, ArrayList<Integer> payoffList) {
     historyStrategy1 = new ArrayList<>();
@@ -74,7 +110,8 @@ public class Game {
 
   /**
    * Method that handles the running of the game.
-   * Uses the round number provided on creation to run that many rounds.
+   * Uses the round number provided on creation to run that many rounds, 
+   * also checks if one strategy is a copy/dummy.
    */
   public void playGame() {
     for (int round = 0; round < length; round++) {
@@ -133,6 +170,10 @@ public class Game {
     return scores;
   }
 
+  /**
+   * Method that determines if one strategy is a dummy.
+   * @return true if one strategy is a dummy, false if not
+   */
   public boolean isDummy() {
     if (strategy1.equals(strategy2)) {
       return true;
@@ -140,18 +181,34 @@ public class Game {
     return false;
   }
 
+  /**
+   * Calculates the score the player started the game with.
+   * @return the score the player started the game with
+   */
   public int getPlayer1Score() {
     return strategy1.getPoints() - player1InitialScore;
   }
 
+  /**
+   * Calculates the score the player started the game with.
+   * @return the score the player started the game with
+   */
   public int getPlayer2Score() {
     return strategy2.getPoints() - player2InitialScore;
   }
 
+  /**
+   * getter for arraylist of all decisions made in the game.
+   * @return arraylist of all decisions made in the game
+   */
   public ArrayList<Character> getAllDecisions() {
     return decisions;
   }
 
+  /**
+   * getter for arraylist of all points earned in the game.
+   * @return arraylist of all points earned in the game
+   */
   public ArrayList<Integer> getAllScores() {
     return points;
   }

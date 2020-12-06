@@ -4,15 +4,49 @@ import java.util.ArrayList;
 
 public class RoundRobin {
 
+  /**
+   * All strategies participating in the tournament.
+   */
   ArrayList<Strategy> strategies;
+  
+  /**
+   * The total number of rounds each pairing will play.
+   */
   int totalRounds;
+  
+  /**
+   * The scores earned for each combination of decisions.
+   */
   ArrayList<Integer> payoffList;
+  
+  /**
+   * The total points earned in a game by each strategy.
+   */
   ArrayList<Integer> scores;
+  
+  /**
+   * All decisions made in the tournament.
+   */
   ArrayList<ArrayList<Character>> decisions;
+  
+  /**
+   * All points earned in the tournament.
+   */
   ArrayList<ArrayList<Integer>> points;
+  
+  /**
+   * length is the length of the game i.e. the number 
+   * of rounds to be played
+   */
   ArrayList<Integer> lengths;
-  ArrayList<String> names;
 
+  /**
+   * Constructor for the class, which sets the following variables to values 
+   * chosen by the user.
+   * @param strats - the strategies participating in the tournament
+   * @param rounds - the total number of rounds they will play
+   * @param payoffs - the scores earned for each combination of decisions
+   */
   public RoundRobin(ArrayList<Strategy> strats, int rounds, ArrayList<Integer> payoffs) {
     totalRounds = rounds;
     strategies = strats;
@@ -21,7 +55,11 @@ public class RoundRobin {
     lengths = new ArrayList<>();
   }
         
-
+  /**
+   * The method responsible for running the tournament which decides 
+   * how many rounds each of the three games should be, then
+   * iterates through the list of strategies to run 3 games with every possible pairing
+   */
   public void runTournament() {
 
     decisions = new ArrayList<ArrayList<Character>>();
@@ -64,22 +102,44 @@ public class RoundRobin {
     }
   }
 
+  /**
+   * Returns the results of the tournament as points are 
+   * associated with strategies.
+   * @return all strategies in the tournament
+   */
   public ArrayList<Strategy> returnResults() {
     return strategies;
   }
 
+  /**
+   * getter for scores, the total points earned in a game by each strategy.
+   * @return scores
+   */
   public ArrayList<Integer> returnScores() {
     return scores;
   }
 
+  /**
+   * getter for decisions, all decisions made in the tournament.
+   * @return decisions
+   */
   public ArrayList<ArrayList<Character>> returnDecisions() {
     return decisions;
   }
 
+  /**
+   * getter for points, all points earned in the tournament.
+   * @return points
+   */
   public ArrayList<ArrayList<Integer>> returnPoints() {
     return points;
   }
 
+  /**
+   * getter for lengths, length is the length of the game i.e. the number 
+   * of rounds to be played
+   * @return
+   */
   public ArrayList<Integer> returnGameLengths() {
     return lengths;
   }

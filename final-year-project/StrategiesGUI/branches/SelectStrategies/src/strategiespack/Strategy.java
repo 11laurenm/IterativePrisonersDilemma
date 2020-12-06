@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  * Superclass for all strategies.
- * @author Lauren Moore
+ * @author Lauren Moore - zfac043
  *
  */
 public class Strategy {

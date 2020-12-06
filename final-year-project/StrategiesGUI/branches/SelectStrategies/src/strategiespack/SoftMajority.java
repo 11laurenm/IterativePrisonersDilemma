@@ -5,6 +5,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import strategiespack.Strategy;
 
+/** A strategy that begins by cooperating and then continues to cooperate as long as the opponent 
+ * has cooperated a number of times equal to or greater than its number of defections.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class SoftMajority extends Strategy {
 
   /**

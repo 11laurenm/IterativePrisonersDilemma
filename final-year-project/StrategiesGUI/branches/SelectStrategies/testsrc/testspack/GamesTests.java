@@ -11,9 +11,10 @@ import strategiespack.AlwaysDefect;
 import strategiespack.Game;
 import strategiespack.VaryGameLength;
 
-/** Tests relating to the functionality of the game class.
+/** Tests relating to the functionality of the game and 
+ * varyGameLength classes.
  * 
- * @author Lauren Moore
+ * @author Lauren Moore - zfac043
  *
  */
 

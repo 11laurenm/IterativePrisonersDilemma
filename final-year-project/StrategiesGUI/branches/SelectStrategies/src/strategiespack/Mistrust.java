@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/** A strategy that begins by defecting and then copies its opponent’s previous move.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class Mistrust extends Strategy {
 
   /**

@@ -5,6 +5,12 @@ import java.util.Random;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * A strategy that randomly returns c or d.
+ * The probability of cooperating can be decided using the GUI
+ * @author Lauren Moore - zfac043
+ */
+
 public class VaryingRandom extends Strategy {
   
   /**

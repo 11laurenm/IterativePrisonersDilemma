@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/** A strategy that plays the moves defect, cooperate, cooperate 
+ * then always defects if the opposing strategy cooperated in moves 2 and 3.
+ * If not it plays the opponent's previous move.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class Prober extends Strategy {
 
   /**

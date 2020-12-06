@@ -11,6 +11,12 @@ import strategiespack.RoundRobin;
 import strategiespack.Strategy;
 import strategiespack.TitForTat;
 
+/** Tests relating to the functionality of the strategy classes.
+ * 
+ * @author Lauren Moore - zfac043
+ *
+ */
+
 class TournamentsTests {
 
   /**

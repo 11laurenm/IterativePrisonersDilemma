@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  * A strategy that begins by cooperating, then copies its opponent's previous move.
- * @author Lauren Moore
+ * @author Lauren Moore - zfac043
  *
  */
 public class TitForTat extends Strategy {

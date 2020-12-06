@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/** A strategy that always cooperates until its opponent defects, 
+ * in which case it defects on every subsequent turn.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class Spiteful extends Strategy {
 
   /**

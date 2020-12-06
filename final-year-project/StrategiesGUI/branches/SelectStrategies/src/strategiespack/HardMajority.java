@@ -5,6 +5,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import strategiespack.Strategy;
 
+/** A strategy that defects if its opponent's defections equal or outnumber its cooperations.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class HardMajority extends Strategy {
 
   /**

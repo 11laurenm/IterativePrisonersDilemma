@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**A strategy that begins by cooperating, 
+ * then cooperates only if both players made the same move in the previous round.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class Pavlov extends Strategy {
 
   /**

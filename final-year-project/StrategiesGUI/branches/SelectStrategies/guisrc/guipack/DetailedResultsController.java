@@ -5,6 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import strategiespack.Strategy;
 
+/**
+ * Controller class used to handle the detailed results screen of GUI.
+ * @author Lauren Moore - zfac043
+ *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
+ */
+
 public class DetailedResultsController {
 
   /**

@@ -27,7 +27,7 @@ import strategiespack.VaryingMajority;
 
 /** Tests relating to the functionality of the strategy classes.
  * 
- * @author Lauren Moore
+ * @author Lauren Moore - zfac043
  *
  */
 

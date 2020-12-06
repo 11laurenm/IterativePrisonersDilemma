@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /** A class that runs one or more games of the PD.
  * 
- * @author Lauren Moore
+ * @author Lauren Moore - zfac043
  *
  */
 public class Game {

@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/** A strategy that defects equal to its opponent's total defections 
+ * when it is defected against.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class Gradual extends Strategy {
 
   /**

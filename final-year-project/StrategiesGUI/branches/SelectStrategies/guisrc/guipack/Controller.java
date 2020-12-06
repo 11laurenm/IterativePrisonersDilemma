@@ -16,7 +16,14 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import strategiespack.RoundRobin;
 import strategiespack.Strategy;
 
+/**
+ * Controller class used to handle the configure tournaments screen of GUI.
+ * @author Lauren Moore - zfac043
+ *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
+ */
+
 public class Controller {
+  
   /**
   * TableView containing each strategy that could be entered 
   * into a tournament.

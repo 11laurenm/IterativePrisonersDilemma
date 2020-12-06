@@ -2,6 +2,12 @@ package strategiespack;
 
 import java.util.ArrayList;
 
+/**
+ * The class representing a tournament of the Iterative Prisoner's Dilemma.
+ * @author Lauren Moore - zfac043
+ *
+ */
+
 public class RoundRobin {
 
   /**

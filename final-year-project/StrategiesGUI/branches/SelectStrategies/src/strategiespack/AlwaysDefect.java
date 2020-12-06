@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 
 /** A strategy that always makes the decision to defect.
  * 
- * @author Lauren Moore
+ * @author Lauren Moore - zfcac043
  *
  */
 

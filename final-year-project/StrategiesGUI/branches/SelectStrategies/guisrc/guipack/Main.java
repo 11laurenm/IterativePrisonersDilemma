@@ -25,13 +25,13 @@ import strategiespack.TitForTat;
 import strategiespack.VaryingMajority;
 import strategiespack.VaryingRandom;
 
+/**
+ * Main class used to create and launch GUI.
+ * @author Lauren Moore - zfac043
+ *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
+ */
+
 public class Main extends Application {
-  
-  /**
-   * Main class used to create and launch GUI.
-   * @author Lauren Moore - zfac043
-   * Some code adapted from https://code.makery.ch/library/javafx-tutorial/part1/, author Marco Jakob
-   */
 
   /**
    * Used to display GUI.

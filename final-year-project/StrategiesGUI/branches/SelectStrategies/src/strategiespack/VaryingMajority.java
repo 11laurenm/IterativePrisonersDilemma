@@ -6,7 +6,8 @@ import javafx.beans.property.StringProperty;
 
 /**
  * A strategy that returns the decision made the majority of times by its opponent.
- * The amount of previous rounds it considers can be decided upon construction
+ * The amount of previous rounds it considers can be decided using the GUI
+ * @author Lauren Moore - zfac043
  */
 public class VaryingMajority extends Strategy {
 

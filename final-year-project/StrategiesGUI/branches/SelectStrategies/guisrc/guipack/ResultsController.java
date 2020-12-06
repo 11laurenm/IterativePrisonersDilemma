@@ -15,6 +15,12 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import strategiespack.Strategy;
 
+/**
+ * Controller class used to handle the results screen of GUI.
+ * @author Lauren Moore - zfac043
+ *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
+ */
+
 public class ResultsController {
 
   /**

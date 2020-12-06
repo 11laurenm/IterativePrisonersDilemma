@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/** A strategy that cooperates on the first two moves, 
+ * then defects if its opponent defected on both of the two previous moves.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class TitForTwoTats extends Strategy {
 
   /**

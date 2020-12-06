@@ -2,6 +2,13 @@ package strategiespack;
 
 import java.util.Random;
 
+/**
+ * Class responsible for deciding the length of each of the three games that 
+ * each pairing plays.
+ * @author Lauren Moore - zfac043
+ *
+ */
+
 public class VaryGameLength {
 
   /**

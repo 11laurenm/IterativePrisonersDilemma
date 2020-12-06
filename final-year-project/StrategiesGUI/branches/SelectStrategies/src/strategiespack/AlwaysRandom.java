@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 
 /** A strategy that always makes a random decision.
  * 
- * @author Lauren Moore
+ * @author Lauren Moore -zfac043
  *
  */
 

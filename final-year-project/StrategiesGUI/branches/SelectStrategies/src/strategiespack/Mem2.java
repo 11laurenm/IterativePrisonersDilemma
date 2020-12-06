@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**  A strategy that makes the same decisions as tit for tat in the first two moves,
+ * then chooses a new strategy to follow every two moves based on the outcome of the last two moves.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class Mem2 extends Strategy {
 
   String following = "titForTat";

@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/** A strategy that makes its decision based on the difference 
+ * between its score andits opponent’s score.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class ScoreBased extends Strategy {
 
   /**

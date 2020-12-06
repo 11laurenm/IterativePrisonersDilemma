@@ -5,6 +5,15 @@ import java.util.Random;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**  A strategy similar to tit for tat in that it begins by cooperating then 
+ * copies its opponent’s previous move in every subsequent round.  
+ * However, it has a random chance (normally quite low) 
+ * of cooperating even if its opponent defected on the previous round
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class TitForTatWithForgiveness extends Strategy {
 
   /**

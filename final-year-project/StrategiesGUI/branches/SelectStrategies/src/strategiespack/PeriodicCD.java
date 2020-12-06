@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**A strategy that plays cooperate, defect on a continuous cycle.
+ * 
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class PeriodicCD extends Strategy {
 
   /**

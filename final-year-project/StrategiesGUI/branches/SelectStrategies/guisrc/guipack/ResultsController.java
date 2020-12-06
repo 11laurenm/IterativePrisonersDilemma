@@ -17,21 +17,53 @@ import strategiespack.Strategy;
 
 public class ResultsController {
 
+  /**
+   * TableView containing each strategy that was entered 
+   * into a tournament and the points they earned.
+   */
   @FXML
   private TableView<Strategy> resultsTable;
+  
+  /**
+   * TableColumn that displays the strategy's place in 
+   * the tournament.
+   */
   @FXML
   private TableColumn<Strategy, String> placeColumn;
+  
+  /**
+   * TableColumn that displays the strategy's name.
+   */
   @FXML
   private TableColumn<Strategy, String> strategyColumn;
+  
+  /**
+   * TableColumn that displays the strategy's points.
+   */
   @FXML
   private TableColumn<Strategy, String> pointsColumn;
+  
+  /**
+   * GridPane that displays the points earned in each game.
+   */
   @FXML
   private GridPane resultsGrid;
 
+  /**
+   * Allows the program to access the main function.
+   */
   private Main mainn;
 
+  /**
+   * A list of strategies used to populate the TableView.
+   */
   private ObservableList<Strategy> resultsList = FXCollections.observableArrayList();
     
+  /**
+   * Called when the controller is created, sets the value of Main variable 
+   * and populates the TableView.
+   * @param main - the main function
+   */
   @FXML void initialize() {
     resultsTable.setItems(resultsList);
 
@@ -44,7 +76,13 @@ public class ResultsController {
     strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
     pointsColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("points"));
   }
-
+  
+  /**
+   * Used to sort the list of strategies into descending order 
+   * based on points so the results are displayed in an easy 
+   * to read format.
+   * @param results - an unordered arrayList of all strategies
+   */
   public void setResults(ArrayList<Strategy> results) {
     ArrayList<Strategy> sortedResults = new ArrayList<>();
     ArrayList<Strategy> tempResults = new ArrayList<>();
@@ -65,20 +103,37 @@ public class ResultsController {
     resultsList = FXCollections.observableArrayList(sortedResults);
   }
 
+  /**
+   * Sets the value of the main variable so the main class can be accessed.
+   * @param mainclass - an instance of the Main class
+   */
   public void setMain(Main mainclass) {
     this.mainn = mainclass;
   }
 
+  /**
+   * Closes the dialog when the close button is pressed.
+   */
   @FXML
   private void handleBackButton() {
     mainn.closeResults();
   }
 
+  /**
+   * Launches the detailed results dialog when the 
+   * corresponding button is pressed.
+   */
   @FXML
   private void detailedResultsButton() {
     mainn.launchDetailedResults();
   }
 
+  /**
+   * Used to construct and populate the gridpane as it varies in size 
+   * depending on how many participating strategies there are.
+   * @param results - the list of strategies to add
+   * @param scores - the points earned in each game
+   */
   void constructGrid(ArrayList<Strategy> results, ArrayList<Integer> scores) {
 
     for (int i = 0; i < results.size(); i++) {

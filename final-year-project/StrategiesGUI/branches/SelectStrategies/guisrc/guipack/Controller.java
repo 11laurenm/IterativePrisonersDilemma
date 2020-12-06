@@ -17,14 +17,36 @@ import strategiespack.RoundRobin;
 import strategiespack.Strategy;
 
 public class Controller {
+  /**
+  * TableView containing each strategy that could be entered 
+  * into a tournament.
+  */
   @FXML
   private TableView<Strategy> strategyTable;
+  
+  /**
+   * TableColumn that displays the strategy's name.
+   */
   @FXML
   private TableColumn<Strategy, String> strategyColumn;
+  
+  /**
+   * TableColumn that displays the value of the 
+   * strategy's probability variable (if one exists).
+   */
   @FXML
   private TableColumn<Strategy, String> probabilityColumn;
+  
+  /**
+   * TableColumn that displays the value of the 
+   * strategy's rounds variable (if one exists).
+   */
   @FXML
   private TableColumn<Strategy, String> roundsColumn;
+  
+  /**
+   * Text fields that make up the editable payoff matrix.
+   */
   @FXML
   private TextField cc1;
   @FXML
@@ -41,14 +63,30 @@ public class Controller {
   private TextField dd1;
   @FXML
   private TextField dd2;
+  
+  /**
+   * Text field that allows user to enter the number of rounds 
+   * to be played.
+   */
   @FXML
   private TextField rounds;
 
+  /**
+   * Allows the program to access the main function.
+   */
   private Main mainn;
 
+  /**
+   * Constructor for an instance of the strategy, needs no inputs.
+   */
   public Controller(){
   }
 
+  /**
+   * Called when the controller is created, sets the value of Main variable 
+   * and populates the TableView.
+   * @param main - the main function
+   */
   @FXML 
   public void initialize(Main main) {
     setMain(main);
@@ -61,11 +99,21 @@ public class Controller {
     roundsColumn.setCellFactory(TextFieldTableCell.forTableColumn());
   }
 
+  /**
+   * Sets the value of the main variable so the main class can be accessed and 
+   * also sets which strategies should be displayed in the table.
+   * @param mainclass - an instance of the Main class
+   */
   public void setMain(Main mainclass) {
     this.mainn = mainclass;
     strategyTable.setItems(mainn.getStrategyData());
   }
 
+  /**
+   * Called when the run button is pressed. It creates a tournament using the 
+   * values entered into the GUI for strategies, rounds and payofffs then 
+   * launches the display results dialog.
+   */
   @FXML
   private void handleRunTournament() {
     ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
@@ -114,46 +162,76 @@ public class Controller {
     }
   }
 
+  /**
+   * Run when cc1 is edited, ensures that cc2 matches cc1.
+   */
   @FXML
   private void cc1Edited() {
     cc2.setText(cc1.getText());
   }
 
+  /**
+   * Run when cc2 is edited, ensures that cc1 matches cc2.
+   */
   @FXML
   private void cc2Edited() {
     cc1.setText(cc2.getText());
   }
 
+  /**
+   * Run when cd1 is edited, ensures that dc2 matches cd1.
+   */
   @FXML
   private void cd1Edited() {
     dc2.setText(cd1.getText());
   }
 
+  /**
+   * Run when cd2 is edited, ensures that dc1 matches cd2.
+   */
   @FXML
   private void cd2Edited() {
     dc1.setText(cd2.getText());
   }
 
+  /**
+   * Run when dc1 is edited, ensures that cd2 matches dc1.
+   */
   @FXML
   private void dc1Edited() {
     cd2.setText(dc1.getText());
   }
 
+  /**
+   * Run when dc2 is edited, ensures that cd1 matches dc2.
+   */
   @FXML
   private void dc2Edited() {
     cd1.setText(dc2.getText());
   }
 
+  /**
+   * Run when dd1 is edited, ensures that dd2 matches dd1.
+   */
   @FXML
   private void dd1Edited() {
     dd2.setText(dd1.getText());
   }
 
+  /**
+   * Run when dd2 is edited, ensures that dd1 matches dd2.
+   */
   @FXML
   private void dd2Edited() {
     dd1.setText(dd2.getText());
   }
 
+  /**
+   * Called when a cell in the probability column is edited, 
+   * sets the relevant strategy's probability variable if it 
+   * has one.
+   * @param event - contains the new value for probability
+   */
   @FXML
   private void probabilityEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
@@ -161,6 +239,12 @@ public class Controller {
     strat.setProbability(Integer.parseInt(newValue));
   }
 
+  /**
+   * Called when a cell in the rounds column is edited, 
+   * sets the relevant strategy's rounds variable if it 
+   * has one.
+   * @param event - contains the new value for rounds
+   */
   @FXML
   private void roundsEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();

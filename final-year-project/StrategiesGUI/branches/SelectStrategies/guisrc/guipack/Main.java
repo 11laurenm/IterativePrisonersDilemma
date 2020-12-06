@@ -26,18 +26,42 @@ import strategiespack.VaryingMajority;
 import strategiespack.VaryingRandom;
 
 public class Main extends Application {
+  
+  /**
+   * Main class used to create and launch GUI.
+   * @author Lauren Moore - zfac043
+   * Some code adapted from https://code.makery.ch/library/javafx-tutorial/part1/, author Marco Jakob
+   */
 
+  /**
+   * Used to display GUI.
+   */
   private Stage primaryStage;
   private BorderPane rootLayout;
+  public Stage dialogStage;
+  
+  /**
+   * List containing every possible strategy to display in the GUI.
+   */
   private ObservableList<Strategy> strategyData = FXCollections.observableArrayList();
 
-  public Stage dialogStage;
+  /**
+   * The tournament to be run.
+   */
   public RoundRobin tournament;
   
+  /**
+   * Getter used to get the list containing every possible strategy.
+   * @return an ObservableList containing every possible strategy
+   */
   public ObservableList<Strategy> getStrategyData() {
     return strategyData;
   }
 
+  /**
+   * Sets up the stage and other objects so GUI can be displayed 
+   * and runs the showOverview method.
+   */
   @Override
   public void start(Stage primaryStage) {
     this.primaryStage = primaryStage;
@@ -48,6 +72,9 @@ public class Main extends Application {
     showOverview();  
   }
 
+  /**
+   * Sets up the root layout which contains menu items.
+   */
   public void initRootLayout() {
     try {
       FXMLLoader loader = new FXMLLoader();
@@ -61,6 +88,10 @@ public class Main extends Application {
     }
   }
 
+  /**
+   * Used to display the overview.fxml file as the main GUI, 
+   * which allows the user to configure and run tournaments
+   */
   public void showOverview() {
     try {
       FXMLLoader loader = new FXMLLoader();
@@ -77,10 +108,17 @@ public class Main extends Application {
     }
   }
 
+  /**
+   * getter for the primary stage.
+   * @return primary stage
+   */
   public Stage getPrimaryStage() {
     return primaryStage;
   }
 
+  /**
+   * Constructor which creates the list of possible strategies.
+   */
   public Main() {
     strategyData.add(new AlwaysCooperate());
     strategyData.add(new AlwaysDefect());
@@ -95,10 +133,17 @@ public class Main extends Application {
     strategyData.add(new VaryingRandom(0.5));
   }
 
+  /**
+   * Main function which launches the program/GUI.
+   * @param args - no CL args are needed
+   */
   public static void main(String[] args) {
     launch(args);
   }
 
+  /**
+   * Launches the results dialog once a tournament has been run.
+   */
   public void displayResults() {
     ArrayList<Strategy> results = tournament.returnResults();
     ArrayList<Integer> scores = tournament.returnScores();
@@ -126,10 +171,16 @@ public class Main extends Application {
     }
   }
 
+  /**
+   * Closes the results dialog.
+   */
   public void closeResults() {
     dialogStage.close();
   }
 
+  /**
+   * Launches the detailed results dialog.
+   */
   public void launchDetailedResults() {
     try {
       FXMLLoader loader = new FXMLLoader();
@@ -153,6 +204,10 @@ public class Main extends Application {
     }
   }
 
+  /**
+   * Sets the value of the tournament variable.
+   * @param tourn - a tournament
+   */
   public void setTournament(RoundRobin tourn) {
     tournament = tourn;
   }

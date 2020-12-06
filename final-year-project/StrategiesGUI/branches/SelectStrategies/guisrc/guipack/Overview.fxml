@@ -48,26 +48,26 @@
                   <Label text="Defect" GridPane.rowIndex="2" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="CC1" onKeyReleased="#CC1Edited" onKeyTyped="#CC1Edited" text="3" />
-                        <TextField fx:id="CC2" onKeyReleased="#CC2Edited" onKeyTyped="#CC2Edited" text="3" />
+                        <TextField fx:id="cc1" onKeyReleased="#cc1Edited" onKeyTyped="#cc1Edited" text="3" />
+                        <TextField fx:id="cc2" onKeyReleased="#cc2Edited" onKeyTyped="#cc2Edited" text="3" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="DC1" onKeyReleased="#DC1Edited" onKeyTyped="#DC1Edited" text="5" />
-                        <TextField fx:id="DC2" onKeyReleased="#DC2Edited" onKeyTyped="#DC2Edited" text="0" />
+                        <TextField fx:id="dc1" onKeyReleased="#dc1Edited" onKeyTyped="#dc1Edited" text="5" />
+                        <TextField fx:id="dc2" onKeyReleased="#dc2Edited" onKeyTyped="#dc2Edited" text="0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <TextField fx:id="CD1" onKeyReleased="#CD1Edited" onKeyTyped="#CD1Edited" text="0" />
-                        <TextField fx:id="CD2" onKeyReleased="#CD2Edited" onKeyTyped="#CD2Edited" text="5" />
+                        <TextField fx:id="cd1" onKeyReleased="#cd1Edited" onKeyTyped="#cd1Edited" text="0" />
+                        <TextField fx:id="cd2" onKeyReleased="#cd2Edited" onKeyTyped="#cd2Edited" text="5" />
                      </children>
                   </HBox>
                   <HBox GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
-                        <TextField fx:id="DD1" onKeyReleased="#DD1Edited" onKeyTyped="#DD1Edited" text="1" />
-                        <TextField fx:id="DD2" onKeyReleased="#DD2Edited" onKeyTyped="#DD2Edited" text="1" />
+                        <TextField fx:id="dd1" onKeyReleased="#dd1Edited" onKeyTyped="#dd1Edited" text="1" />
+                        <TextField fx:id="dd2" onKeyReleased="#dd2Edited" onKeyTyped="#dd2Edited" text="1" />
                      </children>
                   </HBox>
                </children>
@@ -81,7 +81,7 @@
                      <padding>
                         <Insets right="25.0" />
                      </padding></Label>
-                  <TextField fx:id="Rounds" text="10" />
+                  <TextField fx:id="rounds" text="10" />
                </children>
                <padding>
                   <Insets bottom="25.0" top="25.0" />

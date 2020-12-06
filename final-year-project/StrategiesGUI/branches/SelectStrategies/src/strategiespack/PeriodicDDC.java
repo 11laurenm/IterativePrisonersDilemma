@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class PeriodicDDC extends Strategy {
-	
+
   public PeriodicDDC() {
       
   }

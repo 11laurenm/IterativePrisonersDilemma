@@ -283,7 +283,7 @@ class StrategiesTests {
   }
  
   @Test
-  void testPeriodicDDC() {
+  void testPeriodicDdc() {
     PeriodicDDC testStrat = new PeriodicDDC();
     AlwaysDefect testStrat2 = new AlwaysDefect();
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
@@ -294,7 +294,7 @@ class StrategiesTests {
   }
  
   @Test
-  void testPeriodicCCD() {
+  void testPeriodicCcd() {
     PeriodicCCD testStrat = new PeriodicCCD();
     AlwaysDefect testStrat2 = new AlwaysDefect();
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
@@ -335,7 +335,8 @@ class StrategiesTests {
     ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd'));
     Game game = new Game(testStrat, testStrat2, 3, payoffs);
     game.playGame();
-    assertEquals(game.historyStrategy1, expected, "HardTitForTat strategy not functioning correctly");
+    assertEquals(game.historyStrategy1, expected, 
+            "HardTitForTat strategy not functioning correctly");
   }
  
   @Test

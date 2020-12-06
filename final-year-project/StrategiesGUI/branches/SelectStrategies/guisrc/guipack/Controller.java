@@ -45,7 +45,7 @@ public class Controller {
   private TextField rounds;
 
   private Main mainn;
-	
+
   public Controller(){
   }
 
@@ -60,12 +60,12 @@ public class Controller {
     roundsColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("rounds"));
     roundsColumn.setCellFactory(TextFieldTableCell.forTableColumn());
   }
-	
+
   public void setMain(Main mainclass) {
     this.mainn = mainclass;
     strategyTable.setItems(mainn.getStrategyData());
   }
-	
+
   @FXML
   private void handleRunTournament() {
     ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();

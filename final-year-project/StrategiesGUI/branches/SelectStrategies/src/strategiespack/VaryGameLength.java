@@ -3,7 +3,7 @@ package strategiespack;
 import java.util.Random;
 
 public class VaryGameLength {
-	
+
   int totalRounds;
   Random random = new Random();
   public int first;

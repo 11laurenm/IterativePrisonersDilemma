@@ -29,7 +29,7 @@ public class AlwaysDefect extends Strategy {
   */
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
-	        ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
+          ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
     return 'd';
   }
   

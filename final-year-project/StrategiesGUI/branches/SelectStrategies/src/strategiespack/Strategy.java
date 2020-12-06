@@ -22,7 +22,7 @@ public class Strategy {
    * Initialise the strategy with 0 points.
    */
   public Strategy() {
-    int points = 0;
+    points = 0;
     tournamentPosition = 0;
   }
 

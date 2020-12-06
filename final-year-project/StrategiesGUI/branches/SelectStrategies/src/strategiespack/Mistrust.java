@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Mistrust extends Strategy {
-	
+
   public Mistrust() {
   }
     

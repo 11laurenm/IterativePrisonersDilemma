@@ -1,27 +1,17 @@
 package guipack;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Observable;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import strategiespack.Strategy;
 
@@ -99,7 +89,7 @@ public class ResultsController {
       label2.setText(results.get(i).nameProperty().getValue());
       resultsGrid.add(label2, i + 1, 0);
     }
-	
+
     int pos = 0;
     for (int i = 1; i < results.size() + 1; i++) {
       for (int j = i; j < results.size() + 1; j++) {

@@ -13,20 +13,20 @@ public class RoundRobin {
   ArrayList<Integer> lengths;
   ArrayList<String> names;
 
-  public RoundRobin(ArrayList<Strategy> strats, int rounds, ArrayList<Integer> Payoffs) {
+  public RoundRobin(ArrayList<Strategy> strats, int rounds, ArrayList<Integer> payoffs) {
     totalRounds = rounds;
     strategies = strats;
-    payoffList = Payoffs;
+    payoffList = payoffs;
     scores = new ArrayList<>();
     lengths = new ArrayList<>();
   }
         
 
   public void runTournament() {
-	
+
     decisions = new ArrayList<ArrayList<Character>>();
     points = new ArrayList<ArrayList<Integer>>();
-	
+
     VaryGameLength varyLength = new VaryGameLength(totalRounds);
     int first = varyLength.getFirstSet();
     int second = varyLength.getSecondSet();

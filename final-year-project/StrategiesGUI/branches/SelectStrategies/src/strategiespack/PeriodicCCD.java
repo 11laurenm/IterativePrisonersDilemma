@@ -51,6 +51,5 @@ public class PeriodicCCD extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
-	
 
 }

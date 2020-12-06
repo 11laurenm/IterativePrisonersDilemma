@@ -198,8 +198,6 @@ class GamesTests {
 
   @Test
   void testVaryGameLengthFirst() {
-    AlwaysCooperate strategy1 = new AlwaysCooperate();
-    AlwaysCooperate strategy2 = new AlwaysCooperate();
     VaryGameLength vary = new VaryGameLength(50);
     int first = vary.getFirstSet();
     assertTrue(first < 51, "getFirstSet returning too high a number");
@@ -208,8 +206,6 @@ class GamesTests {
 
   @Test
   void testVaryGameLengthSecond() { 
-    AlwaysCooperate strategy1 = new AlwaysCooperate();
-    AlwaysCooperate strategy2 = new AlwaysCooperate();
     VaryGameLength vary = new VaryGameLength(50);
     int first = vary.getFirstSet();
     int second = vary.getSecondSet();
@@ -219,8 +215,6 @@ class GamesTests {
 
   @Test
   void testVaryGameLengthFirstTotalRounds() {
-    AlwaysCooperate strategy1 = new AlwaysCooperate();
-    AlwaysCooperate strategy2 = new AlwaysCooperate();
     VaryGameLength vary = new VaryGameLength(50);
     vary.first = 50;
     int second = vary.getSecondSet();
@@ -229,8 +223,6 @@ class GamesTests {
 
   @Test
   void testVaryGameLengthThird() {
-    AlwaysCooperate strategy1 = new AlwaysCooperate();
-    AlwaysCooperate strategy2 = new AlwaysCooperate();
     VaryGameLength vary = new VaryGameLength(50);
     vary.first = 20;
     vary.second = 10;
@@ -240,8 +232,6 @@ class GamesTests {
 
   @Test
   void testVaryGameLengthSecondTotalRounds() {
-    AlwaysCooperate strategy1 = new AlwaysCooperate();
-    AlwaysCooperate strategy2 = new AlwaysCooperate();
     VaryGameLength vary = new VaryGameLength(50);
     vary.first = 27;
     vary.second = 23;

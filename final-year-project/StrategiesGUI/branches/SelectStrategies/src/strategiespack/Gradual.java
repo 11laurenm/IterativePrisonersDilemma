@@ -50,7 +50,7 @@ public class Gradual extends Strategy {
     }
     return 'c';
   }
-	
+
   /**
    * Method that provides the strategy's name.
    * @return the name of the strategy as a SimpleStringProperty

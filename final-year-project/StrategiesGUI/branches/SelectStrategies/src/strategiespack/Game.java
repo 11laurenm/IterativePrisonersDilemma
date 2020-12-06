@@ -64,7 +64,7 @@ public class Game {
   }
 
   /**
-   * Adds a decision to the history
+   * Adds a decision to the history.
    * @param move the decision that was made
    * @param history the history arraylist that the decision should be added to
    */
@@ -77,7 +77,6 @@ public class Game {
    * Uses the round number provided on creation to run that many rounds.
    */
   public void playGame() {
-
     for (int round = 0; round < length; round++) {
       strategy1move = strategy1.getDecision(getLastMove(historyStrategy2), historyStrategy2, 
               historyStrategy1, getLastMove(historyStrategy1), strategy2.getPoints());

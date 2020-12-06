@@ -5,10 +5,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class HardTitForTat extends Strategy {
-	
+
   public HardTitForTat() {
   }
-	
+
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
           ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
@@ -21,7 +21,7 @@ public class HardTitForTat extends Strategy {
     }
     return 'c';
   }
-	
+
   /**
    * Method that provides the strategy's name.
    * @return the name of the strategy as a SimpleStringProperty

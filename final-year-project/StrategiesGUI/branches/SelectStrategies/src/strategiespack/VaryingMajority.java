@@ -9,7 +9,7 @@ import javafx.beans.property.StringProperty;
  * The amount of previous rounds it considers can be decided upon construction
  */
 public class VaryingMajority extends Strategy {
-	
+
   /**
    * The number of previous rounds it considers when deciding its move.
    */

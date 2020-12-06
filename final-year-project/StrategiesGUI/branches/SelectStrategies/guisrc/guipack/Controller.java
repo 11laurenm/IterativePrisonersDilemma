@@ -4,8 +4,10 @@ import guipack.Main;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -13,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.GridPane;
 import strategiespack.RoundRobin;
 import strategiespack.Strategy;
 
@@ -71,6 +74,16 @@ public class Controller {
   @FXML
   private TextField dd2;
   
+  @FXML
+  private Label cooperate1;
+  @FXML
+  private Label cooperate2;
+  @FXML
+  private Label defect1;
+  @FXML
+  private Label defect2;
+  
+  
   /**
    * Text field that allows user to enter the number of rounds 
    * to be played.
@@ -104,6 +117,10 @@ public class Controller {
     probabilityColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     roundsColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("rounds"));
     roundsColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+    GridPane.setHalignment(cooperate1, HPos.CENTER);
+    GridPane.setHalignment(cooperate2, HPos.CENTER);
+    GridPane.setHalignment(defect1, HPos.CENTER);
+    GridPane.setHalignment(defect2, HPos.CENTER);
   }
 
   /**

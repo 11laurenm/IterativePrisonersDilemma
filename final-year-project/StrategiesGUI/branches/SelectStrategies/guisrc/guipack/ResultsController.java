@@ -6,12 +6,17 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.ColumnConstraintsBuilder;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.RowConstraintsBuilder;
 import javafx.util.Callback;
 import strategiespack.Strategy;
 
@@ -141,14 +146,25 @@ public class ResultsController {
    * @param scores - the points earned in each game
    */
   void constructGrid(ArrayList<Strategy> results, ArrayList<Integer> scores) {
-
+    
+    for (int i = 0; i < results.size() - 1; i++) {
+      ColumnConstraints col1 = new ColumnConstraints();
+      col1.setPercentWidth(100 / (results.size() + 1));
+      RowConstraints row1 = new RowConstraints();
+      row1.setPercentHeight(100 / (results.size() + 1));
+      resultsGrid.getColumnConstraints().add(col1);
+      resultsGrid.getRowConstraints().add(row1);
+    }
+    
     for (int i = 0; i < results.size(); i++) {
       Label label = new Label();
       label.setText(results.get(i).nameProperty().getValue());
       resultsGrid.add(label, 0, i + 1);
+      GridPane.setHalignment(label, HPos.CENTER);
       Label label2 = new Label();
       label2.setText(results.get(i).nameProperty().getValue());
       resultsGrid.add(label2, i + 1, 0);
+      GridPane.setHalignment(label2, HPos.CENTER);
     }
 
     int pos = 0;
@@ -158,11 +174,13 @@ public class ResultsController {
         label.setText(Integer.toString(scores.get(pos)) + ", " 
             + Integer.toString(scores.get(pos + 1)));
         resultsGrid.add(label, i, j);
+        GridPane.setHalignment(label, HPos.CENTER);
         if (i != j) {
           Label label2 = new Label();
           label2.setText(Integer.toString(scores.get(pos + 1)) + ", " 
               + Integer.toString(scores.get(pos)));
           resultsGrid.add(label2, j, i);
+          GridPane.setHalignment(label2, HPos.CENTER);
         }
         pos = pos + 2;
       }

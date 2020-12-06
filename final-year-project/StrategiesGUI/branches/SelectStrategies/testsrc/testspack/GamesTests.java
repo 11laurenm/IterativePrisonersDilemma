@@ -47,7 +47,7 @@ class GameTests {
         AlwaysDefect strategy2 = new AlwaysDefect();
         ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
         Game game = new Game(strategy1, strategy2, 3, payoffs);
-        char last = game.getLastMove(game.HistoryStrategy1);
+        char last = game.getLastMove(game.historyStrategy1);
         assertEquals(last, 'n', "getLastMove not returning correctly when 0 moves");
     }
     
@@ -62,8 +62,8 @@ class GameTests {
         AlwaysDefect strategy2 = new AlwaysDefect();
         ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
         Game game = new Game(strategy1, strategy2, 3, payoffs);
-        game.setLastMove('c', game.HistoryStrategy1);
-        char last = game.getLastMove(game.HistoryStrategy1);
+        game.setLastMove('c', game.historyStrategy1);
+        char last = game.getLastMove(game.historyStrategy1);
         assertEquals(last, 'c', "getLastMove not returning correctly");
     }
     
@@ -78,14 +78,14 @@ class GameTests {
         AlwaysDefect strategy2 = new AlwaysDefect();
         ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
         Game game = new Game(strategy1, strategy2, 3, payoffs);
-        game.setLastMove('c', game.HistoryStrategy1);
-        game.setLastMove('d', game.HistoryStrategy1);
-        game.setLastMove('d', game.HistoryStrategy1);
+        game.setLastMove('c', game.historyStrategy1);
+        game.setLastMove('d', game.historyStrategy1);
+        game.setLastMove('d', game.historyStrategy1);
         ArrayList<Character> testlist = new ArrayList<>(); 
         testlist.add('c');
         testlist.add('d');
         testlist.add('d');
-        assertEquals(testlist, game.HistoryStrategy1, "setLastMove not functioning correctly");  
+        assertEquals(testlist, game.historyStrategy1, "setLastMove not functioning correctly");  
     }
     
     /**
@@ -101,8 +101,8 @@ class GameTests {
         ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
         Game game = new Game(strategy1, strategy2, 3, payoffs);
         game.playGame();
-        assertEquals('c', game.getLastMove(game.HistoryStrategy1), "strategy1 getLastMove not working in playGame method");
-        assertEquals('d', game.getLastMove(game.HistoryStrategy2), "strategy2 getLastMove not working in playGame method");
+        assertEquals('c', game.getLastMove(game.historyStrategy1), "strategy1 getLastMove not working in playGame method");
+        assertEquals('d', game.getLastMove(game.historyStrategy2), "strategy2 getLastMove not working in playGame method");
     }
     
     /**

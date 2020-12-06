@@ -290,7 +290,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('d', 'd', 'c'));
 	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "PeriodicDDC strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "PeriodicDDC strategy not functioning correctly");
  }
  
  @Test
@@ -301,7 +301,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd'));
 	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "PeriodicCCD strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "PeriodicCCD strategy not functioning correctly");
  }
  
  @Test
@@ -312,7 +312,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'd'));
 	 Game game = new Game(testStrat, testStrat2, 2, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "PeriodicCD strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "PeriodicCD strategy not functioning correctly");
  }
  
  @Test
@@ -323,7 +323,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd', 'd'));
 	 Game game = new Game(testStrat, testStrat2, 4, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "TitForTwoTats strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "TitForTwoTats strategy not functioning correctly");
  }
  
  @Test
@@ -334,7 +334,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd'));
 	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "HardTitForTat strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "HardTitForTat strategy not functioning correctly");
  }
  
  @Test
@@ -345,7 +345,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'c', 'd', 'c', 'c', 'd', 'd', 'c', 'c'));
 	 Game game = new Game(testStrat, testStrat2, 10, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "Gradual strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "Gradual strategy not functioning correctly");
  }
  
  @Test
@@ -356,7 +356,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd', 'c', 'c', 'c', 'd', 'd'));
 	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "Gradual strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "Gradual strategy not functioning correctly");
  }
  
  @Test
@@ -367,7 +367,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('d', 'c', 'c', 'd', 'd'));
 	 Game game = new Game(testStrat, testStrat2, 5, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "Prober strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "Prober strategy not functioning correctly");
  }
  
  @Test
@@ -378,7 +378,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('d', 'c', 'c', 'c', 'd'));
 	 Game game = new Game(testStrat, testStrat2, 5, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "Prober strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "Prober strategy not functioning correctly");
  }
  
  @Test
@@ -389,7 +389,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'd', 'd', 'd', 'd', 'd', 'd'));
 	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "Mem2 strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "Mem2 strategy not functioning correctly");
  }
  
  @Test
@@ -400,7 +400,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'));
 	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "Mem2 strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "Mem2 strategy not functioning correctly");
  }
  
  @Test
@@ -411,7 +411,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('c', 'c', 'c', 'd', 'c', 'c', 'd', 'd'));
 	 Game game = new Game(testStrat, testStrat2, 8, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "Mem2 strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "Mem2 strategy not functioning correctly");
  }
  
  @Test
@@ -422,7 +422,7 @@ class StrategiesTests {
 	 ArrayList<Character> expected = new ArrayList<>(Arrays.asList('d', 'd', 'c'));
 	 Game game = new Game(testStrat, testStrat2, 3, payoffs);
 	 game.playGame();
-	 assertEquals(game.HistoryStrategy1, expected, "ScoreBased strategy not functioning correctly");
+	 assertEquals(game.historyStrategy1, expected, "ScoreBased strategy not functioning correctly");
  }
 
 }

@@ -187,6 +187,13 @@ class GamesTests {
             + "possibly not playing correct number of rounds");
   }
 
+  /**
+   * Eleventh test: This tests whether the playGame method recognises when the same 
+   *      strategy is passed to it twice.
+   * In order to pass this test I created a function isDummy to identify if the strategies were 
+   *     the same and added code to the playGame function to only count one set of 
+   *     scores if so
+   */
   @Test
   void testEqualStrategies() {
     AlwaysCooperate strategy = new AlwaysCooperate();
@@ -196,6 +203,12 @@ class GamesTests {
     assertEquals(strategy.getPoints(), 3, "Game not recognising should be dummy strategy");
   }
 
+  /**
+   * Twelfth test: This tests whether the varyGameLength method returns a number lower 
+   *      than the total variable passed to it as a parameter and higher than 0.
+   * In order to pass this test I created the varyGameLength class, and a method that 
+   *      returns a random integer between 1 and the total parameter
+   */
   @Test
   void testVaryGameLengthFirst() {
     VaryGameLength vary = new VaryGameLength(50);
@@ -204,6 +217,14 @@ class GamesTests {
     assertTrue(first > 0, "getFirstSet returning too low a number");
   }
 
+  /**
+   * Thirteenth test: This tests whether the varyGameLength method returns a number lower 
+   *      than the total variable minus the number of rounds in the first game 
+   *      and higher than 0.
+   * In order to pass this test I created a getSecondSet method which returns a 
+   *      random integer between 1 and the total variable minus the number of 
+   *      rounds in the first game
+   */
   @Test
   void testVaryGameLengthSecond() { 
     VaryGameLength vary = new VaryGameLength(50);
@@ -213,6 +234,14 @@ class GamesTests {
     assertTrue(first > 0, "getSecondSet returning too low a number");
   }
 
+  /**
+   * Fourteenth test: This tests whether the varyGameLength method returns 
+   *      0 when it has reached the total number of rounds before two games 
+   *      have been played.
+   * In order to pass this test I created an if statement in the method for 
+   *      the first set of rounds to return 0 if the total 
+   *      number of rounds had been played
+   */
   @Test
   void testVaryGameLengthFirstTotalRounds() {
     VaryGameLength vary = new VaryGameLength(50);
@@ -221,6 +250,13 @@ class GamesTests {
     assertEquals(0, second, "Not behaving correctly when total rounds reached");
   }
 
+  /**
+   * Fifteenth test: This tests whether the varyGameLength method returns 
+   *      the correct length for the third set of rounds.
+   * In order to pass this test I created a getThirdSet method that 
+   *      returns the total - length of first set - length of 
+   *      second set
+   */
   @Test
   void testVaryGameLengthThird() {
     VaryGameLength vary = new VaryGameLength(50);
@@ -230,6 +266,14 @@ class GamesTests {
     assertEquals(third, 20, "getThirdSet returning incorrect number");
   }
 
+  /**
+   * Sixteenth test: This tests whether the varyGameLength method returns 
+   *      0 when it has reached the total number of rounds before three games 
+   *      have been played.
+   * In order to pass this test I created an if statement in the method for 
+   *      the second set of rounds to return 0 if the total 
+   *      number of rounds had been played
+   */
   @Test
   void testVaryGameLengthSecondTotalRounds() {
     VaryGameLength vary = new VaryGameLength(50);

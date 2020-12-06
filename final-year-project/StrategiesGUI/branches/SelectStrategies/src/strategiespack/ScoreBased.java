@@ -19,7 +19,7 @@ public class ScoreBased extends Strategy {
    * @param myHistory - all previous moves made by the strategy
    * @param myLastMove - last move made by the strategy
    * @param opponentPoints - score of opponent
-   * @return the d if participants scores are equal or if opponent is losing by more than 9 points
+   * @return d if participants scores are equal or if opponent is losing by more than 9 points
   */
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 

@@ -13,6 +13,14 @@ import strategiespack.TitForTat;
 
 class TournamentsTests {
 
+  /**
+   * First test: Tests that a roundrobin tournament can be set up and run, 
+   * as well as testing that it returns the correct number of points for 
+   * the strategies involved
+   * In order to pass this test I created the RoundRobin class with the 
+   * runTournament method, which iterates through the list of strategies to 
+   * run a game with every possible pairing
+   */
   @Test
   void testCooperateDefectTournament() {
     AlwaysCooperate strategy1 = new AlwaysCooperate();
@@ -29,6 +37,12 @@ class TournamentsTests {
             "Round robin not running properly with Cooperate Defect");
   }
 
+  /**
+   * Second test: Tests that a roundrobin tournament can be set up and run, 
+   * as well as testing that it returns the correct number of points for 
+   * the strategies involved
+   * I did not have to write any additional code to pass this test
+   */
   @Test
   void testCooperateTitForTatTournament() {
     AlwaysCooperate strategy1 = new AlwaysCooperate();

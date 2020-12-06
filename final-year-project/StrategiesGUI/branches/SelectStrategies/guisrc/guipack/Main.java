@@ -14,14 +14,24 @@ import javafx.stage.Stage;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
 import strategiespack.AlwaysRandom;
+import strategiespack.Gradual;
 import strategiespack.HardMajority;
+import strategiespack.HardTitForTat;
+import strategiespack.Mem2;
 import strategiespack.Mistrust;
 import strategiespack.Pavlov;
+import strategiespack.PeriodicCCD;
+import strategiespack.PeriodicCD;
+import strategiespack.PeriodicDDC;
+import strategiespack.Prober;
 import strategiespack.RoundRobin;
+import strategiespack.ScoreBased;
 import strategiespack.SoftMajority;
 import strategiespack.Spiteful;
 import strategiespack.Strategy;
 import strategiespack.TitForTat;
+import strategiespack.TitForTatWithForgiveness;
+import strategiespack.TitForTwoTats;
 import strategiespack.VaryingMajority;
 import strategiespack.VaryingRandom;
 
@@ -122,14 +132,24 @@ public class Main extends Application {
   public Main() {
     strategyData.add(new AlwaysCooperate());
     strategyData.add(new AlwaysDefect());
-    strategyData.add(new VaryingMajority(5));
     strategyData.add(new AlwaysRandom());
+    strategyData.add(new Gradual());
     strategyData.add(new HardMajority());
+    strategyData.add(new HardTitForTat());
+    strategyData.add(new Mem2());
     strategyData.add(new Mistrust());
     strategyData.add(new Pavlov());
+    strategyData.add(new PeriodicCCD());
+    strategyData.add(new PeriodicCD());
+    strategyData.add(new PeriodicDDC());
+    strategyData.add(new Prober());
+    strategyData.add(new ScoreBased());
     strategyData.add(new SoftMajority());
     strategyData.add(new Spiteful());
     strategyData.add(new TitForTat());
+    strategyData.add(new TitForTatWithForgiveness(0.5));
+    strategyData.add(new TitForTwoTats());
+    strategyData.add(new VaryingMajority(5));
     strategyData.add(new VaryingRandom(0.5));
   }
 

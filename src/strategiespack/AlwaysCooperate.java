@@ -12,7 +12,7 @@ import javafx.beans.property.StringProperty;
  */
 
 public class AlwaysCooperate extends Strategy{
-  
+   
   /**
     * Constructor for an instance of the strategy, needs no inputs.
    */

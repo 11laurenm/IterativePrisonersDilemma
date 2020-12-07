@@ -51,23 +51,25 @@ public class Gradual extends Strategy {
       cooperatesLeft = 0;
       return 'c';
     }
-    if (defectsLeft > 0) {
-      if (defectsLeft == 1) {
+    if (defectsLeft > 0) { //if the strategy has determined in a previous round 
+      //that it should defect this turn
+      if (defectsLeft == 1) { //if this is the last planned defection 
         defectsLeft--;
-        cooperatesLeft = 2;
+        cooperatesLeft = 2; //plan to cooperate on the next two turns
         return 'd';
       }
       defectsLeft--;
       return 'd';
     }
-    if (cooperatesLeft > 0) {
+    if (cooperatesLeft > 0) { //if the strategy has determined in a previous round 
+      //that it should cooperate this turn
       cooperatesLeft--;
       return 'c';
     }
     if (lastMove == 'd') {
       for (char move : opponentHistory) {
-        if (move == 'd') {
-          defectsLeft++;
+        if (move == 'd') { 
+          defectsLeft++; //counts the number of times opponent has defected
         }
       }
       if (defectsLeft == 1) {

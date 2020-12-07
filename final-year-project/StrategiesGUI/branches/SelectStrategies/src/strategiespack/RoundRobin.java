@@ -64,7 +64,7 @@ public class RoundRobin {
   /**
    * The method responsible for running the tournament which decides 
    * how many rounds each of the three games should be, then
-   * iterates through the list of strategies to run 3 games with every possible pairing
+   * iterates through the list of strategies to run 3 games with every possible pairing.
    */
   public void runTournament() {
 
@@ -76,20 +76,20 @@ public class RoundRobin {
     int second = varyLength.getSecondSet();
     int third = varyLength.getThirdSet();
 
-    lengths.add(first);
+    lengths.add(first); //save the length of each game so GUI can output it
     lengths.add(second);
     lengths.add(third);
 
     for (int i = 0; i < strategies.size(); i++) {
-      for (int j = i; j < strategies.size(); j++) {
-        int player1Score = 0;
+      for (int j = i; j < strategies.size(); j++) { //iterate through every pair of strategies
+        int player1Score = 0; //initialise each player's score for this pairing to 0
         int player2Score = 0;
         Game game1 = new Game(strategies.get(i), strategies.get(j), first, payoffList);
         game1.playGame();
         player1Score = player1Score + game1.getPlayer1Score();
         player2Score = player2Score + game1.getPlayer2Score();
-        decisions.add(game1.getAllDecisions());
-        points.add(game1.getAllScores());
+        decisions.add(game1.getAllDecisions()); //add decisions to a master list so GUI can use it
+        points.add(game1.getAllScores()); //add points earned to a master list so GUI can use it
         Game game2 = new Game(strategies.get(i), strategies.get(j), second, payoffList);
         game2.playGame();
         player1Score = player1Score + game2.getPlayer1Score();

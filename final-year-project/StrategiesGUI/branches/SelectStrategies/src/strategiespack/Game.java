@@ -120,7 +120,7 @@ public class Game {
       strategy2move = strategy2.getDecision(getLastMove(historyStrategy1), historyStrategy1, 
               historyStrategy2, getLastMove(historyStrategy2), strategy1.getPoints());
         
-      decisions.add(strategy1move);
+      decisions.add(strategy1move); //save the move so GUI can output it
       decisions.add(strategy2move);
 
       setLastMove(strategy1move, historyStrategy1);
@@ -129,11 +129,11 @@ public class Game {
       roundScores = calculateScores(strategy1move, strategy2move);
         
       strategy1.addPoints(roundScores.get(0));
-      if (!isDummy()) {
+      if (!isDummy()) { //if one is a dummy then it should not gain points
         strategy2.addPoints(roundScores.get(1));
       }
         
-      points.add(roundScores.get(0));
+      points.add(roundScores.get(0)); //save the points earned so GUI can output them
       points.add(roundScores.get(1));
         
       roundScores.clear();
@@ -175,7 +175,7 @@ public class Game {
    * @return true if one strategy is a dummy, false if not
    */
   public boolean isDummy() {
-    if (strategy1.equals(strategy2)) {
+    if (strategy1.equals(strategy2)) { //if the strategies are the same one is a dummy
       return true;
     }
     return false;

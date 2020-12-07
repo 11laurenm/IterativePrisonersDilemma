@@ -32,7 +32,7 @@ public class Spiteful extends Strategy {
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
           ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
-    if (opponentHistory.contains('d')) {
+    if (opponentHistory.contains('d')) { //if opponent has ever defected
       return 'd';
     }
     return 'c';

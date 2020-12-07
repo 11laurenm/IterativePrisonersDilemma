@@ -56,7 +56,7 @@ public class VaryGameLength {
    * @return first - the amount of rounds in the first game
    */
   public int getFirstSet() {
-    first = random.nextInt(totalRounds) + 1;
+    first = random.nextInt(totalRounds) + 1; // +1 so the minimum result is 1 not 0
     return first;
   }
 
@@ -67,7 +67,8 @@ public class VaryGameLength {
    */
   public int getSecondSet() {
     if ((totalRounds - first - 1 > 0)) {
-      second = random.nextInt(totalRounds - first - 1) + 1;
+      second = random.nextInt(totalRounds - first - 1) + 1; //highest possible value is 
+      //the total minus length of first game
       return second;
     } else {
       return 0;
@@ -76,12 +77,13 @@ public class VaryGameLength {
 
   /**
    * Decides the amount of rounds in the third game by 
-   * subtracting the first and second values from the total
+   * subtracting the first and second values from the total.
    * @return third - the amount of rounds in the third game
    */
   public int getThirdSet() {
     int roundsPlayed = first + second;
-    if (roundsPlayed == totalRounds) {
+    if (roundsPlayed == totalRounds) { //length of third game is 
+      //the total amount minus the amount already played
       return 0;
     }
     return totalRounds - first - second;

@@ -70,7 +70,7 @@ public class DetailedResultsController {
     labelText = labelText + "\n";
 
     for (int i = 0; i < strats.size(); i++) {
-      for (int j = i; j < strats.size(); j++) {
+      for (int j = i; j < strats.size(); j++) { //creates list of every pairing
         pairings.add(strats.get(i).nameProperty().getValue());
         pairings.add(strats.get(j).nameProperty().getValue());
       }

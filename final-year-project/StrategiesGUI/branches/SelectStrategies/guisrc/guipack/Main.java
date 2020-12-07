@@ -172,6 +172,7 @@ public class Main extends Application {
       loader.setLocation(Main.class.getResource("OutputResults.fxml"));
       AnchorPane page;
       page = (AnchorPane) loader.load();
+      
       dialogStage = new Stage();
       dialogStage.setMinWidth(900);
       dialogStage.setMinHeight(500);
@@ -180,6 +181,7 @@ public class Main extends Application {
       dialogStage.initOwner(primaryStage);
       Scene scene = new Scene(page);
       dialogStage.setScene(scene);
+      
       ResultsController controller = loader.getController();
       controller.constructGrid(results, scores);
       controller.setResults(results);

@@ -34,11 +34,12 @@ public class Mem2 extends Strategy {
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
           ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
-    if (myHistory.size() == 0) {
+    if (myHistory.size() == 0) { //start by following tit for tat
       following = "titForTat";
       return 'c';
     }
-    if (myHistory.size() % 2 == 0 && following != "alwaysAlwaysDefect") {
+    if (myHistory.size() % 2 == 0 && following != "alwaysAlwaysDefect") { 
+      //every two moves reconsider strategy
       if (lastMove == 'c' && opponentHistory.get(opponentHistory.size() - 2) == 'c') {
         following = "titForTat";
       } else if (((lastMove == 'c' && myLastMove == 'd') 
@@ -47,11 +48,12 @@ public class Mem2 extends Strategy {
               && myHistory.get(myHistory.size() - 2) == 'd') 
               || (opponentHistory.get(opponentHistory.size() - 2) == 'd' 
               && myHistory.get(myHistory.size() - 2) == 'c'))) {
+        //if cd or dc were played on both of previous two turns
         following = "titForTwoTats";
       } else {
         if (following != "alwaysDefect") {
           following = "alwaysDefect";
-        } else {
+        } else { //if always defect is chosen twice always choose always defect
           following = "alwaysAlwaysDefect";
         }
       }
@@ -66,7 +68,7 @@ public class Mem2 extends Strategy {
       }
       return 'c';
     }
-    return 'd';
+    return 'd'; //if following alwaysdefect
   }
   
   /**

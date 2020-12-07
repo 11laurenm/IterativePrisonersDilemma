@@ -31,7 +31,7 @@ public class TitForTat extends Strategy {
     if (lastMove == 'd') {
       return 'd';
     }
-    return 'c';
+    return 'c'; //return opponent's last move, and c on first turn
   }
   
   /**

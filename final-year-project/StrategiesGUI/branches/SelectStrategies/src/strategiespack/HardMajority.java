@@ -40,9 +40,9 @@ public class HardMajority extends Strategy {
 
     for (int i = 0; i < size; i++) {
       if (opponentHistory.get(i) == 'd') {
-        defects++;
+        defects++; //counts how many times opponent has defected
       } else {
-        coops++;
+        coops++; //counts how many times opponent has cooperated
       }
     }
 

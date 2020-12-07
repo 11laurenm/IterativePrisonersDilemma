@@ -33,15 +33,15 @@ public class Prober extends Strategy {
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
           ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
     if (myHistory.size() == 0) {
-      return 'd';
+      return 'd'; //always return d first
     }
     if (myHistory.size() == 1 || myHistory.size() == 2) {
-      return 'c';
+      return 'c'; //always return c on rounds 2 and 3
     }
     if (opponentHistory.get(1) == 'c' && opponentHistory.get(2) == 'c') {
-      return 'd';
+      return 'd'; //if opponents second and third moves follow alwaysdefect
     }
-    if (lastMove == 'c') {
+    if (lastMove == 'c') { //follow tit for tat
       return 'c';
     }
     return 'd';

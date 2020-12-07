@@ -31,12 +31,12 @@ public class HardTitForTat extends Strategy {
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
           ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
-    if (myHistory.size() == 0 || myHistory.size() == 1) {
+    if (myHistory.size() == 0 || myHistory.size() == 1) { //cooperate on the first two moves
       return 'c';
     }
     char secondToLastMove = opponentHistory.get(opponentHistory.size() - 2);
     if (lastMove == 'd' || secondToLastMove == 'd') {
-      return 'd';
+      return 'd'; //defect if opponent defected on either of previous two moves
     }
     return 'c';
   }

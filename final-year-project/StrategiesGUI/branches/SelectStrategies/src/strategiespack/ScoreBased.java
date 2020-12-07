@@ -31,8 +31,8 @@ public class ScoreBased extends Strategy {
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
           ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
-    if (this.getPoints() == opponentPoints || this.getPoints() - opponentPoints < 9) {
-      return 'd';
+    if (this.getPoints() == opponentPoints || this.getPoints() - opponentPoints <= 9) {
+      return 'd'; //if points are equal or the strategy's lead is less than 10 then defect
     }
     System.out.println(this.getPoints() + " " + opponentPoints);
     return 'c';

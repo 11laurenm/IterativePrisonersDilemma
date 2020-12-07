@@ -31,11 +31,11 @@ public class TitForTwoTats extends Strategy {
   @Override
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
         ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
-    if (myHistory.size() == 0 || myHistory.size() == 1) {
+    if (myHistory.size() == 0 || myHistory.size() == 1) { //play c on first two turns
       return 'c';
     }
     char secondToLastMove = opponentHistory.get(opponentHistory.size() - 2);
-    if (lastMove == 'd' && secondToLastMove == 'd') {
+    if (lastMove == 'd' && secondToLastMove == 'd') { //if opponent defected on previous two turns
       return 'd';
     }
     return 'c';

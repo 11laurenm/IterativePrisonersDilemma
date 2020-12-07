@@ -49,7 +49,7 @@ public class TitForTatWithForgiveness extends Strategy {
         ArrayList<Character> myHistory, char myLastMove, int opponentPoints) {
     if (lastMove == 'd') {
       double randomValue = random.nextDouble();
-      if (randomValue < probability) {
+      if (randomValue < probability) { //random chance of cooperating when opponent defected
         return 'c';
       }
       return 'd';

@@ -111,13 +111,14 @@ public class Controller {
   public void initialize(Main main) {
     setMain(main);
     strategyTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    //line above allows user to select more than one strategy
     strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
     probabilityColumn.setCellValueFactory(new PropertyValueFactory<Strategy, 
             String>("probability"));
     probabilityColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     roundsColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("rounds"));
     roundsColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-    GridPane.setHalignment(cooperate1, HPos.CENTER);
+    GridPane.setHalignment(cooperate1, HPos.CENTER); //set label to center of grid
     GridPane.setHalignment(cooperate2, HPos.CENTER);
     GridPane.setHalignment(defect1, HPos.CENTER);
     GridPane.setHalignment(defect2, HPos.CENTER);
@@ -130,7 +131,7 @@ public class Controller {
    */
   public void setMain(Main mainclass) {
     this.mainn = mainclass;
-    strategyTable.setItems(mainn.getStrategyData());
+    strategyTable.setItems(mainn.getStrategyData()); //fills the tableview with strategies
   }
 
   /**
@@ -142,10 +143,10 @@ public class Controller {
   private void handleRunTournament() {
     ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
     ArrayList<Strategy> alSelectedItems = new ArrayList<Strategy>(selectedItems);
-
+    //line above converts observable list into an array list
     ArrayList<Integer> payoffs = new ArrayList<>();
 
-    if (alSelectedItems.size() < 2) {
+    if (alSelectedItems.size() < 2) { //show error if less than two strategies selected
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("At least two strategies must be selected");
@@ -153,7 +154,7 @@ public class Controller {
       return;
     }
 
-    try {
+    try { //checks payoff values are integers
       payoffs.add(Integer.parseInt(cc1.getText()));
       payoffs.add(Integer.parseInt(dc1.getText()));
       payoffs.add(Integer.parseInt(dc2.getText()));

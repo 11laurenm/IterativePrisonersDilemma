@@ -2,6 +2,8 @@ package guipack;
 
 import guipack.Main;
 import java.util.ArrayList;
+import java.util.Random;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -107,6 +109,12 @@ public class Controller {
   @FXML
   private CheckBox gamesCheckBox;
 
+  Random random;
+  
+  RoundRobin tournament;
+  
+  ArrayList<Integer> gameLengths;
+  
   /**
    * Allows the program to access the main function.
    */
@@ -182,8 +190,23 @@ public class Controller {
       alert.showAndWait();
     }
     try {
-      RoundRobin tournament = new RoundRobin(alSelectedItems, 
-              Integer.parseInt(rounds.getText()), payoffs);
+      gameLengths = new ArrayList();
+      if(!roundsCheckBox.isSelected()) {
+        if(gamesCheckBox.isSelected()) {
+          tournament = new RoundRobin(alSelectedItems, 
+                  Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+        } else {
+          gameLengths.set(0, Integer.parseInt(game1.getText()));
+          gameLengths.set(1, Integer.parseInt(game2.getText()));
+          gameLengths.set(2, Integer.parseInt(game3.getText()));
+          tournament = new RoundRobin(alSelectedItems, 
+              Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+        }
+      } else {
+        random = new Random();
+        tournament = new RoundRobin(alSelectedItems, 
+            random.nextInt(99) + 1, payoffs, gameLengths);
+      }
       try {
         tournament.runTournament();
         mainn.setTournament(tournament);

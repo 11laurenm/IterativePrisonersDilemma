@@ -188,42 +188,62 @@ public class Controller {
       alert.setTitle("Error Dialog");
       alert.setContentText("Payoff values must be integers");
       alert.showAndWait();
+      return;
     }
+    
+    gameLengths = new ArrayList();
+    
     try {
-      gameLengths = new ArrayList();
+      if(gameLengths.size() != 0) {
+        gameLengths.set(0, Integer.parseInt(game1.getText()));
+        gameLengths.set(1, Integer.parseInt(game2.getText()));
+        gameLengths.set(2, Integer.parseInt(game3.getText()));
+      } else {
+        gameLengths.add(0, Integer.parseInt(game1.getText()));
+        gameLengths.add(1, Integer.parseInt(game2.getText()));
+        gameLengths.add(2, Integer.parseInt(game3.getText()));
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Game lengths must be integers");
+      alert.showAndWait();
+      return;
+    }
+    
+    try {
       if(!roundsCheckBox.isSelected()) {
-        if(gamesCheckBox.isSelected()) {
+          if(gamesCheckBox.isSelected()) {
+            gameLengths.clear();
+          }
           tournament = new RoundRobin(alSelectedItems, 
                   Integer.parseInt(rounds.getText()), payoffs, gameLengths);
-        } else {
-          gameLengths.set(0, Integer.parseInt(game1.getText()));
-          gameLengths.set(1, Integer.parseInt(game2.getText()));
-          gameLengths.set(2, Integer.parseInt(game3.getText()));
-          tournament = new RoundRobin(alSelectedItems, 
-              Integer.parseInt(rounds.getText()), payoffs, gameLengths);
-        }
       } else {
         random = new Random();
         tournament = new RoundRobin(alSelectedItems, 
             random.nextInt(99) + 1, payoffs, gameLengths);
-      }
-      try {
-        tournament.runTournament();
-        mainn.setTournament(tournament);
-        mainn.displayResults();
-      } catch (Exception e) {
-        e.printStackTrace();
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error Dialog");
-        alert.setContentText("Error running tournament");
-        alert.showAndWait();
       }
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Round length must be an integer");
       alert.showAndWait();
+      return;
     }
+    
+    try {
+      tournament.runTournament();
+      mainn.setTournament(tournament);
+      mainn.displayResults();
+    } catch (Exception e) {
+      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error running tournament");
+      alert.showAndWait();
+    }
+    
   }
 
   /**

@@ -213,17 +213,7 @@ public class Controller {
     }
     
     try {
-      if(!roundsCheckBox.isSelected()) {
-          if(gamesCheckBox.isSelected()) {
-            gameLengths.clear();
-          }
-          tournament = new RoundRobin(alSelectedItems, 
-                  Integer.parseInt(rounds.getText()), payoffs, gameLengths);
-      } else {
-        random = new Random();
-        tournament = new RoundRobin(alSelectedItems, 
-            random.nextInt(99) + 1, payoffs, gameLengths);
-      }
+      int testRounds = Integer.parseInt(rounds.getText());
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
@@ -232,7 +222,33 @@ public class Controller {
       return;
     }
     
+    int one = Integer.parseInt(game1.getText());
+    int two = Integer.parseInt(game2.getText());
+    int three = Integer.parseInt(game3.getText());
+    if((one + two + three) != Integer.parseInt(rounds.getText()) && 
+        !roundsCheckBox.isSelected()) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Total of game lengths must equal number of rounds");
+      alert.showAndWait();
+      return;
+    }
+    
     try {
+      if(roundsCheckBox.isSelected()) {
+        gameLengths.clear();
+        random = new Random();
+        tournament = new RoundRobin(alSelectedItems, 
+            random.nextInt(99) + 1, payoffs, gameLengths);
+      } else if(gamesCheckBox.isSelected()) {
+        gameLengths.clear();
+        tournament = new RoundRobin(alSelectedItems, 
+            Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+      } else {
+        tournament = new RoundRobin(alSelectedItems, 
+            Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+      }
+      
       tournament.runTournament();
       mainn.setTournament(tournament);
       mainn.displayResults();

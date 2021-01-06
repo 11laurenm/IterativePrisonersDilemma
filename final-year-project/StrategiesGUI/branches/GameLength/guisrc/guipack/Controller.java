@@ -313,9 +313,13 @@ public class Controller {
 	  if(roundsCheckBox.isSelected()) {
 		  rounds.setEditable(false);
 		  rounds.setOpacity(0.5);
+		  gamesCheckBox.setSelected(true);
+		  gamesCheckBoxSelected();
 	  } else {
 		  rounds.setEditable(true);
 		  rounds.setOpacity(1);
+		  gamesCheckBox.setSelected(false);
+		  gamesCheckBoxSelected();
 	  }
   }
   

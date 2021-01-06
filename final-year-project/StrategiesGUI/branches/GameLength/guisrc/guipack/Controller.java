@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -90,6 +91,21 @@ public class Controller {
    */
   @FXML
   private TextField rounds;
+  
+  @FXML
+  private TextField game1;
+  
+  @FXML
+  private TextField game2;
+  
+  @FXML
+  private TextField game3;
+  
+  @FXML
+  private CheckBox roundsCheckBox;
+  
+  @FXML
+  private CheckBox gamesCheckBox;
 
   /**
    * Allows the program to access the main function.
@@ -290,6 +306,36 @@ public class Controller {
       alert.setContentText("Cells containing - are not editable");
       alert.showAndWait();
     }
+  }
+  
+  @FXML
+  private void roundsCheckBoxSelected() {
+	  if(roundsCheckBox.isSelected()) {
+		  rounds.setEditable(false);
+		  rounds.setOpacity(0.5);
+	  } else {
+		  rounds.setEditable(true);
+		  rounds.setOpacity(1);
+	  }
+  }
+  
+  @FXML
+  private void gamesCheckBoxSelected() {
+	  if(gamesCheckBox.isSelected()) {
+		  game1.setEditable(false);
+		  game2.setEditable(false);
+		  game3.setEditable(false);
+		  game1.setOpacity(0.5);
+		  game2.setOpacity(0.5);
+		  game3.setOpacity(0.5);
+	  } else {
+		  game1.setEditable(true);
+		  game2.setEditable(true);
+		  game3.setEditable(true);
+		  game1.setOpacity(1);
+		  game2.setOpacity(1);
+		  game3.setOpacity(1);
+	  }
   }
   
 }

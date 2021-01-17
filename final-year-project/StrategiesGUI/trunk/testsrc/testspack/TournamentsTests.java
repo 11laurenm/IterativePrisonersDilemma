@@ -35,7 +35,8 @@ class TournamentsTests {
     strats.add(strategy1);
     strats.add(strategy2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
-    RoundRobin tournament = new RoundRobin(strats, 10, payoffs);
+    ArrayList<Integer> gameLengths = new ArrayList();
+    RoundRobin tournament = new RoundRobin(strats, 10, payoffs, gameLengths);
     tournament.runTournament();
     assertEquals(strategy1.getPoints(), 30, 
             "Round robin not running properly with Cooperate Defect");
@@ -57,7 +58,8 @@ class TournamentsTests {
     strats.add(strategy1);
     strats.add(strategy2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
-    RoundRobin tournament = new RoundRobin(strats, 10, payoffs);
+    ArrayList<Integer> gameLengths = new ArrayList();
+    RoundRobin tournament = new RoundRobin(strats, 10, payoffs, gameLengths);
     tournament.runTournament();
     assertEquals(strategy1.getPoints(), 60, 
             "Round robin not running properly with Cooperate TFT 1");

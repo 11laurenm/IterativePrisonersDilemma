@@ -45,6 +45,14 @@ public class RoundRobin {
    * of rounds to be played
    */
   ArrayList<Integer> lengths;
+  
+  ArrayList<Integer> setGameLengths;
+  
+  int first;
+  
+  int second;
+  
+  int third;
 
   /**
    * Constructor for the class, which sets the following variables to values 
@@ -53,12 +61,14 @@ public class RoundRobin {
    * @param rounds - the total number of rounds they will play
    * @param payoffs - the scores earned for each combination of decisions
    */
-  public RoundRobin(ArrayList<Strategy> strats, int rounds, ArrayList<Integer> payoffs) {
+  public RoundRobin(ArrayList<Strategy> strats, int rounds, ArrayList<Integer> payoffs, 
+      ArrayList<Integer> gameLengths) {
     totalRounds = rounds;
     strategies = strats;
     payoffList = payoffs;
     scores = new ArrayList<>();
     lengths = new ArrayList<>();
+    setGameLengths = gameLengths;
   }
         
   /**
@@ -71,10 +81,16 @@ public class RoundRobin {
     decisions = new ArrayList<ArrayList<Character>>();
     points = new ArrayList<ArrayList<Integer>>();
 
-    VaryGameLength varyLength = new VaryGameLength(totalRounds);
-    int first = varyLength.getFirstSet();
-    int second = varyLength.getSecondSet();
-    int third = varyLength.getThirdSet();
+    if(setGameLengths.size() == 0) {
+      VaryGameLength varyLength = new VaryGameLength(totalRounds);
+      first = varyLength.getFirstSet();
+      second = varyLength.getSecondSet();
+      third = varyLength.getThirdSet();
+    } else {
+      first = setGameLengths.get(0);
+      second = setGameLengths.get(1);
+      third = setGameLengths.get(2);
+    }
 
     lengths.add(first); //save the length of each game so GUI can output it
     lengths.add(second);

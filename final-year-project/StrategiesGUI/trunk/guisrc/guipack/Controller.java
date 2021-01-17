@@ -2,11 +2,14 @@ package guipack;
 
 import guipack.Main;
 import java.util.ArrayList;
+import java.util.Random;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -90,7 +93,28 @@ public class Controller {
    */
   @FXML
   private TextField rounds;
+  
+  @FXML
+  private TextField game1;
+  
+  @FXML
+  private TextField game2;
+  
+  @FXML
+  private TextField game3;
+  
+  @FXML
+  private CheckBox roundsCheckBox;
+  
+  @FXML
+  private CheckBox gamesCheckBox;
 
+  Random random;
+  
+  RoundRobin tournament;
+  
+  ArrayList<Integer> gameLengths;
+  
   /**
    * Allows the program to access the main function.
    */
@@ -164,27 +188,78 @@ public class Controller {
       alert.setTitle("Error Dialog");
       alert.setContentText("Payoff values must be integers");
       alert.showAndWait();
+      return;
     }
+    
+    gameLengths = new ArrayList();
+    
     try {
-      RoundRobin tournament = new RoundRobin(alSelectedItems, 
-              Integer.parseInt(rounds.getText()), payoffs);
-      try {
-        tournament.runTournament();
-        mainn.setTournament(tournament);
-        mainn.displayResults();
-      } catch (Exception e) {
-        e.printStackTrace();
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error Dialog");
-        alert.setContentText("Error running tournament");
-        alert.showAndWait();
+      if(gameLengths.size() != 0) {
+        gameLengths.set(0, Integer.parseInt(game1.getText()));
+        gameLengths.set(1, Integer.parseInt(game2.getText()));
+        gameLengths.set(2, Integer.parseInt(game3.getText()));
+      } else {
+        gameLengths.add(0, Integer.parseInt(game1.getText()));
+        gameLengths.add(1, Integer.parseInt(game2.getText()));
+        gameLengths.add(2, Integer.parseInt(game3.getText()));
       }
+    } catch (Exception e) {
+      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Game lengths must be integers");
+      alert.showAndWait();
+      return;
+    }
+    
+    try {
+      int testRounds = Integer.parseInt(rounds.getText());
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Round length must be an integer");
       alert.showAndWait();
+      return;
     }
+    
+    int one = Integer.parseInt(game1.getText());
+    int two = Integer.parseInt(game2.getText());
+    int three = Integer.parseInt(game3.getText());
+    if((one + two + three) != Integer.parseInt(rounds.getText()) && 
+        !roundsCheckBox.isSelected()) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Total of game lengths must equal number of rounds");
+      alert.showAndWait();
+      return;
+    }
+    
+    try {
+      if(roundsCheckBox.isSelected()) {
+        gameLengths.clear();
+        random = new Random();
+        tournament = new RoundRobin(alSelectedItems, 
+            random.nextInt(99) + 1, payoffs, gameLengths);
+      } else if(gamesCheckBox.isSelected()) {
+        gameLengths.clear();
+        tournament = new RoundRobin(alSelectedItems, 
+            Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+      } else {
+        tournament = new RoundRobin(alSelectedItems, 
+            Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+      }
+      
+      tournament.runTournament();
+      mainn.setTournament(tournament);
+      mainn.displayResults();
+    } catch (Exception e) {
+      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error running tournament");
+      alert.showAndWait();
+    }
+    
   }
 
   /**
@@ -290,6 +365,40 @@ public class Controller {
       alert.setContentText("Cells containing - are not editable");
       alert.showAndWait();
     }
+  }
+  
+  @FXML
+  private void roundsCheckBoxSelected() {
+	  if(roundsCheckBox.isSelected()) {
+		  rounds.setEditable(false);
+		  rounds.setOpacity(0.5);
+		  gamesCheckBox.setSelected(true);
+		  gamesCheckBoxSelected();
+	  } else {
+		  rounds.setEditable(true);
+		  rounds.setOpacity(1);
+		  gamesCheckBox.setSelected(false);
+		  gamesCheckBoxSelected();
+	  }
+  }
+  
+  @FXML
+  private void gamesCheckBoxSelected() {
+	  if(gamesCheckBox.isSelected()) {
+		  game1.setEditable(false);
+		  game2.setEditable(false);
+		  game3.setEditable(false);
+		  game1.setOpacity(0.5);
+		  game2.setOpacity(0.5);
+		  game3.setOpacity(0.5);
+	  } else {
+		  game1.setEditable(true);
+		  game2.setEditable(true);
+		  game3.setEditable(true);
+		  game1.setOpacity(1);
+		  game2.setOpacity(1);
+		  game3.setOpacity(1);
+	  }
   }
   
 }

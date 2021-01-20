@@ -17,7 +17,7 @@ import strategiespack.TitForTat;
  *
  */
 
-class TournamentsTests {
+class RoundRobinTests {
 
   /**
    * First test: Tests that a roundrobin tournament can be set up and run, 

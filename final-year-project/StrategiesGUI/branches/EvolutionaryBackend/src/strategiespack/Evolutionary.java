@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 public class Evolutionary {
   
-  public Evolutionary(){
-    
+  ArrayList<Node> nodes;
+  
+  public Evolutionary(ArrayList<Node> nodeList){
+    nodes = nodeList;
   }
+  
   
   
   

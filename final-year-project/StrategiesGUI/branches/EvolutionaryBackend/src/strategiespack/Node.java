@@ -19,5 +19,12 @@ public class Node {
   public void setStrategy(Strategy newStrategy) {
     strategy = newStrategy;
   }
+  
+  public ArrayList<Node> getNeighbours(){
+    return neighbours;
+  }
 
+  public void addNeighbour(Node neighbourNode) {
+    neighbours.add(neighbourNode);
+  }
 }

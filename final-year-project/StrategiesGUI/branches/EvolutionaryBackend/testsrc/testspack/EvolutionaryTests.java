@@ -9,18 +9,36 @@ import org.junit.jupiter.api.Test;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
 import strategiespack.Evolutionary;
+import strategiespack.Node;
 import strategiespack.Strategy;
 
 class EvolutionaryTests {
 
   @Test
   void testCreateTournament() {
-    AlwaysCooperate strategy1 = new AlwaysCooperate();
-    AlwaysDefect strategy2 = new AlwaysDefect();
-    ArrayList<Strategy> strats = new ArrayList<>();
-    strats.add(strategy1);
-    strats.add(strategy2);
-    Evolutionary tournament = new Evolutionary(2, 4, strats);
+    Evolutionary tournament = new Evolutionary();
+  }
+  
+  @Test
+  void testCreateNode() {
+    AlwaysCooperate strategy = new AlwaysCooperate();
+    Node node = new Node(strategy);
+  }
+  
+  @Test
+  void testGetStrategy() {
+    AlwaysCooperate strategy = new AlwaysCooperate();
+    Node node = new Node(strategy);
+    assertEquals(strategy, node.getStrategy(), "node getter or functioning incorrectly");
+  }
+  
+  @Test
+  void testSetStrategy() {
+    AlwaysCooperate strategy = new AlwaysCooperate();
+    Node node = new Node(strategy);
+    AlwaysDefect newStrategy = new AlwaysDefect();
+    node.setStrategy(newStrategy);
+    assertEquals(newStrategy, node.getStrategy(), "node setter functioning incorrectly");
   }
 
 }

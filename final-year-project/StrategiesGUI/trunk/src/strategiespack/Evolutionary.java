@@ -2,27 +2,24 @@ package strategiespack;
 
 import java.util.ArrayList;
 
-public class Evolutionary {
+public class Evolutionary extends Tournament{
   
   ArrayList<Node> nodes;
-  int totalRounds;
-  ArrayList<Integer> lengths;
-  ArrayList<Integer> setGameLengths;
-  ArrayList<Integer> payoffList;
-  
-  int first;
-  int second;
-  int third;
+  int generations;
   
   public Evolutionary(ArrayList<Node> nodeList, int rounds, ArrayList<Integer> payoffs, 
-      ArrayList<Integer> gameLengths){
+      ArrayList<Integer> gameLengths, int gens){
     totalRounds = rounds;
     nodes = nodeList;
     setGameLengths = gameLengths;
     payoffList = payoffs;
+    generations = gens;
   }
   
   public void runTournament() {
+    
+    decisions = new ArrayList<ArrayList<Character>>();
+    points = new ArrayList<ArrayList<Integer>>();
     
     if(setGameLengths.size() == 0) {
       VaryGameLength varyLength = new VaryGameLength(totalRounds);
@@ -35,22 +32,39 @@ public class Evolutionary {
       third = setGameLengths.get(2);
     }
     
-    for(int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
-      Node currentNode = nodes.get(nodeNumber);
-      for(int neighbourNumber = 0; neighbourNumber < currentNode.getNeighbours().size(); neighbourNumber++) {
-        Node neighbourNode = currentNode.neighbours.get(neighbourNumber);
-        if(!neighbourNode.getPlayedAllGames()) {
-          Game game1 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), first, payoffList);
-          game1.playGame();
-          Game game2 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), second, payoffList);
-          game2.playGame();
-          Game game3 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), third, payoffList);
-          game3.playGame();
-        }
+    for(int gen = 0; gen < generations; gen++) {
+      
+      for(int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
+        Node currentNode = nodes.get(nodeNumber);
+        currentNode.strategy.points = 0;
       }
-      nodes.get(nodeNumber).setPlayedAllGames(true);
+      
+      for(int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
+        Node currentNode = nodes.get(nodeNumber);
+        for(int neighbourNumber = 0; neighbourNumber < currentNode.getNeighbours().size(); neighbourNumber++) {
+          Node neighbourNode = currentNode.neighbours.get(neighbourNumber);
+          player1Score = 0; //initialise each player's score for this pairing to 0
+          player2Score = 0;
+          if(!neighbourNode.getPlayedAllGames()) {
+            Game game1 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), first, payoffList);
+            game1.playGame();
+            endOfGame(game1);
+            Game game2 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), second, payoffList);
+            game2.playGame();
+            endOfGame(game2);
+            Game game3 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), third, payoffList);
+            game3.playGame();
+            endOfGame(game3);
+          }
+        }
+        nodes.get(nodeNumber).setPlayedAllGames(true);
+      }
     }
       
+  }
+  
+  public ArrayList<Node> returnResults() {
+    return nodes;
   }
   
   

@@ -10,8 +10,11 @@ import java.util.ArrayList;
 
 public class RoundRobin extends Tournament{
 
+  /**
+   * All strategies participating in the tournament.
+   */
+  ArrayList<Strategy> strategies;
   
-
   /**
    * Constructor for the class, which sets the following variables to values 
    * chosen by the user.
@@ -71,6 +74,15 @@ public class RoundRobin extends Tournament{
         scores.add(player2Score);
       }
     }
+  }
+  
+  /**
+   * Returns the results of the tournament as points are 
+   * associated with strategies.
+   * @return all strategies in the tournament
+   */
+  public ArrayList<Strategy> returnResults() {
+    return strategies;
   }
 
 }

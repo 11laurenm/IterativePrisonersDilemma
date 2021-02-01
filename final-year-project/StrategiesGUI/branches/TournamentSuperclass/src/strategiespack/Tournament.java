@@ -5,11 +5,6 @@ import java.util.ArrayList;
 public class Tournament {
   
   /**
-   * All strategies participating in the tournament.
-   */
-  ArrayList<Strategy> strategies;
-  
-  /**
    * The total number of rounds each pairing will play.
    */
   int totalRounds;
@@ -57,15 +52,6 @@ public class Tournament {
     player1Score = 0;
     player2Score = 0;
     
-  }
-  
-  /**
-   * Returns the results of the tournament as points are 
-   * associated with strategies.
-   * @return all strategies in the tournament
-   */
-  public ArrayList<Strategy> returnResults() {
-    return strategies;
   }
 
   /**

@@ -83,7 +83,7 @@ class EvolutionaryTests {
     nodes.add(node2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
     ArrayList<Integer> gameLengths = new ArrayList();
-    Evolutionary tournament = new Evolutionary(nodes, 5, payoffs, gameLengths);
+    Evolutionary tournament = new Evolutionary(nodes, 5, payoffs, gameLengths, 4);
   }
   
   @Test
@@ -99,7 +99,7 @@ class EvolutionaryTests {
     nodes.add(node2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
     ArrayList<Integer> gameLengths = new ArrayList(Arrays.asList(1, 1, 1));
-    Evolutionary tournament = new Evolutionary(nodes, 5, payoffs, gameLengths);
+    Evolutionary tournament = new Evolutionary(nodes, 5, payoffs, gameLengths, 1);
     tournament.runTournament();
     assertEquals(node1.getStrategy().getPoints(), 9, "tournament not returning correct scores");
   }

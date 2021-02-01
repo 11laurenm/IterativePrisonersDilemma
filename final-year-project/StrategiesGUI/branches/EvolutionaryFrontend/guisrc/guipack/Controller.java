@@ -261,6 +261,11 @@ public class Controller {
     }
     
   }
+  
+  @FXML
+  private void launchEvolutionary() {
+    mainn.showEvSettings();
+  }
 
   /**
    * Run when cc1 is edited, ensures that cc2 matches cc1.

@@ -117,6 +117,22 @@ public class Main extends Application {
       ;
     }
   }
+  
+  public void showEvSettings() {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(Main.class.getResource("EvolutionaryFirstScreen.fxml"));
+      AnchorPane overview = (AnchorPane) loader.load();
+    
+      rootLayout.setCenter(overview);
+
+      EvolutionarySettingsController controller = loader.getController();
+      controller.initialize(this);
+    
+    } catch (IOException e) {
+      ;
+    }
+  }
 
   /**
    * getter for the primary stage.

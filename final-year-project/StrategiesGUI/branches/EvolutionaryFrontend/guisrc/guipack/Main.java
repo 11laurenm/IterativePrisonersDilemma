@@ -118,7 +118,7 @@ public class Main extends Application {
     }
   }
   
-  public void showEvSettings() {
+  public void showEvSettings(ArrayList<Strategy> strategies) {
     try {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(Main.class.getResource("EvolutionaryFirstScreen.fxml"));
@@ -127,7 +127,7 @@ public class Main extends Application {
       rootLayout.setCenter(overview);
 
       EvolutionarySettingsController controller = loader.getController();
-      controller.initialize(this);
+      controller.initialize(this, strategies);
     
     } catch (IOException e) {
       ;

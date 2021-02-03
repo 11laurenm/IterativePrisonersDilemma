@@ -264,7 +264,16 @@ public class Controller {
   
   @FXML
   private void launchEvolutionary() {
-    mainn.showEvSettings();
+    ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
+    ArrayList<Strategy> alSelectedItems = new ArrayList<Strategy>(selectedItems);
+    if (alSelectedItems.size() < 2) { //show error if less than two strategies selected
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("At least two strategies must be selected");
+      alert.showAndWait();
+      return;
+    }
+    mainn.showEvSettings(alSelectedItems);
   }
 
   /**

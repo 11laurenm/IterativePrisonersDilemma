@@ -1,13 +1,18 @@
 package guipack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import strategiespack.Strategy;
 
 public class EvolutionarySettingsController {
@@ -34,7 +39,20 @@ public class EvolutionarySettingsController {
     setMain(main);
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
+    
+    ArrayList<String> colours = new ArrayList<String>(
+        Arrays.asList("Red", "Green", "Blue", "Yellow", "Pink", "White", "Black", "Purple", "Light Grey", 
+            "Orange", "Light Blue", "Light Green", "Brown", "Navy", "Dark Grey", "Lilac", "Teal", "Lime", 
+            "Light Pink", "Peach", "Dark Yellow"));
+    
     strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
+    
+    colourColumn.setCellValueFactory(new Callback<CellDataFeatures<Strategy, String>, 
+        ObservableValue<String>>() {
+      @Override public ObservableValue<String> call(CellDataFeatures<Strategy, String> p) {
+        return new ReadOnlyObjectWrapper(colours.get(stratsTable.getItems().indexOf(p.getValue())));
+      }
+    });
   }
   
   public void setMain(Main mainclass) {

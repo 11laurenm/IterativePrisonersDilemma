@@ -62,13 +62,15 @@ public class EvolutionarySettingsController {
   @FXML
   private BorderPane graphPane;
   
+  private String toLoad;
+  
   public EvolutionarySettingsController() {
     
   }
   
   @FXML 
   public void initialize(Main main, ArrayList<Strategy> strats) {
-    setAnchorPane();
+    setBorderPane();
     setMain(main);
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
@@ -98,16 +100,28 @@ public class EvolutionarySettingsController {
   }
   
   @FXML
-  public void setAnchorPane() {
+  public void setBorderPane() {
     if(gridButton.isSelected()) {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("GridGraph.fxml"));
-      loader.setController(this);
-      try {
-        graphPane.setCenter(loader.load());
-      } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
+      toLoad = "Grid";
+    } else if (circleGraphButton.isSelected()) {
+      toLoad = "Circle";
+    } else if (starGraphButton.isSelected()) {
+      toLoad = "Star";
+    } else if (completeGraphButton.isSelected()) {
+      toLoad = "Complete";
+    } else if (bipartiteGraphButton.isSelected()) {
+      toLoad = "Bipartite";
+    } else if (busGraphButton.isSelected()) {
+      toLoad = "Bus";
+    }
+    
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(toLoad + "Graph.fxml"));
+    loader.setController(this);
+    try {
+      graphPane.setCenter(loader.load());
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
   }
 

@@ -20,30 +20,30 @@
                   <BorderPane fx:id="graphPane" prefHeight="410.0" prefWidth="563.0" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <RadioButton fx:id="gridButton" mnemonicParsing="false" selected="true" text="Grid">
+                        <RadioButton fx:id="gridButton" mnemonicParsing="false" onAction="#setBorderPane" selected="true" text="Grid">
                            <HBox.margin>
                               <Insets right="15.0" />
                            </HBox.margin>
                            <toggleGroup>
                               <ToggleGroup fx:id="graphType" />
                            </toggleGroup></RadioButton>
-                        <RadioButton fx:id="circleGraphButton" mnemonicParsing="false" text="Circle" toggleGroup="$graphType" />
-                        <RadioButton fx:id="starGraphButton" mnemonicParsing="false" text="Star" toggleGroup="$graphType">
+                        <RadioButton fx:id="circleGraphButton" mnemonicParsing="false" onAction="#setBorderPane" text="Circle" toggleGroup="$graphType" />
+                        <RadioButton fx:id="starGraphButton" mnemonicParsing="false" onAction="#setBorderPane" text="Star" toggleGroup="$graphType">
                            <HBox.margin>
                               <Insets left="15.0" />
                            </HBox.margin>
                         </RadioButton>
-                        <RadioButton fx:id="busGraphButton" mnemonicParsing="false" text="Bus" toggleGroup="$graphType">
+                        <RadioButton fx:id="busGraphButton" mnemonicParsing="false" onAction="#setBorderPane" text="Bus" toggleGroup="$graphType">
                            <HBox.margin>
                               <Insets left="15.0" />
                            </HBox.margin>
                         </RadioButton>
-                        <RadioButton fx:id="completeGraphButton" mnemonicParsing="false" text="Complete" toggleGroup="$graphType">
+                        <RadioButton fx:id="completeGraphButton" mnemonicParsing="false" onAction="#setBorderPane" text="Complete" toggleGroup="$graphType">
                            <HBox.margin>
                               <Insets left="15.0" />
                            </HBox.margin>
                         </RadioButton>
-                        <RadioButton fx:id="bipartiteGraphButton" mnemonicParsing="false" text="Bipartite" toggleGroup="$graphType">
+                        <RadioButton fx:id="bipartiteGraphButton" mnemonicParsing="false" onAction="#setBorderPane" text="Bipartite" toggleGroup="$graphType">
                            <HBox.margin>
                               <Insets left="15.0" />
                            </HBox.margin>

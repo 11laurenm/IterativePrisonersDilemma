@@ -17,7 +17,10 @@
          <children>
             <VBox prefHeight="500.0" prefWidth="573.0">
                <children>
-                  <BorderPane fx:id="graphPane" prefHeight="410.0" prefWidth="563.0" />
+                  <BorderPane fx:id="graphPane" prefHeight="410.0" prefWidth="563.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></BorderPane>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <RadioButton fx:id="gridButton" mnemonicParsing="false" onAction="#setBorderPane" selected="true" text="Grid">

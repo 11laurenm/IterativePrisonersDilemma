@@ -12,14 +12,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.util.Callback;
 import strategiespack.Strategy;
 
@@ -64,6 +68,15 @@ public class EvolutionarySettingsController {
   
   private String toLoad;
   
+  @FXML
+  private GridPane gridGraph;
+  
+  @FXML
+  private TextField rows;
+  
+  @FXML
+  private TextField cols;
+  
   public EvolutionarySettingsController() {
     
   }
@@ -72,6 +85,7 @@ public class EvolutionarySettingsController {
   public void initialize(Main main, ArrayList<Strategy> strats) {
     setBorderPane();
     setMain(main);
+    gridResize();
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
     
@@ -123,6 +137,42 @@ public class EvolutionarySettingsController {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+  
+  @FXML
+  public void gridSquareSelected() {
+    
+  }
+  
+  @FXML
+  public void gridResize() {
+    int totalRows = Integer.parseInt(rows.getText());
+    int totalCols = Integer.parseInt(cols.getText());
+    int currentRows = gridGraph.getRowConstraints().size();
+    int currentCols = gridGraph.getColumnConstraints().size();
+    
+    if(totalRows < currentRows) {
+      for(int i = 0; i < currentRows - totalRows; i++) {
+        gridGraph.getRowConstraints().remove(currentRows - 1);
+      }
+    } else if(totalCols < currentCols) {
+      for(int i = 0; i < currentCols - totalCols; i++) {
+        gridGraph.getColumnConstraints().remove(currentCols - 1);
+      }
+    } else if(totalRows > currentRows) {
+      for(int i = 0; i < totalRows - currentRows; i++) {
+        RowConstraints row1 = new RowConstraints();
+        row1.setPercentHeight(100 / (totalRows));
+        gridGraph.getRowConstraints().add(row1);
+      }
+    } else {
+      for(int i = 0; i < totalCols - currentCols; i++) {
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(100 / (totalCols));
+        gridGraph.getColumnConstraints().add(col1);
+      }
+    }
+    
   }
 
 }

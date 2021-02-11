@@ -7,13 +7,18 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import strategiespack.Strategy;
 
@@ -53,6 +58,12 @@ public class EvolutionarySettingsController {
   
   private ObservableList<Strategy> stratsList = FXCollections.observableArrayList();
   
+  @FXML
+  private AnchorPane graphPane;
+  
+  @FXML
+  private TextField nodeNumber;
+  
   public EvolutionarySettingsController() {
     
   }
@@ -60,7 +71,7 @@ public class EvolutionarySettingsController {
   @FXML 
   public void initialize(Main main, ArrayList<Strategy> strats) {
     setMain(main);
-
+    setAnchorGrid();
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
     
@@ -86,6 +97,49 @@ public class EvolutionarySettingsController {
   @FXML
   public void backButton() {
     mainn.showOverview();
+  }
+  
+  @FXML
+  public void setAnchorGrid() {
+    //int numberOfNodes = Integer.parseInt(nodeNumber.getText());
+    int rowSize = 4;
+    int colSize = 3;
+    double height;
+    double width;
+    if(graphPane.getHeight() == 0.00) {
+      height = graphPane.getMinHeight();
+      width = graphPane.getMinWidth();
+      System.out.println("USING MIN");
+    } else {
+      height = graphPane.getHeight();
+      width = graphPane.getWidth();
+      System.out.println("USING ACTUAl");
+    }
+    ArrayList<Button> buttons = new ArrayList<>();
+    double minnWidth = width/(rowSize * 2);
+    double minnHeight = height/(colSize * 2);
+    double nodeHorizontalDistance = width/(rowSize + 2);
+    double nodeVerticalDistance = height/(colSize + 2);
+    System.out.println(height);
+    System.out.println(width);
+    for(int j = 0; j < colSize; j++) {
+      for(int i = 0; i < rowSize; i++) {
+        Button graphButton = new Button();
+        graphButton.setMinSize(minnWidth, minnHeight);
+        graphButton.setLayoutX((i+1) * nodeHorizontalDistance);
+        graphButton.setLayoutY((j + 1) * nodeVerticalDistance);
+        graphButton.setOnAction(buttonPressedChangeColour());
+        buttons.add(graphButton);
+        graphPane.getChildren().add(graphButton);
+        System.out.println("ADDED BUTTON");
+        System.out.println((i+1) * nodeHorizontalDistance);
+        System.out.println((j+1) * nodeVerticalDistance);
+      }
+    }
+  }
+  
+  private EventHandler<ActionEvent> buttonPressedChangeColour() {
+    return null;
   }
 
 }

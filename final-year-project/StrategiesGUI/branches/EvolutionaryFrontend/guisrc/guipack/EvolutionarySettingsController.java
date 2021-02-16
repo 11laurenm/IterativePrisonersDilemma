@@ -101,7 +101,6 @@ public class EvolutionarySettingsController {
   
   @FXML
   public void setAnchorGrid() {
-    //int numberOfNodes = Integer.parseInt(nodeNumber.getText());
     int rowSize = 4;
     int colSize = 3;
     double height;
@@ -109,19 +108,15 @@ public class EvolutionarySettingsController {
     if(graphPane.getHeight() == 0.00) {
       height = graphPane.getMinHeight();
       width = graphPane.getMinWidth();
-      System.out.println("USING MIN");
     } else {
       height = graphPane.getHeight();
       width = graphPane.getWidth();
-      System.out.println("USING ACTUAl");
     }
     ArrayList<Button> buttons = new ArrayList<>();
     double minnWidth = width/(rowSize * 2);
     double minnHeight = height/(colSize * 2);
     double nodeHorizontalDistance = width/(rowSize + 2);
     double nodeVerticalDistance = height/(colSize + 2);
-    System.out.println(height);
-    System.out.println(width);
     for(int j = 0; j < colSize; j++) {
       for(int i = 0; i < rowSize; i++) {
         Button graphButton = new Button();
@@ -131,9 +126,6 @@ public class EvolutionarySettingsController {
         graphButton.setOnAction(buttonPressedChangeColour());
         buttons.add(graphButton);
         graphPane.getChildren().add(graphButton);
-        System.out.println("ADDED BUTTON");
-        System.out.println((i+1) * nodeHorizontalDistance);
-        System.out.println((j+1) * nodeVerticalDistance);
       }
     }
   }

@@ -100,7 +100,8 @@ class EvolutionaryTests {
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
     ArrayList<Integer> gameLengths = new ArrayList(Arrays.asList(1, 1, 1));
     Evolutionary tournament = new Evolutionary(nodes, 5, payoffs, gameLengths, 1);
-    tournament.runTournament();
+    tournament.setUpTournament();
+    tournament.runGeneration();
     assertEquals(node1.getStrategy().getPoints(), 9, "tournament not returning correct scores");
   }
 

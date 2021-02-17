@@ -147,19 +147,19 @@ public class EvolutionarySettingsController {
     nodes = new ArrayList<>();
     for(Button button: buttons) {
       Node buttonToNode = new Node((Strategy) button.getUserData());
-      buttonToNode.setID(button.getUserData().toString());
+      buttonToNode.setID(button.getId().toString());
       nodes.add(buttonToNode);
     }
     
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
-      int columnNumber1 = Character.getNumericValue(firstNode.getID().charAt(0));
-      int rowNumber1 = Character.getNumericValue(firstNode.getID().charAt(1));
+      System.out.println(firstNode.getID());
+      int columnNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(0)));
+      int rowNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(1)));
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
-        int columnNumber2 = Character.getNumericValue(secondNode.getID().charAt(0));
-        int rowNumber2 = Character.getNumericValue(secondNode.getID().charAt(1));
-        
+        int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(0)));
+        int rowNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(1)));
         if((columnNumber1 == columnNumber2 && (Math.abs(rowNumber1 - rowNumber2) <= 1)) ||
             (rowNumber1 == rowNumber2 && (Math.abs(columnNumber1 - columnNumber2) <= 1))) {
           firstNode.addNeighbour(secondNode);
@@ -173,7 +173,7 @@ public class EvolutionarySettingsController {
       b.setUserData(nodes.get(buttonNumber));
     }
     
-    mainn.showEvRun();
+    mainn.showEvRun(buttons, nodes);
     
   }
 

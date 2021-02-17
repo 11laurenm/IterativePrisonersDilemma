@@ -8,12 +8,14 @@ public class Node {
   ArrayList<Node> neighbours;
   boolean playedAllGames;
   String ID;
+  Strategy newStrategy;
   
   public Node(Strategy strat) {
     strategy = strat;
     neighbours = new ArrayList<Node>();
     playedAllGames = false;
     ID = "";
+    newStrategy = strat;
   }
   
   public Strategy getStrategy() {

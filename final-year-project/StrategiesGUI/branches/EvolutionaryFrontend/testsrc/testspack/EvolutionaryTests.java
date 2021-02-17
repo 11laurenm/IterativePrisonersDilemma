@@ -103,7 +103,9 @@ class EvolutionaryTests {
     Evolutionary tournament = new Evolutionary(nodes, 5, payoffs, gameLengths, 1);
     tournament.setUpTournament();
     tournament.runGeneration();
-    assertEquals(node1.getStrategy().getPoints(), 9, "tournament not returning correct scores");
+    ArrayList<Integer> scores = tournament.returnGenerationScores();
+    int score = scores.get(0);
+    assertEquals(score, 9, "tournament not returning correct scores");
   }
   
   @Test

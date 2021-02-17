@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class Evolutionary extends Tournament{
   
   ArrayList<Node> nodes;
+  ArrayList<Integer> genScores;
   int generations;
   
   public Evolutionary(ArrayList<Node> nodeList, int rounds, ArrayList<Integer> payoffs, 
       ArrayList<Integer> gameLengths, int gens){
     totalRounds = rounds;
     nodes = nodeList;
+    genScores = new ArrayList<Integer>(nodes.size());
     setGameLengths = gameLengths;
     payoffList = payoffs;
     generations = gens;
@@ -60,6 +62,7 @@ public class Evolutionary extends Tournament{
         }
         nodes.get(nodeNumber).setPlayedAllGames(true);
       }
+      setGenerationScores();
       updateNodes();
   }
   
@@ -71,7 +74,14 @@ public class Evolutionary extends Tournament{
           highestScoring = neighbour;
         }
       }
-      n.newStrategy = highestScoring.getStrategy();
+      try {
+        Strategy strat = highestScoring.getStrategy().getClass().newInstance();
+        strat.setProbability(Double.parseDouble(highestScoring.getStrategy().probabilityProperty().get()));
+        strat.setRounds(Integer.parseInt(highestScoring.getStrategy().roundsProperty().get()));
+        n.newStrategy = strat;
+      } catch (InstantiationException | IllegalAccessException e) {
+        e.printStackTrace();
+      }
     }
     for(Node n: nodes) {
       n.strategy = n.newStrategy;
@@ -82,6 +92,18 @@ public class Evolutionary extends Tournament{
     return nodes;
   }
   
+  public void setGenerationScores() {
+    int score;
+    genScores.clear();
+    for(int n = 0; n < nodes.size(); n++) {
+      score = nodes.get(n).getStrategy().getPoints();
+      genScores.add(score);
+    }
+  }
+  
+  public ArrayList<Integer> returnGenerationScores() {
+    return genScores;
+  }
   
   
 

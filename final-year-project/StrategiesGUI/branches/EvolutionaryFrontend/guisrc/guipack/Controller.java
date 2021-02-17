@@ -350,7 +350,6 @@ public class Controller {
   private void probabilityEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
-    System.out.println(event.getOldValue());
     if (strat.probabilityProperty().getValue() != "-") {
       strat.setProbability(Integer.parseInt(newValue));
     } else {

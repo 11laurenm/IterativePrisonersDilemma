@@ -65,5 +65,11 @@ public class PeriodicCD extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Lavender");
+    return colour;
+  }
 
 }

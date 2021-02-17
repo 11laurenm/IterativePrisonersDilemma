@@ -96,4 +96,10 @@ public class TitForTatWithForgiveness extends Strategy {
     this.probability = prob;
   }
   
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Lime");
+    return colour;
+  }
+  
 }

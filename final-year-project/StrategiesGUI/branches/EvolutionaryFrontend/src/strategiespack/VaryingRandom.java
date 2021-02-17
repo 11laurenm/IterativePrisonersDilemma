@@ -90,4 +90,10 @@ public class VaryingRandom extends Strategy {
   public void setProbability(double prob) {
     this.probability = prob;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Magenta");
+    return colour;
+  }
 }

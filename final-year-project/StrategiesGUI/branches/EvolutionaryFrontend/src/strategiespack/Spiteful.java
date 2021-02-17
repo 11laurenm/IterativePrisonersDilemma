@@ -67,5 +67,11 @@ public class Spiteful extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Cyan");
+    return colour;
+  }
 
 }

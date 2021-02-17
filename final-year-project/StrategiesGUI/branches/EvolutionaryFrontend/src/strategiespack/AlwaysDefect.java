@@ -62,5 +62,11 @@ public class AlwaysDefect extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Green");
+    return colour;
+  }
 
 }

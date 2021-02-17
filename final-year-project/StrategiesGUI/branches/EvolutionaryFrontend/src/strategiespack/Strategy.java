@@ -115,5 +115,11 @@ public class Strategy {
     roundsProp.setValue("-");
     return roundsProp;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("-");
+    return colour;
+  }
 
 }

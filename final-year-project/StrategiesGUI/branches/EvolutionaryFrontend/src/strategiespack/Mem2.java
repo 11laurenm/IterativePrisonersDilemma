@@ -100,5 +100,11 @@ public class Mem2 extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Black");
+    return colour;
+  }
 
 }

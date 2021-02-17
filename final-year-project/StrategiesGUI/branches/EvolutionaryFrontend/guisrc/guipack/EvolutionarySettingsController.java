@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -75,19 +76,9 @@ public class EvolutionarySettingsController {
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
     
-    ArrayList<String> colours = new ArrayList<String>(
-        Arrays.asList("Red", "Green", "Blue", "Yellow", "Pink", "White", "Black", "Purple", "Light Grey", 
-            "Orange", "Light Blue", "Light Green", "Brown", "Navy", "Dark Grey", "Lilac", "Teal", "Lime", 
-            "Light Pink", "Peach", "Mustard"));
-    
     strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
     
-    colourColumn.setCellValueFactory(new Callback<CellDataFeatures<Strategy, String>, 
-        ObservableValue<String>>() {
-      @Override public ObservableValue<String> call(CellDataFeatures<Strategy, String> p) {
-        return new ReadOnlyObjectWrapper(colours.get(stratsTable.getItems().indexOf(p.getValue())));
-      }
-    });
+    colourColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("colour"));
   }
   
   public void setMain(Main mainclass) {
@@ -131,7 +122,17 @@ public class EvolutionarySettingsController {
   }
   
   private EventHandler<ActionEvent> buttonPressedChangeColour() {
-    return null;
+    return new EventHandler<ActionEvent>(){
+      @Override
+      public void handle(ActionEvent event) {
+        System.out.println("REACHED BUTTON");
+        Strategy selectedStrat = stratsTable.getSelectionModel().getSelectedItem();
+        String buttonStyle = "-fx-background-color: " + selectedStrat.colourProperty().get();
+        System.out.println(buttonStyle);
+        Button b = ((Button)event.getSource());
+        b.setStyle(buttonStyle);
+      }
+    };
   }
 
 }

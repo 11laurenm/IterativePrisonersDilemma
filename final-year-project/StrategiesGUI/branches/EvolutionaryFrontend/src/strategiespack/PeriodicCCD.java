@@ -69,5 +69,11 @@ public class PeriodicCCD extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Orange");
+    return colour;
+  }
 
 }

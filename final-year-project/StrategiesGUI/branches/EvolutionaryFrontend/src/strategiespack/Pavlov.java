@@ -66,5 +66,11 @@ public class Pavlov extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Gold");
+    return colour;
+  }
 
 }

@@ -104,5 +104,11 @@ public class VaryingMajority extends Strategy {
   public void setRounds(int round) {
     this.rounds = round;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Olive");
+    return colour;
+  }
 
 }

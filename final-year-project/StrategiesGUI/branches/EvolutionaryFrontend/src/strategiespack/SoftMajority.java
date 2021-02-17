@@ -83,5 +83,11 @@ public class SoftMajority extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Magenta");
+    return colour;
+  }
 
 }

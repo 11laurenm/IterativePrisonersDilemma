@@ -76,5 +76,11 @@ public class Prober extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Brown");
+    return colour;
+  }
 
 }

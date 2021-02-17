@@ -65,5 +65,11 @@ public class Mistrust extends Strategy {
     rounds.setValue("-");
     return rounds;
   }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Purple");
+    return colour;
+  }
 
 }

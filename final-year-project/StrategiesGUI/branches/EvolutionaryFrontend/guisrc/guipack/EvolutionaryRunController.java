@@ -6,6 +6,7 @@ import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import strategiespack.Evolutionary;
@@ -24,6 +25,11 @@ public class EvolutionaryRunController {
   
   Evolutionary evoTournament;
   
+  @FXML
+  Label generationLabel;
+  
+  int generationNumber;
+  
   public EvolutionaryRunController() {
     
   }
@@ -32,6 +38,7 @@ public class EvolutionaryRunController {
   public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList) {
     buttons = buttonsList;
     nodes = nodesList;
+    generationNumber = 0;
     showButtons();
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
     ArrayList<Integer> gameLengths = new ArrayList(Arrays.asList(1, 1, 1));
@@ -54,6 +61,8 @@ public class EvolutionaryRunController {
       String buttonStyle = "-fx-background-color: " + nodes.get(buttonNumber).getStrategy().colourProperty().get();
       b.setStyle(buttonStyle);
     }
+    generationNumber++;
+    generationLabel.setText(Integer.toString(generationNumber));
   }
 
 }

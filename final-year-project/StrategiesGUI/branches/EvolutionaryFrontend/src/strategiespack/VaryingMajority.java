@@ -81,7 +81,7 @@ public class VaryingMajority extends Strategy {
   @Override
   public StringProperty probabilityProperty() {
     SimpleStringProperty prob = new SimpleStringProperty();
-    prob.setValue("-");
+    prob.setValue("0");
     return prob;
   }
   

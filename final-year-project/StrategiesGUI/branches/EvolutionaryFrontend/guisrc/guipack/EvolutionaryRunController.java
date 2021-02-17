@@ -50,7 +50,6 @@ public class EvolutionaryRunController {
     for(Button b: buttons) {
       buttonsPane.getChildren().add(b);
     }
-    
   }
   
   public void nextGen() {

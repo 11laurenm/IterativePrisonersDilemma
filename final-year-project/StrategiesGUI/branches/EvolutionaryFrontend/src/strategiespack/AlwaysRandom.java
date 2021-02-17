@@ -58,7 +58,7 @@ public class AlwaysRandom extends Strategy {
    */
   public StringProperty probabilityProperty() {
     SimpleStringProperty prob = new SimpleStringProperty();
-    prob.setValue("-");
+    prob.setValue("0");
     return prob;
   }
   
@@ -68,7 +68,7 @@ public class AlwaysRandom extends Strategy {
    */
   public StringProperty roundsProperty() {
     SimpleStringProperty rounds = new SimpleStringProperty();
-    rounds.setValue("-");
+    rounds.setValue("0");
     return rounds;
   }
   

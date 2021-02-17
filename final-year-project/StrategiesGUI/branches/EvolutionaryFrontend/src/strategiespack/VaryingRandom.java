@@ -78,7 +78,7 @@ public class VaryingRandom extends Strategy {
   @Override
   public StringProperty roundsProperty() {
     SimpleStringProperty rounds = new SimpleStringProperty();
-    rounds.setValue("-");
+    rounds.setValue("0");
     return rounds;
   }
   

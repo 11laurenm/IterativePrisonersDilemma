@@ -102,7 +102,7 @@ public class Strategy {
    */
   public StringProperty probabilityProperty() {
     SimpleStringProperty prob = new SimpleStringProperty();
-    prob.setValue("-");
+    prob.setValue("0");
     return prob;
   }
   
@@ -112,7 +112,7 @@ public class Strategy {
    */
   public StringProperty roundsProperty() {
     SimpleStringProperty roundsProp = new SimpleStringProperty();
-    roundsProp.setValue("-");
+    roundsProp.setValue("0");
     return roundsProp;
   }
   

@@ -26,6 +26,9 @@ public class TitForTatWithForgiveness extends Strategy {
    */
   Random random = new Random();
 
+  public TitForTatWithForgiveness() {
+  }
+  
   /**
    * Constructor that sets the probability variable to value of parameter prob.
    * @param prob The probability that the strategy will cooperate when its opponent's 
@@ -83,7 +86,7 @@ public class TitForTatWithForgiveness extends Strategy {
    */
   public StringProperty roundsProperty() {
     SimpleStringProperty rounds = new SimpleStringProperty();
-    rounds.setValue("-");
+    rounds.setValue("0");
     return rounds;
   }
   

@@ -12,6 +12,7 @@ import strategiespack.AlwaysDefect;
 import strategiespack.Evolutionary;
 import strategiespack.Node;
 import strategiespack.Strategy;
+import strategiespack.TitForTatWithForgiveness;
 
 class EvolutionaryTests {
   
@@ -103,6 +104,54 @@ class EvolutionaryTests {
     tournament.setUpTournament();
     tournament.runGeneration();
     assertEquals(node1.getStrategy().getPoints(), 9, "tournament not returning correct scores");
+  }
+  
+  @Test
+  void testReflection() {
+    AlwaysCooperate testStrat = new AlwaysCooperate();
+    Strategy newStrat = null;
+    try {
+      newStrat = testStrat.getClass().newInstance();
+    } catch (InstantiationException e) {
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+    }
+    assertNotEquals(newStrat, testStrat, "Strategies are equal but should not be");
+    assertEquals(newStrat.nameProperty().get(), "AlwaysCooperate", "New strategy is not of correct type");
+  }
+  
+  @Test
+  void testReflectionOfParamaterisedStrategy() {
+    TitForTatWithForgiveness testStrat = new TitForTatWithForgiveness(0.4);
+    Strategy newStrat = null;
+    try {
+      newStrat = testStrat.getClass().newInstance();
+      newStrat.setProbability(Double.parseDouble(testStrat.probabilityProperty().get()));
+    } catch (InstantiationException e) {
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+    }
+    assertNotEquals(newStrat, testStrat, "Strategies are equal but should not be");
+    assertEquals(newStrat.nameProperty().get(), "TitForTatWithForgiveness", "New strategy is not of correct type");
+    assertEquals(newStrat.probabilityProperty().get(), "0.4", "New strategy does not have correct probability");
+  }
+  
+  @Test
+  void testReflectionOfNonParamaterisedStrategy() {
+    AlwaysCooperate testStrat = new AlwaysCooperate();
+    Strategy newStrat = null;
+    try {
+      newStrat = testStrat.getClass().newInstance();
+      newStrat.setProbability(Double.parseDouble(testStrat.probabilityProperty().get()));
+    } catch (InstantiationException e) {
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+    }
+    assertNotEquals(newStrat, testStrat, "Strategies are equal but should not be");
+    assertEquals(newStrat.nameProperty().get(), "AlwaysCooperate", "New strategy is not of correct type");
   }
 
 }

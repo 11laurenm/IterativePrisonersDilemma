@@ -23,7 +23,14 @@ public class EvolutionaryRunController {
   @FXML
   Button nextButton;
   
+  @FXML
+  Button previousButton;
+  
+  ArrayList<ArrayList<Node>> allGens;
+  
   Evolutionary evoTournament;
+  
+  int mostRecentGen;
   
   @FXML
   Label generationLabel;
@@ -39,11 +46,14 @@ public class EvolutionaryRunController {
     buttons = buttonsList;
     nodes = nodesList;
     generationNumber = 0;
+    mostRecentGen = 0;
+    allGens = new ArrayList<ArrayList<Node>>();
     showButtons();
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
     ArrayList<Integer> gameLengths = new ArrayList(Arrays.asList(1, 1, 1));
     evoTournament = new Evolutionary(nodes, 10, payoffs, gameLengths, 5);
     evoTournament.setUpTournament();
+    allGens.add(nodes);
   }
   
   public void showButtons() {
@@ -53,15 +63,35 @@ public class EvolutionaryRunController {
   }
   
   public void nextGen() {
-    evoTournament.runGeneration();
-    nodes = evoTournament.returnResults();
-    for(int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
-      Button b = buttons.get(buttonNumber);
-      String buttonStyle = "-fx-background-color: " + nodes.get(buttonNumber).getStrategy().colourProperty().get();
-      b.setStyle(buttonStyle);
+    if(generationNumber == mostRecentGen) {
+      evoTournament.runGeneration();
+      nodes = evoTournament.returnResults();
+      allGens.add(nodes);
+      mostRecentGen++;
     }
     generationNumber++;
     generationLabel.setText(Integer.toString(generationNumber));
+    updateNodes();
+  }
+  
+  public void previousGen() {
+    if(generationNumber > 0) {
+      System.out.println("PREVIOUS GEN");
+      generationNumber--;
+      generationLabel.setText(Integer.toString(generationNumber));
+    }
+    updateNodes();
+  }
+  
+  public void updateNodes() {
+    ArrayList<Node> genNodes = allGens.get(generationNumber);
+    System.out.println("UPDATING");
+    for(int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
+      Button b = buttons.get(buttonNumber);
+      String buttonStyle = "-fx-background-color: " + genNodes.get(buttonNumber).getStrategy().colourProperty().get();
+      System.out.println(buttonStyle);
+      b.setStyle(buttonStyle);
+    }
   }
 
 }

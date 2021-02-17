@@ -133,7 +133,12 @@ public class EvolutionarySettingsController {
     return new EventHandler<ActionEvent>(){
       @Override
       public void handle(ActionEvent event) {
-        Strategy selectedStrat = stratsTable.getSelectionModel().getSelectedItem();
+        Strategy selectedStrat = null;
+        try {
+          selectedStrat = stratsTable.getSelectionModel().getSelectedItem().getClass().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+          e.printStackTrace();
+        }
         String buttonStyle = "-fx-background-color: " + selectedStrat.colourProperty().get();
         Button b = ((Button)event.getSource());
         b.setUserData(selectedStrat);

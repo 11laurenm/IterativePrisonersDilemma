@@ -1,5 +1,6 @@
 package guipack;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -21,6 +23,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import strategiespack.Node;
 import strategiespack.Strategy;
 
 public class EvolutionarySettingsController {
@@ -65,6 +68,10 @@ public class EvolutionarySettingsController {
   @FXML
   private TextField nodeNumber;
   
+  ArrayList<Button> buttons;
+  
+  ArrayList<Node> nodes;
+  
   public EvolutionarySettingsController() {
     
   }
@@ -103,18 +110,19 @@ public class EvolutionarySettingsController {
       height = graphPane.getHeight();
       width = graphPane.getWidth();
     }
-    ArrayList<Button> buttons = new ArrayList<>();
+    buttons = new ArrayList<>();
     double minnWidth = width/(rowSize * 2);
     double minnHeight = height/(colSize * 2);
     double nodeHorizontalDistance = width/(rowSize + 2);
     double nodeVerticalDistance = height/(colSize + 2);
-    for(int j = 0; j < colSize; j++) {
-      for(int i = 0; i < rowSize; i++) {
+    for(int colNum = 0; colNum < colSize; colNum++) {
+      for(int rowNum = 0; rowNum < rowSize; rowNum++) {
         Button graphButton = new Button();
         graphButton.setMinSize(minnWidth, minnHeight);
-        graphButton.setLayoutX((i+1) * nodeHorizontalDistance);
-        graphButton.setLayoutY((j + 1) * nodeVerticalDistance);
+        graphButton.setLayoutX((rowNum+1) * nodeHorizontalDistance);
+        graphButton.setLayoutY((colNum + 1) * nodeVerticalDistance);
         graphButton.setOnAction(buttonPressedChangeColour());
+        graphButton.setId(String.valueOf(colNum) + String.valueOf(rowNum));
         buttons.add(graphButton);
         graphPane.getChildren().add(graphButton);
       }
@@ -125,14 +133,48 @@ public class EvolutionarySettingsController {
     return new EventHandler<ActionEvent>(){
       @Override
       public void handle(ActionEvent event) {
-        System.out.println("REACHED BUTTON");
         Strategy selectedStrat = stratsTable.getSelectionModel().getSelectedItem();
         String buttonStyle = "-fx-background-color: " + selectedStrat.colourProperty().get();
-        System.out.println(buttonStyle);
         Button b = ((Button)event.getSource());
+        b.setUserData(selectedStrat);
         b.setStyle(buttonStyle);
       }
     };
+  }
+  
+  @FXML
+  public void runButton() {
+    nodes = new ArrayList<>();
+    for(Button button: buttons) {
+      Node buttonToNode = new Node((Strategy) button.getUserData());
+      buttonToNode.setID(button.getUserData().toString());
+      nodes.add(buttonToNode);
+    }
+    
+    for (int first = 0; first < nodes.size(); first++) {
+      Node firstNode = nodes.get(first);
+      int columnNumber1 = Character.getNumericValue(firstNode.getID().charAt(0));
+      int rowNumber1 = Character.getNumericValue(firstNode.getID().charAt(1));
+      for (int second = first; second < nodes.size(); second++) {
+        Node secondNode = nodes.get(second);
+        int columnNumber2 = Character.getNumericValue(secondNode.getID().charAt(0));
+        int rowNumber2 = Character.getNumericValue(secondNode.getID().charAt(1));
+        
+        if((columnNumber1 == columnNumber2 && (Math.abs(rowNumber1 - rowNumber2) <= 1)) ||
+            (rowNumber1 == rowNumber2 && (Math.abs(columnNumber1 - columnNumber2) <= 1))) {
+          firstNode.addNeighbour(secondNode);
+          secondNode.addNeighbour(firstNode);
+        }
+      }
+    }
+    
+    for(int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
+      Button b = buttons.get(buttonNumber);
+      b.setUserData(nodes.get(buttonNumber));
+    }
+    
+    mainn.showEvRun();
+    
   }
 
 }

@@ -7,11 +7,13 @@ public class Node {
   Strategy strategy;
   ArrayList<Node> neighbours;
   boolean playedAllGames;
+  String ID;
   
   public Node(Strategy strat) {
     strategy = strat;
     neighbours = new ArrayList<Node>();
     playedAllGames = false;
+    ID = "";
   }
   
   public Strategy getStrategy() {
@@ -36,5 +38,13 @@ public class Node {
   
   public void setPlayedAllGames(boolean played) {
     playedAllGames = played;
+  }
+  
+  public String getID() {
+    return ID;
+  }
+  
+  public void setID(String id) {
+    ID = id;
   }
 }

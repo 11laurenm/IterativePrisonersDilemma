@@ -133,6 +133,22 @@ public class Main extends Application {
       ;
     }
   }
+  
+  public void showEvRun() {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(Main.class.getResource("EvolutionaryRunScreen.fxml"));
+      AnchorPane overview = (AnchorPane) loader.load();
+    
+      rootLayout.setCenter(overview);
+
+      EvolutionaryRunController controller = loader.getController();
+      controller.initialize();
+    
+    } catch (IOException e) {
+      ;
+    }
+  }
 
   /**
    * getter for the primary stage.

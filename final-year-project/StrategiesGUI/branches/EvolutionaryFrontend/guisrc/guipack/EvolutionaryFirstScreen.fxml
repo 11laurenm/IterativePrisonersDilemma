@@ -68,7 +68,7 @@
                               <Insets bottom="15.0" right="30.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Run">
+                        <Button mnemonicParsing="false" onAction="#runButton" text="Run">
                            <HBox.margin>
                               <Insets bottom="15.0" />
                            </HBox.margin>

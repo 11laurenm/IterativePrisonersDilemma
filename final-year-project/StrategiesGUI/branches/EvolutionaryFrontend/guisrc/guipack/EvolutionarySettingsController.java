@@ -98,7 +98,25 @@ public class EvolutionarySettingsController {
   }
   
   @FXML
+  public void runCorrectAnchorMethod() {
+    if(gridButton.isSelected()) {
+      setAnchorGrid();
+    } else if (circleGraphButton.isSelected()) {
+      setAnchorCircle();
+    } else if (starGraphButton.isSelected()) {
+      
+    } else if (busGraphButton.isSelected()) {
+      
+    } else if (completeGraphButton.isSelected()) {
+      
+    } else {
+      
+    }
+  }
+  
+  @FXML
   public void setAnchorGrid() {
+    graphPane.getChildren().clear();
     int rowSize = 4;
     int colSize = 3;
     double height;
@@ -127,6 +145,31 @@ public class EvolutionarySettingsController {
         graphPane.getChildren().add(graphButton);
       }
     }
+  }
+  
+  @FXML
+  public void setAnchorCircle() {
+    graphPane.getChildren().clear();
+  }
+  
+  @FXML
+  public void setAnchorStar() {
+    graphPane.getChildren().clear();
+  }
+  
+  @FXML
+  public void setAnchorBus() {
+    graphPane.getChildren().clear();
+  }
+  
+  @FXML
+  public void setAnchorComplete() {
+    graphPane.getChildren().clear();
+  }
+  
+  @FXML
+  public void setAnchorBipartite() {
+    graphPane.getChildren().clear();
   }
   
   private EventHandler<ActionEvent> buttonPressedChangeColour() {

@@ -79,6 +79,7 @@ public class EvolutionarySettingsController {
   @FXML 
   public void initialize(Main main, ArrayList<Strategy> strats) {
     setMain(main);
+    buttons = new ArrayList<>();
     setAnchorGrid();
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
@@ -104,19 +105,20 @@ public class EvolutionarySettingsController {
     } else if (circleGraphButton.isSelected()) {
       setAnchorCircle();
     } else if (starGraphButton.isSelected()) {
-      
+      setAnchorStar();
     } else if (busGraphButton.isSelected()) {
-      
+      setAnchorBus();
     } else if (completeGraphButton.isSelected()) {
-      
+      setAnchorComplete();
     } else {
-      
+      setAnchorBipartite();
     }
   }
   
   @FXML
   public void setAnchorGrid() {
     graphPane.getChildren().clear();
+    buttons.clear();
     int rowSize = 4;
     int colSize = 3;
     double height;
@@ -128,7 +130,6 @@ public class EvolutionarySettingsController {
       height = graphPane.getHeight();
       width = graphPane.getWidth();
     }
-    buttons = new ArrayList<>();
     double minnWidth = width/(rowSize * 2);
     double minnHeight = height/(colSize * 2);
     double nodeHorizontalDistance = width/(rowSize + 2);
@@ -147,29 +148,63 @@ public class EvolutionarySettingsController {
     }
   }
   
+  public void GridRun() {
+    
+  }
+  
   @FXML
   public void setAnchorCircle() {
     graphPane.getChildren().clear();
+    buttons.clear();
   }
   
   @FXML
   public void setAnchorStar() {
     graphPane.getChildren().clear();
+    buttons.clear();
   }
   
   @FXML
   public void setAnchorBus() {
     graphPane.getChildren().clear();
+    buttons.clear();
+    int nodeNumber = 3;
+    double height;
+    double width;
+    if(graphPane.getHeight() == 0.00) {
+      height = graphPane.getMinHeight();
+      width = graphPane.getMinWidth();
+    } else {
+      height = graphPane.getHeight();
+      width = graphPane.getWidth();
+    }
+    
+    double minnWidth = width/(nodeNumber * 2);
+    double minnHeight = height/4;
+    double nodeHorizontalDistance = width/(nodeNumber + 2);
+    double nodeVerticalDistance = height/2;
+    for(int nodeLoopNum = 0; nodeLoopNum < nodeNumber; nodeLoopNum++) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX((nodeLoopNum+1) * nodeHorizontalDistance);
+      graphButton.setLayoutY(nodeVerticalDistance);
+      graphButton.setOnAction(buttonPressedChangeColour());
+      graphButton.setId(String.valueOf(nodeNumber));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+    }
   }
   
   @FXML
   public void setAnchorComplete() {
     graphPane.getChildren().clear();
+    buttons.clear();
   }
   
   @FXML
   public void setAnchorBipartite() {
     graphPane.getChildren().clear();
+    buttons.clear();
   }
   
   private EventHandler<ActionEvent> buttonPressedChangeColour() {

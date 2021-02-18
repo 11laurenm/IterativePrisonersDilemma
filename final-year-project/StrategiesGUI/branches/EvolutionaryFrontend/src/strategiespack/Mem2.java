@@ -77,7 +77,7 @@ public class Mem2 extends Strategy {
    */
   public StringProperty nameProperty() {
     SimpleStringProperty strategyName = new SimpleStringProperty();
-    strategyName.setValue("AlwaysCooperate");
+    strategyName.setValue("Mem2");
     return strategyName;
   }
   

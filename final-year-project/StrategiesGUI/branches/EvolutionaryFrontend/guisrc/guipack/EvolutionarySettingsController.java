@@ -158,7 +158,6 @@ public class EvolutionarySettingsController {
     
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
-      System.out.println(firstNode.getID());
       int columnNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(0)));
       int rowNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(1)));
       for (int second = first; second < nodes.size(); second++) {

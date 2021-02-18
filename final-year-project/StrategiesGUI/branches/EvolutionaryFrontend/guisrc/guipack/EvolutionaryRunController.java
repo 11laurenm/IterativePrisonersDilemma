@@ -76,7 +76,6 @@ public class EvolutionaryRunController {
   
   public void previousGen() {
     if(generationNumber > 0) {
-      System.out.println("PREVIOUS GEN");
       generationNumber--;
       generationLabel.setText(Integer.toString(generationNumber));
     }
@@ -85,11 +84,9 @@ public class EvolutionaryRunController {
   
   public void updateNodes() {
     ArrayList<Node> genNodes = allGens.get(generationNumber);
-    System.out.println("UPDATING");
     for(int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
       Button b = buttons.get(buttonNumber);
       String buttonStyle = "-fx-background-color: " + genNodes.get(buttonNumber).getStrategy().colourProperty().get();
-      System.out.println(buttonStyle);
       b.setStyle(buttonStyle);
     }
   }

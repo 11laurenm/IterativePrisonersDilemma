@@ -36,34 +36,34 @@ public class Evolutionary extends Tournament{
   }
   
   public void runGeneration() {
-      for(int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
-        Node currentNode = nodes.get(nodeNumber);
-        currentNode.strategy.points = 0;
-        currentNode.setPlayedAllGames(false);
-      }
-      
-      for(int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
-        Node currentNode = nodes.get(nodeNumber);
-        for(int neighbourNumber = 0; neighbourNumber < currentNode.getNeighbours().size(); neighbourNumber++) {
-          Node neighbourNode = currentNode.neighbours.get(neighbourNumber);
-          player1Score = 0; //initialise each player's score for this pairing to 0
-          player2Score = 0;
-          if(!neighbourNode.getPlayedAllGames()) {
-            Game game1 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), first, payoffList);
-            game1.playGame();
-            endOfGame(game1);
-            Game game2 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), second, payoffList);
-            game2.playGame();
-            endOfGame(game2);
-            Game game3 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), third, payoffList);
-            game3.playGame();
-            endOfGame(game3);
-          }
+    for(int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
+      Node currentNode = nodes.get(nodeNumber);
+      currentNode.strategy.points = 0;
+      currentNode.setPlayedAllGames(false);
+    }
+    
+    for(int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
+      Node currentNode = nodes.get(nodeNumber);
+      for(int neighbourNumber = 0; neighbourNumber < currentNode.getNeighbours().size(); neighbourNumber++) {
+        Node neighbourNode = currentNode.neighbours.get(neighbourNumber);
+        player1Score = 0; //initialise each player's score for this pairing to 0
+        player2Score = 0;
+        if(!neighbourNode.getPlayedAllGames()) {
+          Game game1 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), first, payoffList);
+          game1.playGame();
+          endOfGame(game1);
+          Game game2 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), second, payoffList);
+          game2.playGame();
+          endOfGame(game2);
+          Game game3 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), third, payoffList);
+          game3.playGame();
+          endOfGame(game3);
         }
-        nodes.get(nodeNumber).setPlayedAllGames(true);
       }
-      setGenerationScores();
-      updateNodes();
+      nodes.get(nodeNumber).setPlayedAllGames(true);
+    }
+    setGenerationScores();
+    updateNodes();
   }
   
   public void updateNodes() {

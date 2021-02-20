@@ -148,8 +148,24 @@ public class EvolutionarySettingsController {
     }
   }
   
-  public void GridRun() {
-    
+  public void gridRun() {
+    buttonToNode();
+    for (int first = 0; first < nodes.size(); first++) {
+      Node firstNode = nodes.get(first);
+      int columnNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(0)));
+      int rowNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(1)));
+      for (int second = first; second < nodes.size(); second++) {
+        Node secondNode = nodes.get(second);
+        int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(0)));
+        int rowNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(1)));
+        if((columnNumber1 == columnNumber2 && (Math.abs(rowNumber1 - rowNumber2) <= 1)) ||
+            (rowNumber1 == rowNumber2 && (Math.abs(columnNumber1 - columnNumber2) <= 1))) {
+          firstNode.addNeighbour(secondNode);
+          secondNode.addNeighbour(firstNode);
+        }
+      }
+    }
+    setButtonData();
   }
   
   @FXML
@@ -158,10 +174,20 @@ public class EvolutionarySettingsController {
     buttons.clear();
   }
   
+  public void circleRun() {
+    buttonToNode();
+    setButtonData();
+  }
+  
   @FXML
   public void setAnchorStar() {
     graphPane.getChildren().clear();
     buttons.clear();
+  }
+  
+  public void starRun() {
+    buttonToNode();
+    setButtonData();
   }
   
   @FXML
@@ -189,10 +215,28 @@ public class EvolutionarySettingsController {
       graphButton.setLayoutX((nodeLoopNum+1) * nodeHorizontalDistance);
       graphButton.setLayoutY(nodeVerticalDistance);
       graphButton.setOnAction(buttonPressedChangeColour());
-      graphButton.setId(String.valueOf(nodeNumber));
+      graphButton.setId(String.valueOf(nodeLoopNum));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
+  }
+  
+  public void busRun() {
+    buttonToNode();
+    for (int first = 0; first < nodes.size(); first++) {
+      Node firstNode = nodes.get(first);
+      int nodeNumber1 = Integer.parseInt(firstNode.getID());
+      for (int second = first; second < nodes.size(); second++) {
+        Node secondNode = nodes.get(second);
+        int nodeNumber2 = Integer.parseInt(secondNode.getID());
+        if(Math.abs(nodeNumber1 - nodeNumber2) == 1) {
+          System.out.println("NEIGHBOUR IDENTIFIED");
+          firstNode.addNeighbour(secondNode);
+          secondNode.addNeighbour(firstNode);
+        }
+      }
+    }
+    setButtonData();
   }
   
   @FXML
@@ -201,10 +245,58 @@ public class EvolutionarySettingsController {
     buttons.clear();
   }
   
+  public void completeRun() {
+    buttonToNode();
+    setButtonData();
+  }
+  
   @FXML
   public void setAnchorBipartite() {
     graphPane.getChildren().clear();
     buttons.clear();
+    int nodesPerColumn = 3;
+    double height;
+    double width;
+    if(graphPane.getHeight() == 0.00) {
+      height = graphPane.getMinHeight();
+      width = graphPane.getMinWidth();
+    } else {
+      height = graphPane.getHeight();
+      width = graphPane.getWidth();
+    }
+    double minnWidth = width/5;
+    double minnHeight = height/((nodesPerColumn * 2) + 2);
+    double nodeHorizontalDistance = minnWidth; 
+    double nodeVerticalDistance = minnHeight; 
+    for(int colNumber = 0; colNumber < 2; colNumber++) {
+      for(int colNode = 1; colNode < nodesPerColumn + 1; colNode++) {
+        Button graphButton = new Button();
+        graphButton.setMinSize(minnWidth, minnHeight);
+        graphButton.setLayoutX(((colNumber * 2) + 1) * minnWidth);
+        graphButton.setLayoutY(minnHeight * colNode * 2);
+        graphButton.setOnAction(buttonPressedChangeColour());
+        graphButton.setId(String.valueOf(colNumber) + String.valueOf(colNode));
+        buttons.add(graphButton);
+        graphPane.getChildren().add(graphButton);
+      }
+    }
+  }
+  
+  public void bipartiteRun() {
+    buttonToNode();
+    for (int first = 0; first < nodes.size(); first++) {
+      Node firstNode = nodes.get(first);
+      int columnNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(0)));
+      for (int second = first; second < nodes.size(); second++) {
+        Node secondNode = nodes.get(second);
+        int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(0)));
+        if(columnNumber1 != columnNumber2){
+          firstNode.addNeighbour(secondNode);
+          secondNode.addNeighbour(firstNode);
+        }
+      }
+    }
+    setButtonData();
   }
   
   private EventHandler<ActionEvent> buttonPressedChangeColour() {
@@ -225,38 +317,38 @@ public class EvolutionarySettingsController {
     };
   }
   
-  @FXML
-  public void runButton() {
+  public void buttonToNode() {
     nodes = new ArrayList<>();
     for(Button button: buttons) {
-      Node buttonToNode = new Node((Strategy) button.getUserData());
-      buttonToNode.setID(button.getId().toString());
-      nodes.add(buttonToNode);
+      Node buttonToNodeVar = new Node((Strategy) button.getUserData());
+      buttonToNodeVar.setID(button.getId().toString());
+      nodes.add(buttonToNodeVar);
     }
-    
-    for (int first = 0; first < nodes.size(); first++) {
-      Node firstNode = nodes.get(first);
-      int columnNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(0)));
-      int rowNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(1)));
-      for (int second = first; second < nodes.size(); second++) {
-        Node secondNode = nodes.get(second);
-        int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(0)));
-        int rowNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(1)));
-        if((columnNumber1 == columnNumber2 && (Math.abs(rowNumber1 - rowNumber2) <= 1)) ||
-            (rowNumber1 == rowNumber2 && (Math.abs(columnNumber1 - columnNumber2) <= 1))) {
-          firstNode.addNeighbour(secondNode);
-          secondNode.addNeighbour(firstNode);
-        }
-      }
-    }
-    
+  }
+  
+  public void setButtonData() {
     for(int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
       Button b = buttons.get(buttonNumber);
       b.setUserData(nodes.get(buttonNumber));
     }
-    
+  }
+  
+  @FXML
+  public void runButton() {
+    if(gridButton.isSelected()) {
+      gridRun();
+    } else if (circleGraphButton.isSelected()) {
+      circleRun();
+    } else if (starGraphButton.isSelected()) {
+      starRun();
+    } else if (busGraphButton.isSelected()) {
+      busRun();
+    } else if (completeGraphButton.isSelected()) {
+      completeRun();
+    } else {
+      bipartiteRun();
+    }
     mainn.showEvRun(buttons, nodes);
-    
   }
 
 }

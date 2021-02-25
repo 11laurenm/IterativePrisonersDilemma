@@ -183,6 +183,99 @@ public class EvolutionarySettingsController {
   public void setAnchorStar() {
     graphPane.getChildren().clear();
     buttons.clear();
+    int nodeNumber = 6;
+    double height;
+    double width;
+    double circleVerticalNodes = 0;
+    double circleHorizontalNodes = 0;
+    if(graphPane.getHeight() == 0.00) {
+      height = graphPane.getMinHeight();
+      width = graphPane.getMinWidth();
+    } else {
+      height = graphPane.getHeight();
+      width = graphPane.getWidth();
+    }
+    
+    if((nodeNumber % 2) == 0) {
+      for(int n = 0; n < nodeNumber/2; n++) {
+        if(n % 2 == 0) {
+          circleVerticalNodes = circleVerticalNodes + 2;
+        } else {
+          circleHorizontalNodes = circleHorizontalNodes + 2;
+        }
+      }
+    } else {
+      boolean addVertical = true;
+      for(int n = 0; n < nodeNumber; n++) {
+        if(n < 3) {
+          circleHorizontalNodes++;
+        } else if (n < 5) {
+          circleVerticalNodes++;
+        } else {
+          if(addVertical) {
+            circleVerticalNodes = circleVerticalNodes + 2;
+            n++;
+            addVertical = false;
+          } else {
+            circleHorizontalNodes = circleHorizontalNodes + 2;
+            n++;
+            addVertical = true;
+          }
+        }
+      }
+    }
+    
+    
+    double minnWidth = width/(((Math.ceil(circleHorizontalNodes / 2)) + 2) * 2);
+    double minnHeight = height/(((Math.ceil(circleVerticalNodes / 2)) + 2) * 2);
+    double nodeHorizontalDistance = width/((Math.ceil(circleHorizontalNodes/2)) + 6 + (Math.ceil((circleHorizontalNodes/2)) - 1));
+    double nodeVerticalDistance = height/((Math.ceil(circleVerticalNodes/2)) + 6 + (Math.ceil((circleVerticalNodes/2)) - 1));
+    
+    for(int nodeLoopNum = 0; nodeLoopNum < Math.floor(circleHorizontalNodes/2); nodeLoopNum++) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX(nodeHorizontalDistance * (nodeLoopNum + 4));
+      graphButton.setLayoutY(nodeVerticalDistance * 3);
+      graphButton.setOnAction(buttonPressedChangeColour());
+      graphButton.setId(String.valueOf(nodeLoopNum + 1));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+    }
+    
+    for(int nodeLoopNum = 0; nodeLoopNum < circleVerticalNodes/2; nodeLoopNum++) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX(((Math.ceil(circleHorizontalNodes/2)) + 4 + (Math.ceil((circleHorizontalNodes/2)) - 1)) * nodeHorizontalDistance);
+      graphButton.setLayoutY(nodeVerticalDistance * (nodeLoopNum + 4));
+      graphButton.setOnAction(buttonPressedChangeColour());
+      graphButton.setId(String.valueOf(nodeLoopNum + circleHorizontalNodes/2));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+    }
+    
+    for(int nodeLoopNum = 0; nodeLoopNum < Math.ceil(circleHorizontalNodes/2); nodeLoopNum++) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX(nodeHorizontalDistance * (3 + (Math.ceil(circleHorizontalNodes)/2) 
+          - nodeLoopNum + (Math.ceil((circleHorizontalNodes)/2) - 1) - nodeLoopNum));
+      graphButton.setLayoutY(nodeVerticalDistance * (4 + (circleVerticalNodes/2)));
+      graphButton.setOnAction(buttonPressedChangeColour());
+      graphButton.setId(String.valueOf(nodeNumber - circleVerticalNodes/2 - nodeLoopNum));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+    }
+    
+    for(int nodeLoopNum = 0; nodeLoopNum < circleVerticalNodes/2; nodeLoopNum++) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX(nodeHorizontalDistance);
+      graphButton.setLayoutY(nodeVerticalDistance * (3 + (circleVerticalNodes/2) - nodeLoopNum));
+      graphButton.setOnAction(buttonPressedChangeColour());
+      graphButton.setId(String.valueOf(nodeNumber - nodeLoopNum));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+    }
+    
   }
   
   public void starRun() {

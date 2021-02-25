@@ -226,7 +226,8 @@ public class EvolutionarySettingsController {
       graphButton.setLayoutX(nodeHorizontalDistance * (nodeLoopNum + 1.25));
       graphButton.setLayoutY(nodeVerticalDistance);
       graphButton.setOnAction(buttonPressedChangeColour());
-      graphButton.setId(String.valueOf(nodeLoopNum + 1));
+      int setID = (int) nodeLoopNum + 1;
+      graphButton.setId(String.valueOf(setID));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
@@ -238,7 +239,8 @@ public class EvolutionarySettingsController {
           (Math.ceil((circleHorizontalNodes/2)) - 1)) * (nodeHorizontalDistance - minnWidth));
       graphButton.setLayoutY((nodeVerticalDistance * (nodeLoopNum + 2)));
       graphButton.setOnAction(buttonPressedChangeColour());
-      graphButton.setId(String.valueOf(nodeLoopNum + circleHorizontalNodes/2 + 1));
+      int setID = (int) (nodeLoopNum + circleHorizontalNodes/2 + 1);
+      graphButton.setId(String.valueOf(setID));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
@@ -250,7 +252,8 @@ public class EvolutionarySettingsController {
           - nodeLoopNum + (Math.ceil((circleHorizontalNodes)/2) - 1) - nodeLoopNum));
       graphButton.setLayoutY(nodeVerticalDistance * (2 * (circleVerticalNodes/2)));
       graphButton.setOnAction(buttonPressedChangeColour());
-      graphButton.setId(String.valueOf(nodeNumber - circleVerticalNodes/2 + nodeLoopNum - 1));
+      int setID = (int) (nodeNumber - circleVerticalNodes/2 + nodeLoopNum - 1);
+      graphButton.setId(String.valueOf(setID));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
@@ -261,7 +264,8 @@ public class EvolutionarySettingsController {
       graphButton.setLayoutX((nodeHorizontalDistance - minnWidth));
       graphButton.setLayoutY(nodeVerticalDistance * (1 + (circleVerticalNodes/2) - nodeLoopNum));
       graphButton.setOnAction(buttonPressedChangeColour());
-      graphButton.setId(String.valueOf(nodeNumber - circleVerticalNodes/2 + nodeLoopNum + 1));
+      int setID = (int) (nodeNumber - circleVerticalNodes/2 + nodeLoopNum + 1);
+      graphButton.setId(String.valueOf(setID));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
@@ -269,11 +273,35 @@ public class EvolutionarySettingsController {
   
   public void circleRun() {
     buttonToNode();
+    for (int first = 0; first < nodes.size(); first++) {
+      Node firstNode = nodes.get(first);
+      int id1 = Integer.parseInt(String.valueOf(firstNode.getID()));
+      for (int second = first; second < nodes.size(); second++) {
+        Node secondNode = nodes.get(second);
+        int id2 = Integer.parseInt(String.valueOf(secondNode.getID()));
+        if(Math.abs(id2 - id1) == 1){ //TODO add or nodeNumber and 1
+          firstNode.addNeighbour(secondNode);
+          secondNode.addNeighbour(firstNode);
+        }
+      }
+    }
     setButtonData();
   }
   
   public void starRun() {
     buttonToNode();
+    for (int first = 0; first < nodes.size(); first++) {
+      Node firstNode = nodes.get(first);
+      int id1 = Integer.parseInt(String.valueOf(firstNode.getID()));
+      for (int second = first; second < nodes.size(); second++) {
+        Node secondNode = nodes.get(second);
+        int id2 = Integer.parseInt(String.valueOf(secondNode.getID()));
+        if(!(Math.abs(id2 - id1) == 1)){ //TODO add or nodeNumber and 1
+          firstNode.addNeighbour(secondNode);
+          secondNode.addNeighbour(firstNode);
+        }
+      }
+    }
     setButtonData();
   }
   
@@ -330,6 +358,14 @@ public class EvolutionarySettingsController {
   
   public void completeRun() {
     buttonToNode();
+    for (int first = 0; first < nodes.size(); first++) {
+      Node firstNode = nodes.get(first);
+      for (int second = first; second < nodes.size(); second++) {
+        Node secondNode = nodes.get(second);
+        firstNode.addNeighbour(secondNode);
+        secondNode.addNeighbour(firstNode);
+      }
+    }
     setButtonData();
   }
   

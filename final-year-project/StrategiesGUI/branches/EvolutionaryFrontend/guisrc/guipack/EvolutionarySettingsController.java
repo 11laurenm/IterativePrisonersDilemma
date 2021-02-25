@@ -183,7 +183,7 @@ public class EvolutionarySettingsController {
   public void setAnchorStar() {
     graphPane.getChildren().clear();
     buttons.clear();
-    int nodeNumber = 6;
+    int nodeNumber = 8;
     double height;
     double width;
     double circleVerticalNodes = 0;
@@ -228,13 +228,13 @@ public class EvolutionarySettingsController {
     
     double minnWidth = width/(((Math.ceil(circleHorizontalNodes / 2)) + 2) * 2);
     double minnHeight = height/(((Math.ceil(circleVerticalNodes / 2)) + 2) * 2);
-    double nodeHorizontalDistance = width/(6 + circleHorizontalNodes);
+    double nodeHorizontalDistance = width/(6 + circleHorizontalNodes) + minnWidth;
     double nodeVerticalDistance = (height/(6 + circleVerticalNodes)) + minnHeight;
     
     for(int nodeLoopNum = 0; nodeLoopNum < Math.floor(circleHorizontalNodes/2); nodeLoopNum++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
-      graphButton.setLayoutX(nodeHorizontalDistance * (nodeLoopNum + 3));
+      graphButton.setLayoutX(nodeHorizontalDistance * (nodeLoopNum + 1.25));
       graphButton.setLayoutY(nodeVerticalDistance);
       graphButton.setOnAction(buttonPressedChangeColour());
       graphButton.setId(String.valueOf(nodeLoopNum + 1));
@@ -246,7 +246,7 @@ public class EvolutionarySettingsController {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
       graphButton.setLayoutX(((Math.ceil(circleHorizontalNodes/2)) + 4 + 
-          (Math.ceil((circleHorizontalNodes/2)) - 1)) * nodeHorizontalDistance);
+          (Math.ceil((circleHorizontalNodes/2)) - 1)) * (nodeHorizontalDistance - minnWidth));
       graphButton.setLayoutY((nodeVerticalDistance * (nodeLoopNum + 2)));
       graphButton.setOnAction(buttonPressedChangeColour());
       graphButton.setId(String.valueOf(nodeLoopNum + circleHorizontalNodes/2));
@@ -257,7 +257,7 @@ public class EvolutionarySettingsController {
     for(int nodeLoopNum = 0; nodeLoopNum < Math.ceil(circleHorizontalNodes/2); nodeLoopNum++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
-      graphButton.setLayoutX(nodeHorizontalDistance * (2 + (Math.ceil(circleHorizontalNodes)/2) 
+      graphButton.setLayoutX((nodeHorizontalDistance - minnWidth) * (2 + (Math.ceil(circleHorizontalNodes)/2) 
           - nodeLoopNum + (Math.ceil((circleHorizontalNodes)/2) - 1) - nodeLoopNum));
       graphButton.setLayoutY(nodeVerticalDistance * (2 * (circleVerticalNodes/2)));
       graphButton.setOnAction(buttonPressedChangeColour());
@@ -269,7 +269,7 @@ public class EvolutionarySettingsController {
     for(int nodeLoopNum = 0; nodeLoopNum < circleVerticalNodes/2; nodeLoopNum++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
-      graphButton.setLayoutX(nodeHorizontalDistance);
+      graphButton.setLayoutX((nodeHorizontalDistance - minnWidth));
       graphButton.setLayoutY(nodeVerticalDistance * (1 + (circleVerticalNodes/2) - nodeLoopNum));
       graphButton.setOnAction(buttonPressedChangeColour());
       graphButton.setId(String.valueOf(nodeNumber - nodeLoopNum));

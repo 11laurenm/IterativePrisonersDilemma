@@ -105,11 +105,11 @@ public class EvolutionarySettingsController {
     } else if (circleGraphButton.isSelected()) {
       setAnchorCircle();
     } else if (starGraphButton.isSelected()) {
-      setAnchorStar();
+      setAnchorCircle();
     } else if (busGraphButton.isSelected()) {
       setAnchorBus();
     } else if (completeGraphButton.isSelected()) {
-      setAnchorComplete();
+      setAnchorCircle();
     } else {
       setAnchorBipartite();
     }
@@ -172,18 +172,7 @@ public class EvolutionarySettingsController {
   public void setAnchorCircle() {
     graphPane.getChildren().clear();
     buttons.clear();
-  }
-  
-  public void circleRun() {
-    buttonToNode();
-    setButtonData();
-  }
-  
-  @FXML
-  public void setAnchorStar() {
-    graphPane.getChildren().clear();
-    buttons.clear();
-    int nodeNumber = 8;
+    int nodeNumber = 3;
     double height;
     double width;
     double circleVerticalNodes = 0;
@@ -276,7 +265,11 @@ public class EvolutionarySettingsController {
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
-    
+  }
+  
+  public void circleRun() {
+    buttonToNode();
+    setButtonData();
   }
   
   public void starRun() {
@@ -333,11 +326,7 @@ public class EvolutionarySettingsController {
     setButtonData();
   }
   
-  @FXML
-  public void setAnchorComplete() {
-    graphPane.getChildren().clear();
-    buttons.clear();
-  }
+
   
   public void completeRun() {
     buttonToNode();

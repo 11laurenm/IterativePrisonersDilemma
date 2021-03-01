@@ -363,7 +363,7 @@ public class EvolutionarySettingsController {
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
         firstNode.addNeighbour(secondNode);
-        secondNode.addNeighbour(firstNode);
+        secondNode.addNeighbour(firstNode); 
       }
     }
     setButtonData();

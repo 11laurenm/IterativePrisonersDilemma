@@ -140,6 +140,44 @@ public class EvolutionarySettingsController {
     tf.setPrefWidth(25);
     tf.setLayoutX(lab.getLayoutX() + lab.getPrefWidth() + 100);
     nodesPane.getChildren().add(tf);
+    
+    if(gridButton.isSelected()) {
+      tf.setOnAction((new EventHandler<ActionEvent>() { 
+        public void handle(ActionEvent event) { 
+           setAnchorGrid();
+        } 
+       }));
+    } else if (circleGraphButton.isSelected()) {
+      tf.setOnAction((new EventHandler<ActionEvent>() { 
+        public void handle(ActionEvent event) { 
+           setAnchorCircle();
+        } 
+       }));
+    } else if (starGraphButton.isSelected()) {
+      tf.setOnAction((new EventHandler<ActionEvent>() { 
+        public void handle(ActionEvent event) { 
+           setAnchorCircle();
+        } 
+       }));
+    } else if (busGraphButton.isSelected()) {
+      tf.setOnAction((new EventHandler<ActionEvent>() { 
+        public void handle(ActionEvent event) { 
+           setAnchorBus();
+        } 
+       }));
+    } else if (completeGraphButton.isSelected()) {
+      tf.setOnAction((new EventHandler<ActionEvent>() { 
+        public void handle(ActionEvent event) { 
+           setAnchorCircle();
+        } 
+       }));
+    } else {
+      tf.setOnAction((new EventHandler<ActionEvent>() { 
+        public void handle(ActionEvent event) { 
+           setAnchorBipartite();
+        } 
+       }));
+    }
   }
   
   public void setSecondNodesPaneChildren() {
@@ -154,6 +192,20 @@ public class EvolutionarySettingsController {
     tf2.setPrefWidth(25);
     tf2.setLayoutX(lab2.getLayoutX()+ lab2.getPrefWidth() + 35);
     nodesPane.getChildren().add(tf2);
+    
+    if(gridButton.isSelected()) {
+      tf2.setOnAction((new EventHandler<ActionEvent>() { 
+        public void handle(ActionEvent event) { 
+           setAnchorGrid();
+        } 
+       }));
+    } else {
+      tf2.setOnAction((new EventHandler<ActionEvent>() { 
+        public void handle(ActionEvent event) { 
+           setAnchorBipartite();
+        } 
+       }));
+    }
   }
   
   @FXML

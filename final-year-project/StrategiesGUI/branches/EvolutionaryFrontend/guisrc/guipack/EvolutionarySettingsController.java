@@ -160,8 +160,8 @@ public class EvolutionarySettingsController {
   public void setAnchorGrid() {
     graphPane.getChildren().clear();
     buttons.clear();
-    int rowSize = 4;
-    int colSize = 3;
+    int rowSize = Integer.parseInt(tf.getText());;
+    int colSize = Integer.parseInt(tf2.getText());;
     double height;
     double width;
     if(graphPane.getHeight() == 0.00) {
@@ -213,7 +213,7 @@ public class EvolutionarySettingsController {
   public void setAnchorCircle() {
     graphPane.getChildren().clear();
     buttons.clear();
-    int nodeNumber = 3;
+    int nodeNumber = Integer.parseInt(tf.getText());
     double height;
     double width;
     double circleVerticalNodes = 0;
@@ -350,7 +350,7 @@ public class EvolutionarySettingsController {
   public void setAnchorBus() {
     graphPane.getChildren().clear();
     buttons.clear();
-    int nodeNumber = 3;
+    int nodeNumber = Integer.parseInt(tf.getText());;
     double height;
     double width;
     if(graphPane.getHeight() == 0.00) {
@@ -414,7 +414,14 @@ public class EvolutionarySettingsController {
   public void setAnchorBipartite() {
     graphPane.getChildren().clear();
     buttons.clear();
-    int nodesPerColumn = 3;
+    int nodesPerColumnA = Integer.parseInt(tf.getText());
+    int nodesPerColumnB = Integer.parseInt(tf.getText());
+    int largestColumn;
+    if(nodesPerColumnA > nodesPerColumnA) {
+      largestColumn = nodesPerColumnA;
+    } else {
+      largestColumn = nodesPerColumnB;
+    }
     double height;
     double width;
     if(graphPane.getHeight() == 0.00) {
@@ -425,20 +432,28 @@ public class EvolutionarySettingsController {
       width = graphPane.getWidth();
     }
     double minnWidth = width/5;
-    double minnHeight = height/((nodesPerColumn * 2) + 2);
+    double minnHeight = height/((largestColumn * 2) + 2);
     double nodeHorizontalDistance = minnWidth; 
     double nodeVerticalDistance = minnHeight; 
-    for(int colNumber = 0; colNumber < 2; colNumber++) {
-      for(int colNode = 1; colNode < nodesPerColumn + 1; colNode++) {
-        Button graphButton = new Button();
-        graphButton.setMinSize(minnWidth, minnHeight);
-        graphButton.setLayoutX(((colNumber * 2) + 1) * minnWidth);
-        graphButton.setLayoutY(minnHeight * colNode * 2);
-        graphButton.setOnAction(buttonPressedChangeColour());
-        graphButton.setId(String.valueOf(colNumber) + String.valueOf(colNode));
-        buttons.add(graphButton);
-        graphPane.getChildren().add(graphButton);
-      }
+    for(int colNode = 1; colNode < nodesPerColumnA + 1; colNode++) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX(((0 * 2) + 1) * minnWidth);
+      graphButton.setLayoutY(minnHeight * colNode * 2);
+      graphButton.setOnAction(buttonPressedChangeColour());
+      graphButton.setId(String.valueOf(0) + String.valueOf(colNode));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+    }
+    for(int colNode = 1; colNode < nodesPerColumnB + 1; colNode++) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX(((1 * 2) + 1) * minnWidth);
+      graphButton.setLayoutY(minnHeight * colNode * 2);
+      graphButton.setOnAction(buttonPressedChangeColour());
+      graphButton.setId(String.valueOf(1) + String.valueOf(colNode));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
     }
   }
   

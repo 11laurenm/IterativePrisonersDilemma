@@ -79,6 +79,9 @@ public class EvolutionarySettingsController {
   
   ArrayList<Node> nodes;
   
+  String tfText1 = "4";
+  String tfText2 = "4";
+  
   public EvolutionarySettingsController() {
     
   }
@@ -87,7 +90,7 @@ public class EvolutionarySettingsController {
   public void initialize(Main main, ArrayList<Strategy> strats) {
     setMain(main);
     buttons = new ArrayList<>();
-    setAnchorGrid();
+    runCorrectAnchorMethod();
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
     
@@ -107,7 +110,9 @@ public class EvolutionarySettingsController {
   
   @FXML
   public void runCorrectAnchorMethod() {
+    setNodesPaneChildren();
     if(gridButton.isSelected()) {
+      setSecondNodesPaneChildren();
       setAnchorGrid();
     } else if (circleGraphButton.isSelected()) {
       setAnchorCircle();
@@ -118,35 +123,41 @@ public class EvolutionarySettingsController {
     } else if (completeGraphButton.isSelected()) {
       setAnchorCircle();
     } else {
+      setSecondNodesPaneChildren();
       setAnchorBipartite();
     }
   }
   
-  @FXML
-  public void setAnchorGrid() {
-    
+  public void setNodesPaneChildren() {
+    nodesPane.getChildren().clear();
     Label lab = new Label();
     lab.setText("Number of Nodes");
     lab.setLayoutX(90);
     nodesPane.getChildren().add(lab);
     
     tf = new TextField();
-    tf.setText("4");
+    tf.setText(tfText1);
     tf.setPrefWidth(25);
     tf.setLayoutX(lab.getLayoutX() + lab.getPrefWidth() + 100);
     nodesPane.getChildren().add(tf);
-    
+  }
+  
+  public void setSecondNodesPaneChildren() {
+    setNodesPaneChildren();
     Label lab2 = new Label();
     lab2.setText("     X     ");
     lab2.setLayoutX(tf.getLayoutX() + tf.getPrefWidth() - 10);
     nodesPane.getChildren().add(lab2);
     
     tf2 = new TextField();
-    tf2.setText("4");
+    tf2.setText(tfText2);
     tf2.setPrefWidth(25);
     tf2.setLayoutX(lab2.getLayoutX()+ lab2.getPrefWidth() + 35);
     nodesPane.getChildren().add(tf2);
-    
+  }
+  
+  @FXML
+  public void setAnchorGrid() {
     graphPane.getChildren().clear();
     buttons.clear();
     int rowSize = 4;

@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -66,7 +67,13 @@ public class EvolutionarySettingsController {
   private AnchorPane graphPane;
   
   @FXML
-  private TextField nodeNumber;
+  private AnchorPane nodesPane;
+  
+  @FXML
+  private TextField tf;
+  
+  @FXML
+  private TextField tf2;
   
   ArrayList<Button> buttons;
   
@@ -117,6 +124,29 @@ public class EvolutionarySettingsController {
   
   @FXML
   public void setAnchorGrid() {
+    
+    Label lab = new Label();
+    lab.setText("Number of Nodes");
+    lab.setLayoutX(90);
+    nodesPane.getChildren().add(lab);
+    
+    tf = new TextField();
+    tf.setText("4");
+    tf.setPrefWidth(25);
+    tf.setLayoutX(lab.getLayoutX() + lab.getPrefWidth() + 100);
+    nodesPane.getChildren().add(tf);
+    
+    Label lab2 = new Label();
+    lab2.setText("     X     ");
+    lab2.setLayoutX(tf.getLayoutX() + tf.getPrefWidth() - 10);
+    nodesPane.getChildren().add(lab2);
+    
+    tf2 = new TextField();
+    tf2.setText("4");
+    tf2.setPrefWidth(25);
+    tf2.setLayoutX(lab2.getLayoutX()+ lab2.getPrefWidth() + 35);
+    nodesPane.getChildren().add(tf2);
+    
     graphPane.getChildren().clear();
     buttons.clear();
     int rowSize = 4;

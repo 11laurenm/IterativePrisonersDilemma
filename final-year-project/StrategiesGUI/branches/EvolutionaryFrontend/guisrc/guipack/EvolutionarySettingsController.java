@@ -75,6 +75,8 @@ public class EvolutionarySettingsController {
   @FXML
   private TextField tf2;
   
+  ArrayList<Strategy> strategiesForTable;
+  
   ArrayList<Button> buttons;
   
   ArrayList<Node> nodes;
@@ -560,6 +562,25 @@ public class EvolutionarySettingsController {
     }
   }
   
+  public void setTableData() {
+    strategiesForTable = new ArrayList<Strategy>();
+    for(int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
+      Button b = buttons.get(buttonNumber);
+      Node n = (Node) b.getUserData();
+      Strategy s;
+      s = n.getStrategy();
+      boolean inList = false;
+      for(Strategy checkS: strategiesForTable) {
+        if(s.getClass().equals(checkS.getClass())) {
+          inList = true;
+        }
+      }
+      if(!inList) {
+        strategiesForTable.add(s);
+      }
+    }
+  }
+  
   @FXML
   public void runButton() {
     if(gridButton.isSelected()) {
@@ -575,7 +596,8 @@ public class EvolutionarySettingsController {
     } else {
       bipartiteRun();
     }
-    mainn.showEvRun(buttons, nodes);
+    setTableData();
+    mainn.showEvRun(buttons, nodes, strategiesForTable);
   }
 
 }

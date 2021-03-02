@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import strategiespack.Evolutionary;
@@ -37,12 +40,23 @@ public class EvolutionaryRunController {
   
   int generationNumber;
   
+  @FXML
+  private TableView<Strategy> stratsTable;
+  
+  @FXML
+  private TableColumn<Strategy, String> strategyColumn;
+  
+  @FXML
+  private TableColumn<Strategy, String> colourColumn;
+  
+  private ObservableList<Strategy> stratsList = FXCollections.observableArrayList();
+  
   public EvolutionaryRunController() {
     
   }
   
   @FXML 
-  public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList) {
+  public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, ArrayList<Strategy> strats) {
     buttons = buttonsList;
     nodes = nodesList;
     generationNumber = 0;
@@ -54,6 +68,12 @@ public class EvolutionaryRunController {
     evoTournament = new Evolutionary(nodes, 10, payoffs, gameLengths, 5);
     evoTournament.setUpTournament();
     allGens.add(nodes);
+    
+    stratsList = FXCollections.observableArrayList(strats);
+    stratsTable.setItems(stratsList);
+    strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
+    colourColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("colour"));
+    
   }
   
   public void showButtons() {

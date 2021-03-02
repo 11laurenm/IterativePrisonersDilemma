@@ -62,6 +62,7 @@ public class Evolutionary extends Tournament{
       }
       nodes.get(nodeNumber).setPlayedAllGames(true);
     }
+    normaliseScores();
     setGenerationScores();
     updateNodes();
   }
@@ -103,6 +104,13 @@ public class Evolutionary extends Tournament{
   
   public ArrayList<Integer> returnGenerationScores() {
     return genScores;
+  }
+  
+  public void normaliseScores() {
+    for(Node n: nodes) {
+      int neighboursSize = n.getNeighbours().size();
+      n.getStrategy().setPoints(n.getStrategy().getPoints()/neighboursSize);
+    }
   }
   
   

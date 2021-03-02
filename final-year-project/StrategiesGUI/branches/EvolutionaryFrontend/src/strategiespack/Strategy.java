@@ -41,6 +41,10 @@ public class Strategy {
   public int getPoints() {
     return points;
   }
+  
+  public void setPoints(int newPoints) {
+    points = newPoints;
+  }
 
   /**
    * Gets the decision made by the strategy for a particular round.

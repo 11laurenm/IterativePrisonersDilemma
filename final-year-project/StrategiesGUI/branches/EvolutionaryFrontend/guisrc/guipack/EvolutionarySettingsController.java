@@ -467,7 +467,7 @@ public class EvolutionarySettingsController {
     graphPane.getChildren().clear();
     buttons.clear();
     int nodesPerColumnA = Integer.parseInt(tf.getText());
-    int nodesPerColumnB = Integer.parseInt(tf.getText());
+    int nodesPerColumnB = Integer.parseInt(tf2.getText());
     int largestColumn;
     if(nodesPerColumnA > nodesPerColumnA) {
       largestColumn = nodesPerColumnA;
@@ -490,7 +490,7 @@ public class EvolutionarySettingsController {
     for(int colNode = 1; colNode < nodesPerColumnA + 1; colNode++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
-      graphButton.setLayoutX(((0 * 2) + 1) * minnWidth);
+      graphButton.setLayoutX(minnWidth);
       graphButton.setLayoutY(minnHeight * colNode * 2);
       graphButton.setOnAction(buttonPressedChangeColour());
       graphButton.setId(String.valueOf(0) + String.valueOf(colNode));
@@ -500,7 +500,7 @@ public class EvolutionarySettingsController {
     for(int colNode = 1; colNode < nodesPerColumnB + 1; colNode++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
-      graphButton.setLayoutX(((1 * 2) + 1) * minnWidth);
+      graphButton.setLayoutX(3 * minnWidth);
       graphButton.setLayoutY(minnHeight * colNode * 2);
       graphButton.setOnAction(buttonPressedChangeColour());
       graphButton.setId(String.valueOf(1) + String.valueOf(colNode));

@@ -255,8 +255,10 @@ public class EvolutionarySettingsController {
         int rowNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(1)));
         if((columnNumber1 == columnNumber2 && (Math.abs(rowNumber1 - rowNumber2) <= 1)) ||
             (rowNumber1 == rowNumber2 && (Math.abs(columnNumber1 - columnNumber2) <= 1))) {
-          firstNode.addNeighbour(secondNode);
-          secondNode.addNeighbour(firstNode);
+          if(firstNode != secondNode) {
+            firstNode.addNeighbour(secondNode);
+            secondNode.addNeighbour(firstNode);
+          }
         }
       }
     }

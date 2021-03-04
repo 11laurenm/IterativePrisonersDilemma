@@ -1,0 +1,11 @@
+The project is made up of three packages:
+src contains all strategy classes and those necessary to run tournaments.
+testsrc contains all JUnit test classes.
+guisrc contains both java and fxml files used to create and control the GUI.
+
+To run the program using these files (instead of an executable):
+Ensure Javafx and the relevant eclipse plugin is installed
+Open guisrc/Main
+Select Run as -> Java application from the run menu
+
+An executable is provided in the executable folder of the project so it can be run from any machine.

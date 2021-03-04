@@ -91,12 +91,21 @@ public class EvolutionarySettingsController {
   double nodeHorizontalDistance;
   double nodeVerticalDistance;
   
+  int roundsParam;
+  ArrayList<Integer> payoffsParam;
+  ArrayList<Integer> gameLengthsParam;
+  
+  
   public EvolutionarySettingsController() {
     
   }
   
   @FXML 
-  public void initialize(Main main, ArrayList<Strategy> strats) {
+  public void initialize(Main main, ArrayList<Strategy> strats, int rounds, 
+      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
+    roundsParam = rounds;
+    payoffsParam = payoffs;
+    gameLengthsParam = gameLengths;
     setMain(main);
     buttons = new ArrayList<>();
     runCorrectAnchorMethod();
@@ -632,7 +641,7 @@ public class EvolutionarySettingsController {
         bipartiteRun();
       }
       setTableData();
-      mainn.showEvRun(buttons, nodes, strategiesForTable);
+      mainn.showEvRun(buttons, nodes, strategiesForTable, roundsParam, payoffsParam, gameLengthsParam);
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");

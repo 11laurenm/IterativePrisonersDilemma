@@ -108,17 +108,8 @@ public class Evolutionary extends Tournament{
   
   public void normaliseScores() {
     for(Node n: nodes) {
-      System.out.print(n);
-      System.out.print("  ");
-      System.out.print(n.getID());
-      System.out.println(n.getNeighbours());
       int neighboursSize = n.getNeighbours().size();
-      System.out.print(n.getStrategy().getPoints());
-      System.out.print(" / ");
-      System.out.print(neighboursSize);
-      System.out.print(" = ");
       n.getStrategy().setPoints((n.getStrategy().getPoints())/neighboursSize);
-      System.out.println(n.getStrategy().getPoints());
     }
   }
   

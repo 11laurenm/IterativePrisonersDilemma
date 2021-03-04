@@ -56,16 +56,15 @@ public class EvolutionaryRunController {
   }
   
   @FXML 
-  public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, ArrayList<Strategy> strats) {
+  public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, ArrayList<Strategy> strats, int rounds, 
+      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
     buttons = buttonsList;
     nodes = nodesList;
     generationNumber = 0;
     mostRecentGen = 0;
     allGens = new ArrayList<ArrayList<Node>>();
     showButtons();
-    ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
-    ArrayList<Integer> gameLengths = new ArrayList(Arrays.asList(1, 1, 1));
-    evoTournament = new Evolutionary(nodes, 10, payoffs, gameLengths, 5);
+    evoTournament = new Evolutionary(nodes, rounds, payoffs, gameLengths, 5);
     evoTournament.setUpTournament();
     allGens.add(nodes);
     

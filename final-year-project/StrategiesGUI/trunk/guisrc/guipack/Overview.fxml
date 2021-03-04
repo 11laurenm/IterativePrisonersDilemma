@@ -113,7 +113,16 @@
                   <Insets bottom="20.0" />
                </padding>
             </CheckBox>
-            <Button mnemonicParsing="false" onAction="#handleRunTournament" text="Run" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleRunTournament" text="Run Round Robin Tournament">
+                     <HBox.margin>
+                        <Insets right="35.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#launchEvolutionary" text="Run Evolutionary Tournament" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -19,6 +20,7 @@ import strategiespack.HardMajority;
 import strategiespack.HardTitForTat;
 import strategiespack.Mem2;
 import strategiespack.Mistrust;
+import strategiespack.Node;
 import strategiespack.Pavlov;
 import strategiespack.PeriodicCCD;
 import strategiespack.PeriodicCD;
@@ -112,6 +114,40 @@ public class Main extends Application {
 
       Controller controller = loader.getController();
       controller.initialize(this);
+    
+    } catch (IOException e) {
+      ;
+    }
+  }
+  
+  public void showEvSettings(ArrayList<Strategy> strategies, int rounds, 
+      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(Main.class.getResource("EvolutionaryFirstScreen.fxml"));
+      AnchorPane overview = (AnchorPane) loader.load();
+    
+      rootLayout.setCenter(overview);
+
+      EvolutionarySettingsController controller = loader.getController();
+      controller.initialize(this, strategies, rounds, payoffs, gameLengths);
+    
+    } catch (IOException e) {
+      ;
+    }
+  }
+  
+  public void showEvRun(ArrayList<Button> buttons, ArrayList<Node> nodes, ArrayList<Strategy> strategiesForTable, int rounds, 
+      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(Main.class.getResource("EvolutionaryRunScreen.fxml"));
+      AnchorPane overview = (AnchorPane) loader.load();
+    
+      rootLayout.setCenter(overview);
+
+      EvolutionaryRunController controller = loader.getController();
+      controller.initialize(buttons, nodes, strategiesForTable, rounds, payoffs, gameLengths);
     
     } catch (IOException e) {
       ;

@@ -617,21 +617,29 @@ public class EvolutionarySettingsController {
       return;
     }
     
-    if(gridButton.isSelected()) {
-      gridRun();
-    } else if (circleGraphButton.isSelected()) {
-      circleRun();
-    } else if (starGraphButton.isSelected()) {
-      starRun();
-    } else if (busGraphButton.isSelected()) {
-      busRun();
-    } else if (completeGraphButton.isSelected()) {
-      completeRun();
-    } else {
-      bipartiteRun();
+    try {
+      if(gridButton.isSelected()) {
+        gridRun();
+      } else if (circleGraphButton.isSelected()) {
+        circleRun();
+      } else if (starGraphButton.isSelected()) {
+        starRun();
+      } else if (busGraphButton.isSelected()) {
+        busRun();
+      } else if (completeGraphButton.isSelected()) {
+        completeRun();
+      } else {
+        bipartiteRun();
+      }
+      setTableData();
+      mainn.showEvRun(buttons, nodes, strategiesForTable);
+    } catch (Exception e) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("All nodes must have a strategy");
+      alert.showAndWait();
+      return;
     }
-    setTableData();
-    mainn.showEvRun(buttons, nodes, strategiesForTable);
   }
 
 }

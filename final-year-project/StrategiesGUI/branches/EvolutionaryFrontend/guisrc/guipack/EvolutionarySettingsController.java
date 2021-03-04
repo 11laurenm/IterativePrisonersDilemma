@@ -84,6 +84,11 @@ public class EvolutionarySettingsController {
   String tfText1 = "4";
   String tfText2 = "4";
   
+  double minnWidth;
+  double minnHeight;
+  double nodeHorizontalDistance;
+  double nodeVerticalDistance;
+  
   public EvolutionarySettingsController() {
     
   }
@@ -120,6 +125,7 @@ public class EvolutionarySettingsController {
       setAnchorCircle();
     } else if (starGraphButton.isSelected()) {
       setAnchorCircle();
+      setAnchorStar();
     } else if (busGraphButton.isSelected()) {
       setAnchorBus();
     } else if (completeGraphButton.isSelected()) {
@@ -159,6 +165,7 @@ public class EvolutionarySettingsController {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
            setAnchorCircle();
+           setAnchorStar();
         } 
        }));
     } else if (busGraphButton.isSelected()) {
@@ -225,10 +232,10 @@ public class EvolutionarySettingsController {
       height = graphPane.getHeight();
       width = graphPane.getWidth();
     }
-    double minnWidth = width/(rowSize * 2);
-    double minnHeight = height/(colSize * 2);
-    double nodeHorizontalDistance = width/(rowSize + 2);
-    double nodeVerticalDistance = height/(colSize + 2);
+    minnWidth = width/(rowSize * 2);
+    minnHeight = height/(colSize * 2);
+    nodeHorizontalDistance = width/(rowSize + 2);
+    nodeVerticalDistance = height/(colSize + 2);
     for(int colNum = 0; colNum < colSize; colNum++) {
       for(int rowNum = 0; rowNum < rowSize; rowNum++) {
         Button graphButton = new Button();
@@ -312,10 +319,10 @@ public class EvolutionarySettingsController {
     }
     
     
-    double minnWidth = width/(((Math.ceil(circleHorizontalNodes / 2)) + 2) * 2);
-    double minnHeight = height/(((Math.ceil(circleVerticalNodes / 2)) + 2) * 2);
-    double nodeHorizontalDistance = width/(6 + circleHorizontalNodes) + minnWidth;
-    double nodeVerticalDistance = (height/(6 + circleVerticalNodes)) + minnHeight;
+    minnWidth = width/(((Math.ceil(circleHorizontalNodes / 2)) + 2) * 2);
+    minnHeight = height/(((Math.ceil(circleVerticalNodes / 2)) + 2) * 2);
+    nodeHorizontalDistance = width/(6 + circleHorizontalNodes) + minnWidth;
+    nodeVerticalDistance = (height/(6 + circleVerticalNodes)) + minnHeight;
     
     for(int nodeLoopNum = 0; nodeLoopNum < Math.floor(circleHorizontalNodes/2); nodeLoopNum++) {
       Button graphButton = new Button();
@@ -392,19 +399,28 @@ public class EvolutionarySettingsController {
   
   public void starRun() {
     buttonToNode();
-    for (int first = 0; first < nodes.size(); first++) {
-      Node firstNode = nodes.get(first);
-      int id1 = Integer.parseInt(String.valueOf(firstNode.getID()));
-      for (int second = first; second < nodes.size(); second++) {
-        Node secondNode = nodes.get(second);
-        int id2 = Integer.parseInt(String.valueOf(secondNode.getID()));
-        if(!(Math.abs(id2 - id1) == 1) && !(id1 == 1 && id2 == Integer.parseInt(tf.getText()))){
-          firstNode.addNeighbour(secondNode);
-          secondNode.addNeighbour(firstNode);
-        }
-      }
+    Node middleNode = nodes.get(nodes.size() - 1);
+    for (int add = 0; add < nodes.size() - 1; add++) {
+      Node otherNode = nodes.get(add);
+      otherNode.addNeighbour(middleNode);
+      middleNode.addNeighbour(otherNode);
     }
     setButtonData();
+  }
+  
+  public void setAnchorStar() {
+    
+    int nodeNumber = Integer.parseInt(tf.getText());
+    
+    Button graphButton = new Button();
+    Button firstButton = buttons.get(0);
+    graphButton.setMinSize(minnWidth, minnHeight);
+    graphButton.setLayoutX(nodeHorizontalDistance * (nodeNumber/4));
+    graphButton.setLayoutY(nodeVerticalDistance * (nodeNumber/2));
+    graphButton.setOnAction(buttonPressedChangeColour());
+    graphButton.setId(String.valueOf(-1));
+    buttons.add(graphButton);
+    graphPane.getChildren().add(graphButton);
   }
   
   @FXML
@@ -422,10 +438,10 @@ public class EvolutionarySettingsController {
       width = graphPane.getWidth();
     }
     
-    double minnWidth = width/(nodeNumber * 2);
-    double minnHeight = height/4;
-    double nodeHorizontalDistance = width/(nodeNumber + 2);
-    double nodeVerticalDistance = height/2;
+    minnWidth = width/(nodeNumber * 2);
+    minnHeight = height/4;
+    nodeHorizontalDistance = width/(nodeNumber + 2);
+    nodeVerticalDistance = height/2;
     for(int nodeLoopNum = 0; nodeLoopNum < nodeNumber; nodeLoopNum++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
@@ -462,9 +478,11 @@ public class EvolutionarySettingsController {
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
       for (int second = first; second < nodes.size(); second++) {
-        Node secondNode = nodes.get(second);
-        firstNode.addNeighbour(secondNode);
-        secondNode.addNeighbour(firstNode); 
+        if(first != second) {
+          Node secondNode = nodes.get(second);
+          firstNode.addNeighbour(secondNode);
+          secondNode.addNeighbour(firstNode);
+        }
       }
     }
     setButtonData();
@@ -491,10 +509,10 @@ public class EvolutionarySettingsController {
       height = graphPane.getHeight();
       width = graphPane.getWidth();
     }
-    double minnWidth = width/5;
-    double minnHeight = height/((largestColumn * 2) + 2);
-    double nodeHorizontalDistance = minnWidth; 
-    double nodeVerticalDistance = minnHeight; 
+    minnWidth = width/5;
+    minnHeight = height/((largestColumn * 2) + 2);
+    nodeHorizontalDistance = minnWidth; 
+    nodeVerticalDistance = minnHeight; 
     for(int colNode = 1; colNode < nodesPerColumnA + 1; colNode++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);

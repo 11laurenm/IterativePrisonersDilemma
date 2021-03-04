@@ -77,7 +77,7 @@ public class Mem2 extends Strategy {
    */
   public StringProperty nameProperty() {
     SimpleStringProperty strategyName = new SimpleStringProperty();
-    strategyName.setValue("AlwaysCooperate");
+    strategyName.setValue("Mem2");
     return strategyName;
   }
   
@@ -87,7 +87,7 @@ public class Mem2 extends Strategy {
    */
   public StringProperty probabilityProperty() {
     SimpleStringProperty prob = new SimpleStringProperty();
-    prob.setValue("-");
+    prob.setValue("0");
     return prob;
   }
   
@@ -97,8 +97,14 @@ public class Mem2 extends Strategy {
    */
   public StringProperty roundsProperty() {
     SimpleStringProperty rounds = new SimpleStringProperty();
-    rounds.setValue("-");
+    rounds.setValue("0");
     return rounds;
+  }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Black");
+    return colour;
   }
 
 }

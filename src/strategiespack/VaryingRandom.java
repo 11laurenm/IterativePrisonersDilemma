@@ -78,7 +78,7 @@ public class VaryingRandom extends Strategy {
   @Override
   public StringProperty roundsProperty() {
     SimpleStringProperty rounds = new SimpleStringProperty();
-    rounds.setValue("-");
+    rounds.setValue("0");
     return rounds;
   }
   
@@ -89,5 +89,11 @@ public class VaryingRandom extends Strategy {
   @Override
   public void setProbability(double prob) {
     this.probability = prob;
+  }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Magenta");
+    return colour;
   }
 }

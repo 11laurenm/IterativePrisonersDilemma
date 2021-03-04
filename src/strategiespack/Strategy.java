@@ -41,6 +41,10 @@ public class Strategy {
   public int getPoints() {
     return points;
   }
+  
+  public void setPoints(int newPoints) {
+    points = newPoints;
+  }
 
   /**
    * Gets the decision made by the strategy for a particular round.
@@ -102,7 +106,7 @@ public class Strategy {
    */
   public StringProperty probabilityProperty() {
     SimpleStringProperty prob = new SimpleStringProperty();
-    prob.setValue("-");
+    prob.setValue("0");
     return prob;
   }
   
@@ -112,8 +116,14 @@ public class Strategy {
    */
   public StringProperty roundsProperty() {
     SimpleStringProperty roundsProp = new SimpleStringProperty();
-    roundsProp.setValue("-");
+    roundsProp.setValue("0");
     return roundsProp;
+  }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("-");
+    return colour;
   }
 
 }

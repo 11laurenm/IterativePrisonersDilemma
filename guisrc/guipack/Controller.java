@@ -168,7 +168,7 @@ public class Controller {
     ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
     ArrayList<Strategy> alSelectedItems = new ArrayList<Strategy>(selectedItems);
     //line above converts observable list into an array list
-    ArrayList<Integer> payoffs = new ArrayList<>();
+    
 
     if (alSelectedItems.size() < 2) { //show error if less than two strategies selected
       Alert alert = new Alert(AlertType.ERROR);
@@ -178,6 +178,7 @@ public class Controller {
       return;
     }
 
+    ArrayList<Integer> payoffs = new ArrayList<>();
     try { //checks payoff values are integers
       payoffs.add(Integer.parseInt(cc1.getText()));
       payoffs.add(Integer.parseInt(dc1.getText()));
@@ -261,6 +262,88 @@ public class Controller {
     }
     
   }
+  
+  @FXML
+  private void launchEvolutionary() {
+    ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
+    ArrayList<Strategy> alSelectedItems = new ArrayList<Strategy>(selectedItems);
+    if (alSelectedItems.size() < 2) { //show error if less than two strategies selected
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("At least two strategies must be selected");
+      alert.showAndWait();
+      return;
+    }
+    ArrayList<Integer> payoffs = new ArrayList<>();
+    try { //checks payoff values are integers
+      payoffs.add(Integer.parseInt(cc1.getText()));
+      payoffs.add(Integer.parseInt(dc1.getText()));
+      payoffs.add(Integer.parseInt(dc2.getText()));
+      payoffs.add(Integer.parseInt(dd1.getText()));
+    } catch (Exception e) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Payoff values must be integers");
+      alert.showAndWait();
+      return;
+    }
+    
+    gameLengths = new ArrayList();
+    
+    try {
+      if(gameLengths.size() != 0) {
+        gameLengths.set(0, Integer.parseInt(game1.getText()));
+        gameLengths.set(1, Integer.parseInt(game2.getText()));
+        gameLengths.set(2, Integer.parseInt(game3.getText()));
+      } else {
+        gameLengths.add(0, Integer.parseInt(game1.getText()));
+        gameLengths.add(1, Integer.parseInt(game2.getText()));
+        gameLengths.add(2, Integer.parseInt(game3.getText()));
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Game lengths must be integers");
+      alert.showAndWait();
+      return;
+    }
+    
+    try {
+      int testRounds = Integer.parseInt(rounds.getText());
+    } catch (Exception e) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Round length must be an integer");
+      alert.showAndWait();
+      return;
+    }
+    
+    int one = Integer.parseInt(game1.getText());
+    int two = Integer.parseInt(game2.getText());
+    int three = Integer.parseInt(game3.getText());
+    if((one + two + three) != Integer.parseInt(rounds.getText()) && 
+        !roundsCheckBox.isSelected()) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Total of game lengths must equal number of rounds");
+      alert.showAndWait();
+      return;
+    }
+    int roundsParam;
+    if(roundsCheckBox.isSelected()) {
+      gameLengths.clear();
+      random = new Random();
+      roundsParam = random.nextInt(99) + 1;
+    } else if(gamesCheckBox.isSelected()) {
+      gameLengths.clear();
+      roundsParam = Integer.parseInt(rounds.getText());
+    } else {
+      roundsParam = Integer.parseInt(rounds.getText());
+    }
+    
+    mainn.showEvSettings(alSelectedItems, roundsParam, payoffs, gameLengths);
+  }
 
   /**
    * Run when cc1 is edited, ensures that cc2 matches cc1.
@@ -336,7 +419,6 @@ public class Controller {
   private void probabilityEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
-    System.out.println(event.getOldValue());
     if (strat.probabilityProperty().getValue() != "-") {
       strat.setProbability(Integer.parseInt(newValue));
     } else {

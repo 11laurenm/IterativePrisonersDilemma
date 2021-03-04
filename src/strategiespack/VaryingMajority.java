@@ -81,7 +81,7 @@ public class VaryingMajority extends Strategy {
   @Override
   public StringProperty probabilityProperty() {
     SimpleStringProperty prob = new SimpleStringProperty();
-    prob.setValue("-");
+    prob.setValue("0");
     return prob;
   }
   
@@ -103,6 +103,12 @@ public class VaryingMajority extends Strategy {
   @Override
   public void setRounds(int round) {
     this.rounds = round;
+  }
+  
+  public StringProperty colourProperty() {
+    SimpleStringProperty colour = new SimpleStringProperty();
+    colour.setValue("Olive");
+    return colour;
   }
 
 }

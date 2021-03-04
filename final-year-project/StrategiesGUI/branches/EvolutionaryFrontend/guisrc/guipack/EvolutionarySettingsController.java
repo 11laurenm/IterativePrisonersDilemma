@@ -336,7 +336,8 @@ public class EvolutionarySettingsController {
           (Math.ceil((circleHorizontalNodes/2)) - 1)) * (nodeHorizontalDistance - minnWidth));
       graphButton.setLayoutY((nodeVerticalDistance * (nodeLoopNum + 2)));
       graphButton.setOnAction(buttonPressedChangeColour());
-      int setID = (int) (nodeLoopNum + circleHorizontalNodes/2 + 1);
+      Button b = buttons.get(buttons.size() - 1);
+      int setID = Integer.parseInt(b.getId()) + 1;
       graphButton.setId(String.valueOf(setID));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
@@ -349,7 +350,8 @@ public class EvolutionarySettingsController {
           - nodeLoopNum + (Math.ceil((circleHorizontalNodes)/2) - 1) - nodeLoopNum));
       graphButton.setLayoutY(nodeVerticalDistance * (2 * (circleVerticalNodes/2)));
       graphButton.setOnAction(buttonPressedChangeColour());
-      int setID = (int) (nodeNumber - circleVerticalNodes/2 + nodeLoopNum - 1);
+      Button b = buttons.get(buttons.size() - 1);
+      int setID = Integer.parseInt(b.getId()) + 1;
       graphButton.setId(String.valueOf(setID));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
@@ -361,7 +363,8 @@ public class EvolutionarySettingsController {
       graphButton.setLayoutX((nodeHorizontalDistance - minnWidth));
       graphButton.setLayoutY(nodeVerticalDistance * (1 + (circleVerticalNodes/2) - nodeLoopNum));
       graphButton.setOnAction(buttonPressedChangeColour());
-      int setID = (int) (nodeNumber - circleVerticalNodes/2 + nodeLoopNum + 1);
+      Button b = buttons.get(buttons.size() - 1);
+      int setID = Integer.parseInt(b.getId()) + 1;
       graphButton.setId(String.valueOf(setID));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
@@ -376,9 +379,11 @@ public class EvolutionarySettingsController {
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
         int id2 = Integer.parseInt(String.valueOf(secondNode.getID()));
-        if(Math.abs(id2 - id1) == 1){ //TODO add or nodeNumber and 1
-          firstNode.addNeighbour(secondNode);
-          secondNode.addNeighbour(firstNode);
+        if(Math.abs(id2 - id1) == 1 || (id1 == 1 && id2 == Integer.parseInt(tf.getText()))){ 
+          if(firstNode != secondNode) {
+            firstNode.addNeighbour(secondNode);
+            secondNode.addNeighbour(firstNode);
+          }
         }
       }
     }
@@ -393,7 +398,7 @@ public class EvolutionarySettingsController {
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
         int id2 = Integer.parseInt(String.valueOf(secondNode.getID()));
-        if(!(Math.abs(id2 - id1) == 1)){ //TODO add or nodeNumber and 1
+        if(!(Math.abs(id2 - id1) == 1) && !(id1 == 1 && id2 == Integer.parseInt(tf.getText()))){
           firstNode.addNeighbour(secondNode);
           secondNode.addNeighbour(firstNode);
         }
@@ -442,7 +447,6 @@ public class EvolutionarySettingsController {
         Node secondNode = nodes.get(second);
         int nodeNumber2 = Integer.parseInt(secondNode.getID());
         if(Math.abs(nodeNumber1 - nodeNumber2) == 1) {
-          System.out.println("NEIGHBOUR IDENTIFIED");
           firstNode.addNeighbour(secondNode);
           secondNode.addNeighbour(firstNode);
         }

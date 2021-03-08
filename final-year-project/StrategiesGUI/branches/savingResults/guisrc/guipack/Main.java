@@ -261,6 +261,13 @@ public class Main extends Application {
       ;
     }
   }
+  
+  public void exportDetailedResults() {
+    
+    
+    
+    return;
+  }
 
   /**
    * Sets the value of the tournament variable.
@@ -269,4 +276,5 @@ public class Main extends Application {
   public void setTournament(RoundRobin tourn) {
     tournament = tourn;
   }
+
 }

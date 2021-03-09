@@ -1,7 +1,11 @@
 package guipack;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -263,10 +267,7 @@ public class Main extends Application {
   }
   
   public void exportDetailedResults() {
-    
-    
-    
-    return;
+    tournament.writeToCSV();
   }
 
   /**

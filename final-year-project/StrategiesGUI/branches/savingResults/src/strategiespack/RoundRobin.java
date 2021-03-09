@@ -1,6 +1,10 @@
 package strategiespack;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The class representing a tournament of the Iterative Prisoner's Dilemma.
@@ -83,6 +87,59 @@ public class RoundRobin extends Tournament{
    */
   public ArrayList<Strategy> returnResults() {
     return strategies;
+  }
+  
+  public void writeToCSV() {
+    //taken from: https://stackabuse.com/reading-and-writing-csvs-in-java/
+    int pairNumber = 0;
+    ArrayList<String> pairings = new ArrayList<>();
+    ArrayList<ArrayList<String>> dataToWrite = new ArrayList<ArrayList<String>>();
+   
+    for(int i = 0; i < 3; i++) {
+      ArrayList<String> data = new ArrayList<>(Arrays.asList("", "Length of game " + (i + 1), Integer.toString(returnGameLengths().get(i))));
+      dataToWrite.add(data);
+    }
+
+    for (int i = 0; i < strategies.size(); i++) {
+      for (int j = i; j < strategies.size(); j++) { //creates list of every pairing
+        pairings.add(strategies.get(i).nameProperty().getValue());
+        pairings.add(strategies.get(j).nameProperty().getValue());
+      }
+    }
+    
+    for (int set = 0; set < decisions.size(); set = set + 3) {
+      ArrayList<String> data = new ArrayList<>(Arrays.asList("", pairings.get(pairNumber) + " Decision",
+          pairings.get(pairNumber) + " Score", pairings.get(pairNumber + 1) + " Decision",
+          pairings.get(pairNumber + 1) + " Score"));
+      dataToWrite.add(data);
+      pairNumber = pairNumber + 2;
+      int roundNumber = 0;
+      for (int j = 0; j < 3; j++) {
+        ArrayList<Character> decisionsSet = returnDecisions().get(set + j);
+        ArrayList<Integer> pointsSet = returnPoints().get(set + j);
+        for (int i = 0; i < decisionsSet.size(); i = i + 2) {
+          roundNumber++;
+          ArrayList<String> data2 = new ArrayList<>(Arrays.asList("Round " + Integer.toString(roundNumber), 
+              Character.toString(decisionsSet.get(i)),
+              Integer.toString(pointsSet.get(i)), 
+              Character.toString(decisionsSet.get(i + 1)), 
+              Integer.toString(pointsSet.get(i + 1))));
+          dataToWrite.add(data2);
+        }
+      }
+    }
+    
+    try {
+      FileWriter csvWriter = new FileWriter("results.csv");
+      for (List<String> rowData : dataToWrite) {
+        csvWriter.append(String.join(",", rowData));
+        csvWriter.append("\n");
+      }
+      csvWriter.flush();
+      csvWriter.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }

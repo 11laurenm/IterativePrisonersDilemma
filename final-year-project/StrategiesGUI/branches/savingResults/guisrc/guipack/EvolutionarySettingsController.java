@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import strategiespack.Evolutionary;
 import strategiespack.Node;
 import strategiespack.Strategy;
 
@@ -641,12 +642,49 @@ public class EvolutionarySettingsController {
         bipartiteRun();
       }
       setTableData();
-      mainn.showEvRun(buttons, nodes, strategiesForTable, roundsParam, payoffsParam, gameLengthsParam);
+      mainn.showEvRun(buttons, nodes, strategiesForTable, roundsParam, 
+          payoffsParam, gameLengthsParam, false);
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("All nodes must have a strategy");
       alert.showAndWait();
+      return;
+    }
+  }
+  
+  @FXML
+  public void runAndExportButton() {
+    if(tf.getText().equals("0") || tf2.getText().equals("0")) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes cannot be zero");
+      alert.showAndWait();
+      return;
+    }
+    
+    try {
+      if(gridButton.isSelected()) {
+        gridRun();
+      } else if (circleGraphButton.isSelected()) {
+        circleRun();
+      } else if (starGraphButton.isSelected()) {
+        starRun();
+      } else if (busGraphButton.isSelected()) {
+        busRun();
+      } else if (completeGraphButton.isSelected()) {
+        completeRun();
+      } else {
+        bipartiteRun();
+      }
+      setTableData();
+      mainn.showEvRun(buttons, nodes, strategiesForTable, roundsParam, payoffsParam, gameLengthsParam, true);
+    } catch (Exception e) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("All nodes must have a strategy");
+      alert.showAndWait();
+      e.printStackTrace();
       return;
     }
   }

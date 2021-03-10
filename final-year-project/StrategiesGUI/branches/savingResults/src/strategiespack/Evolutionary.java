@@ -7,6 +7,7 @@ public class Evolutionary extends Tournament{
   ArrayList<Node> nodes;
   ArrayList<Integer> genScores;
   int generations;
+  public ArrayList<ArrayList<Node>> allGenerations;
   
   public Evolutionary(ArrayList<Node> nodeList, int rounds, ArrayList<Integer> payoffs, 
       ArrayList<Integer> gameLengths, int gens){
@@ -16,6 +17,13 @@ public class Evolutionary extends Tournament{
     setGameLengths = gameLengths;
     payoffList = payoffs;
     generations = gens;
+    allGenerations = new ArrayList<ArrayList<Node>>();
+    ArrayList<Node> newNodes = new ArrayList<>();
+    for(Node n: nodes) {
+      Node newNode = new Node(n.getStrategy());
+      newNodes.add(newNode);
+    }
+    allGenerations.add(newNodes);
   }
   
   public void setUpTournament() {
@@ -32,6 +40,18 @@ public class Evolutionary extends Tournament{
       first = setGameLengths.get(0);
       second = setGameLengths.get(1);
       third = setGameLengths.get(2);
+    }
+  }
+  
+  public void runWholeTournament() {
+    for(int gen = 0; gen < generations; gen++) {
+      runGeneration();
+      ArrayList<Node> newNodes = new ArrayList<>();
+      for(Node n: nodes) {
+        Node newNode = new Node(n.getStrategy());
+        newNodes.add(newNode);
+      }
+      allGenerations.add(newNodes);
     }
   }
   

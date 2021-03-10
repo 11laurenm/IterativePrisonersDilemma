@@ -142,7 +142,7 @@ public class Main extends Application {
   }
   
   public void showEvRun(ArrayList<Button> buttons, ArrayList<Node> nodes, ArrayList<Strategy> strategiesForTable, int rounds, 
-      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
+      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, boolean export) {
     try {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(Main.class.getResource("EvolutionaryRunScreen.fxml"));
@@ -151,7 +151,8 @@ public class Main extends Application {
       rootLayout.setCenter(overview);
 
       EvolutionaryRunController controller = loader.getController();
-      controller.initialize(buttons, nodes, strategiesForTable, rounds, payoffs, gameLengths);
+      controller.initialize(buttons, nodes, strategiesForTable, rounds, 
+          payoffs, gameLengths, export);
     
     } catch (IOException e) {
       ;

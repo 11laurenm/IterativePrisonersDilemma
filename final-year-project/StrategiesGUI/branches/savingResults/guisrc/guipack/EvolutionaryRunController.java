@@ -1,7 +1,17 @@
 package guipack;
 
+import java.awt.Component;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
+import javax.imageio.ImageIO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +22,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import strategiespack.Evolutionary;
 import strategiespack.Node;
 import strategiespack.Strategy;
@@ -51,17 +63,22 @@ public class EvolutionaryRunController {
   
   private ObservableList<Strategy> stratsList = FXCollections.observableArrayList();
   
+  boolean export;
+  
+  Component rL;
+  
   public EvolutionaryRunController() {
     
   }
   
   @FXML 
   public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, ArrayList<Strategy> strats, int rounds, 
-      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
+      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, boolean exp) {
     buttons = buttonsList;
     nodes = nodesList;
     generationNumber = 0;
     mostRecentGen = 0;
+    export = exp;
     allGens = new ArrayList<ArrayList<Node>>();
     showButtons();
     evoTournament = new Evolutionary(nodes, rounds, payoffs, gameLengths, 5);
@@ -73,6 +90,9 @@ public class EvolutionaryRunController {
     strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
     colourColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("colour"));
     
+    if(exp) {
+      autoRunAndExport();
+    }
   }
   
   public void showButtons() {
@@ -107,6 +127,31 @@ public class EvolutionaryRunController {
       Button b = buttons.get(buttonNumber);
       String buttonStyle = "-fx-background-color: " + genNodes.get(buttonNumber).getStrategy().colourProperty().get();
       b.setStyle(buttonStyle);
+    }
+  }
+  
+  public void autoRunAndExport() {
+    takeScreenshot();
+    for(int gen = 0; gen < 6; gen++) {
+      nextGen();
+      takeScreenshot();
+    }
+  }
+  
+  public void takeScreenshot() {
+    Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+    BufferedImage capture = null;
+    try {
+      capture = new Robot().createScreenCapture(screenRect);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    String fileName = "tournament" + generationNumber + "screenshot.bmp";
+    File imageFile = new File(fileName);
+    try {
+      ImageIO.write(capture, "bmp", imageFile );
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 

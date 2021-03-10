@@ -2,11 +2,22 @@ package testspack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.awt.AWTException;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.imageio.ImageIO;
+
 import org.junit.jupiter.api.Test;
 
+import guipack.Main;
+import javafx.stage.Stage;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
 import strategiespack.Evolutionary;
@@ -154,6 +165,25 @@ class EvolutionaryTests {
     }
     assertNotEquals(newStrat, testStrat, "Strategies are equal but should not be");
     assertEquals(newStrat.nameProperty().get(), "AlwaysCooperate", "New strategy is not of correct type");
+  }
+  
+  @Test
+  void testTakeScreenshot() {
+    //adapted from https://www.baeldung.com/java-taking-screenshots
+    Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+    BufferedImage capture = null;
+    try {
+      capture = new Robot().createScreenCapture(screenRect);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    File imageFile = new File("test-screenshot.bmp");
+    try {
+      ImageIO.write(capture, "bmp", imageFile );
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    assertTrue(imageFile .exists());
   }
 
 }

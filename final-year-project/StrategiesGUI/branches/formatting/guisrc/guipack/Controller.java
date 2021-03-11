@@ -3,7 +3,6 @@ package guipack;
 import guipack.Main;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -195,7 +194,7 @@ public class Controller {
     gameLengths = new ArrayList();
     
     try {
-      if(gameLengths.size() != 0) {
+      if (gameLengths.size() != 0) {
         gameLengths.set(0, Integer.parseInt(game1.getText()));
         gameLengths.set(1, Integer.parseInt(game2.getText()));
         gameLengths.set(2, Integer.parseInt(game3.getText()));
@@ -226,7 +225,7 @@ public class Controller {
     int one = Integer.parseInt(game1.getText());
     int two = Integer.parseInt(game2.getText());
     int three = Integer.parseInt(game3.getText());
-    if((one + two + three) != Integer.parseInt(rounds.getText()) && 
+    if ((one + two + three) != Integer.parseInt(rounds.getText()) && 
         !roundsCheckBox.isSelected()) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
@@ -236,12 +235,12 @@ public class Controller {
     }
     
     try {
-      if(roundsCheckBox.isSelected()) {
+      if (roundsCheckBox.isSelected()) {
         gameLengths.clear();
         random = new Random();
         tournament = new RoundRobin(alSelectedItems, 
             random.nextInt(99) + 1, payoffs, gameLengths);
-      } else if(gamesCheckBox.isSelected()) {
+      } else if (gamesCheckBox.isSelected()) {
         gameLengths.clear();
         tournament = new RoundRobin(alSelectedItems, 
             Integer.parseInt(rounds.getText()), payoffs, gameLengths);
@@ -291,7 +290,7 @@ public class Controller {
     gameLengths = new ArrayList();
     
     try {
-      if(gameLengths.size() != 0) {
+      if (gameLengths.size() != 0) {
         gameLengths.set(0, Integer.parseInt(game1.getText()));
         gameLengths.set(1, Integer.parseInt(game2.getText()));
         gameLengths.set(2, Integer.parseInt(game3.getText()));
@@ -322,7 +321,7 @@ public class Controller {
     int one = Integer.parseInt(game1.getText());
     int two = Integer.parseInt(game2.getText());
     int three = Integer.parseInt(game3.getText());
-    if((one + two + three) != Integer.parseInt(rounds.getText()) && 
+    if ((one + two + three) != Integer.parseInt(rounds.getText()) && 
         !roundsCheckBox.isSelected()) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
@@ -331,11 +330,11 @@ public class Controller {
       return;
     }
     int roundsParam;
-    if(roundsCheckBox.isSelected()) {
+    if (roundsCheckBox.isSelected()) {
       gameLengths.clear();
       random = new Random();
       roundsParam = random.nextInt(99) + 1;
-    } else if(gamesCheckBox.isSelected()) {
+    } else if (gamesCheckBox.isSelected()) {
       gameLengths.clear();
       roundsParam = Integer.parseInt(rounds.getText());
     } else {
@@ -451,36 +450,36 @@ public class Controller {
   
   @FXML
   private void roundsCheckBoxSelected() {
-	  if(roundsCheckBox.isSelected()) {
-		  rounds.setEditable(false);
-		  rounds.setOpacity(0.5);
-		  gamesCheckBox.setSelected(true);
-		  gamesCheckBoxSelected();
-	  } else {
-		  rounds.setEditable(true);
-		  rounds.setOpacity(1);
-		  gamesCheckBox.setSelected(false);
-		  gamesCheckBoxSelected();
-	  }
+    if (roundsCheckBox.isSelected()) {
+      rounds.setEditable(false);
+      rounds.setOpacity(0.5);
+      gamesCheckBox.setSelected(true);
+      gamesCheckBoxSelected();
+    } else {
+      rounds.setEditable(true);
+      rounds.setOpacity(1);
+      gamesCheckBox.setSelected(false);
+      gamesCheckBoxSelected();
+    }
   }
   
   @FXML
   private void gamesCheckBoxSelected() {
-	  if(gamesCheckBox.isSelected()) {
-		  game1.setEditable(false);
-		  game2.setEditable(false);
-		  game3.setEditable(false);
-		  game1.setOpacity(0.5);
-		  game2.setOpacity(0.5);
-		  game3.setOpacity(0.5);
-	  } else {
-		  game1.setEditable(true);
-		  game2.setEditable(true);
-		  game3.setEditable(true);
-		  game1.setOpacity(1);
-		  game2.setOpacity(1);
-		  game3.setOpacity(1);
-	  }
+    if (gamesCheckBox.isSelected()) {
+      game1.setEditable(false);
+      game2.setEditable(false);
+      game3.setEditable(false);
+      game1.setOpacity(0.5);
+      game2.setOpacity(0.5);
+      game3.setOpacity(0.5);
+    } else {
+      game1.setEditable(true);
+      game2.setEditable(true);
+      game3.setEditable(true);
+      game1.setOpacity(1);
+      game2.setOpacity(1);
+      game3.setOpacity(1);
+    }
   }
   
 }

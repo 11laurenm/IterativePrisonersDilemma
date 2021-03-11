@@ -13,10 +13,8 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.ColumnConstraintsBuilder;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.RowConstraintsBuilder;
 import javafx.util.Callback;
 import strategiespack.Strategy;
 

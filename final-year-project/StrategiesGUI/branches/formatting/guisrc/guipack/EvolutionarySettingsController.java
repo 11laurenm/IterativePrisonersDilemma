@@ -1,19 +1,13 @@
 package guipack;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -21,12 +15,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Callback;
-import strategiespack.Evolutionary;
 import strategiespack.Node;
 import strategiespack.Strategy;
 
@@ -133,7 +123,7 @@ public class EvolutionarySettingsController {
   @FXML
   public void runCorrectAnchorMethod() {
     setNodesPaneChildren();
-    if(gridButton.isSelected()) {
+    if (gridButton.isSelected()) {
       setSecondNodesPaneChildren();
       setAnchorGrid();
     } else if (circleGraphButton.isSelected()) {
@@ -164,43 +154,43 @@ public class EvolutionarySettingsController {
     tf.setLayoutX(lab.getLayoutX() + lab.getPrefWidth() + 100);
     nodesPane.getChildren().add(tf);
     
-    if(gridButton.isSelected()) {
+    if (gridButton.isSelected()) {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-           setAnchorGrid();
+          setAnchorGrid();
         } 
-       }));
+      }));
     } else if (circleGraphButton.isSelected()) {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-           setAnchorCircle();
+          setAnchorCircle();
         } 
-       }));
+      }));
     } else if (starGraphButton.isSelected()) {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-           setAnchorCircle();
-           setAnchorStar();
+          setAnchorCircle();
+          setAnchorStar();
         } 
-       }));
+      }));
     } else if (busGraphButton.isSelected()) {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-           setAnchorBus();
+          setAnchorBus();
         } 
-       }));
+      }));
     } else if (completeGraphButton.isSelected()) {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-           setAnchorCircle();
+          setAnchorCircle();
         } 
-       }));
+      }));
     } else {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-           setAnchorBipartite();
+          setAnchorBipartite();
         } 
-       }));
+      }));
     }
   }
   
@@ -214,21 +204,21 @@ public class EvolutionarySettingsController {
     tf2 = new TextField();
     tf2.setText(tfText2);
     tf2.setPrefWidth(25);
-    tf2.setLayoutX(lab2.getLayoutX()+ lab2.getPrefWidth() + 35);
+    tf2.setLayoutX(lab2.getLayoutX() + lab2.getPrefWidth() + 35);
     nodesPane.getChildren().add(tf2);
     
-    if(gridButton.isSelected()) {
+    if (gridButton.isSelected()) {
       tf2.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-           setAnchorGrid();
+          setAnchorGrid();
         } 
-       }));
+      }));
     } else {
       tf2.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-           setAnchorBipartite();
+          setAnchorBipartite();
         } 
-       }));
+      }));
     }
   }
   
@@ -240,22 +230,22 @@ public class EvolutionarySettingsController {
     int colSize = Integer.parseInt(tf2.getText());;
     double height;
     double width;
-    if(graphPane.getHeight() == 0.00) {
+    if (graphPane.getHeight() == 0.00) {
       height = graphPane.getMinHeight();
       width = graphPane.getMinWidth();
     } else {
       height = graphPane.getHeight();
       width = graphPane.getWidth();
     }
-    minnWidth = width/(rowSize * 2);
-    minnHeight = height/(colSize * 2);
-    nodeHorizontalDistance = width/(rowSize + 2);
-    nodeVerticalDistance = height/(colSize + 2);
-    for(int colNum = 0; colNum < colSize; colNum++) {
-      for(int rowNum = 0; rowNum < rowSize; rowNum++) {
+    minnWidth = width / (rowSize * 2);
+    minnHeight = height / (colSize * 2);
+    nodeHorizontalDistance = width / (rowSize + 2);
+    nodeVerticalDistance = height / (colSize + 2);
+    for (int colNum = 0; colNum < colSize; colNum++) {
+      for (int rowNum = 0; rowNum < rowSize; rowNum++) {
         Button graphButton = new Button();
         graphButton.setMinSize(minnWidth, minnHeight);
-        graphButton.setLayoutX((rowNum+1) * nodeHorizontalDistance);
+        graphButton.setLayoutX((rowNum + 1) * nodeHorizontalDistance);
         graphButton.setLayoutY((colNum + 1) * nodeVerticalDistance);
         graphButton.setOnAction(buttonPressedChangeColour());
         graphButton.setId(String.valueOf(colNum) + String.valueOf(rowNum));
@@ -275,9 +265,9 @@ public class EvolutionarySettingsController {
         Node secondNode = nodes.get(second);
         int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(0)));
         int rowNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(1)));
-        if((columnNumber1 == columnNumber2 && (Math.abs(rowNumber1 - rowNumber2) <= 1)) ||
-            (rowNumber1 == rowNumber2 && (Math.abs(columnNumber1 - columnNumber2) <= 1))) {
-          if(firstNode != secondNode) {
+        if ((columnNumber1 == columnNumber2 && (Math.abs(rowNumber1 - rowNumber2) <= 1)) 
+            || (rowNumber1 == rowNumber2 && (Math.abs(columnNumber1 - columnNumber2) <= 1))) {
+          if (firstNode != secondNode) {
             firstNode.addNeighbour(secondNode);
             secondNode.addNeighbour(firstNode);
           }
@@ -296,7 +286,7 @@ public class EvolutionarySettingsController {
     double width;
     double circleVerticalNodes = 0;
     double circleHorizontalNodes = 0;
-    if(graphPane.getHeight() == 0.00) {
+    if (graphPane.getHeight() == 0.00) {
       height = graphPane.getMinHeight();
       width = graphPane.getMinWidth();
     } else {
@@ -304,9 +294,9 @@ public class EvolutionarySettingsController {
       width = graphPane.getWidth();
     }
     
-    if((nodeNumber % 2) == 0) {
-      for(int n = 0; n < nodeNumber/2; n++) {
-        if(n % 2 == 0) {
+    if ((nodeNumber % 2) == 0) {
+      for (int n = 0; n < nodeNumber / 2; n++) {
+        if (n % 2 == 0) {
           circleVerticalNodes = circleVerticalNodes + 2;
         } else {
           circleHorizontalNodes = circleHorizontalNodes + 2;
@@ -314,13 +304,13 @@ public class EvolutionarySettingsController {
       }
     } else {
       boolean addVertical = true;
-      for(int n = 0; n < nodeNumber; n++) {
-        if(n < 3) {
+      for (int n = 0; n < nodeNumber; n++) {
+        if (n < 3) {
           circleHorizontalNodes++;
         } else if (n < 5) {
           circleVerticalNodes++;
         } else {
-          if(addVertical) {
+          if (addVertical) {
             circleVerticalNodes = circleVerticalNodes + 2;
             n++;
             addVertical = false;
@@ -334,60 +324,61 @@ public class EvolutionarySettingsController {
     }
     
     
-    minnWidth = width/(((Math.ceil(circleHorizontalNodes / 2)) + 2) * 2);
-    minnHeight = height/(((Math.ceil(circleVerticalNodes / 2)) + 2) * 2);
-    nodeHorizontalDistance = width/(6 + circleHorizontalNodes) + minnWidth;
-    nodeVerticalDistance = (height/(6 + circleVerticalNodes)) + minnHeight;
+    minnWidth = width / (((Math.ceil(circleHorizontalNodes / 2)) + 2) * 2);
+    minnHeight = height / (((Math.ceil(circleVerticalNodes / 2)) + 2) * 2);
+    nodeHorizontalDistance = width / (6 + circleHorizontalNodes) + minnWidth;
+    nodeVerticalDistance = (height / (6 + circleVerticalNodes)) + minnHeight;
     
-    for(int nodeLoopNum = 0; nodeLoopNum < Math.floor(circleHorizontalNodes/2); nodeLoopNum++) {
+    for (int nodeLoopNum = 0; nodeLoopNum < Math.floor(circleHorizontalNodes / 2); nodeLoopNum++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
       graphButton.setLayoutX(nodeHorizontalDistance * (nodeLoopNum + 1.25));
       graphButton.setLayoutY(nodeVerticalDistance);
       graphButton.setOnAction(buttonPressedChangeColour());
-      int setID = (int) nodeLoopNum + 1;
-      graphButton.setId(String.valueOf(setID));
+      int setId = (int) nodeLoopNum + 1;
+      graphButton.setId(String.valueOf(setId));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
     
-    for(int nodeLoopNum = 0; nodeLoopNum < circleVerticalNodes/2; nodeLoopNum++) {
+    for (int nodeLoopNum = 0; nodeLoopNum < circleVerticalNodes / 2; nodeLoopNum++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
-      graphButton.setLayoutX(((Math.ceil(circleHorizontalNodes/2)) + 4 + 
-          (Math.ceil((circleHorizontalNodes/2)) - 1)) * (nodeHorizontalDistance - minnWidth));
+      graphButton.setLayoutX(((Math.ceil(circleHorizontalNodes / 2)) + 4 
+          + (Math.ceil((circleHorizontalNodes / 2)) - 1)) * (nodeHorizontalDistance - minnWidth));
       graphButton.setLayoutY((nodeVerticalDistance * (nodeLoopNum + 2)));
       graphButton.setOnAction(buttonPressedChangeColour());
       Button b = buttons.get(buttons.size() - 1);
-      int setID = Integer.parseInt(b.getId()) + 1;
-      graphButton.setId(String.valueOf(setID));
+      int setId = Integer.parseInt(b.getId()) + 1;
+      graphButton.setId(String.valueOf(setId));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
     
-    for(int nodeLoopNum = 0; nodeLoopNum < Math.ceil(circleHorizontalNodes/2); nodeLoopNum++) {
+    for (int nodeLoopNum = 0; nodeLoopNum < Math.ceil(circleHorizontalNodes / 2); nodeLoopNum++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
-      graphButton.setLayoutX((nodeHorizontalDistance - minnWidth) * (2 + (Math.ceil(circleHorizontalNodes)/2) 
-          - nodeLoopNum + (Math.ceil((circleHorizontalNodes)/2) - 1) - nodeLoopNum));
-      graphButton.setLayoutY(nodeVerticalDistance * (2 * (circleVerticalNodes/2)));
+      graphButton.setLayoutX((nodeHorizontalDistance - minnWidth) 
+          * (2 + (Math.ceil(circleHorizontalNodes) / 2) 
+          - nodeLoopNum + (Math.ceil((circleHorizontalNodes) / 2) - 1) - nodeLoopNum));
+      graphButton.setLayoutY(nodeVerticalDistance * (2 * (circleVerticalNodes / 2)));
       graphButton.setOnAction(buttonPressedChangeColour());
       Button b = buttons.get(buttons.size() - 1);
-      int setID = Integer.parseInt(b.getId()) + 1;
-      graphButton.setId(String.valueOf(setID));
+      int setId = Integer.parseInt(b.getId()) + 1;
+      graphButton.setId(String.valueOf(setId));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
     
-    for(int nodeLoopNum = 0; nodeLoopNum < circleVerticalNodes/2; nodeLoopNum++) {
+    for (int nodeLoopNum = 0; nodeLoopNum < circleVerticalNodes / 2; nodeLoopNum++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
       graphButton.setLayoutX((nodeHorizontalDistance - minnWidth));
-      graphButton.setLayoutY(nodeVerticalDistance * (1 + (circleVerticalNodes/2) - nodeLoopNum));
+      graphButton.setLayoutY(nodeVerticalDistance * (1 + (circleVerticalNodes / 2) - nodeLoopNum));
       graphButton.setOnAction(buttonPressedChangeColour());
       Button b = buttons.get(buttons.size() - 1);
-      int setID = Integer.parseInt(b.getId()) + 1;
-      graphButton.setId(String.valueOf(setID));
+      int setId = Integer.parseInt(b.getId()) + 1;
+      graphButton.setId(String.valueOf(setId));
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
@@ -401,8 +392,8 @@ public class EvolutionarySettingsController {
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
         int id2 = Integer.parseInt(String.valueOf(secondNode.getID()));
-        if(Math.abs(id2 - id1) == 1 || (id1 == 1 && id2 == Integer.parseInt(tf.getText()))){ 
-          if(firstNode != secondNode) {
+        if (Math.abs(id2 - id1) == 1 || (id1 == 1 && id2 == Integer.parseInt(tf.getText()))) { 
+          if (firstNode != secondNode) {
             firstNode.addNeighbour(secondNode);
             secondNode.addNeighbour(firstNode);
           }
@@ -430,8 +421,8 @@ public class EvolutionarySettingsController {
     Button graphButton = new Button();
     Button firstButton = buttons.get(0);
     graphButton.setMinSize(minnWidth, minnHeight);
-    graphButton.setLayoutX(nodeHorizontalDistance * (nodeNumber/4));
-    graphButton.setLayoutY(nodeVerticalDistance * (nodeNumber/2));
+    graphButton.setLayoutX(nodeHorizontalDistance * (nodeNumber / 4));
+    graphButton.setLayoutY(nodeVerticalDistance * (nodeNumber / 2));
     graphButton.setOnAction(buttonPressedChangeColour());
     graphButton.setId(String.valueOf(-1));
     buttons.add(graphButton);
@@ -445,7 +436,7 @@ public class EvolutionarySettingsController {
     int nodeNumber = Integer.parseInt(tf.getText());;
     double height;
     double width;
-    if(graphPane.getHeight() == 0.00) {
+    if (graphPane.getHeight() == 0.00) {
       height = graphPane.getMinHeight();
       width = graphPane.getMinWidth();
     } else {
@@ -453,14 +444,14 @@ public class EvolutionarySettingsController {
       width = graphPane.getWidth();
     }
     
-    minnWidth = width/(nodeNumber * 2);
-    minnHeight = height/4;
-    nodeHorizontalDistance = width/(nodeNumber + 2);
-    nodeVerticalDistance = height/2;
-    for(int nodeLoopNum = 0; nodeLoopNum < nodeNumber; nodeLoopNum++) {
+    minnWidth = width / (nodeNumber * 2);
+    minnHeight = height / 4;
+    nodeHorizontalDistance = width / (nodeNumber + 2);
+    nodeVerticalDistance = height / 2;
+    for (int nodeLoopNum = 0; nodeLoopNum < nodeNumber; nodeLoopNum++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
-      graphButton.setLayoutX((nodeLoopNum+1) * nodeHorizontalDistance);
+      graphButton.setLayoutX((nodeLoopNum + 1) * nodeHorizontalDistance);
       graphButton.setLayoutY(nodeVerticalDistance);
       graphButton.setOnAction(buttonPressedChangeColour());
       graphButton.setId(String.valueOf(nodeLoopNum));
@@ -477,7 +468,7 @@ public class EvolutionarySettingsController {
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
         int nodeNumber2 = Integer.parseInt(secondNode.getID());
-        if(Math.abs(nodeNumber1 - nodeNumber2) == 1) {
+        if (Math.abs(nodeNumber1 - nodeNumber2) == 1) {
           firstNode.addNeighbour(secondNode);
           secondNode.addNeighbour(firstNode);
         }
@@ -493,7 +484,7 @@ public class EvolutionarySettingsController {
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
       for (int second = first; second < nodes.size(); second++) {
-        if(first != second) {
+        if (first != second) {
           Node secondNode = nodes.get(second);
           firstNode.addNeighbour(secondNode);
           secondNode.addNeighbour(firstNode);
@@ -510,25 +501,25 @@ public class EvolutionarySettingsController {
     int nodesPerColumnA = Integer.parseInt(tf.getText());
     int nodesPerColumnB = Integer.parseInt(tf2.getText());
     int largestColumn;
-    if(nodesPerColumnA > nodesPerColumnA) {
+    if (nodesPerColumnA > nodesPerColumnA) {
       largestColumn = nodesPerColumnA;
     } else {
       largestColumn = nodesPerColumnB;
     }
     double height;
     double width;
-    if(graphPane.getHeight() == 0.00) {
+    if (graphPane.getHeight() == 0.00) {
       height = graphPane.getMinHeight();
       width = graphPane.getMinWidth();
     } else {
       height = graphPane.getHeight();
       width = graphPane.getWidth();
     }
-    minnWidth = width/5;
-    minnHeight = height/((largestColumn * 2) + 2);
+    minnWidth = width / 5;
+    minnHeight = height / ((largestColumn * 2) + 2);
     nodeHorizontalDistance = minnWidth; 
     nodeVerticalDistance = minnHeight; 
-    for(int colNode = 1; colNode < nodesPerColumnA + 1; colNode++) {
+    for (int colNode = 1; colNode < nodesPerColumnA + 1; colNode++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
       graphButton.setLayoutX(minnWidth);
@@ -538,7 +529,7 @@ public class EvolutionarySettingsController {
       buttons.add(graphButton);
       graphPane.getChildren().add(graphButton);
     }
-    for(int colNode = 1; colNode < nodesPerColumnB + 1; colNode++) {
+    for (int colNode = 1; colNode < nodesPerColumnB + 1; colNode++) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
       graphButton.setLayoutX(3 * minnWidth);
@@ -558,7 +549,7 @@ public class EvolutionarySettingsController {
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
         int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(0)));
-        if(columnNumber1 != columnNumber2){
+        if (columnNumber1 != columnNumber2){
           firstNode.addNeighbour(secondNode);
           secondNode.addNeighbour(firstNode);
         }
@@ -568,17 +559,18 @@ public class EvolutionarySettingsController {
   }
   
   private EventHandler<ActionEvent> buttonPressedChangeColour() {
-    return new EventHandler<ActionEvent>(){
+    return new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
         Strategy selectedStrat = null;
         try {
-          selectedStrat = stratsTable.getSelectionModel().getSelectedItem().getClass().newInstance();
+          selectedStrat = stratsTable.getSelectionModel()
+              .getSelectedItem().getClass().newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
           e.printStackTrace();
         }
         String buttonStyle = "-fx-background-color: " + selectedStrat.colourProperty().get();
-        Button b = ((Button)event.getSource());
+        Button b = ((Button) event.getSource());
         b.setUserData(selectedStrat);
         b.setStyle(buttonStyle);
       }
@@ -587,7 +579,7 @@ public class EvolutionarySettingsController {
   
   public void buttonToNode() {
     nodes = new ArrayList<>();
-    for(Button button: buttons) {
+    for (Button button: buttons) {
       Node buttonToNodeVar = new Node((Strategy) button.getUserData());
       buttonToNodeVar.setID(button.getId().toString());
       nodes.add(buttonToNodeVar);
@@ -595,7 +587,7 @@ public class EvolutionarySettingsController {
   }
   
   public void setButtonData() {
-    for(int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
+    for (int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
       Button b = buttons.get(buttonNumber);
       b.setUserData(nodes.get(buttonNumber));
     }
@@ -603,18 +595,18 @@ public class EvolutionarySettingsController {
   
   public void setTableData() {
     strategiesForTable = new ArrayList<Strategy>();
-    for(int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
+    for (int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
       Button b = buttons.get(buttonNumber);
       Node n = (Node) b.getUserData();
       Strategy s;
       s = n.getStrategy();
       boolean inList = false;
-      for(Strategy checkS: strategiesForTable) {
-        if(s.getClass().equals(checkS.getClass())) {
+      for (Strategy checkS: strategiesForTable) {
+        if (s.getClass().equals(checkS.getClass())) {
           inList = true;
         }
       }
-      if(!inList) {
+      if (!inList) {
         strategiesForTable.add(s);
       }
     }
@@ -622,7 +614,7 @@ public class EvolutionarySettingsController {
   
   @FXML
   public void runButton() {
-    if(tf.getText().equals("0") || tf2.getText().equals("0")) {
+    if (tf.getText().equals("0") || tf2.getText().equals("0")) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Number of nodes cannot be zero");
@@ -631,7 +623,7 @@ public class EvolutionarySettingsController {
     }
     
     try {
-      if(gridButton.isSelected()) {
+      if (gridButton.isSelected()) {
         gridRun();
       } else if (circleGraphButton.isSelected()) {
         circleRun();

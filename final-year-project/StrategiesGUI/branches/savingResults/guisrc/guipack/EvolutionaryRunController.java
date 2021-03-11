@@ -16,10 +16,13 @@ import javax.imageio.ImageIO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -45,11 +48,6 @@ public class EvolutionaryRunController {
   
   Evolutionary evoTournament;
   
-  int mostRecentGen;
-  
-  @FXML
-  Label generationLabel;
-  
   int generationNumber;
   
   @FXML
@@ -63,9 +61,10 @@ public class EvolutionaryRunController {
   
   private ObservableList<Strategy> stratsList = FXCollections.observableArrayList();
   
-  boolean export;
+  int totalGens;
   
-  Component rL;
+  @FXML
+  private TextField chosenGenNumber;
   
   public EvolutionaryRunController() {
     
@@ -73,17 +72,18 @@ public class EvolutionaryRunController {
   
   @FXML 
   public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, ArrayList<Strategy> strats, int rounds, 
-      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
+      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, int gens) {
     buttons = buttonsList;
     nodes = nodesList;
     generationNumber = 0;
-    mostRecentGen = 0;
+    chosenGenNumber.setText(Integer.toString(generationNumber));
     allGens = new ArrayList<ArrayList<Node>>();
     showButtons();
-    evoTournament = new Evolutionary(nodes, rounds, payoffs, gameLengths, 5);
+    totalGens = gens;
+    evoTournament = new Evolutionary(nodes, rounds, payoffs, gameLengths, totalGens);
     evoTournament.setUpTournament();
-    allGens.add(nodes);
-    
+    evoTournament.runWholeTournament();
+    allGens = evoTournament.returnAllGenerationResults();
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
     strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
@@ -97,21 +97,28 @@ public class EvolutionaryRunController {
   }
   
   public void nextGen() {
-    if(generationNumber == mostRecentGen) {
-      evoTournament.runGeneration();
-      nodes = evoTournament.returnResults();
-      allGens.add(nodes);
-      mostRecentGen++;
-    }
     generationNumber++;
-    generationLabel.setText(Integer.toString(generationNumber));
+    chosenGenNumber.setText(Integer.toString(generationNumber));
     updateNodes();
   }
   
   public void previousGen() {
     if(generationNumber > 0) {
       generationNumber--;
-      generationLabel.setText(Integer.toString(generationNumber));
+      chosenGenNumber.setText(Integer.toString(generationNumber));
+    }
+    updateNodes();
+  }
+  
+  public void setGen() {
+    try {
+      generationNumber = Integer.parseInt(chosenGenNumber.getText());
+    } catch (Exception e) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of generations must be an integer");
+      alert.showAndWait();
+      return;
     }
     updateNodes();
   }
@@ -124,5 +131,7 @@ public class EvolutionaryRunController {
       b.setStyle(buttonStyle);
     }
   }
+  
+  
 
 }

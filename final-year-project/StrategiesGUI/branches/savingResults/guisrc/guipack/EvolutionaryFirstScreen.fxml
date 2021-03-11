@@ -65,7 +65,7 @@
                            </HBox.margin>
                         </Button>
                         <Label text="Generations: " />
-                        <TextField prefHeight="25.0" prefWidth="60.0" text="5" />
+                        <TextField fx:id="generationField" prefHeight="25.0" prefWidth="60.0" text="5" />
                      </children>
                   </HBox>
                </children>

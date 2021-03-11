@@ -78,6 +78,9 @@ public class EvolutionarySettingsController {
   @FXML
   private TextField tf2;
   
+  @FXML
+  private TextField generationField;
+  
   ArrayList<Strategy> strategiesForTable;
   
   ArrayList<Button> buttons;
@@ -642,9 +645,20 @@ public class EvolutionarySettingsController {
         bipartiteRun();
       }
       setTableData();
+      int gens = 1;
+      try {
+        gens = Integer.parseInt(generationField.getText());
+      } catch (Exception e) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Number of generations must be an integer");
+        alert.showAndWait();
+        return;
+      }
       mainn.showEvRun(buttons, nodes, strategiesForTable, roundsParam, 
-          payoffsParam, gameLengthsParam);
+          payoffsParam, gameLengthsParam, gens);
     } catch (Exception e) {
+      e.printStackTrace();
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("All nodes must have a strategy");

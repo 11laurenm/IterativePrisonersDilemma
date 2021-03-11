@@ -133,6 +133,28 @@ public class Evolutionary extends Tournament{
     }
   }
   
+  public void addNodesToMasterList(ArrayList<Node> nodesToAdd) {
+    ArrayList<Node> nodeCopies = new ArrayList<Node>();
+    for(Node n: nodesToAdd) {
+      Strategy nodeStrat = n.getStrategy();
+      Strategy copyNodeStrat = null;
+      try {
+        copyNodeStrat = nodeStrat.getClass().newInstance();
+      } catch (InstantiationException | IllegalAccessException e) {
+        e.printStackTrace();
+      }
+      copyNodeStrat.setPoints(nodeStrat.getPoints());
+      Node copy = new Node(copyNodeStrat);
+      copy.setID(n.getID());
+      nodeCopies.add(copy);
+    }
+    allGenerations.add(nodeCopies);
+  }
+  
+  public ArrayList<ArrayList<Node>> returnAllGenerationResults(){
+    return allGenerations;
+  }
+  
   
 
 }

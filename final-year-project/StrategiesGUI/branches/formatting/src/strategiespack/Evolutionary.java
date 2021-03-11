@@ -2,7 +2,7 @@ package strategiespack;
 
 import java.util.ArrayList;
 
-public class Evolutionary extends Tournament{
+public class Evolutionary extends Tournament {
   
   ArrayList<Node> nodes;
   ArrayList<Integer> genScores;
@@ -10,7 +10,7 @@ public class Evolutionary extends Tournament{
   public ArrayList<ArrayList<Node>> allGenerations;
   
   public Evolutionary(ArrayList<Node> nodeList, int rounds, ArrayList<Integer> payoffs, 
-      ArrayList<Integer> gameLengths, int gens){
+      ArrayList<Integer> gameLengths, int gens) {
     totalRounds = rounds;
     nodes = nodeList;
     genScores = new ArrayList<Integer>(nodes.size());
@@ -150,13 +150,13 @@ public class Evolutionary extends Tournament{
       }
       copyNodeStrat.setPoints(nodeStrat.getPoints());
       Node copy = new Node(copyNodeStrat);
-      copy.setID(n.getID());
+      copy.setNodeId(n.getNodeId());
       nodeCopies.add(copy);
     }
     allGenerations.add(nodeCopies);
   }
   
-  public ArrayList<ArrayList<Node>> returnAllGenerationResults(){
+  public ArrayList<ArrayList<Node>> returnAllGenerationResults() {
     return allGenerations;
   }
   

@@ -214,9 +214,9 @@ public class Controller {
       alert.showAndWait();
       return;
     }
-    
+    int chosenRounds = 10;
     try {
-      int testRounds = Integer.parseInt(rounds.getText());
+      chosenRounds = Integer.parseInt(rounds.getText());
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
@@ -228,7 +228,7 @@ public class Controller {
     int one = Integer.parseInt(game1.getText());
     int two = Integer.parseInt(game2.getText());
     int three = Integer.parseInt(game3.getText());
-    if ((one + two + three) != Integer.parseInt(rounds.getText()) 
+    if ((one + two + three) != chosenRounds 
         && !roundsCheckBox.isSelected()) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
@@ -246,10 +246,10 @@ public class Controller {
       } else if (gamesCheckBox.isSelected()) {
         gameLengths.clear();
         tournament = new RoundRobin(alSelectedItems, 
-            Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+            chosenRounds, payoffs, gameLengths);
       } else {
         tournament = new RoundRobin(alSelectedItems, 
-            Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+            chosenRounds, payoffs, gameLengths);
       }
       
       tournament.runTournament();
@@ -312,7 +312,7 @@ public class Controller {
     }
     int chosenRounds = 10;
     try {
-       chosenRounds = Integer.parseInt(rounds.getText());
+      chosenRounds = Integer.parseInt(rounds.getText());
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");

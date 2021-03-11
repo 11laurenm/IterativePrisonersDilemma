@@ -1,11 +1,7 @@
 package guipack;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,7 +39,7 @@ import strategiespack.VaryingRandom;
 
 /**
  * Main class used to create and launch GUI.
- * 
+
  * @author Lauren Moore - zfac043
  *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
  */
@@ -69,6 +65,7 @@ public class Main extends Application {
   
   /**
    * Getter used to get the list containing every possible strategy.
+
    * @return an ObservableList containing every possible strategy
    */
   public ObservableList<Strategy> getStrategyData() {
@@ -142,7 +139,8 @@ public class Main extends Application {
     }
   }
   
-  public void showEvRun(ArrayList<Button> buttons, ArrayList<Node> nodes, ArrayList<Strategy> strategiesForTable, int rounds, 
+  public void showEvRun(ArrayList<Button> buttons, ArrayList<Node> nodes, 
+      ArrayList<Strategy> strategiesForTable, int rounds, 
       ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, int generations) {
     try {
       FXMLLoader loader = new FXMLLoader();
@@ -162,6 +160,7 @@ public class Main extends Application {
 
   /**
    * getter for the primary stage.
+
    * @return primary stage
    */
   public Stage getPrimaryStage() {
@@ -197,6 +196,7 @@ public class Main extends Application {
 
   /**
    * Main function which launches the program/GUI.
+
    * @param args - no CL args are needed
    */
   public static void main(String[] args) {
@@ -259,7 +259,6 @@ public class Main extends Application {
       dialogStage.setScene(scene);
       DetailedResultsController controller = loader.getController();
       controller.initialize();
-      controller.setMain(this);
       controller.setResults(tournament.returnDecisions(), tournament.returnPoints(), 
               tournament.returnResults(), tournament.returnGameLengths());
       dialogStage.showAndWait();
@@ -274,6 +273,7 @@ public class Main extends Application {
 
   /**
    * Sets the value of the tournament variable.
+
    * @param tourn - a tournament
    */
   public void setTournament(RoundRobin tourn) {

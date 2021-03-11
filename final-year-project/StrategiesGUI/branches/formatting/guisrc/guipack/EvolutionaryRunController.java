@@ -56,7 +56,8 @@ public class EvolutionaryRunController {
   }
   
   @FXML 
-  public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, ArrayList<Strategy> strats, int rounds, 
+  public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, 
+      ArrayList<Strategy> strats, int rounds, 
       ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, int gens) {
     buttons = buttonsList;
     nodes = nodesList;
@@ -76,7 +77,7 @@ public class EvolutionaryRunController {
   }
   
   public void showButtons() {
-    for (Button b: buttons) {
+    for (Button b : buttons) {
       buttonsPane.getChildren().add(b);
     }
   }
@@ -117,7 +118,4 @@ public class EvolutionaryRunController {
       b.setStyle(buttonStyle);
     }
   }
-  
-  
-
 }

@@ -13,7 +13,7 @@ import strategiespack.VaryGameLength;
 
 /** Tests relating to the functionality of the game and 
  * varyGameLength classes.
- * 
+
  * @author Lauren Moore - zfac043
  *
  */

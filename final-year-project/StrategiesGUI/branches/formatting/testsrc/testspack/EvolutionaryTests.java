@@ -1,23 +1,11 @@
 package testspack;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.awt.AWTException;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import javax.imageio.ImageIO;
-
 import org.junit.jupiter.api.Test;
-
-import guipack.Main;
-import javafx.stage.Stage;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
 import strategiespack.Evolutionary;
@@ -70,7 +58,7 @@ class EvolutionaryTests {
   }
   
   @Test
-  void testGetDisabled(){
+  void testGetDisabled() {
     AlwaysCooperate strategy = new AlwaysCooperate();
     Node node = new Node(strategy);
     assertEquals(node.getPlayedAllGames(), false, "disabled getter functioning incorrectly");
@@ -131,7 +119,8 @@ class EvolutionaryTests {
       e.printStackTrace();
     }
     assertNotEquals(newStrat, testStrat, "Strategies are equal but should not be");
-    assertEquals(newStrat.nameProperty().get(), "AlwaysCooperate", "New strategy is not of correct type");
+    assertEquals(newStrat.nameProperty().get(), "AlwaysCooperate", 
+        "New strategy is not of correct type");
   }
   
   @Test
@@ -147,8 +136,10 @@ class EvolutionaryTests {
       e.printStackTrace();
     }
     assertNotEquals(newStrat, testStrat, "Strategies are equal but should not be");
-    assertEquals(newStrat.nameProperty().get(), "TitForTatWithForgiveness", "New strategy is not of correct type");
-    assertEquals(newStrat.probabilityProperty().get(), "0.4", "New strategy does not have correct probability");
+    assertEquals(newStrat.nameProperty().get(), "TitForTatWithForgiveness", 
+        "New strategy is not of correct type");
+    assertEquals(newStrat.probabilityProperty().get(), "0.4", 
+        "New strategy does not have correct probability");
   }
   
   @Test
@@ -164,7 +155,8 @@ class EvolutionaryTests {
       e.printStackTrace();
     }
     assertNotEquals(newStrat, testStrat, "Strategies are equal but should not be");
-    assertEquals(newStrat.nameProperty().get(), "AlwaysCooperate", "New strategy is not of correct type");
+    assertEquals(newStrat.nameProperty().get(), "AlwaysCooperate", 
+        "New strategy is not of correct type");
   }
 
 }

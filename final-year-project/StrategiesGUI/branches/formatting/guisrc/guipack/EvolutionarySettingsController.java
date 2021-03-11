@@ -259,12 +259,12 @@ public class EvolutionarySettingsController {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
-      int columnNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(0)));
-      int rowNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(1)));
+      int columnNumber1 = Integer.parseInt(String.valueOf(firstNode.getNodeId().charAt(0)));
+      int rowNumber1 = Integer.parseInt(String.valueOf(firstNode.getNodeId().charAt(1)));
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
-        int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(0)));
-        int rowNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(1)));
+        int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getNodeId().charAt(0)));
+        int rowNumber2 = Integer.parseInt(String.valueOf(secondNode.getNodeId().charAt(1)));
         if ((columnNumber1 == columnNumber2 && (Math.abs(rowNumber1 - rowNumber2) <= 1)) 
             || (rowNumber1 == rowNumber2 && (Math.abs(columnNumber1 - columnNumber2) <= 1))) {
           if (firstNode != secondNode) {
@@ -388,10 +388,10 @@ public class EvolutionarySettingsController {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
-      int id1 = Integer.parseInt(String.valueOf(firstNode.getID()));
+      int id1 = Integer.parseInt(String.valueOf(firstNode.getNodeId()));
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
-        int id2 = Integer.parseInt(String.valueOf(secondNode.getID()));
+        int id2 = Integer.parseInt(String.valueOf(secondNode.getNodeId()));
         if (Math.abs(id2 - id1) == 1 || (id1 == 1 && id2 == Integer.parseInt(tf.getText()))) { 
           if (firstNode != secondNode) {
             firstNode.addNeighbour(secondNode);
@@ -419,7 +419,6 @@ public class EvolutionarySettingsController {
     int nodeNumber = Integer.parseInt(tf.getText());
     
     Button graphButton = new Button();
-    Button firstButton = buttons.get(0);
     graphButton.setMinSize(minnWidth, minnHeight);
     graphButton.setLayoutX(nodeHorizontalDistance * (nodeNumber / 4));
     graphButton.setLayoutY(nodeVerticalDistance * (nodeNumber / 2));
@@ -464,10 +463,10 @@ public class EvolutionarySettingsController {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
-      int nodeNumber1 = Integer.parseInt(firstNode.getID());
+      int nodeNumber1 = Integer.parseInt(firstNode.getNodeId());
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
-        int nodeNumber2 = Integer.parseInt(secondNode.getID());
+        int nodeNumber2 = Integer.parseInt(secondNode.getNodeId());
         if (Math.abs(nodeNumber1 - nodeNumber2) == 1) {
           firstNode.addNeighbour(secondNode);
           secondNode.addNeighbour(firstNode);
@@ -545,11 +544,11 @@ public class EvolutionarySettingsController {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
-      int columnNumber1 = Integer.parseInt(String.valueOf(firstNode.getID().charAt(0)));
+      int columnNumber1 = Integer.parseInt(String.valueOf(firstNode.getNodeId().charAt(0)));
       for (int second = first; second < nodes.size(); second++) {
         Node secondNode = nodes.get(second);
-        int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getID().charAt(0)));
-        if (columnNumber1 != columnNumber2){
+        int columnNumber2 = Integer.parseInt(String.valueOf(secondNode.getNodeId().charAt(0)));
+        if (columnNumber1 != columnNumber2) {
           firstNode.addNeighbour(secondNode);
           secondNode.addNeighbour(firstNode);
         }
@@ -579,9 +578,9 @@ public class EvolutionarySettingsController {
   
   public void buttonToNode() {
     nodes = new ArrayList<>();
-    for (Button button: buttons) {
+    for (Button button : buttons) {
       Node buttonToNodeVar = new Node((Strategy) button.getUserData());
-      buttonToNodeVar.setID(button.getId().toString());
+      buttonToNodeVar.setNodeId(button.getId().toString());
       nodes.add(buttonToNodeVar);
     }
   }
@@ -601,7 +600,7 @@ public class EvolutionarySettingsController {
       Strategy s;
       s = n.getStrategy();
       boolean inList = false;
-      for (Strategy checkS: strategiesForTable) {
+      for (Strategy checkS : strategiesForTable) {
         if (s.getClass().equals(checkS.getClass())) {
           inList = true;
         }

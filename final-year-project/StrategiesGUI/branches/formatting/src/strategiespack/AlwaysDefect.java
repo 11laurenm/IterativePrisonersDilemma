@@ -67,6 +67,11 @@ public class AlwaysDefect extends Strategy {
     return rounds;
   }
   
+  /**
+   * Method that provides the colour associated with a strategy.
+
+   * @return the value of the colour variable of the strategy as a SimpleStringProperty
+   */
   public StringProperty colourProperty() {
     SimpleStringProperty colour = new SimpleStringProperty();
     colour.setValue("Green");

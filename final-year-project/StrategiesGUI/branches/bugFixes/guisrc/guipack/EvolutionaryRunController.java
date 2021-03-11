@@ -113,6 +113,13 @@ public class EvolutionaryRunController {
    * of the tournament.
    */
   public void nextGen() {
+    if(generationNumber == totalGens) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Reached total number of generations run");
+      alert.showAndWait();
+      return;
+    }
     generationNumber++;
     chosenGenNumber.setText(Integer.toString(generationNumber));
     updateNodes();
@@ -137,6 +144,13 @@ public class EvolutionaryRunController {
   public void setGen() {
     try {
       generationNumber = Integer.parseInt(chosenGenNumber.getText());
+      if(generationNumber > totalGens) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Generation number must be less than " + totalGens);
+        alert.showAndWait();
+        return;
+      }
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");

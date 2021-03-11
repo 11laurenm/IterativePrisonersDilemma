@@ -2,15 +2,9 @@ package testspack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
-
-import guipack.Main;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
 import strategiespack.RoundRobin;
@@ -18,7 +12,7 @@ import strategiespack.Strategy;
 import strategiespack.TitForTat;
 
 /** Tests relating to the functionality of the strategy classes.
- * 
+
  * @author Lauren Moore - zfac043
  *
  */
@@ -28,7 +22,7 @@ class RoundRobinTests {
   /**
    * First test: Tests that a roundrobin tournament can be set up and run, 
    * as well as testing that it returns the correct number of points for 
-   * the strategies involved
+   * the strategies involved.
    * In order to pass this test I created the RoundRobin class with the 
    * runTournament method, which iterates through the list of strategies to 
    * run a game with every possible pairing
@@ -41,7 +35,7 @@ class RoundRobinTests {
     strats.add(strategy1);
     strats.add(strategy2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
-    ArrayList<Integer> gameLengths = new ArrayList();
+    ArrayList<Integer> gameLengths = new ArrayList<>();
     RoundRobin tournament = new RoundRobin(strats, 10, payoffs, gameLengths);
     tournament.runTournament();
     assertEquals(strategy1.getPoints(), 30, 
@@ -53,7 +47,7 @@ class RoundRobinTests {
   /**
    * Second test: Tests that a roundrobin tournament can be set up and run, 
    * as well as testing that it returns the correct number of points for 
-   * the strategies involved
+   * the strategies involved.
    * I did not have to write any additional code to pass this test
    */
   @Test
@@ -64,7 +58,7 @@ class RoundRobinTests {
     strats.add(strategy1);
     strats.add(strategy2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
-    ArrayList<Integer> gameLengths = new ArrayList();
+    ArrayList<Integer> gameLengths = new ArrayList<>();
     RoundRobin tournament = new RoundRobin(strats, 10, payoffs, gameLengths);
     tournament.runTournament();
     assertEquals(strategy1.getPoints(), 60, 
@@ -74,17 +68,17 @@ class RoundRobinTests {
   }
   
   @Test
-  public void testCreateCSVFile() {
+  public void testCreateCsvFile() {
     AlwaysDefect strategy1 = new AlwaysDefect();
     TitForTat strategy2 = new TitForTat();
     ArrayList<Strategy> strats = new ArrayList<>();
     strats.add(strategy1);
     strats.add(strategy2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
-    ArrayList<Integer> gameLengths = new ArrayList();
+    ArrayList<Integer> gameLengths = new ArrayList<>();
     RoundRobin tournament = new RoundRobin(strats, 10, payoffs, gameLengths);
     tournament.runTournament();
-    tournament.writeToCSV();
+    tournament.writeToCsv();
   }
 
 }

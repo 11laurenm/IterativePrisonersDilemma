@@ -8,16 +8,12 @@ import strategiespack.Strategy;
 
 /**
  * Controller class used to handle the detailed results screen of GUI.
+
  * @author Lauren Moore - zfac043
  *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
  */
 
 public class DetailedResultsController {
-
-  /**
-   * Allows the program to access the main function.
-   */
-  private Main mainn;
 
   /**
    * Label that displays the results from each game and round 
@@ -32,13 +28,6 @@ public class DetailedResultsController {
   @FXML
   private ScrollPane scrollPane;
   
-  /**
-   * Sets the value of the main variable so the main class can be accessed.
-   * @param mainclass - an instance of the Main class
-   */
-  public void setMain(Main mainclass) {
-    this.mainn = mainclass;
-  }
 
   /**
    * Run when controller is created, currently no complex 
@@ -51,6 +40,7 @@ public class DetailedResultsController {
   /**
    * Formats information from the game and roundrobin classes 
    * into a readable format, then displays it using a label.
+
    * @param decisions - every decision made during the tournament
    * @param points - every set of points earned during the tournament
    * @param strats - every strategy participating in the tournament

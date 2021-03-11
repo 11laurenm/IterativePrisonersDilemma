@@ -13,15 +13,14 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.ColumnConstraintsBuilder;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.RowConstraintsBuilder;
 import javafx.util.Callback;
 import strategiespack.Strategy;
 
 /**
  * Controller class used to handle the results screen of GUI.
+
  * @author Lauren Moore - zfac043
  *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
  */
@@ -73,6 +72,7 @@ public class ResultsController {
   /**
    * Called when the controller is created, sets the value of Main variable 
    * and populates the TableView.
+
    * @param main - the main function
    */
   @FXML void initialize() {
@@ -92,6 +92,7 @@ public class ResultsController {
    * Used to sort the list of strategies into descending order 
    * based on points so the results are displayed in an easy 
    * to read format.
+
    * @param results - an unordered arrayList of all strategies
    */
   public void setResults(ArrayList<Strategy> results) {
@@ -118,6 +119,7 @@ public class ResultsController {
 
   /**
    * Sets the value of the main variable so the main class can be accessed.
+
    * @param mainclass - an instance of the Main class
    */
   public void setMain(Main mainclass) {
@@ -149,6 +151,7 @@ public class ResultsController {
   /**
    * Used to construct and populate the gridpane as it varies in size 
    * depending on how many participating strategies there are.
+
    * @param results - the list of strategies to add
    * @param scores - the points earned in each game
    */

@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 
 /**  A strategy that makes the same decisions as tit for tat in the first two moves,
  * then chooses a new strategy to follow every two moves based on the outcome of the last two moves.
- * 
+
  * @author Lauren Moore -zfac043
  *
  */
@@ -23,6 +23,7 @@ public class Mem2 extends Strategy {
 
   /**
    * returns the decision made by the strategy for the turn in which it is called.
+
    * @param lastMove - the last move made by its opponent
    * @param opponentHistory - all previous moves made by its opponent in this game
    * @param myHistory - all previous moves made by the strategy
@@ -73,6 +74,7 @@ public class Mem2 extends Strategy {
   
   /**
    * Method that provides the strategy's name.
+
    * @return the name of the strategy as a SimpleStringProperty
    */
   public StringProperty nameProperty() {
@@ -83,6 +85,7 @@ public class Mem2 extends Strategy {
   
   /**
    * Method that provides the strategy's probability (if one exists).
+
    * @return the value of the probability variable of the strategy as a SimpleStringProperty
    */
   public StringProperty probabilityProperty() {
@@ -93,6 +96,7 @@ public class Mem2 extends Strategy {
   
   /**
    * Method that provides the number of rounds the strategy considers (if one exists).
+
    * @return the value of the rounds variable of the strategy as a SimpleStringProperty
    */
   public StringProperty roundsProperty() {
@@ -101,6 +105,11 @@ public class Mem2 extends Strategy {
     return rounds;
   }
   
+  /**
+   * Method that provides the colour associated with a strategy.
+
+   * @return the value of the colour variable of the strategy as a SimpleStringProperty
+   */
   public StringProperty colourProperty() {
     SimpleStringProperty colour = new SimpleStringProperty();
     colour.setValue("Black");

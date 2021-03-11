@@ -26,7 +26,7 @@ import strategiespack.TitForTwoTats;
 import strategiespack.VaryingMajority;
 
 /** Tests relating to the functionality of the strategy classes.
- * 
+
  * @author Lauren Moore - zfac043
  *
  */
@@ -95,6 +95,7 @@ class StrategiesTests {
     AlwaysDefect testStrat2 = new AlwaysDefect();
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
     Game game = new Game(testStrat, testStrat2, 1, payoffs);
+    game.playGame();
     int points = testStrat.getPoints();
     assertEquals(points, 0, "tit for tat not returning c when no history");
   }
@@ -378,7 +379,7 @@ class StrategiesTests {
    * returns c,d on a loop.
    */
   @Test
-  void testPeriodicCD() {
+  void testPeriodicCd() {
     PeriodicCD testStrat = new PeriodicCD();
     AlwaysDefect testStrat2 = new AlwaysDefect();
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
@@ -460,7 +461,7 @@ class StrategiesTests {
  
   /**
    * Twenty seventh test: tests that the Prober strategy returns correctly against an opponent 
-   * that always cooperates
+   * that always cooperates.
    * In order to pass this test I created the Prober class and the getDecision method that 
    * returns d, c, c then defects if its opponent cooperated in rounds two and three
    */
@@ -492,10 +493,10 @@ class StrategiesTests {
   }
  
   /**
-   * Twenty ninth test: tests that the Mem2 strategy returns correctly when it should defect
+   * Twenty ninth test: tests that the Mem2 strategy returns correctly when it should defect.
    * In order to pass this test I created the Mem2 class and the getDecision method that 
-   * follows tit for tat then reevaluates its strategy, choosing to defect when its opponent's moves 
-   * don't match its own
+   * follows tit for tat then reevaluates its strategy, 
+   * choosing to defect when its opponent's moves don't match its own
    */
   @Test
   void testMem2First() {
@@ -511,7 +512,7 @@ class StrategiesTests {
  
   /**
    * Thirtieth test: tests that the Mem2 strategy returns correctly when it should 
-   * cooperate through tit for tat
+   * cooperate through tit for tat.
    * In order to pass this test I added to the getDecision method so that it 
    * followed tit for tat when both it and its opponent cooperated both turns
    */
@@ -529,7 +530,7 @@ class StrategiesTests {
  
   /**
    * Thirty first test: tests that the Mem2 strategy returns correctly when it should 
-   * follow TitForTwoTats
+   * follow TitForTwoTats.
    * In order to pass this test I added to the getDecision method so that it 
    * followed TitForTwoTats when it and its opponent returned different decisions
    */

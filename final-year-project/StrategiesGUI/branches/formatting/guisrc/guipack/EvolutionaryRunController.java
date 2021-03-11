@@ -16,6 +16,12 @@ import strategiespack.Evolutionary;
 import strategiespack.Node;
 import strategiespack.Strategy;
 
+/**
+ * Controller class used to handle the run evolutionary tournament screen of GUI.
+
+ * @author Lauren Moore - zfac043
+ */
+
 public class EvolutionaryRunController {
   
   ArrayList<Button> buttons;
@@ -51,10 +57,24 @@ public class EvolutionaryRunController {
   @FXML
   private TextField chosenGenNumber;
   
+  /**
+   * Empty constructor for the controller.
+   */
   public EvolutionaryRunController() {
     
   }
   
+  /**
+   * Method that runs when screen is launched in order to initialise all necessary variables.
+
+   * @param buttonsList - an ArrayList containing every button created in the previous screen.
+   * @param nodesList - an ArrayList containing every node created in the previous screen.
+   * @param strats - all the strategies selected by the user.
+   * @param rounds - the total number of rounds selected by the user.
+   * @param payoffs - the payoff values selected by the user.
+   * @param gameLengths - the game lengths selected by the user.
+   * @param gens - the total number of generations selected by the user.
+   */
   @FXML 
   public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, 
       ArrayList<Strategy> strats, int rounds, 

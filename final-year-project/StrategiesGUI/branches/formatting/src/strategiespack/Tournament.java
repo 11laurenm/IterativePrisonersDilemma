@@ -2,6 +2,13 @@ package strategiespack;
 
 import java.util.ArrayList;
 
+/**
+ * Superclass for all types of tournaments.
+
+ * @author Lauren Moore -zfac043
+ *
+ */
+
 public class Tournament {
   
   /**
@@ -47,6 +54,9 @@ public class Tournament {
   
   int player2Score;
   
+  /**
+   * Constructor for the tournament that sets each player's score to 0.
+   */
   public Tournament() {
     
     player1Score = 0;
@@ -91,6 +101,11 @@ public class Tournament {
     return lengths;
   }
   
+  /**
+   * Method that adds each player's score and decision to the master list.
+
+   * @param game object used to access scores and decisions.
+   */
   public void endOfGame(Game game) {
     player1Score = player1Score + game.getPlayer1Score();
     player2Score = player2Score + game.getPlayer2Score();

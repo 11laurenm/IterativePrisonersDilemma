@@ -20,6 +20,12 @@ import javafx.scene.layout.AnchorPane;
 import strategiespack.Node;
 import strategiespack.Strategy;
 
+/**
+ * Controller class used to handle the configure evolutionary tournament screen of GUI.
+
+ * @author Lauren Moore - zfac043
+ */
+
 public class EvolutionarySettingsController {
   
   private Main mainn;
@@ -89,11 +95,22 @@ public class EvolutionarySettingsController {
   ArrayList<Integer> payoffsParam;
   ArrayList<Integer> gameLengthsParam;
   
-  
+  /**
+   * Empty constructor for the controller.
+   */
   public EvolutionarySettingsController() {
     
   }
   
+  /**
+   *  Method that runs when screen is launched in order to initialise all necessary variables.
+
+   * @param main - the Main class, used to launch other screens when needed.
+   * @param strats - all the strategies selected by the user.
+   * @param rounds - the total number of rounds selected by the user.
+   * @param payoffs - the payoff values selected by the user.
+   * @param gameLengths - the game lengths selected by the user.
+   */
   @FXML 
   public void initialize(Main main, ArrayList<Strategy> strats, int rounds, 
       ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
@@ -120,6 +137,10 @@ public class EvolutionarySettingsController {
     mainn.showOverview();
   }
   
+  /**
+   * Method responsible for running the correct graph building method depending 
+   * on which type of graph the user has selected via radio button.
+   */
   @FXML
   public void runCorrectAnchorMethod() {
     setNodesPaneChildren();
@@ -141,6 +162,10 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Method that creates the first text field for choosing the number of nodes and ensures that 
+   * a new graph is generated when the user has changed the value in the text field.
+   */
   public void setNodesPaneChildren() {
     nodesPane.getChildren().clear();
     Label lab = new Label();
@@ -194,6 +219,11 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Method that creates the second text field for choosing the number of nodes where needed
+   *  and ensures that a new graph is generated when the user 
+   *  has changed the value in the text field.
+   */
   public void setSecondNodesPaneChildren() {
     setNodesPaneChildren();
     Label lab2 = new Label();
@@ -222,6 +252,9 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Method responsible for generating a graph when the user has chosen the grid option.
+   */
   @FXML
   public void setAnchorGrid() {
     graphPane.getChildren().clear();
@@ -255,6 +288,9 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Method responsible for assigning the correct neighbours to each node.
+   */
   public void gridRun() {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
@@ -277,6 +313,10 @@ public class EvolutionarySettingsController {
     setButtonData();
   }
   
+  /**
+   * Method responsible for generating a graph when the user has chosen the 
+   * circle or complete option.
+   */
   @FXML
   public void setAnchorCircle() {
     graphPane.getChildren().clear();
@@ -384,6 +424,9 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Method responsible for assigning the correct neighbours to each node.
+   */
   public void circleRun() {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
@@ -403,6 +446,9 @@ public class EvolutionarySettingsController {
     setButtonData();
   }
   
+  /**
+   * Method responsible for assigning the correct neighbours to each node.
+   */
   public void starRun() {
     buttonToNode();
     Node middleNode = nodes.get(nodes.size() - 1);
@@ -414,6 +460,9 @@ public class EvolutionarySettingsController {
     setButtonData();
   }
   
+  /**
+   * Method responsible for generating a graph when the user has chosen the star option.
+   */
   public void setAnchorStar() {
     
     int nodeNumber = Integer.parseInt(tf.getText());
@@ -428,6 +477,9 @@ public class EvolutionarySettingsController {
     graphPane.getChildren().add(graphButton);
   }
   
+  /**
+   * Method responsible for generating a graph when the user has chosen the bus option.
+   */
   @FXML
   public void setAnchorBus() {
     graphPane.getChildren().clear();
@@ -459,6 +511,9 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Method responsible for assigning the correct neighbours to each node.
+   */
   public void busRun() {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
@@ -476,8 +531,9 @@ public class EvolutionarySettingsController {
     setButtonData();
   }
   
-
-  
+  /**
+   * Method responsible for assigning the correct neighbours to each node.
+   */
   public void completeRun() {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
@@ -493,6 +549,9 @@ public class EvolutionarySettingsController {
     setButtonData();
   }
   
+  /**
+   * Method responsible for generating a graph when the user has chosen the bipartite option.
+   */
   @FXML
   public void setAnchorBipartite() {
     graphPane.getChildren().clear();
@@ -540,6 +599,9 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Method responsible for assigning the correct neighbours to each node.
+   */
   public void bipartiteRun() {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
@@ -557,6 +619,12 @@ public class EvolutionarySettingsController {
     setButtonData();
   }
   
+  /**
+   * Event handler that runs when a button is pressed, changing its colour to represent the 
+   * strategy the user has decided to associate with it.
+
+   * @return event handler
+   */
   private EventHandler<ActionEvent> buttonPressedChangeColour() {
     return new EventHandler<ActionEvent>() {
       @Override
@@ -576,6 +644,10 @@ public class EvolutionarySettingsController {
     };
   }
   
+  /**
+   * Creates the list of nodes to be used during the running of the tournament and 
+   * adds the id from each button to the corresponding node.
+   */
   public void buttonToNode() {
     nodes = new ArrayList<>();
     for (Button button : buttons) {
@@ -585,6 +657,9 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Sets the corresponding node as the user data stored in each button.
+   */
   public void setButtonData() {
     for (int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
       Button b = buttons.get(buttonNumber);
@@ -592,6 +667,10 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Creates a list of only the strategies selected by the user so it can be displayed in 
+   * the next screen.
+   */
   public void setTableData() {
     strategiesForTable = new ArrayList<Strategy>();
     for (int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {
@@ -611,6 +690,11 @@ public class EvolutionarySettingsController {
     }
   }
   
+  /**
+   * Method that ensures a graph has been generated and populated with strategies, 
+   * then runs the run method corresponding to the type of graph chosen, then 
+   * launches the next screen.
+   */
   @FXML
   public void runButton() {
     if (tf.getText().equals("0") || tf2.getText().equals("0")) {

@@ -92,6 +92,10 @@ public class RoundRobin extends Tournament {
     return strategies;
   }
   
+  /**
+   * Method that writes the results of the tournament (including decisions made) 
+   * to a csv file.
+   */
   public void writeToCsv() {
     //taken from: https://stackabuse.com/reading-and-writing-csvs-in-java/
     int pairNumber = 0;

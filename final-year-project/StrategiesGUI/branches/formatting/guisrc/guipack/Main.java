@@ -122,6 +122,10 @@ public class Main extends Application {
     }
   }
   
+  /**
+   * Used to display the EvolutionaryFirstScreen.fxml file as the main GUI, 
+   * which allows the user to configure an evolutionary tournament.
+   */
   public void showEvSettings(ArrayList<Strategy> strategies, int rounds, 
       ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
     try {
@@ -139,6 +143,10 @@ public class Main extends Application {
     }
   }
   
+  /**
+   * Used to display the EvolutionaryRunScreen.fxml file as the main GUI, 
+   * which allows the user to run an evolutionary tournament.
+   */
   public void showEvRun(ArrayList<Button> buttons, ArrayList<Node> nodes, 
       ArrayList<Strategy> strategiesForTable, int rounds, 
       ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, int generations) {

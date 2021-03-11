@@ -20,7 +20,7 @@ public class Strategy {
   int tournamentPosition;
 
   /**
-   * Initialise the strategy with 0 points.
+   * Constructor that initialises the strategy with 0 points.
    */
   public Strategy() {
     points = 0;
@@ -131,6 +131,11 @@ public class Strategy {
     return roundsProp;
   }
   
+  /**
+   * Method that provides the colour associated with a strategy.
+
+   * @return the value of the colour variable of the strategy as a SimpleStringProperty
+   */
   public StringProperty colourProperty() {
     SimpleStringProperty colour = new SimpleStringProperty();
     colour.setValue("-");

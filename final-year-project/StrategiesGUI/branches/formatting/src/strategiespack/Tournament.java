@@ -56,6 +56,7 @@ public class Tournament {
 
   /**
    * getter for scores, the total points earned in a game by each strategy.
+
    * @return scores
    */
   public ArrayList<Integer> returnScores() {
@@ -64,6 +65,7 @@ public class Tournament {
 
   /**
    * getter for decisions, all decisions made in the tournament.
+
    * @return decisions
    */
   public ArrayList<ArrayList<Character>> returnDecisions() {
@@ -72,6 +74,7 @@ public class Tournament {
 
   /**
    * getter for points, all points earned in the tournament.
+
    * @return points
    */
   public ArrayList<ArrayList<Integer>> returnPoints() {
@@ -80,7 +83,8 @@ public class Tournament {
 
   /**
    * getter for lengths, length is the length of the game i.e. the number 
-   * of rounds to be played
+   * of rounds to be played.
+
    * @return
    */
   public ArrayList<Integer> returnGameLengths() {

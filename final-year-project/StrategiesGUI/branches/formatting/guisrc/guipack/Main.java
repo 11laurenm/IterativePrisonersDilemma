@@ -268,7 +268,7 @@ public class Main extends Application {
   }
   
   public void exportDetailedResults() {
-    tournament.writeToCSV();
+    tournament.writeToCsv();
   }
 
   /**

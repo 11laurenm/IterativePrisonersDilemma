@@ -6,6 +6,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  * Superclass for all strategies.
+
  * @author Lauren Moore - zfac043
  *
  */
@@ -28,6 +29,7 @@ public class Strategy {
 
   /**
    * Adds a specified amount of points to its score.
+
    * @param pointsToAdd - the amount of points to be added to the overall score.
    */
   public void addPoints(int pointsToAdd) {
@@ -36,6 +38,7 @@ public class Strategy {
 
   /**
    * Gets the amount of points the strategy has.
+
    * @return the amount of points the strategy has.
    */
   public int getPoints() {
@@ -48,6 +51,7 @@ public class Strategy {
 
   /**
    * Gets the decision made by the strategy for a particular round.
+
    * @return the decision made.
    */
   public char getDecision() {
@@ -56,6 +60,7 @@ public class Strategy {
 
   /**
    * Gets the decision made by the strategy for a particular round.
+
    * @return the decision made.
    */
   public char getDecision(char lastMove, ArrayList<Character> opponentHistory, 
@@ -65,6 +70,7 @@ public class Strategy {
 
   /**
    * Sets the value of the strategy's probability variable if it exists.
+
    * @param prob - the new probability value
    */
   public void setProbability(double prob) {
@@ -73,6 +79,7 @@ public class Strategy {
 
   /**
    * Sets the value of the strategy's rounds variable if it exists.
+
    * @param round - the new rounds value
    */
   public void setRounds(int round) {
@@ -82,6 +89,7 @@ public class Strategy {
   /**
    * Returns a stringProperty that allows the program to create 
    * a numbered table of results.
+
    * @return the number to be shown associated with this strategy
    */
   public StringProperty positionProperty() {
@@ -92,6 +100,7 @@ public class Strategy {
 
   /**
    * Method that provides the strategy's name.
+
    * @return the name of the strategy as a SimpleStringProperty
    */
   public StringProperty nameProperty() {
@@ -102,6 +111,7 @@ public class Strategy {
   
   /**
    * Method that provides the strategy's probability (if one exists).
+
    * @return the value of the probability variable of the strategy as a SimpleStringProperty
    */
   public StringProperty probabilityProperty() {
@@ -112,6 +122,7 @@ public class Strategy {
   
   /**
    * Method that provides the number of rounds the strategy considers (if one exists).
+
    * @return the value of the rounds variable of the strategy as a SimpleStringProperty
    */
   public StringProperty roundsProperty() {

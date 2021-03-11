@@ -23,6 +23,7 @@ import strategiespack.Strategy;
 
 /**
  * Controller class used to handle the configure tournaments screen of GUI.
+
  * @author Lauren Moore - zfac043
  *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
  */
@@ -128,6 +129,7 @@ public class Controller {
   /**
    * Called when the controller is created, sets the value of Main variable 
    * and populates the TableView.
+
    * @param main - the main function
    */
   @FXML 
@@ -150,6 +152,7 @@ public class Controller {
   /**
    * Sets the value of the main variable so the main class can be accessed and 
    * also sets which strategies should be displayed in the table.
+
    * @param mainclass - an instance of the Main class
    */
   public void setMain(Main mainclass) {
@@ -225,8 +228,8 @@ public class Controller {
     int one = Integer.parseInt(game1.getText());
     int two = Integer.parseInt(game2.getText());
     int three = Integer.parseInt(game3.getText());
-    if ((one + two + three) != Integer.parseInt(rounds.getText()) && 
-        !roundsCheckBox.isSelected()) {
+    if ((one + two + three) != Integer.parseInt(rounds.getText()) 
+        && !roundsCheckBox.isSelected()) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Total of game lengths must equal number of rounds");
@@ -307,9 +310,9 @@ public class Controller {
       alert.showAndWait();
       return;
     }
-    
+    int chosenRounds = 10;
     try {
-      int testRounds = Integer.parseInt(rounds.getText());
+       chosenRounds = Integer.parseInt(rounds.getText());
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
@@ -321,27 +324,23 @@ public class Controller {
     int one = Integer.parseInt(game1.getText());
     int two = Integer.parseInt(game2.getText());
     int three = Integer.parseInt(game3.getText());
-    if ((one + two + three) != Integer.parseInt(rounds.getText()) && 
-        !roundsCheckBox.isSelected()) {
+    if ((one + two + three) != chosenRounds 
+        && !roundsCheckBox.isSelected()) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Total of game lengths must equal number of rounds");
       alert.showAndWait();
       return;
     }
-    int roundsParam;
     if (roundsCheckBox.isSelected()) {
       gameLengths.clear();
       random = new Random();
-      roundsParam = random.nextInt(99) + 1;
+      chosenRounds = random.nextInt(99) + 1;
     } else if (gamesCheckBox.isSelected()) {
       gameLengths.clear();
-      roundsParam = Integer.parseInt(rounds.getText());
-    } else {
-      roundsParam = Integer.parseInt(rounds.getText());
     }
     
-    mainn.showEvSettings(alSelectedItems, roundsParam, payoffs, gameLengths);
+    mainn.showEvSettings(alSelectedItems, chosenRounds, payoffs, gameLengths);
   }
 
   /**
@@ -412,6 +411,7 @@ public class Controller {
    * Called when a cell in the probability column is edited, 
    * sets the relevant strategy's probability variable if it 
    * has one.
+
    * @param event - contains the new value for probability
    */
   @FXML
@@ -432,6 +432,7 @@ public class Controller {
    * Called when a cell in the rounds column is edited, 
    * sets the relevant strategy's rounds variable if it 
    * has one.
+
    * @param event - contains the new value for rounds
    */
   @FXML

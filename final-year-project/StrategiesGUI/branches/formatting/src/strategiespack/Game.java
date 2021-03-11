@@ -3,7 +3,7 @@ package strategiespack;
 import java.util.ArrayList;
 
 /** A class that runs one or more games of the PD.
- * 
+
  * @author Lauren Moore - zfac043
  *
  */
@@ -67,6 +67,7 @@ public class Game {
   /**
    * This method is responsible for running a game (made up of multiple rounds) of 
    * the Prisoner's Dilemma.
+
    * @param strat1 a strategy being played
    * @param strat2 the other strategy being played
    * @param rounds the amount of rounds to be played
@@ -89,6 +90,7 @@ public class Game {
 
   /**
    * When given a history, returns the most recent decision made.
+
    * @param history - an arraylist of decisions made
    * @return the most recent decision in the history
    */
@@ -101,6 +103,7 @@ public class Game {
 
   /**
    * Adds a decision to the history.
+
    * @param move the decision that was made
    * @param history the history arraylist that the decision should be added to
    */
@@ -143,6 +146,7 @@ public class Game {
 
   /**
    * Used to calculate the scores of each strategy given their decisions.
+
    * @param decision1 - decision made by strategy 1
    * @param decision2 - decision made by strategy 2
    * @return an arraylist containing the scores for both strategies
@@ -172,6 +176,7 @@ public class Game {
 
   /**
    * Method that determines if one strategy is a dummy.
+
    * @return true if one strategy is a dummy, false if not
    */
   public boolean isDummy() {
@@ -183,6 +188,7 @@ public class Game {
 
   /**
    * Calculates the score the player started the game with.
+
    * @return the score the player started the game with
    */
   public int getPlayer1Score() {
@@ -191,6 +197,7 @@ public class Game {
 
   /**
    * Calculates the score the player started the game with.
+
    * @return the score the player started the game with
    */
   public int getPlayer2Score() {
@@ -199,6 +206,7 @@ public class Game {
 
   /**
    * getter for arraylist of all decisions made in the game.
+
    * @return arraylist of all decisions made in the game
    */
   public ArrayList<Character> getAllDecisions() {
@@ -207,6 +215,7 @@ public class Game {
 
   /**
    * getter for arraylist of all points earned in the game.
+
    * @return arraylist of all points earned in the game
    */
   public ArrayList<Integer> getAllScores() {

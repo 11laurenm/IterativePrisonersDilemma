@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 /**
  * A strategy that returns the decision made the majority of times by its opponent.
  * The amount of previous rounds it considers can be decided using the GUI
+
  * @author Lauren Moore - zfac043
  */
 public class VaryingMajority extends Strategy {
@@ -27,6 +28,7 @@ public class VaryingMajority extends Strategy {
   /**
    * Returns the decision made by the strategy, which is whatever move the 
    * opponent has made in the majority of rounds analysed.
+
    * @param lastMove - the last move made by its opponent
    * @param myHistory - all previous moves made by the strategy
    * @param myLastMove - last move made by the strategy
@@ -66,6 +68,7 @@ public class VaryingMajority extends Strategy {
   
   /**
    * Method that provides the strategy's name.
+
    * @return the name of the strategy as a SimpleStringProperty
    */
   public StringProperty nameProperty() {
@@ -76,6 +79,7 @@ public class VaryingMajority extends Strategy {
   
   /**
    * Method that provides the strategy's probability (if one exists).
+
    * @return the value of the probability variable of the strategy as a SimpleStringProperty
    */
   @Override
@@ -87,6 +91,7 @@ public class VaryingMajority extends Strategy {
   
   /**
    * Method that provides the number of rounds the strategy considers (if one exists).
+
    * @return the value of the rounds variable of the strategy as a SimpleStringProperty
    */
   @Override

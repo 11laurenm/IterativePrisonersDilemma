@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 
 /** A strategy that always cooperates until its opponent defects, 
  * in which case it defects on every subsequent turn.
- * 
+
  * @author Lauren Moore -zfac043
  *
  */
@@ -22,6 +22,7 @@ public class Spiteful extends Strategy {
 
   /**
    * returns the decision made by the strategy for the turn in which it is called.
+
    * @param lastMove - the last move made by its opponent
    * @param opponentHistory - all previous moves made by its opponent in this game
    * @param myHistory - all previous moves made by the strategy
@@ -40,6 +41,7 @@ public class Spiteful extends Strategy {
   
   /**
    * Method that provides the strategy's name.
+
    * @return the name of the strategy as a SimpleStringProperty
    */
   public StringProperty nameProperty() {
@@ -50,6 +52,7 @@ public class Spiteful extends Strategy {
   
   /**
    * Method that provides the strategy's probability (if one exists).
+
    * @return the value of the probability variable of the strategy as a SimpleStringProperty
    */
   public StringProperty probabilityProperty() {
@@ -60,6 +63,7 @@ public class Spiteful extends Strategy {
   
   /**
    * Method that provides the number of rounds the strategy considers (if one exists).
+
    * @return the value of the rounds variable of the strategy as a SimpleStringProperty
    */
   public StringProperty roundsProperty() {

@@ -152,7 +152,7 @@ public class Game {
    * @return an arraylist containing the scores for both strategies
    */
   public ArrayList<Integer> calculateScores(char decision1, char decision2) {
-    ArrayList<Integer> scores = new ArrayList();
+    ArrayList<Integer> scores = new ArrayList<>();
     if (decision1 == 'c') {
       if (decision2 == 'c') {
         scores.add(payoffs.get(0));

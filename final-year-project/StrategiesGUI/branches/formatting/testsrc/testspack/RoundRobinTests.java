@@ -35,7 +35,7 @@ class RoundRobinTests {
     strats.add(strategy1);
     strats.add(strategy2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
-    ArrayList<Integer> gameLengths = new ArrayList();
+    ArrayList<Integer> gameLengths = new ArrayList<>();
     RoundRobin tournament = new RoundRobin(strats, 10, payoffs, gameLengths);
     tournament.runTournament();
     assertEquals(strategy1.getPoints(), 30, 
@@ -58,7 +58,7 @@ class RoundRobinTests {
     strats.add(strategy1);
     strats.add(strategy2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
-    ArrayList<Integer> gameLengths = new ArrayList();
+    ArrayList<Integer> gameLengths = new ArrayList<>();
     RoundRobin tournament = new RoundRobin(strats, 10, payoffs, gameLengths);
     tournament.runTournament();
     assertEquals(strategy1.getPoints(), 60, 
@@ -75,7 +75,7 @@ class RoundRobinTests {
     strats.add(strategy1);
     strats.add(strategy2);
     ArrayList<Integer> payoffs = new ArrayList<>(Arrays.asList(3, 5, 0, 1));
-    ArrayList<Integer> gameLengths = new ArrayList();
+    ArrayList<Integer> gameLengths = new ArrayList<>();
     RoundRobin tournament = new RoundRobin(strats, 10, payoffs, gameLengths);
     tournament.runTournament();
     tournament.writeToCsv();

@@ -167,7 +167,7 @@ public class Controller {
    */
   @FXML
   private void handleRunTournament() {
-    ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
+    ObservableList<Strategy> selectedItems = strategyTable.getSelectionModel().getSelectedItems();
     ArrayList<Strategy> alSelectedItems = new ArrayList<Strategy>(selectedItems);
     //line above converts observable list into an array list
     
@@ -194,7 +194,7 @@ public class Controller {
       return;
     }
     
-    gameLengths = new ArrayList();
+    gameLengths = new ArrayList<>();
     
     try {
       if (gameLengths.size() != 0) {
@@ -267,7 +267,7 @@ public class Controller {
   
   @FXML
   private void launchEvolutionary() {
-    ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
+    ObservableList<Strategy> selectedItems = strategyTable.getSelectionModel().getSelectedItems();
     ArrayList<Strategy> alSelectedItems = new ArrayList<Strategy>(selectedItems);
     if (alSelectedItems.size() < 2) { //show error if less than two strategies selected
       Alert alert = new Alert(AlertType.ERROR);
@@ -290,7 +290,7 @@ public class Controller {
       return;
     }
     
-    gameLengths = new ArrayList();
+    gameLengths = new ArrayList<>();
     
     try {
       if (gameLengths.size() != 0) {

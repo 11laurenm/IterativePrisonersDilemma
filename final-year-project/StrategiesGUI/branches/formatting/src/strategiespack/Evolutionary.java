@@ -151,7 +151,7 @@ public class Evolutionary extends Tournament {
   }
   
   /**
-   * Sets the list of scores for the current generation to the most recent scores
+   * Sets the list of scores for the current generation to the most recent scores.
    */
   public void setGenerationScores() {
     int score;

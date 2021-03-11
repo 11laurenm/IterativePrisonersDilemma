@@ -134,7 +134,7 @@ class GamesTests {
     Game game = new Game(strategy1, strategy2, 3, payoffs);
     ArrayList<Integer> actualscores = game.calculateScores(strategy1.getDecision(), 
             strategy2.getDecision());
-    ArrayList<Integer> testscores = new ArrayList();
+    ArrayList<Integer> testscores = new ArrayList<>();
     testscores.add(1);
     testscores.add(1);
     assertEquals(actualscores, testscores, "calculateScores not functioning correctly");

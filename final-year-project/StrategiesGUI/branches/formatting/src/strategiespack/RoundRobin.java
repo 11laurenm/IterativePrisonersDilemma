@@ -27,6 +27,7 @@ public class RoundRobin extends Tournament {
    * @param strats - the strategies participating in the tournament
    * @param rounds - the total number of rounds they will play
    * @param payoffs - the scores earned for each combination of decisions
+   * @param gameLengths - the length of each of the three games to be played
    */
   public RoundRobin(ArrayList<Strategy> strats, int rounds, ArrayList<Integer> payoffs, 
       ArrayList<Integer> gameLengths) {

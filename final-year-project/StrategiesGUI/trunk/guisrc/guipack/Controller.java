@@ -3,7 +3,6 @@ package guipack;
 import guipack.Main;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -24,6 +23,7 @@ import strategiespack.Strategy;
 
 /**
  * Controller class used to handle the configure tournaments screen of GUI.
+
  * @author Lauren Moore - zfac043
  *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
  */
@@ -129,6 +129,7 @@ public class Controller {
   /**
    * Called when the controller is created, sets the value of Main variable 
    * and populates the TableView.
+
    * @param main - the main function
    */
   @FXML 
@@ -151,6 +152,7 @@ public class Controller {
   /**
    * Sets the value of the main variable so the main class can be accessed and 
    * also sets which strategies should be displayed in the table.
+
    * @param mainclass - an instance of the Main class
    */
   public void setMain(Main mainclass) {
@@ -165,7 +167,7 @@ public class Controller {
    */
   @FXML
   private void handleRunTournament() {
-    ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
+    ObservableList<Strategy> selectedItems = strategyTable.getSelectionModel().getSelectedItems();
     ArrayList<Strategy> alSelectedItems = new ArrayList<Strategy>(selectedItems);
     //line above converts observable list into an array list
     
@@ -192,10 +194,10 @@ public class Controller {
       return;
     }
     
-    gameLengths = new ArrayList();
+    gameLengths = new ArrayList<>();
     
     try {
-      if(gameLengths.size() != 0) {
+      if (gameLengths.size() != 0) {
         gameLengths.set(0, Integer.parseInt(game1.getText()));
         gameLengths.set(1, Integer.parseInt(game2.getText()));
         gameLengths.set(2, Integer.parseInt(game3.getText()));
@@ -212,9 +214,9 @@ public class Controller {
       alert.showAndWait();
       return;
     }
-    
+    int chosenRounds = 10;
     try {
-      int testRounds = Integer.parseInt(rounds.getText());
+      chosenRounds = Integer.parseInt(rounds.getText());
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
@@ -226,8 +228,8 @@ public class Controller {
     int one = Integer.parseInt(game1.getText());
     int two = Integer.parseInt(game2.getText());
     int three = Integer.parseInt(game3.getText());
-    if((one + two + three) != Integer.parseInt(rounds.getText()) && 
-        !roundsCheckBox.isSelected()) {
+    if ((one + two + three) != chosenRounds 
+        && !roundsCheckBox.isSelected()) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Total of game lengths must equal number of rounds");
@@ -236,18 +238,18 @@ public class Controller {
     }
     
     try {
-      if(roundsCheckBox.isSelected()) {
+      if (roundsCheckBox.isSelected()) {
         gameLengths.clear();
         random = new Random();
         tournament = new RoundRobin(alSelectedItems, 
             random.nextInt(99) + 1, payoffs, gameLengths);
-      } else if(gamesCheckBox.isSelected()) {
+      } else if (gamesCheckBox.isSelected()) {
         gameLengths.clear();
         tournament = new RoundRobin(alSelectedItems, 
-            Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+            chosenRounds, payoffs, gameLengths);
       } else {
         tournament = new RoundRobin(alSelectedItems, 
-            Integer.parseInt(rounds.getText()), payoffs, gameLengths);
+            chosenRounds, payoffs, gameLengths);
       }
       
       tournament.runTournament();
@@ -265,7 +267,7 @@ public class Controller {
   
   @FXML
   private void launchEvolutionary() {
-    ObservableList selectedItems = strategyTable.getSelectionModel().getSelectedItems();
+    ObservableList<Strategy> selectedItems = strategyTable.getSelectionModel().getSelectedItems();
     ArrayList<Strategy> alSelectedItems = new ArrayList<Strategy>(selectedItems);
     if (alSelectedItems.size() < 2) { //show error if less than two strategies selected
       Alert alert = new Alert(AlertType.ERROR);
@@ -288,10 +290,10 @@ public class Controller {
       return;
     }
     
-    gameLengths = new ArrayList();
+    gameLengths = new ArrayList<>();
     
     try {
-      if(gameLengths.size() != 0) {
+      if (gameLengths.size() != 0) {
         gameLengths.set(0, Integer.parseInt(game1.getText()));
         gameLengths.set(1, Integer.parseInt(game2.getText()));
         gameLengths.set(2, Integer.parseInt(game3.getText()));
@@ -308,9 +310,9 @@ public class Controller {
       alert.showAndWait();
       return;
     }
-    
+    int chosenRounds = 10;
     try {
-      int testRounds = Integer.parseInt(rounds.getText());
+      chosenRounds = Integer.parseInt(rounds.getText());
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
@@ -322,27 +324,23 @@ public class Controller {
     int one = Integer.parseInt(game1.getText());
     int two = Integer.parseInt(game2.getText());
     int three = Integer.parseInt(game3.getText());
-    if((one + two + three) != Integer.parseInt(rounds.getText()) && 
-        !roundsCheckBox.isSelected()) {
+    if ((one + two + three) != chosenRounds 
+        && !roundsCheckBox.isSelected()) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Total of game lengths must equal number of rounds");
       alert.showAndWait();
       return;
     }
-    int roundsParam;
-    if(roundsCheckBox.isSelected()) {
+    if (roundsCheckBox.isSelected()) {
       gameLengths.clear();
       random = new Random();
-      roundsParam = random.nextInt(99) + 1;
-    } else if(gamesCheckBox.isSelected()) {
+      chosenRounds = random.nextInt(99) + 1;
+    } else if (gamesCheckBox.isSelected()) {
       gameLengths.clear();
-      roundsParam = Integer.parseInt(rounds.getText());
-    } else {
-      roundsParam = Integer.parseInt(rounds.getText());
     }
     
-    mainn.showEvSettings(alSelectedItems, roundsParam, payoffs, gameLengths);
+    mainn.showEvSettings(alSelectedItems, chosenRounds, payoffs, gameLengths);
   }
 
   /**
@@ -413,6 +411,7 @@ public class Controller {
    * Called when a cell in the probability column is edited, 
    * sets the relevant strategy's probability variable if it 
    * has one.
+
    * @param event - contains the new value for probability
    */
   @FXML
@@ -433,6 +432,7 @@ public class Controller {
    * Called when a cell in the rounds column is edited, 
    * sets the relevant strategy's rounds variable if it 
    * has one.
+
    * @param event - contains the new value for rounds
    */
   @FXML
@@ -451,36 +451,36 @@ public class Controller {
   
   @FXML
   private void roundsCheckBoxSelected() {
-	  if(roundsCheckBox.isSelected()) {
-		  rounds.setEditable(false);
-		  rounds.setOpacity(0.5);
-		  gamesCheckBox.setSelected(true);
-		  gamesCheckBoxSelected();
-	  } else {
-		  rounds.setEditable(true);
-		  rounds.setOpacity(1);
-		  gamesCheckBox.setSelected(false);
-		  gamesCheckBoxSelected();
-	  }
+    if (roundsCheckBox.isSelected()) {
+      rounds.setEditable(false);
+      rounds.setOpacity(0.5);
+      gamesCheckBox.setSelected(true);
+      gamesCheckBoxSelected();
+    } else {
+      rounds.setEditable(true);
+      rounds.setOpacity(1);
+      gamesCheckBox.setSelected(false);
+      gamesCheckBoxSelected();
+    }
   }
   
   @FXML
   private void gamesCheckBoxSelected() {
-	  if(gamesCheckBox.isSelected()) {
-		  game1.setEditable(false);
-		  game2.setEditable(false);
-		  game3.setEditable(false);
-		  game1.setOpacity(0.5);
-		  game2.setOpacity(0.5);
-		  game3.setOpacity(0.5);
-	  } else {
-		  game1.setEditable(true);
-		  game2.setEditable(true);
-		  game3.setEditable(true);
-		  game1.setOpacity(1);
-		  game2.setOpacity(1);
-		  game3.setOpacity(1);
-	  }
+    if (gamesCheckBox.isSelected()) {
+      game1.setEditable(false);
+      game2.setEditable(false);
+      game3.setEditable(false);
+      game1.setOpacity(0.5);
+      game2.setOpacity(0.5);
+      game3.setOpacity(0.5);
+    } else {
+      game1.setEditable(true);
+      game2.setEditable(true);
+      game3.setEditable(true);
+      game1.setOpacity(1);
+      game2.setOpacity(1);
+      game3.setOpacity(1);
+    }
   }
   
 }

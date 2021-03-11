@@ -2,15 +2,32 @@ package strategiespack;
 
 import java.util.ArrayList;
 
-public class Evolutionary extends Tournament{
+/**
+ * The class representing an evolutionary tournament of the Iterative Prisoner's Dilemma.
+
+ * @author Lauren Moore - zfac043
+ *
+ */
+
+public class Evolutionary extends Tournament {
   
   ArrayList<Node> nodes;
   ArrayList<Integer> genScores;
   int generations;
   public ArrayList<ArrayList<Node>> allGenerations;
   
+  /**
+   * Constructor for the class, which sets the following variables to values 
+   * chosen by the user.
+
+   * @param nodeList - every node to be entered in the tournament
+   * @param rounds - the total number of rounds they will play
+   * @param payoffs - the scores earned for each combination of decisions
+   * @param gameLengths - the length of each of the three games to be played
+   * @param gens - the total number of generations the tournament will run
+   */
   public Evolutionary(ArrayList<Node> nodeList, int rounds, ArrayList<Integer> payoffs, 
-      ArrayList<Integer> gameLengths, int gens){
+      ArrayList<Integer> gameLengths, int gens) {
     totalRounds = rounds;
     nodes = nodeList;
     genScores = new ArrayList<Integer>(nodes.size());
@@ -19,19 +36,22 @@ public class Evolutionary extends Tournament{
     generations = gens;
     allGenerations = new ArrayList<ArrayList<Node>>();
     ArrayList<Node> newNodes = new ArrayList<>();
-    for(Node n: nodes) {
+    for (Node n : nodes) {
       Node newNode = new Node(n.getStrategy());
       newNodes.add(newNode);
     }
     allGenerations.add(newNodes);
   }
   
+  /**
+   * Sets up the tournament by initialising the needed variables.
+   */
   public void setUpTournament() {
     
     decisions = new ArrayList<ArrayList<Character>>();
     points = new ArrayList<ArrayList<Integer>>();
     
-    if(setGameLengths.size() == 0) {
+    if (setGameLengths.size() == 0) {
       VaryGameLength varyLength = new VaryGameLength(totalRounds);
       first = varyLength.getFirstSet();
       second = varyLength.getSecondSet();
@@ -43,11 +63,15 @@ public class Evolutionary extends Tournament{
     }
   }
   
+  /**
+   * Method responsible for running the whole tournament by running the other methods 
+   * that make up the tournament for each generation.
+   */
   public void runWholeTournament() {
-    for(int gen = 0; gen < generations; gen++) {
+    for (int gen = 0; gen < generations; gen++) {
       runGeneration();
       ArrayList<Node> newNodes = new ArrayList<>();
-      for(Node n: nodes) {
+      for (Node n : nodes) {
         Node newNode = new Node(n.getStrategy());
         newNodes.add(newNode);
       }
@@ -55,27 +79,35 @@ public class Evolutionary extends Tournament{
     }
   }
   
+  /**
+   * Runs a single generation of the tournament, then calls the relevant methods to save 
+   * the results.
+   */
   public void runGeneration() {
-    for(int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
+    for (int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
       Node currentNode = nodes.get(nodeNumber);
       currentNode.strategy.points = 0;
       currentNode.setPlayedAllGames(false);
     }
     
-    for(int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
+    for (int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
       Node currentNode = nodes.get(nodeNumber);
-      for(int neighbourNumber = 0; neighbourNumber < currentNode.getNeighbours().size(); neighbourNumber++) {
+      for (int neighbourNumber = 0; neighbourNumber < currentNode.getNeighbours().size();
+          neighbourNumber++) {
         Node neighbourNode = currentNode.neighbours.get(neighbourNumber);
         player1Score = 0; //initialise each player's score for this pairing to 0
         player2Score = 0;
-        if(!neighbourNode.getPlayedAllGames()) {
-          Game game1 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), first, payoffList);
+        if (!neighbourNode.getPlayedAllGames()) {
+          Game game1 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), 
+              first, payoffList);
           game1.playGame();
           endOfGame(game1);
-          Game game2 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), second, payoffList);
+          Game game2 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), 
+              second, payoffList);
           game2.playGame();
           endOfGame(game2);
-          Game game3 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), third, payoffList);
+          Game game3 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), 
+              third, payoffList);
           game3.playGame();
           endOfGame(game3);
         }
@@ -87,24 +119,29 @@ public class Evolutionary extends Tournament{
     updateNodes();
   }
   
+  /**
+   * Updates each node with its new strategy if it has been taken over by a more successful 
+   * neighbour.
+   */
   public void updateNodes() {
-    for(Node n: nodes) {
+    for (Node n : nodes) {
       Node highestScoring = n;
-      for(Node neighbour: n.neighbours) {
-        if(neighbour.getStrategy().getPoints() > highestScoring.getStrategy().getPoints()) {
+      for (Node neighbour : n.neighbours) {
+        if (neighbour.getStrategy().getPoints() > highestScoring.getStrategy().getPoints()) {
           highestScoring = neighbour;
         }
       }
       try {
         Strategy strat = highestScoring.getStrategy().getClass().newInstance();
-        strat.setProbability(Double.parseDouble(highestScoring.getStrategy().probabilityProperty().get()));
+        strat.setProbability(Double.parseDouble(highestScoring.getStrategy()
+            .probabilityProperty().get()));
         strat.setRounds(Integer.parseInt(highestScoring.getStrategy().roundsProperty().get()));
         n.newStrategy = strat;
       } catch (InstantiationException | IllegalAccessException e) {
         e.printStackTrace();
       }
     }
-    for(Node n: nodes) {
+    for (Node n : nodes) {
       n.strategy = n.newStrategy;
     }
   }
@@ -113,10 +150,13 @@ public class Evolutionary extends Tournament{
     return nodes;
   }
   
+  /**
+   * Sets the list of scores for the current generation to the most recent scores.
+   */
   public void setGenerationScores() {
     int score;
     genScores.clear();
-    for(int n = 0; n < nodes.size(); n++) {
+    for (int n = 0; n < nodes.size(); n++) {
       score = nodes.get(n).getStrategy().getPoints();
       genScores.add(score);
     }
@@ -126,16 +166,25 @@ public class Evolutionary extends Tournament{
     return genScores;
   }
   
+  /**
+   * Divides a node's score by the number of neighbours it has in order to maintain
+   * fairness between nodes.
+   */
   public void normaliseScores() {
-    for(Node n: nodes) {
+    for (Node n : nodes) {
       int neighboursSize = n.getNeighbours().size();
-      n.getStrategy().setPoints((n.getStrategy().getPoints())/neighboursSize);
+      n.getStrategy().setPoints((n.getStrategy().getPoints()) / neighboursSize);
     }
   }
   
+  /**
+   * Adds the nodes (and therefore scores) for a generation to the master list.
+
+   * @param nodesToAdd the nodes for the current generation
+   */
   public void addNodesToMasterList(ArrayList<Node> nodesToAdd) {
     ArrayList<Node> nodeCopies = new ArrayList<Node>();
-    for(Node n: nodesToAdd) {
+    for (Node n : nodesToAdd) {
       Strategy nodeStrat = n.getStrategy();
       Strategy copyNodeStrat = null;
       try {
@@ -145,13 +194,18 @@ public class Evolutionary extends Tournament{
       }
       copyNodeStrat.setPoints(nodeStrat.getPoints());
       Node copy = new Node(copyNodeStrat);
-      copy.setID(n.getID());
+      copy.setNodeId(n.getNodeId());
       nodeCopies.add(copy);
     }
     allGenerations.add(nodeCopies);
   }
   
-  public ArrayList<ArrayList<Node>> returnAllGenerationResults(){
+  /**
+   * Getter for the master list of all results.
+
+   * @return the ArrayList allGenerations, which contains the reults of each generation
+   */
+  public ArrayList<ArrayList<Node>> returnAllGenerationResults() {
     return allGenerations;
   }
   

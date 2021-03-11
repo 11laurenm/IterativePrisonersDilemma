@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 
 /**A strategy that begins by cooperating, 
  * then cooperates only if both players made the same move in the previous round.
- * 
+
  * @author Lauren Moore -zfac043
  *
  */
@@ -21,6 +21,7 @@ public class Pavlov extends Strategy {
   
   /**
    * returns the decision made by the strategy for the turn in which it is called.
+
    * @param lastMove - the last move made by its opponent
    * @param opponentHistory - all previous moves made by its opponent in this game
    * @param myHistory - all previous moves made by the strategy
@@ -39,6 +40,7 @@ public class Pavlov extends Strategy {
   
   /**
    * Method that provides the strategy's name.
+
    * @return the name of the strategy as a SimpleStringProperty
    */
   public StringProperty nameProperty() {
@@ -49,6 +51,7 @@ public class Pavlov extends Strategy {
   
   /**
    * Method that provides the strategy's probability (if one exists).
+
    * @return the value of the probability variable of the strategy as a SimpleStringProperty
    */
   public StringProperty probabilityProperty() {
@@ -59,6 +62,7 @@ public class Pavlov extends Strategy {
   
   /**
    * Method that provides the number of rounds the strategy considers (if one exists).
+
    * @return the value of the rounds variable of the strategy as a SimpleStringProperty
    */
   public StringProperty roundsProperty() {
@@ -67,6 +71,11 @@ public class Pavlov extends Strategy {
     return rounds;
   }
   
+  /**
+   * Method that provides the colour associated with a strategy.
+
+   * @return the value of the colour variable of the strategy as a SimpleStringProperty
+   */
   public StringProperty colourProperty() {
     SimpleStringProperty colour = new SimpleStringProperty();
     colour.setValue("Gold");

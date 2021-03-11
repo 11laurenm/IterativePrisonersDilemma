@@ -9,7 +9,7 @@ import javafx.beans.property.StringProperty;
  * copies its opponent’s previous move in every subsequent round.  
  * However, it has a random chance (normally quite low) 
  * of cooperating even if its opponent defected on the previous round
- * 
+
  * @author Lauren Moore -zfac043
  *
  */
@@ -31,6 +31,7 @@ public class TitForTatWithForgiveness extends Strategy {
   
   /**
    * Constructor that sets the probability variable to value of parameter prob.
+
    * @param prob The probability that the strategy will cooperate when its opponent's 
    *      previous move was defect.
    */
@@ -40,6 +41,7 @@ public class TitForTatWithForgiveness extends Strategy {
 
   /**
    * returns the decision made by the strategy for the turn in which it is called.
+
    * @param lastMove - the last move made by its opponent
    * @param opponentHistory - all previous moves made by its opponent in this game
    * @param myHistory - all previous moves made by the strategy
@@ -62,6 +64,7 @@ public class TitForTatWithForgiveness extends Strategy {
   
   /**
    * Method that provides the strategy's name.
+
    * @return the name of the strategy as a SimpleStringProperty
    */
   public StringProperty nameProperty() {
@@ -72,6 +75,7 @@ public class TitForTatWithForgiveness extends Strategy {
   
   /**
    * Method that provides the strategy's probability (if one exists).
+
    * @return the value of the probability variable of the strategy as a SimpleStringProperty
    */
   public StringProperty probabilityProperty() {
@@ -82,6 +86,7 @@ public class TitForTatWithForgiveness extends Strategy {
   
   /**
    * Method that provides the number of rounds the strategy considers (if one exists).
+
    * @return the value of the rounds variable of the strategy as a SimpleStringProperty
    */
   public StringProperty roundsProperty() {
@@ -99,6 +104,11 @@ public class TitForTatWithForgiveness extends Strategy {
     this.probability = prob;
   }
   
+  /**
+   * Method that provides the colour associated with a strategy.
+
+   * @return the value of the colour variable of the strategy as a SimpleStringProperty
+   */
   public StringProperty colourProperty() {
     SimpleStringProperty colour = new SimpleStringProperty();
     colour.setValue("Lime");

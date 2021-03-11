@@ -5,6 +5,7 @@ import java.util.Random;
 /**
  * Class responsible for deciding the length of each of the three games that 
  * each pairing plays.
+
  * @author Lauren Moore - zfac043
  *
  */
@@ -40,6 +41,7 @@ public class VaryGameLength {
   /**
    * Constructor that sets the value of total to the value passed as a parameter 
    * and first, second and third to 0.
+
    * @param total The total number of rounds to be played over the course of 
    *      three games.
    */
@@ -53,6 +55,7 @@ public class VaryGameLength {
   /**
    * Decides the amount of rounds in the first game using random 
    * number generation.
+
    * @return first - the amount of rounds in the first game
    */
   public int getFirstSet() {
@@ -63,6 +66,7 @@ public class VaryGameLength {
   /**
    * Decides the amount of rounds in the second game using random 
    * number generation.
+
    * @return second - the amount of rounds in the second game
    */
   public int getSecondSet() {
@@ -78,6 +82,7 @@ public class VaryGameLength {
   /**
    * Decides the amount of rounds in the third game by 
    * subtracting the first and second values from the total.
+
    * @return third - the amount of rounds in the third game
    */
   public int getThirdSet() {

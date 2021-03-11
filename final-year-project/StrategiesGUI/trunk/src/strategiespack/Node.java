@@ -2,19 +2,30 @@ package strategiespack;
 
 import java.util.ArrayList;
 
+/**
+ * Node class where a node represents a node/point in a graph.
+
+ * @author Lauren Moore - zfac043
+ *
+ */
 public class Node {
   
   Strategy strategy;
   ArrayList<Node> neighbours;
   boolean playedAllGames;
-  String ID;
+  String nodeId;
   Strategy newStrategy;
   
+  /**
+   * Constructor for a node which assigns it a strategy.
+
+   * @param strat - the strategy which is associated with this node
+   */
   public Node(Strategy strat) {
     strategy = strat;
     neighbours = new ArrayList<Node>();
     playedAllGames = false;
-    ID = "";
+    nodeId = "";
     newStrategy = strat;
   }
   
@@ -26,7 +37,7 @@ public class Node {
     strategy = newStrategy;
   }
   
-  public ArrayList<Node> getNeighbours(){
+  public ArrayList<Node> getNeighbours() {
     return neighbours;
   }
 
@@ -42,11 +53,11 @@ public class Node {
     playedAllGames = played;
   }
   
-  public String getID() {
-    return ID;
+  public String getNodeId() {
+    return nodeId;
   }
   
-  public void setID(String id) {
-    ID = id;
+  public void setNodeId(String id) {
+    nodeId = id;
   }
 }

@@ -96,18 +96,29 @@ public class EvolutionaryRunController {
     colourColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("colour"));
   }
   
+  /**
+   * Displays the graph generated in the previous screen.
+   */
   public void showButtons() {
     for (Button b : buttons) {
       buttonsPane.getChildren().add(b);
     }
   }
   
+  /**
+   * Runs the updateNodes method to show the results of the next generation 
+   * of the tournament.
+   */
   public void nextGen() {
     generationNumber++;
     chosenGenNumber.setText(Integer.toString(generationNumber));
     updateNodes();
   }
   
+  /**
+   * Runs the updateNodes method to show the results of the previous generation 
+   * of the tournament.
+   */
   public void previousGen() {
     if (generationNumber > 0) {
       generationNumber--;
@@ -116,6 +127,10 @@ public class EvolutionaryRunController {
     updateNodes();
   }
   
+  /**
+   * Runs the updateNodes method to show the results of the selected generation 
+   * of the tournament.
+   */
   public void setGen() {
     try {
       generationNumber = Integer.parseInt(chosenGenNumber.getText());
@@ -129,6 +144,10 @@ public class EvolutionaryRunController {
     updateNodes();
   }
   
+  /**
+   * Updates the colour of the nodes in the graph to show the results of the selected
+   * generation of the tournament.
+   */
   public void updateNodes() {
     ArrayList<Node> genNodes = allGens.get(generationNumber);
     for (int buttonNumber = 0; buttonNumber < buttons.size(); buttonNumber++) {

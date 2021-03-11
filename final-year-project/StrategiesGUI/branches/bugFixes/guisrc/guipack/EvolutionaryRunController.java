@@ -3,6 +3,8 @@ package guipack;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -94,6 +96,7 @@ public class EvolutionaryRunController {
     stratsTable.setItems(stratsList);
     strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
     colourColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("colour"));
+    setButtonHandlers();
   }
   
   /**
@@ -155,6 +158,26 @@ public class EvolutionaryRunController {
       String buttonStyle = "-fx-background-color: " 
           + genNodes.get(buttonNumber).getStrategy().colourProperty().get();
       b.setStyle(buttonStyle);
+    }
+  }
+  
+  /**
+   * Event handler that prevents a button from changing colour due to being pressed.
+
+   * @return event handler
+   */
+  private EventHandler<ActionEvent> newButtonPressedChangeColour() {
+    return new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        return;
+      }
+    };
+  }
+  
+  public void setButtonHandlers() {
+    for(Button b: buttons) {
+      b.setOnAction(newButtonPressedChangeColour());
     }
   }
 }

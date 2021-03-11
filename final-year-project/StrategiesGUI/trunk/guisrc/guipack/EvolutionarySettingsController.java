@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import strategiespack.Evolutionary;
 import strategiespack.Node;
 import strategiespack.Strategy;
 
@@ -76,6 +77,9 @@ public class EvolutionarySettingsController {
   
   @FXML
   private TextField tf2;
+  
+  @FXML
+  private TextField generationField;
   
   ArrayList<Strategy> strategiesForTable;
   
@@ -641,8 +645,20 @@ public class EvolutionarySettingsController {
         bipartiteRun();
       }
       setTableData();
-      mainn.showEvRun(buttons, nodes, strategiesForTable, roundsParam, payoffsParam, gameLengthsParam);
+      int gens = 1;
+      try {
+        gens = Integer.parseInt(generationField.getText());
+      } catch (Exception e) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Number of generations must be an integer");
+        alert.showAndWait();
+        return;
+      }
+      mainn.showEvRun(buttons, nodes, strategiesForTable, roundsParam, 
+          payoffsParam, gameLengthsParam, gens);
     } catch (Exception e) {
+      e.printStackTrace();
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("All nodes must have a strategy");
@@ -650,5 +666,5 @@ public class EvolutionarySettingsController {
       return;
     }
   }
-
+  
 }

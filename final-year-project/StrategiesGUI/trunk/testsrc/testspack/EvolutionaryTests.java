@@ -2,11 +2,22 @@ package testspack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.awt.AWTException;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.imageio.ImageIO;
+
 import org.junit.jupiter.api.Test;
 
+import guipack.Main;
+import javafx.stage.Stage;
 import strategiespack.AlwaysCooperate;
 import strategiespack.AlwaysDefect;
 import strategiespack.Evolutionary;

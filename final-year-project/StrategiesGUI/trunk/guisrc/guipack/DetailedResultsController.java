@@ -91,8 +91,8 @@ public class DetailedResultsController {
           labelText = labelText + roundNumber + ": ";
           labelText = labelText + decisionsSet.get(i) + " vs ";
           labelText = labelText + decisionsSet.get(i + 1) + " ";
-          labelText = labelText + pointsSet.get(i) + " points vs ";
-          labelText = labelText + pointsSet.get(i + 1) + " points";
+          labelText = labelText + pointsSet.get(i) + " point/s vs ";
+          labelText = labelText + pointsSet.get(i + 1) + " point/s";
           labelText = labelText + "\n";
         }
       }

@@ -166,24 +166,5 @@ class EvolutionaryTests {
     assertNotEquals(newStrat, testStrat, "Strategies are equal but should not be");
     assertEquals(newStrat.nameProperty().get(), "AlwaysCooperate", "New strategy is not of correct type");
   }
-  
-  @Test
-  void testTakeScreenshot() {
-    //adapted from https://www.baeldung.com/java-taking-screenshots
-    Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-    BufferedImage capture = null;
-    try {
-      capture = new Robot().createScreenCapture(screenRect);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    File imageFile = new File("test-screenshot.bmp");
-    try {
-      ImageIO.write(capture, "bmp", imageFile );
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    assertTrue(imageFile .exists());
-  }
 
 }

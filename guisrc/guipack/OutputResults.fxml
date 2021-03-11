@@ -21,7 +21,8 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="283.0" layoutY="435.0" mnemonicParsing="false" onAction="#detailedResultsButton" text="Detailed Results" AnchorPane.bottomAnchor="40.0" />
+      <Button layoutX="283.0" layoutY="435.0" mnemonicParsing="false" onAction="#detailedResultsButton" text="Show Detailed Results" AnchorPane.bottomAnchor="40.0" />
+      <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#exportDetailedResultsButton" text="Export Detailed Results" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="300.0" />
       <Button layoutX="825.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleBackButton" text="Close" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="30.0" />
       <HBox layoutX="322.0" layoutY="106.0" prefHeight="270.0" prefWidth="511.0">
          <children>

@@ -1,7 +1,11 @@
 package guipack;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -138,7 +142,7 @@ public class Main extends Application {
   }
   
   public void showEvRun(ArrayList<Button> buttons, ArrayList<Node> nodes, ArrayList<Strategy> strategiesForTable, int rounds, 
-      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths) {
+      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, int generations) {
     try {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(Main.class.getResource("EvolutionaryRunScreen.fxml"));
@@ -147,10 +151,11 @@ public class Main extends Application {
       rootLayout.setCenter(overview);
 
       EvolutionaryRunController controller = loader.getController();
-      controller.initialize(buttons, nodes, strategiesForTable, rounds, payoffs, gameLengths);
+      controller.initialize(buttons, nodes, strategiesForTable, rounds, 
+          payoffs, gameLengths, generations);
     
     } catch (IOException e) {
-      ;
+      e.printStackTrace();
     }
   }
 
@@ -261,6 +266,10 @@ public class Main extends Application {
       ;
     }
   }
+  
+  public void exportDetailedResults() {
+    tournament.writeToCSV();
+  }
 
   /**
    * Sets the value of the tournament variable.
@@ -269,4 +278,5 @@ public class Main extends Application {
   public void setTournament(RoundRobin tourn) {
     tournament = tourn;
   }
+
 }

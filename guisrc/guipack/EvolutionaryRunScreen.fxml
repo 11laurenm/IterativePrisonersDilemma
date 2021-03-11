@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -24,12 +25,15 @@
                            </HBox.margin>
                         </Button>
                         <Button fx:id="nextButton" alignment="CENTER" mnemonicParsing="false" onAction="#nextGen" text="Next Generation" />
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="66.0" prefWidth="94.0">
                            <children>
-                              <Label text="Generation:   " />
-                              <Label fx:id="generationLabel" text="0" />
+                              <Label text="Generation:   ">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin></Label>
                            </children>
                         </HBox>
+                        <TextField fx:id="chosenGenNumber" onAction="#setGen" />
                      </children>
                   </HBox>
                </children>

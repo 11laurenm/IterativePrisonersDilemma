@@ -140,6 +140,11 @@ public class ResultsController {
   private void detailedResultsButton() {
     mainn.launchDetailedResults();
   }
+  
+  @FXML
+  private void exportDetailedResultsButton() {
+    mainn.exportDetailedResults();
+  }
 
   /**
    * Used to construct and populate the gridpane as it varies in size 

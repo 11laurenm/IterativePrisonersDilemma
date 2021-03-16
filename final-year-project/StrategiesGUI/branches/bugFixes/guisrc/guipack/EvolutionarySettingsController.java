@@ -332,6 +332,28 @@ public class EvolutionarySettingsController {
       width = graphPane.getWidth();
     }
     
+    if(nodeNumber == 2) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX((width / 5));
+      graphButton.setLayoutY(height/2);
+      graphButton.setOnAction(buttonPressedChangeColour());
+      int setId = 1;
+      graphButton.setId(String.valueOf(setId));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+      Button graphButton2 = new Button();
+      graphButton2.setMinSize(minnWidth, minnHeight);
+      graphButton2.setLayoutX((width / 5) * 3);
+      graphButton2.setLayoutY(height/2);
+      graphButton2.setOnAction(buttonPressedChangeColour());
+      int setId2 = 2;
+      graphButton.setId(String.valueOf(setId2));
+      buttons.add(graphButton2);
+      graphPane.getChildren().add(graphButton2);
+      return;
+    }
+    
     if ((nodeNumber % 2) == 0) {
       for (int n = 0; n < nodeNumber / 2; n++) {
         if (n % 2 == 0) {

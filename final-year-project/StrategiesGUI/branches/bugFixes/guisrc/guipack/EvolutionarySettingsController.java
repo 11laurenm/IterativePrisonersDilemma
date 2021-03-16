@@ -43,7 +43,7 @@ public class EvolutionarySettingsController {
   private RadioButton starGraphButton;
   
   @FXML
-  private RadioButton busGraphButton;
+  private RadioButton pathGraphButton;
   
   @FXML
   private RadioButton completeGraphButton;
@@ -151,8 +151,8 @@ public class EvolutionarySettingsController {
       setAnchorCircle();
     } else if (starGraphButton.isSelected()) {
       setAnchorStar();
-    } else if (busGraphButton.isSelected()) {
-      setAnchorBus();
+    } else if (pathGraphButton.isSelected()) {
+      setAnchorPath();
     } else if (completeGraphButton.isSelected()) {
       setAnchorCircle();
     } else {
@@ -196,10 +196,10 @@ public class EvolutionarySettingsController {
           setAnchorStar();
         } 
       }));
-    } else if (busGraphButton.isSelected()) {
+    } else if (pathGraphButton.isSelected()) {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-          setAnchorBus();
+          setAnchorPath();
         } 
       }));
     } else if (completeGraphButton.isSelected()) {
@@ -524,10 +524,10 @@ public class EvolutionarySettingsController {
   }
   
   /**
-   * Method responsible for generating a graph when the user has chosen the bus option.
+   * Method responsible for generating a graph when the user has chosen the path option.
    */
   @FXML
-  public void setAnchorBus() {
+  public void setAnchorPath() {
     graphPane.getChildren().clear();
     buttons.clear();
     int nodeNumber = Integer.parseInt(tf.getText());;
@@ -560,7 +560,7 @@ public class EvolutionarySettingsController {
   /**
    * Method responsible for assigning the correct neighbours to each node.
    */
-  public void busRun() {
+  public void pathRun() {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
@@ -758,8 +758,8 @@ public class EvolutionarySettingsController {
         circleRun();
       } else if (starGraphButton.isSelected()) {
         starRun();
-      } else if (busGraphButton.isSelected()) {
-        busRun();
+      } else if (pathGraphButton.isSelected()) {
+        pathRun();
       } else if (completeGraphButton.isSelected()) {
         completeRun();
       } else {

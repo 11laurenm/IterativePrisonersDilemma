@@ -150,7 +150,6 @@ public class EvolutionarySettingsController {
     } else if (circleGraphButton.isSelected()) {
       setAnchorCircle();
     } else if (starGraphButton.isSelected()) {
-      setAnchorCircle();
       setAnchorStar();
     } else if (busGraphButton.isSelected()) {
       setAnchorBus();
@@ -194,7 +193,6 @@ public class EvolutionarySettingsController {
     } else if (starGraphButton.isSelected()) {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-          setAnchorCircle();
           setAnchorStar();
         } 
       }));
@@ -464,17 +462,43 @@ public class EvolutionarySettingsController {
    * Method responsible for generating a graph when the user has chosen the star option.
    */
   public void setAnchorStar() {
+    graphPane.getChildren().clear();
+    buttons.clear();
     
-    int nodeNumber = Integer.parseInt(tf.getText());
+    int nodeNumber = Integer.parseInt(tf.getText());;
+    double height;
+    double width;
+    if (graphPane.getHeight() == 0.00) {
+      height = graphPane.getMinHeight();
+      width = graphPane.getMinWidth();
+    } else {
+      height = graphPane.getHeight();
+      width = graphPane.getWidth();
+    }
     
+    minnWidth = width / ((nodeNumber - 1) * 2);
+    minnHeight = height / 5;
+    nodeHorizontalDistance = width / (nodeNumber + 2);
+    nodeVerticalDistance = height / 5;
+    for (int nodeLoopNum = 0; nodeLoopNum < nodeNumber - 1; nodeLoopNum++) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX((nodeLoopNum + 1) * nodeHorizontalDistance);
+      graphButton.setLayoutY(nodeVerticalDistance * 3);
+      graphButton.setOnAction(buttonPressedChangeColour());
+      graphButton.setId(String.valueOf(nodeLoopNum));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+    }
     Button graphButton = new Button();
     graphButton.setMinSize(minnWidth, minnHeight);
-    graphButton.setLayoutX(nodeHorizontalDistance * (nodeNumber / 4));
-    graphButton.setLayoutY(nodeVerticalDistance * (nodeNumber / 2));
+    graphButton.setLayoutX(((nodeNumber) / 2) * nodeHorizontalDistance);
+    graphButton.setLayoutY(nodeVerticalDistance);
     graphButton.setOnAction(buttonPressedChangeColour());
-    graphButton.setId(String.valueOf(-1));
+    graphButton.setId(String.valueOf(nodeNumber));
     buttons.add(graphButton);
     graphPane.getChildren().add(graphButton);
+    
   }
   
   /**

@@ -173,8 +173,9 @@ public class EvolutionarySettingsController {
     nodesPane.getChildren().add(lab);
     
     tf = new TextField();
+    tf.setPrefWidth(50);
+    tf.setMinWidth(50);
     tf.setText(tfText1);
-    tf.setPrefWidth(25);
     tf.setLayoutX(lab.getLayoutX() + lab.getPrefWidth() + 100);
     nodesPane.getChildren().add(tf);
     
@@ -226,13 +227,14 @@ public class EvolutionarySettingsController {
     setNodesPaneChildren();
     Label lab2 = new Label();
     lab2.setText("     X     ");
-    lab2.setLayoutX(tf.getLayoutX() + tf.getPrefWidth() - 10);
+    lab2.setLayoutX(tf.getLayoutX() + tf.getPrefWidth());
     nodesPane.getChildren().add(lab2);
     
     tf2 = new TextField();
+    tf2.setMinWidth(50);
+    tf2.setPrefWidth(50);
     tf2.setText(tfText2);
-    tf2.setPrefWidth(25);
-    tf2.setLayoutX(lab2.getLayoutX() + lab2.getPrefWidth() + 35);
+    tf2.setLayoutX(lab2.getLayoutX() + lab2.getPrefWidth() + 40);
     nodesPane.getChildren().add(tf2);
     
     if (gridButton.isSelected()) {

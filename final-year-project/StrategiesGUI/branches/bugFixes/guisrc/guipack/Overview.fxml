@@ -76,6 +76,7 @@
                   <Insets bottom="25.0" />
                </padding>
             </GridPane>
+            <Button fx:id="resetPayoffsButton" mnemonicParsing="false" onAction="#resetPayoffs" text="Reset Payoffs" />
             <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="412.0">
                <children>
                   <Label alignment="CENTER" text="Rounds:">

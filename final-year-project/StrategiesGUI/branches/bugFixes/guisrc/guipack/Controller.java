@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -108,6 +109,9 @@ public class Controller {
   
   @FXML
   private CheckBox gamesCheckBox;
+  
+  @FXML
+  private Button resetPayoffsButton;
 
   Random random;
   
@@ -481,6 +485,18 @@ public class Controller {
       game2.setOpacity(1);
       game3.setOpacity(1);
     }
+  }
+  
+  @FXML
+  private void resetPayoffs() {
+    cc1.setText("3");
+    cc2.setText("3");
+    cd1.setText("0");
+    cd2.setText("5");
+    dc1.setText("5");
+    dc2.setText("0");
+    dd1.setText("1");
+    dd2.setText("1");
   }
   
 }

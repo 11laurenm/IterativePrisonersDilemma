@@ -594,6 +594,7 @@ public class EvolutionarySettingsController {
         }
       }
     }
+    
     setButtonData();
   }
   

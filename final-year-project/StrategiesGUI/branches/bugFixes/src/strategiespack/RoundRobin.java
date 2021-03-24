@@ -45,6 +45,8 @@ public class RoundRobin extends Tournament {
    * iterates through the list of strategies to run 3 games with every possible pairing.
    */
   public void runTournament() {
+    
+    setUpTournament();
 
     decisions = new ArrayList<ArrayList<Character>>();
     points = new ArrayList<ArrayList<Integer>>();
@@ -80,6 +82,13 @@ public class RoundRobin extends Tournament {
         scores.add(player1Score);
         scores.add(player2Score);
       }
+    }
+  }
+  
+  public void setUpTournament() {
+    for (int i = 0; i < strategies.size(); i++) {
+      Strategy strat = strategies.get(i);
+      strat.setPoints(0);
     }
   }
   

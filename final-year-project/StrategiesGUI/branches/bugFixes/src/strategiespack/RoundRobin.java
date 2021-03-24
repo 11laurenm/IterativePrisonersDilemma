@@ -141,7 +141,7 @@ public class RoundRobin extends Tournament {
     }
     
     try {
-      FileWriter csvWriter = new FileWriter("results.csv");
+      FileWriter csvWriter = new FileWriter("RoundRobinResults.csv");
       for (List<String> rowData : dataToWrite) {
         csvWriter.append(String.join(",", rowData));
         csvWriter.append("\n");

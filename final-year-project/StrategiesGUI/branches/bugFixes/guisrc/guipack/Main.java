@@ -134,14 +134,11 @@ public class Main extends Application {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(Main.class.getResource("EvolutionaryFirstScreen.fxml"));
       AnchorPane overview = (AnchorPane) loader.load();
-    
       rootLayout.setCenter(overview);
-
       EvolutionarySettingsController controller = loader.getController();
       controller.initialize(this, strategies, rounds, payoffs, gameLengths);
-    
-    } catch (IOException e) {
-      ;
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
   
@@ -150,7 +147,7 @@ public class Main extends Application {
    * which allows the user to run an evolutionary tournament.
    */
   public void showEvRun(ArrayList<Button> buttons, ArrayList<Node> nodes, 
-      ArrayList<Strategy> strategiesForTable, int rounds, 
+      ArrayList<Strategy> strategiesForTable, ArrayList<Strategy> allStrategies, int rounds, 
       ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, int generations) {
     try {
       FXMLLoader loader = new FXMLLoader();
@@ -160,7 +157,7 @@ public class Main extends Application {
       rootLayout.setCenter(overview);
 
       EvolutionaryRunController controller = loader.getController();
-      controller.initialize(buttons, nodes, strategiesForTable, rounds, 
+      controller.initialize(this, buttons, nodes, strategiesForTable, allStrategies, rounds, 
           payoffs, gameLengths, generations);
     
     } catch (IOException e) {

@@ -31,12 +31,6 @@ public class EvolutionaryRunController {
   @FXML
   AnchorPane buttonsPane;
   
-  @FXML
-  Button nextButton;
-  
-  @FXML
-  Button previousButton;
-  
   ArrayList<ArrayList<Node>> allGens;
   
   Evolutionary evoTournament;
@@ -59,6 +53,13 @@ public class EvolutionaryRunController {
   @FXML
   private TextField chosenGenNumber;
   
+  Main mainn;
+  
+  int rounds;
+  ArrayList<Integer> payoffs;
+  ArrayList<Integer> gameLengths;
+  ArrayList<Strategy> allStrategies;
+  
   /**
    * Empty constructor for the controller.
    */
@@ -78,9 +79,9 @@ public class EvolutionaryRunController {
    * @param gens - the total number of generations selected by the user.
    */
   @FXML 
-  public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, 
-      ArrayList<Strategy> strats, int rounds, 
-      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, int gens) {
+  public void initialize(Main main, ArrayList<Button> buttonsList, ArrayList<Node> nodesList, 
+      ArrayList<Strategy> strats, ArrayList<Strategy> allStrats, int setRounds, 
+      ArrayList<Integer> setPayoffs, ArrayList<Integer> setGameLengths, int gens) {
     buttons = buttonsList;
     nodes = nodesList;
     generationNumber = 0;
@@ -88,7 +89,11 @@ public class EvolutionaryRunController {
     allGens = new ArrayList<ArrayList<Node>>();
     showButtons();
     totalGens = gens;
-    evoTournament = new Evolutionary(nodes, rounds, payoffs, gameLengths, totalGens);
+    rounds = setRounds;
+    payoffs = setPayoffs;
+    gameLengths = setGameLengths;
+    allStrategies = allStrats;
+    evoTournament = new Evolutionary(nodes, setRounds, setPayoffs, setGameLengths, totalGens);
     evoTournament.setUpTournament();
     evoTournament.runWholeTournament();
     allGens = evoTournament.returnAllGenerationResults();
@@ -97,6 +102,11 @@ public class EvolutionaryRunController {
     strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
     colourColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("colour"));
     setButtonHandlers();
+    setMain(main);
+  }
+  
+  public void setMain(Main mainclass) {
+    this.mainn = mainclass;
   }
   
   /**
@@ -203,5 +213,9 @@ public class EvolutionaryRunController {
     for(Button b: buttons) {
       b.setOnAction(newButtonPressedChangeColour());
     }
+  }
+  
+  public void backPressed() {
+    mainn.showEvSettings(allStrategies, rounds, payoffs, gameLengths);
   }
 }

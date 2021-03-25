@@ -79,6 +79,8 @@ public class EvolutionarySettingsController {
   
   ArrayList<Strategy> strategiesForTable;
   
+  ArrayList<Strategy> allStrategies;
+  
   ArrayList<Button> buttons;
   
   ArrayList<Node> nodes;
@@ -120,6 +122,7 @@ public class EvolutionarySettingsController {
     setMain(main);
     buttons = new ArrayList<>();
     runCorrectAnchorMethod();
+    allStrategies = strats;
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
     
@@ -779,7 +782,7 @@ public class EvolutionarySettingsController {
         alert.showAndWait();
         return;
       }
-      mainn.showEvRun(buttons, nodes, strategiesForTable, roundsParam, 
+      mainn.showEvRun(buttons, nodes, strategiesForTable, allStrategies, roundsParam, 
           payoffsParam, gameLengthsParam, gens);
     } catch (Exception e) {
       e.printStackTrace();

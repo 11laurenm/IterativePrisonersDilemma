@@ -88,6 +88,9 @@ public class EvolutionarySettingsController {
   String tfText1 = "4";
   String tfText2 = "4";
   
+  int limit1;
+  int limit2;
+  
   double minnWidth;
   double minnHeight;
   double nodeHorizontalDistance;
@@ -148,17 +151,25 @@ public class EvolutionarySettingsController {
   public void runCorrectAnchorMethod() {
     setNodesPaneChildren();
     if (gridButton.isSelected()) {
+      limit1 = 40;
+      limit2 = 13;
       setSecondNodesPaneChildren();
       setAnchorGrid();
     } else if (circleGraphButton.isSelected()) {
+      limit1 = 8;
       setAnchorCircle();
     } else if (starGraphButton.isSelected()) {
+      limit1 = 40;
       setAnchorStar();
     } else if (pathGraphButton.isSelected()) {
+      limit1 = 40;
       setAnchorPath();
     } else if (completeGraphButton.isSelected()) {
+      limit1 = 8;
       setAnchorCircle();
     } else {
+      limit1 = 4;
+      limit2 = 4;
       setSecondNodesPaneChildren();
       setAnchorBipartite();
     }
@@ -262,8 +273,22 @@ public class EvolutionarySettingsController {
   public void setAnchorGrid() {
     graphPane.getChildren().clear();
     buttons.clear();
-    int rowSize = Integer.parseInt(tf.getText());;
-    int colSize = Integer.parseInt(tf2.getText());;
+    int rowSize = Integer.parseInt(tf.getText());
+    if(rowSize > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Row size must be less than or equal to " + limit1);
+      alert.showAndWait();
+      rowSize = 4;
+    }
+    int colSize = Integer.parseInt(tf2.getText());
+    if(colSize > limit2) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Column size must be less than or equal to " + limit2);
+      alert.showAndWait();
+      colSize = 4;
+    }
     double height;
     double width;
     if (graphPane.getHeight() == 0.00) {
@@ -325,6 +350,13 @@ public class EvolutionarySettingsController {
     graphPane.getChildren().clear();
     buttons.clear();
     int nodeNumber = Integer.parseInt(tf.getText());
+    if(nodeNumber > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit1);
+      alert.showAndWait();
+      nodeNumber = 4;
+    }
     double height;
     double width;
     double circleVerticalNodes = 0;
@@ -492,7 +524,14 @@ public class EvolutionarySettingsController {
     graphPane.getChildren().clear();
     buttons.clear();
     
-    int nodeNumber = Integer.parseInt(tf.getText());;
+    int nodeNumber = Integer.parseInt(tf.getText());
+    if(nodeNumber > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit1);
+      alert.showAndWait();
+      nodeNumber = 4;
+    }
     double height;
     double width;
     if (graphPane.getHeight() == 0.00) {
@@ -535,7 +574,14 @@ public class EvolutionarySettingsController {
   public void setAnchorPath() {
     graphPane.getChildren().clear();
     buttons.clear();
-    int nodeNumber = Integer.parseInt(tf.getText());;
+    int nodeNumber = Integer.parseInt(tf.getText());
+    if(nodeNumber > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit1);
+      alert.showAndWait();
+      nodeNumber = 4;
+    }
     double height;
     double width;
     if (graphPane.getHeight() == 0.00) {
@@ -610,6 +656,22 @@ public class EvolutionarySettingsController {
     buttons.clear();
     int nodesPerColumnA = Integer.parseInt(tf.getText());
     int nodesPerColumnB = Integer.parseInt(tf2.getText());
+    
+    if(nodesPerColumnA > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit1);
+      alert.showAndWait();
+      nodesPerColumnA = 4;
+    }
+    if(nodesPerColumnB > limit2) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit2);
+      alert.showAndWait();
+      nodesPerColumnB = 4;
+    }
+    
     int largestColumn;
     if (nodesPerColumnA > nodesPerColumnA) {
       largestColumn = nodesPerColumnA;

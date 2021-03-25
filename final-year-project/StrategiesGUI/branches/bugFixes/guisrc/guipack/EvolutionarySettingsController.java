@@ -747,8 +747,12 @@ public class EvolutionarySettingsController {
         try {
           selectedStrat = stratsTable.getSelectionModel()
               .getSelectedItem().getClass().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-          e.printStackTrace();
+        } catch (Exception e) {
+          Alert alert = new Alert(AlertType.ERROR);
+          alert.setTitle("Error Dialog");
+          alert.setContentText("A strategy must be selected from the table to assign it to a node");
+          alert.showAndWait();
+          return;
         }
         String buttonStyle = "-fx-background-color: " + selectedStrat.colourProperty().get();
         Button b = ((Button) event.getSource());

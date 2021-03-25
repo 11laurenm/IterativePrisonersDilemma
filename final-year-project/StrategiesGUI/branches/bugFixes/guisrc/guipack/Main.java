@@ -100,7 +100,11 @@ public class Main extends Application {
       primaryStage.setScene(scene);
       primaryStage.show();
     } catch (IOException e) {
-        ;
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching GUI");
+      alert.showAndWait();
+      return;
     }
   }
 
@@ -120,7 +124,11 @@ public class Main extends Application {
       controller.initialize(this);
     
     } catch (IOException e) {
-      ;
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching GUI");
+      alert.showAndWait();
+      return;
     }
   }
   
@@ -138,7 +146,11 @@ public class Main extends Application {
       EvolutionarySettingsController controller = loader.getController();
       controller.initialize(this, strategies, rounds, payoffs, gameLengths);
     } catch (Exception e) {
-      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching tournament setup screen");
+      alert.showAndWait();
+      return;
     }
   }
   
@@ -161,7 +173,11 @@ public class Main extends Application {
           payoffs, gameLengths, generations);
     
     } catch (IOException e) {
-      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching results screen");
+      alert.showAndWait();
+      return;
     }
   }
 
@@ -238,7 +254,11 @@ public class Main extends Application {
       controller.setMain(this);
       dialogStage.showAndWait();
     } catch (IOException e) {
-      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching results screen");
+      alert.showAndWait();
+      return;
     }
   }
 
@@ -270,7 +290,11 @@ public class Main extends Application {
               tournament.returnResults(), tournament.returnGameLengths());
       dialogStage.showAndWait();
     } catch (IOException e) {
-      ;
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching results window");
+      alert.showAndWait();
+      return;
     }
   }
   

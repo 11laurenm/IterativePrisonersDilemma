@@ -4,6 +4,8 @@ import guipack.Main;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.collections.ObservableList;
+import java.awt.Desktop;
+import java.io.File;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Alert;
@@ -529,7 +531,33 @@ public class Controller {
   
   @FXML
   private void helpSelected() {
-    
+    //code taken from https://mkyong.com/java/how-to-open-a-pdf-file-in-java/
+    try {
+      File pdfFile = new File("Documentation/UserGuide.pdf");
+      if (pdfFile.exists()) {
+          if (Desktop.isDesktopSupported()) {
+              Desktop.getDesktop().open(pdfFile);
+          } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Unable to open user guide");
+            alert.showAndWait();
+            return;
+          }
+      } else {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Unable to find user guide");
+        alert.showAndWait();
+        return;
+      }
+    } catch (Exception e) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Unable to open user guide");
+      alert.showAndWait();
+      return;
+    }
   }
   
 }

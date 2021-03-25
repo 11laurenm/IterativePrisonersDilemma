@@ -117,6 +117,9 @@ public class RoundRobin extends Tournament {
           "", "Length of game " + (i + 1), Integer.toString(returnGameLengths().get(i))));
       dataToWrite.add(data);
     }
+    ArrayList<String> spaceData = new ArrayList<>();
+    spaceData.add(" ");
+    dataToWrite.add(spaceData);
 
     for (int i = 0; i < strategies.size(); i++) {
       for (int j = i; j < strategies.size(); j++) { //creates list of every pairing
@@ -147,6 +150,7 @@ public class RoundRobin extends Tournament {
           dataToWrite.add(data2);
         }
       }
+      dataToWrite.add(spaceData);
     }
     
     try {

@@ -143,6 +143,7 @@ public class EvolutionaryRunController {
    */
   public void setGen() {
     try {
+      String oldNum = Integer.toString(generationNumber);
       generationNumber = Integer.parseInt(chosenGenNumber.getText());
       if(generationNumber > totalGens) {
         Alert alert = new Alert(AlertType.ERROR);
@@ -151,10 +152,19 @@ public class EvolutionaryRunController {
         alert.showAndWait();
         return;
       }
+      if(generationNumber < 0) {
+        chosenGenNumber.setText(oldNum);
+        generationNumber = Integer.parseInt(oldNum);
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Number of generations must be a positive integer");
+        alert.showAndWait();
+        return;
+      }
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
-      alert.setContentText("Number of generations must be an integer");
+      alert.setContentText("Number of generations must be a positive integer");
       alert.showAndWait();
       return;
     }

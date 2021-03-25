@@ -86,7 +86,7 @@ public class Evolutionary extends Tournament {
   public void runGeneration() {
     for (int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
       Node currentNode = nodes.get(nodeNumber);
-      currentNode.strategy.points = 0;
+      currentNode.getStrategy().setPoints(0);
       currentNode.setPlayedAllGames(false);
     }
     

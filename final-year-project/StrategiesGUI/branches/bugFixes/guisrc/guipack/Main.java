@@ -54,7 +54,7 @@ public class Main extends Application {
   private Stage primaryStage;
   private BorderPane rootLayout;
   public Stage dialogStage;
-  
+  public Stage resultsStage;
   /**
    * List containing every possible strategy to display in the GUI.
    */
@@ -278,17 +278,17 @@ public class Main extends Application {
       loader.setLocation(Main.class.getResource("OutputDetailedResults.fxml"));
       AnchorPane page;
       page = (AnchorPane) loader.load();
-      dialogStage = new Stage();
-      dialogStage.setTitle("Detailed Tournament Results");
-      dialogStage.initModality(Modality.WINDOW_MODAL);
-      dialogStage.initOwner(primaryStage);
+      resultsStage = new Stage();
+      resultsStage.setTitle("Detailed Tournament Results");
+      resultsStage.initModality(Modality.WINDOW_MODAL);
+      resultsStage.initOwner(primaryStage);
       Scene scene = new Scene(page);
-      dialogStage.setScene(scene);
+      resultsStage.setScene(scene);
       DetailedResultsController controller = loader.getController();
       controller.initialize();
       controller.setResults(tournament.returnDecisions(), tournament.returnPoints(), 
               tournament.returnResults(), tournament.returnGameLengths());
-      dialogStage.showAndWait();
+      resultsStage.showAndWait();
     } catch (IOException e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");

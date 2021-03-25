@@ -422,12 +422,26 @@ public class Controller {
   private void probabilityEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
-    if (strat.probabilityProperty().getValue() != "-") {
-      strat.setProbability(Integer.parseInt(newValue));
+    if (strat.probabilityProperty().getValue() != "0") {
+      if(Double.parseDouble(newValue) <= 1) {
+        if(Double.parseDouble(newValue) >= 0) {
+          strat.setProbability(Double.parseDouble(newValue));
+        } else {
+          Alert alert = new Alert(AlertType.WARNING);
+          alert.setTitle("Warning Dialog");
+          alert.setContentText("Probability must be between 0 and 1");
+          alert.showAndWait();
+        }
+      } else {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setContentText("Probability must be between 0 and 1");
+        alert.showAndWait();
+      }
     } else {
       Alert alert = new Alert(AlertType.WARNING);
       alert.setTitle("Warning Dialog");
-      alert.setContentText("Cells containing - are not editable");
+      alert.setContentText("Editing cells containing 0 will not impact the tournament");
       alert.showAndWait();
     }
   }
@@ -443,12 +457,26 @@ public class Controller {
   private void roundsEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
-    if (strat.roundsProperty().getValue() != "-") {
-      strat.setRounds(Integer.parseInt(newValue));
-    } else {
+    try {
+      if (strat.roundsProperty().getValue() != "0") {
+        if(Integer.parseInt(newValue) > 0) {
+          strat.setRounds(Integer.parseInt(newValue));
+        } else {
+          Alert alert = new Alert(AlertType.WARNING);
+          alert.setTitle("Warning Dialog");
+          alert.setContentText("Rounds must be more than 0");
+          alert.showAndWait();
+        }
+      } else {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setContentText("Editing cells containing 0 will not impact the tournament");
+        alert.showAndWait();
+      }
+    } catch (Exception e) {
       Alert alert = new Alert(AlertType.WARNING);
       alert.setTitle("Warning Dialog");
-      alert.setContentText("Cells containing - are not editable");
+      alert.setContentText("Number of rounds must be an integer");
       alert.showAndWait();
     }
   }

@@ -121,6 +121,21 @@ public class RoundRobin extends Tournament {
     spaceData.add(" ");
     dataToWrite.add(spaceData);
 
+    ArrayList<String> titleData = new ArrayList<>(Arrays.asList(
+        "Final Position", 
+        "Strategy", 
+        "Total Points"));
+    dataToWrite.add(titleData);
+    
+    for(int i = 0; i < strategies.size(); i++) {
+      ArrayList<String> resultsData = new ArrayList<>(Arrays.asList(
+          Integer.toString(i + 1), strategies.get(i).nameProperty().getValue(), 
+          Integer.toString(strategies.get(i).getPoints())));
+      dataToWrite.add(resultsData);
+    }
+    dataToWrite.add(spaceData);
+    
+    
     for (int i = 0; i < strategies.size(); i++) {
       for (int j = i; j < strategies.size(); j++) { //creates list of every pairing
         pairings.add(strategies.get(i).nameProperty().getValue());

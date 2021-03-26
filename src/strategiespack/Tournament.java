@@ -42,16 +42,35 @@ public class Tournament {
    */
   ArrayList<Integer> lengths;
   
+  /**
+   * ArrayList containing the length of each of the three games to be played by each pair 
+   * of strategies (if the user has set these through the GUI.
+   */
   ArrayList<Integer> setGameLengths;
   
+  /**
+   * The length of the first of the three games to be played by each pair.
+   */
   int first;
   
+  /**
+   * The length of the second of the three games to be played by each pair.
+   */
   int second;
   
+  /**
+   * The length of the last of the three games to be played by each pair.
+   */
   int third;
   
+  /**
+   * The score accumulated by player1 during the tournament.
+   */
   int player1Score;
   
+  /**
+   * The score accumulated by player2 during the tournament.
+   */
   int player2Score;
   
   /**

@@ -82,13 +82,13 @@ public class DetailedResultsController {
           labelText = labelText + decisionsSet.get(i) + " vs ";
           labelText = labelText + decisionsSet.get(i + 1) + " ";
           labelText = labelText + pointsSet.get(i);
-          if(pointsSet.get(i) == 1) {
+          if (pointsSet.get(i) == 1) {
             labelText = labelText + " point vs ";
           } else {
             labelText = labelText + " points vs ";
           }
           labelText = labelText + pointsSet.get(i + 1);
-          if(pointsSet.get(i + 1) == 1) {
+          if (pointsSet.get(i + 1) == 1) {
             labelText = labelText + " point ";
           } else {
             labelText = labelText + " points ";

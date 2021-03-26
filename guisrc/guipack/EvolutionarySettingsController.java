@@ -274,7 +274,7 @@ public class EvolutionarySettingsController {
     graphPane.getChildren().clear();
     buttons.clear();
     int rowSize = Integer.parseInt(tf.getText());
-    if(rowSize > limit1) {
+    if (rowSize > limit1) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Row size must be less than or equal to " + limit1);
@@ -282,7 +282,7 @@ public class EvolutionarySettingsController {
       rowSize = 4;
     }
     int colSize = Integer.parseInt(tf2.getText());
-    if(colSize > limit2) {
+    if (colSize > limit2) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Column size must be less than or equal to " + limit2);
@@ -350,7 +350,7 @@ public class EvolutionarySettingsController {
     graphPane.getChildren().clear();
     buttons.clear();
     int nodeNumber = Integer.parseInt(tf.getText());
-    if(nodeNumber > limit1) {
+    if (nodeNumber > limit1) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Number of nodes must be less than or equal to " + limit1);
@@ -369,11 +369,11 @@ public class EvolutionarySettingsController {
       width = graphPane.getWidth();
     }
     
-    if(nodeNumber == 2) {
+    if (nodeNumber == 2) {
       Button graphButton = new Button();
       graphButton.setMinSize(minnWidth, minnHeight);
       graphButton.setLayoutX((width / 5));
-      graphButton.setLayoutY(height/2);
+      graphButton.setLayoutY(height / 2);
       graphButton.setOnAction(buttonPressedChangeColour());
       int setId = 1;
       graphButton.setId(String.valueOf(setId));
@@ -382,7 +382,7 @@ public class EvolutionarySettingsController {
       Button graphButton2 = new Button();
       graphButton2.setMinSize(minnWidth, minnHeight);
       graphButton2.setLayoutX((width / 5) * 3);
-      graphButton2.setLayoutY(height/2);
+      graphButton2.setLayoutY(height / 2);
       graphButton2.setOnAction(buttonPressedChangeColour());
       int setId2 = 2;
       graphButton.setId(String.valueOf(setId2));
@@ -525,7 +525,7 @@ public class EvolutionarySettingsController {
     buttons.clear();
     
     int nodeNumber = Integer.parseInt(tf.getText());
-    if(nodeNumber > limit1) {
+    if (nodeNumber > limit1) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Number of nodes must be less than or equal to " + limit1);
@@ -575,7 +575,7 @@ public class EvolutionarySettingsController {
     graphPane.getChildren().clear();
     buttons.clear();
     int nodeNumber = Integer.parseInt(tf.getText());
-    if(nodeNumber > limit1) {
+    if (nodeNumber > limit1) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Number of nodes must be less than or equal to " + limit1);
@@ -657,14 +657,14 @@ public class EvolutionarySettingsController {
     int nodesPerColumnA = Integer.parseInt(tf.getText());
     int nodesPerColumnB = Integer.parseInt(tf2.getText());
     
-    if(nodesPerColumnA > limit1) {
+    if (nodesPerColumnA > limit1) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Number of nodes must be less than or equal to " + limit1);
       alert.showAndWait();
       nodesPerColumnA = 4;
     }
-    if(nodesPerColumnB > limit2) {
+    if (nodesPerColumnB > limit2) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Number of nodes must be less than or equal to " + limit2);

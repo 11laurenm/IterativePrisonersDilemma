@@ -29,6 +29,7 @@ import strategiespack.Strategy;
 
  * @author Lauren Moore - zfac043
  *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
+ *     Code for opening pdf adapted from https://mkyong.com/java/how-to-open-a-pdf-file-in-java/, author Mkyong
  */
 
 public class Controller {
@@ -531,7 +532,6 @@ public class Controller {
   
   @FXML
   private void helpSelected() {
-    //code taken from https://mkyong.com/java/how-to-open-a-pdf-file-in-java/
     try {
       File pdfFile = new File("Documentation/UserGuide.pdf");
       if (pdfFile.exists()) {

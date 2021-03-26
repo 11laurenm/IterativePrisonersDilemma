@@ -10,6 +10,7 @@ import java.util.List;
  * The class representing a tournament of the Iterative Prisoner's Dilemma.
 
  * @author Lauren Moore - zfac043
+ * code for creating a CSV file adapted from: https://stackabuse.com/reading-and-writing-csvs-in-java/, author Jean Fernando
  *
  */
 
@@ -107,7 +108,6 @@ public class RoundRobin extends Tournament {
    * to a csv file.
    */
   public void writeToCsv() {
-    //taken from: https://stackabuse.com/reading-and-writing-csvs-in-java/
     int pairNumber = 0;
     ArrayList<String> pairings = new ArrayList<>();
     ArrayList<ArrayList<String>> dataToWrite = new ArrayList<ArrayList<String>>();

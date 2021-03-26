@@ -28,74 +28,153 @@ import strategiespack.Strategy;
 
 public class EvolutionarySettingsController {
   
+  /**
+   * Allows the program to access the main function.
+   */
   private Main mainn;
   
+  /**
+   * Ensures only one graph type can be selected at a time.
+   */
   @FXML
   private ToggleGroup graphType;
   
+  /**
+   * Allows the user to choose a grid.
+   */
   @FXML
   private RadioButton gridButton;
   
+  /**
+   * Allows the user to choose a circle graph.
+   */
   @FXML
   private RadioButton circleGraphButton;
   
+  /**
+   * Allows the user to choose a star graph.
+   */
   @FXML
   private RadioButton starGraphButton;
   
+  /**
+   * Allows the user to choose a path graph.
+   */
   @FXML
   private RadioButton pathGraphButton;
   
+  /**
+   * Allows the user to choose a complete graph.
+   */
   @FXML
   private RadioButton completeGraphButton;
   
+  /**
+   * Allows the user to choose a bipartite graph.
+   */
   @FXML
   private RadioButton bipartiteGraphButton;
   
+  /**
+   * Table containing all the strategies chosen by the user in the first screen.
+   */
   @FXML
   private TableView<Strategy> stratsTable;
   
+  /**
+   * Column displaying the strategy's name.
+   */
   @FXML
   private TableColumn<Strategy, String> strategyColumn;
   
+  /**
+   * Column displaying the colour associated with the strategy.
+   */
   @FXML
   private TableColumn<Strategy, String> colourColumn;
   
+  /**
+   * The list of strategies used to populate the TableView.
+   */
   private ObservableList<Strategy> stratsList = FXCollections.observableArrayList();
   
+  /**
+   * The AnchorPane containing the graph.
+   */
   @FXML
   private AnchorPane graphPane;
   
+  /**
+   * The AnchorPane containing the TextFields used to set the number of nodes in a graph.
+   */
   @FXML
   private AnchorPane nodesPane;
   
+  /**
+   * TextField used to set the number of nodes in a graph.
+   */
   @FXML
   private TextField tf;
   
+  /**
+   * TextField used to set the number of nodes in a graph.
+   */
   @FXML
   private TextField tf2;
   
+  /**
+   * TextField used to set the number of generations run.
+   */
   @FXML
   private TextField generationField;
   
+  /**
+   * The strategies actually used in the graph, this list is sent to the results screen.
+   */
   ArrayList<Strategy> strategiesForTable;
   
+  /**
+   * The strategies passed to the screen, 
+   * this list is sent to the results screen so it can include a back button.
+   * To relaunch this screen the run screen must have a list of the strategies used in this screen.
+   */
   ArrayList<Strategy> allStrategies;
   
+  /**
+   * The buttons that make up the graph displayed using the GUI.
+   */
   ArrayList<Button> buttons;
   
+  /**
+   * The nodes that make up the graph conceptually and are used to run the tournament.
+   */
   ArrayList<Node> nodes;
   
+  /**
+   * The default values for the nodeNumber TextFields.
+   */
   String tfText1 = "4";
   String tfText2 = "4";
   
+  /**
+   * The limit on how many nodes can be in a graph.
+   */
   int limit1;
   int limit2;
   
+  /**
+   * Used to dynamically generate graphs.
+   */
   double minnWidth;
   double minnHeight;
   double nodeHorizontalDistance;
   double nodeVerticalDistance;
   
+  /**
+   * The data passed to the screen, 
+   * this list is sent to the results screen so it can include a back button.
+   * To relaunch this screen the run screen must have a list of the strategies used in this screen.
+   */
   int roundsParam;
   ArrayList<Integer> payoffsParam;
   ArrayList<Integer> gameLengthsParam;
@@ -134,10 +213,19 @@ public class EvolutionarySettingsController {
     colourColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("colour"));
   }
   
+  /**
+   * Sets the value of the main variable so the main class can be accessed and 
+   * also sets which strategies should be displayed in the table.
+
+   * @param mainclass 
+   */
   public void setMain(Main mainclass) {
     this.mainn = mainclass;
   }
   
+  /**
+   * Returns the user to the first screen.
+   */
   @FXML
   public void backButton() {
     mainn.showOverview();
@@ -146,6 +234,8 @@ public class EvolutionarySettingsController {
   /**
    * Method responsible for running the correct graph building method depending 
    * on which type of graph the user has selected via radio button.
+   * It sets the size limit of each type of graph and displays either one or two 
+   * TextFields to allow the user to set the size of the graph.
    */
   @FXML
   public void runCorrectAnchorMethod() {

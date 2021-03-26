@@ -3,6 +3,8 @@ package guipack;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -29,12 +31,6 @@ public class EvolutionaryRunController {
   @FXML
   AnchorPane buttonsPane;
   
-  @FXML
-  Button nextButton;
-  
-  @FXML
-  Button previousButton;
-  
   ArrayList<ArrayList<Node>> allGens;
   
   Evolutionary evoTournament;
@@ -57,6 +53,13 @@ public class EvolutionaryRunController {
   @FXML
   private TextField chosenGenNumber;
   
+  Main mainn;
+  
+  int rounds;
+  ArrayList<Integer> payoffs;
+  ArrayList<Integer> gameLengths;
+  ArrayList<Strategy> allStrategies;
+  
   /**
    * Empty constructor for the controller.
    */
@@ -76,9 +79,9 @@ public class EvolutionaryRunController {
    * @param gens - the total number of generations selected by the user.
    */
   @FXML 
-  public void initialize(ArrayList<Button> buttonsList, ArrayList<Node> nodesList, 
-      ArrayList<Strategy> strats, int rounds, 
-      ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, int gens) {
+  public void initialize(Main main, ArrayList<Button> buttonsList, ArrayList<Node> nodesList, 
+      ArrayList<Strategy> strats, ArrayList<Strategy> allStrats, int setRounds, 
+      ArrayList<Integer> setPayoffs, ArrayList<Integer> setGameLengths, int gens) {
     buttons = buttonsList;
     nodes = nodesList;
     generationNumber = 0;
@@ -86,7 +89,11 @@ public class EvolutionaryRunController {
     allGens = new ArrayList<ArrayList<Node>>();
     showButtons();
     totalGens = gens;
-    evoTournament = new Evolutionary(nodes, rounds, payoffs, gameLengths, totalGens);
+    rounds = setRounds;
+    payoffs = setPayoffs;
+    gameLengths = setGameLengths;
+    allStrategies = allStrats;
+    evoTournament = new Evolutionary(nodes, setRounds, setPayoffs, setGameLengths, totalGens);
     evoTournament.setUpTournament();
     evoTournament.runWholeTournament();
     allGens = evoTournament.returnAllGenerationResults();
@@ -94,6 +101,12 @@ public class EvolutionaryRunController {
     stratsTable.setItems(stratsList);
     strategyColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("name"));
     colourColumn.setCellValueFactory(new PropertyValueFactory<Strategy, String>("colour"));
+    setButtonHandlers();
+    setMain(main);
+  }
+  
+  public void setMain(Main mainclass) {
+    this.mainn = mainclass;
   }
   
   /**
@@ -110,6 +123,13 @@ public class EvolutionaryRunController {
    * of the tournament.
    */
   public void nextGen() {
+    if(generationNumber == totalGens) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Reached total number of generations run");
+      alert.showAndWait();
+      return;
+    }
     generationNumber++;
     chosenGenNumber.setText(Integer.toString(generationNumber));
     updateNodes();
@@ -133,11 +153,28 @@ public class EvolutionaryRunController {
    */
   public void setGen() {
     try {
+      String oldNum = Integer.toString(generationNumber);
       generationNumber = Integer.parseInt(chosenGenNumber.getText());
+      if(generationNumber > totalGens) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Generation number must be less than " + totalGens);
+        alert.showAndWait();
+        return;
+      }
+      if(generationNumber < 0) {
+        chosenGenNumber.setText(oldNum);
+        generationNumber = Integer.parseInt(oldNum);
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Number of generations must be a positive integer");
+        alert.showAndWait();
+        return;
+      }
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
-      alert.setContentText("Number of generations must be an integer");
+      alert.setContentText("Number of generations must be a positive integer");
       alert.showAndWait();
       return;
     }
@@ -156,5 +193,29 @@ public class EvolutionaryRunController {
           + genNodes.get(buttonNumber).getStrategy().colourProperty().get();
       b.setStyle(buttonStyle);
     }
+  }
+  
+  /**
+   * Event handler that prevents a button from changing colour due to being pressed.
+
+   * @return event handler
+   */
+  private EventHandler<ActionEvent> newButtonPressedChangeColour() {
+    return new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        return;
+      }
+    };
+  }
+  
+  public void setButtonHandlers() {
+    for(Button b: buttons) {
+      b.setOnAction(newButtonPressedChangeColour());
+    }
+  }
+  
+  public void backPressed() {
+    mainn.showEvSettings(allStrategies, rounds, payoffs, gameLengths);
   }
 }

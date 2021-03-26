@@ -86,7 +86,7 @@ public class Evolutionary extends Tournament {
   public void runGeneration() {
     for (int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
       Node currentNode = nodes.get(nodeNumber);
-      currentNode.strategy.points = 0;
+      currentNode.getStrategy().setPoints(0);
       currentNode.setPlayedAllGames(false);
     }
     
@@ -97,7 +97,7 @@ public class Evolutionary extends Tournament {
         Node neighbourNode = currentNode.neighbours.get(neighbourNumber);
         player1Score = 0; //initialise each player's score for this pairing to 0
         player2Score = 0;
-        if (!neighbourNode.getPlayedAllGames()) {
+        if (!neighbourNode.getPlayedAllGames() && !currentNode.getPlayedAllGames()) {
           Game game1 = new Game(currentNode.getStrategy(), neighbourNode.getStrategy(), 
               first, payoffList);
           game1.playGame();

@@ -7,7 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -52,7 +54,7 @@ public class Main extends Application {
   private Stage primaryStage;
   private BorderPane rootLayout;
   public Stage dialogStage;
-  
+  public Stage resultsStage;
   /**
    * List containing every possible strategy to display in the GUI.
    */
@@ -98,7 +100,11 @@ public class Main extends Application {
       primaryStage.setScene(scene);
       primaryStage.show();
     } catch (IOException e) {
-        ;
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching GUI");
+      alert.showAndWait();
+      return;
     }
   }
 
@@ -118,7 +124,11 @@ public class Main extends Application {
       controller.initialize(this);
     
     } catch (IOException e) {
-      ;
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching GUI");
+      alert.showAndWait();
+      return;
     }
   }
   
@@ -132,14 +142,15 @@ public class Main extends Application {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(Main.class.getResource("EvolutionaryFirstScreen.fxml"));
       AnchorPane overview = (AnchorPane) loader.load();
-    
       rootLayout.setCenter(overview);
-
       EvolutionarySettingsController controller = loader.getController();
       controller.initialize(this, strategies, rounds, payoffs, gameLengths);
-    
-    } catch (IOException e) {
-      ;
+    } catch (Exception e) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching tournament setup screen");
+      alert.showAndWait();
+      return;
     }
   }
   
@@ -148,7 +159,7 @@ public class Main extends Application {
    * which allows the user to run an evolutionary tournament.
    */
   public void showEvRun(ArrayList<Button> buttons, ArrayList<Node> nodes, 
-      ArrayList<Strategy> strategiesForTable, int rounds, 
+      ArrayList<Strategy> strategiesForTable, ArrayList<Strategy> allStrategies, int rounds, 
       ArrayList<Integer> payoffs, ArrayList<Integer> gameLengths, int generations) {
     try {
       FXMLLoader loader = new FXMLLoader();
@@ -158,11 +169,15 @@ public class Main extends Application {
       rootLayout.setCenter(overview);
 
       EvolutionaryRunController controller = loader.getController();
-      controller.initialize(buttons, nodes, strategiesForTable, rounds, 
+      controller.initialize(this, buttons, nodes, strategiesForTable, allStrategies, rounds, 
           payoffs, gameLengths, generations);
     
     } catch (IOException e) {
-      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching results screen");
+      alert.showAndWait();
+      return;
     }
   }
 
@@ -239,7 +254,11 @@ public class Main extends Application {
       controller.setMain(this);
       dialogStage.showAndWait();
     } catch (IOException e) {
-      e.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching results screen");
+      alert.showAndWait();
+      return;
     }
   }
 
@@ -259,24 +278,33 @@ public class Main extends Application {
       loader.setLocation(Main.class.getResource("OutputDetailedResults.fxml"));
       AnchorPane page;
       page = (AnchorPane) loader.load();
-      dialogStage = new Stage();
-      dialogStage.setTitle("Detailed Tournament Results");
-      dialogStage.initModality(Modality.WINDOW_MODAL);
-      dialogStage.initOwner(primaryStage);
+      resultsStage = new Stage();
+      resultsStage.setTitle("Detailed Tournament Results");
+      resultsStage.initModality(Modality.WINDOW_MODAL);
+      resultsStage.initOwner(primaryStage);
       Scene scene = new Scene(page);
-      dialogStage.setScene(scene);
+      resultsStage.setScene(scene);
       DetailedResultsController controller = loader.getController();
       controller.initialize();
       controller.setResults(tournament.returnDecisions(), tournament.returnPoints(), 
               tournament.returnResults(), tournament.returnGameLengths());
-      dialogStage.showAndWait();
+      resultsStage.showAndWait();
     } catch (IOException e) {
-      ;
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Error launching results window");
+      alert.showAndWait();
+      return;
     }
   }
   
   public void exportDetailedResults() {
     tournament.writeToCsv();
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle("Success");
+    alert.setContentText("Results successfully exported to file");
+    alert.showAndWait();
+    return;
   }
 
   /**

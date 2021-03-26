@@ -43,7 +43,7 @@ public class EvolutionarySettingsController {
   private RadioButton starGraphButton;
   
   @FXML
-  private RadioButton busGraphButton;
+  private RadioButton pathGraphButton;
   
   @FXML
   private RadioButton completeGraphButton;
@@ -79,12 +79,17 @@ public class EvolutionarySettingsController {
   
   ArrayList<Strategy> strategiesForTable;
   
+  ArrayList<Strategy> allStrategies;
+  
   ArrayList<Button> buttons;
   
   ArrayList<Node> nodes;
   
   String tfText1 = "4";
   String tfText2 = "4";
+  
+  int limit1;
+  int limit2;
   
   double minnWidth;
   double minnHeight;
@@ -120,6 +125,7 @@ public class EvolutionarySettingsController {
     setMain(main);
     buttons = new ArrayList<>();
     runCorrectAnchorMethod();
+    allStrategies = strats;
     stratsList = FXCollections.observableArrayList(strats);
     stratsTable.setItems(stratsList);
     
@@ -145,18 +151,25 @@ public class EvolutionarySettingsController {
   public void runCorrectAnchorMethod() {
     setNodesPaneChildren();
     if (gridButton.isSelected()) {
+      limit1 = 40;
+      limit2 = 13;
       setSecondNodesPaneChildren();
       setAnchorGrid();
     } else if (circleGraphButton.isSelected()) {
+      limit1 = 8;
       setAnchorCircle();
     } else if (starGraphButton.isSelected()) {
-      setAnchorCircle();
+      limit1 = 40;
       setAnchorStar();
-    } else if (busGraphButton.isSelected()) {
-      setAnchorBus();
+    } else if (pathGraphButton.isSelected()) {
+      limit1 = 40;
+      setAnchorPath();
     } else if (completeGraphButton.isSelected()) {
+      limit1 = 8;
       setAnchorCircle();
     } else {
+      limit1 = 4;
+      limit2 = 4;
       setSecondNodesPaneChildren();
       setAnchorBipartite();
     }
@@ -174,8 +187,9 @@ public class EvolutionarySettingsController {
     nodesPane.getChildren().add(lab);
     
     tf = new TextField();
+    tf.setPrefWidth(50);
+    tf.setMinWidth(50);
     tf.setText(tfText1);
-    tf.setPrefWidth(25);
     tf.setLayoutX(lab.getLayoutX() + lab.getPrefWidth() + 100);
     nodesPane.getChildren().add(tf);
     
@@ -194,14 +208,13 @@ public class EvolutionarySettingsController {
     } else if (starGraphButton.isSelected()) {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-          setAnchorCircle();
           setAnchorStar();
         } 
       }));
-    } else if (busGraphButton.isSelected()) {
+    } else if (pathGraphButton.isSelected()) {
       tf.setOnAction((new EventHandler<ActionEvent>() { 
         public void handle(ActionEvent event) { 
-          setAnchorBus();
+          setAnchorPath();
         } 
       }));
     } else if (completeGraphButton.isSelected()) {
@@ -228,13 +241,14 @@ public class EvolutionarySettingsController {
     setNodesPaneChildren();
     Label lab2 = new Label();
     lab2.setText("     X     ");
-    lab2.setLayoutX(tf.getLayoutX() + tf.getPrefWidth() - 10);
+    lab2.setLayoutX(tf.getLayoutX() + tf.getPrefWidth());
     nodesPane.getChildren().add(lab2);
     
     tf2 = new TextField();
+    tf2.setMinWidth(50);
+    tf2.setPrefWidth(50);
     tf2.setText(tfText2);
-    tf2.setPrefWidth(25);
-    tf2.setLayoutX(lab2.getLayoutX() + lab2.getPrefWidth() + 35);
+    tf2.setLayoutX(lab2.getLayoutX() + lab2.getPrefWidth() + 40);
     nodesPane.getChildren().add(tf2);
     
     if (gridButton.isSelected()) {
@@ -259,8 +273,22 @@ public class EvolutionarySettingsController {
   public void setAnchorGrid() {
     graphPane.getChildren().clear();
     buttons.clear();
-    int rowSize = Integer.parseInt(tf.getText());;
-    int colSize = Integer.parseInt(tf2.getText());;
+    int rowSize = Integer.parseInt(tf.getText());
+    if(rowSize > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Row size must be less than or equal to " + limit1);
+      alert.showAndWait();
+      rowSize = 4;
+    }
+    int colSize = Integer.parseInt(tf2.getText());
+    if(colSize > limit2) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Column size must be less than or equal to " + limit2);
+      alert.showAndWait();
+      colSize = 4;
+    }
     double height;
     double width;
     if (graphPane.getHeight() == 0.00) {
@@ -322,6 +350,13 @@ public class EvolutionarySettingsController {
     graphPane.getChildren().clear();
     buttons.clear();
     int nodeNumber = Integer.parseInt(tf.getText());
+    if(nodeNumber > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit1);
+      alert.showAndWait();
+      nodeNumber = 4;
+    }
     double height;
     double width;
     double circleVerticalNodes = 0;
@@ -332,6 +367,28 @@ public class EvolutionarySettingsController {
     } else {
       height = graphPane.getHeight();
       width = graphPane.getWidth();
+    }
+    
+    if(nodeNumber == 2) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX((width / 5));
+      graphButton.setLayoutY(height/2);
+      graphButton.setOnAction(buttonPressedChangeColour());
+      int setId = 1;
+      graphButton.setId(String.valueOf(setId));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+      Button graphButton2 = new Button();
+      graphButton2.setMinSize(minnWidth, minnHeight);
+      graphButton2.setLayoutX((width / 5) * 3);
+      graphButton2.setLayoutY(height/2);
+      graphButton2.setOnAction(buttonPressedChangeColour());
+      int setId2 = 2;
+      graphButton.setId(String.valueOf(setId2));
+      buttons.add(graphButton2);
+      graphPane.getChildren().add(graphButton2);
+      return;
     }
     
     if ((nodeNumber % 2) == 0) {
@@ -464,27 +521,67 @@ public class EvolutionarySettingsController {
    * Method responsible for generating a graph when the user has chosen the star option.
    */
   public void setAnchorStar() {
+    graphPane.getChildren().clear();
+    buttons.clear();
     
     int nodeNumber = Integer.parseInt(tf.getText());
+    if(nodeNumber > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit1);
+      alert.showAndWait();
+      nodeNumber = 4;
+    }
+    double height;
+    double width;
+    if (graphPane.getHeight() == 0.00) {
+      height = graphPane.getMinHeight();
+      width = graphPane.getMinWidth();
+    } else {
+      height = graphPane.getHeight();
+      width = graphPane.getWidth();
+    }
     
+    minnWidth = width / ((nodeNumber - 1) * 2);
+    minnHeight = height / 5;
+    nodeHorizontalDistance = width / (nodeNumber + 2);
+    nodeVerticalDistance = height / 5;
+    for (int nodeLoopNum = 0; nodeLoopNum < nodeNumber - 1; nodeLoopNum++) {
+      Button graphButton = new Button();
+      graphButton.setMinSize(minnWidth, minnHeight);
+      graphButton.setLayoutX((nodeLoopNum + 1) * nodeHorizontalDistance);
+      graphButton.setLayoutY(nodeVerticalDistance * 3);
+      graphButton.setOnAction(buttonPressedChangeColour());
+      graphButton.setId(String.valueOf(nodeLoopNum));
+      buttons.add(graphButton);
+      graphPane.getChildren().add(graphButton);
+    }
     Button graphButton = new Button();
     graphButton.setMinSize(minnWidth, minnHeight);
-    graphButton.setLayoutX(nodeHorizontalDistance * (nodeNumber / 4));
-    graphButton.setLayoutY(nodeVerticalDistance * (nodeNumber / 2));
+    graphButton.setLayoutX(((nodeNumber) / 2) * nodeHorizontalDistance);
+    graphButton.setLayoutY(nodeVerticalDistance);
     graphButton.setOnAction(buttonPressedChangeColour());
-    graphButton.setId(String.valueOf(-1));
+    graphButton.setId(String.valueOf(nodeNumber));
     buttons.add(graphButton);
     graphPane.getChildren().add(graphButton);
+    
   }
   
   /**
-   * Method responsible for generating a graph when the user has chosen the bus option.
+   * Method responsible for generating a graph when the user has chosen the path option.
    */
   @FXML
-  public void setAnchorBus() {
+  public void setAnchorPath() {
     graphPane.getChildren().clear();
     buttons.clear();
-    int nodeNumber = Integer.parseInt(tf.getText());;
+    int nodeNumber = Integer.parseInt(tf.getText());
+    if(nodeNumber > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit1);
+      alert.showAndWait();
+      nodeNumber = 4;
+    }
     double height;
     double width;
     if (graphPane.getHeight() == 0.00) {
@@ -514,7 +611,7 @@ public class EvolutionarySettingsController {
   /**
    * Method responsible for assigning the correct neighbours to each node.
    */
-  public void busRun() {
+  public void pathRun() {
     buttonToNode();
     for (int first = 0; first < nodes.size(); first++) {
       Node firstNode = nodes.get(first);
@@ -546,6 +643,7 @@ public class EvolutionarySettingsController {
         }
       }
     }
+    
     setButtonData();
   }
   
@@ -558,6 +656,22 @@ public class EvolutionarySettingsController {
     buttons.clear();
     int nodesPerColumnA = Integer.parseInt(tf.getText());
     int nodesPerColumnB = Integer.parseInt(tf2.getText());
+    
+    if(nodesPerColumnA > limit1) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit1);
+      alert.showAndWait();
+      nodesPerColumnA = 4;
+    }
+    if(nodesPerColumnB > limit2) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Number of nodes must be less than or equal to " + limit2);
+      alert.showAndWait();
+      nodesPerColumnB = 4;
+    }
+    
     int largestColumn;
     if (nodesPerColumnA > nodesPerColumnA) {
       largestColumn = nodesPerColumnA;
@@ -633,8 +747,12 @@ public class EvolutionarySettingsController {
         try {
           selectedStrat = stratsTable.getSelectionModel()
               .getSelectedItem().getClass().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-          e.printStackTrace();
+        } catch (Exception e) {
+          Alert alert = new Alert(AlertType.ERROR);
+          alert.setTitle("Error Dialog");
+          alert.setContentText("A strategy must be selected from the table to assign it to a node");
+          alert.showAndWait();
+          return;
         }
         String buttonStyle = "-fx-background-color: " + selectedStrat.colourProperty().get();
         Button b = ((Button) event.getSource());
@@ -712,8 +830,8 @@ public class EvolutionarySettingsController {
         circleRun();
       } else if (starGraphButton.isSelected()) {
         starRun();
-      } else if (busGraphButton.isSelected()) {
-        busRun();
+      } else if (pathGraphButton.isSelected()) {
+        pathRun();
       } else if (completeGraphButton.isSelected()) {
         completeRun();
       } else {
@@ -730,7 +848,7 @@ public class EvolutionarySettingsController {
         alert.showAndWait();
         return;
       }
-      mainn.showEvRun(buttons, nodes, strategiesForTable, roundsParam, 
+      mainn.showEvRun(buttons, nodes, strategiesForTable, allStrategies, roundsParam, 
           payoffsParam, gameLengthsParam, gens);
     } catch (Exception e) {
       e.printStackTrace();

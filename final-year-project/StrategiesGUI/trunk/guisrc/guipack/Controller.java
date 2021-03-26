@@ -4,10 +4,13 @@ import guipack.Main;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.collections.ObservableList;
+import java.awt.Desktop;
+import java.io.File;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -26,6 +29,7 @@ import strategiespack.Strategy;
 
  * @author Lauren Moore - zfac043
  *     Some code adapted from https://code.makery.ch/library/javafx-tutorial/, author Marco Jakob
+ *     Code for opening pdf adapted from https://mkyong.com/java/how-to-open-a-pdf-file-in-java/, author Mkyong
  */
 
 public class Controller {
@@ -108,6 +112,9 @@ public class Controller {
   
   @FXML
   private CheckBox gamesCheckBox;
+  
+  @FXML
+  private Button resetPayoffsButton;
 
   Random random;
   
@@ -418,12 +425,26 @@ public class Controller {
   private void probabilityEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
-    if (strat.probabilityProperty().getValue() != "-") {
-      strat.setProbability(Integer.parseInt(newValue));
+    if (strat.probabilityProperty().getValue() != "0") {
+      if(Double.parseDouble(newValue) <= 1) {
+        if(Double.parseDouble(newValue) >= 0) {
+          strat.setProbability(Double.parseDouble(newValue));
+        } else {
+          Alert alert = new Alert(AlertType.WARNING);
+          alert.setTitle("Warning Dialog");
+          alert.setContentText("Probability must be between 0 and 1");
+          alert.showAndWait();
+        }
+      } else {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setContentText("Probability must be between 0 and 1");
+        alert.showAndWait();
+      }
     } else {
       Alert alert = new Alert(AlertType.WARNING);
       alert.setTitle("Warning Dialog");
-      alert.setContentText("Cells containing - are not editable");
+      alert.setContentText("Editing cells containing 0 will not impact the tournament");
       alert.showAndWait();
     }
   }
@@ -439,12 +460,26 @@ public class Controller {
   private void roundsEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
-    if (strat.roundsProperty().getValue() != "-") {
-      strat.setRounds(Integer.parseInt(newValue));
-    } else {
+    try {
+      if (strat.roundsProperty().getValue() != "0") {
+        if(Integer.parseInt(newValue) > 0) {
+          strat.setRounds(Integer.parseInt(newValue));
+        } else {
+          Alert alert = new Alert(AlertType.WARNING);
+          alert.setTitle("Warning Dialog");
+          alert.setContentText("Rounds must be more than 0");
+          alert.showAndWait();
+        }
+      } else {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setContentText("Editing cells containing 0 will not impact the tournament");
+        alert.showAndWait();
+      }
+    } catch (Exception e) {
       Alert alert = new Alert(AlertType.WARNING);
       alert.setTitle("Warning Dialog");
-      alert.setContentText("Cells containing - are not editable");
+      alert.setContentText("Number of rounds must be an integer");
       alert.showAndWait();
     }
   }
@@ -480,6 +515,48 @@ public class Controller {
       game1.setOpacity(1);
       game2.setOpacity(1);
       game3.setOpacity(1);
+    }
+  }
+  
+  @FXML
+  private void resetPayoffs() {
+    cc1.setText("3");
+    cc2.setText("3");
+    cd1.setText("0");
+    cd2.setText("5");
+    dc1.setText("5");
+    dc2.setText("0");
+    dd1.setText("1");
+    dd2.setText("1");
+  }
+  
+  @FXML
+  private void helpSelected() {
+    try {
+      File pdfFile = new File("Documentation/UserGuide.pdf");
+      if (pdfFile.exists()) {
+          if (Desktop.isDesktopSupported()) {
+              Desktop.getDesktop().open(pdfFile);
+          } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Unable to open user guide");
+            alert.showAndWait();
+            return;
+          }
+      } else {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Unable to find user guide");
+        alert.showAndWait();
+        return;
+      }
+    } catch (Exception e) {
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error Dialog");
+      alert.setContentText("Unable to open user guide");
+      alert.showAndWait();
+      return;
     }
   }
   

@@ -10,6 +10,7 @@ import java.util.List;
  * The class representing a tournament of the Iterative Prisoner's Dilemma.
 
  * @author Lauren Moore - zfac043
+ * code for creating a CSV file adapted from: https://stackabuse.com/reading-and-writing-csvs-in-java/, author Jean Fernando
  *
  */
 
@@ -45,6 +46,8 @@ public class RoundRobin extends Tournament {
    * iterates through the list of strategies to run 3 games with every possible pairing.
    */
   public void runTournament() {
+    
+    setUpTournament();
 
     decisions = new ArrayList<ArrayList<Character>>();
     points = new ArrayList<ArrayList<Integer>>();
@@ -83,6 +86,13 @@ public class RoundRobin extends Tournament {
     }
   }
   
+  public void setUpTournament() {
+    for (int i = 0; i < strategies.size(); i++) {
+      Strategy strat = strategies.get(i);
+      strat.setPoints(0);
+    }
+  }
+  
   /**
    * Returns the results of the tournament as points are 
    * associated with strategies.
@@ -98,7 +108,6 @@ public class RoundRobin extends Tournament {
    * to a csv file.
    */
   public void writeToCsv() {
-    //taken from: https://stackabuse.com/reading-and-writing-csvs-in-java/
     int pairNumber = 0;
     ArrayList<String> pairings = new ArrayList<>();
     ArrayList<ArrayList<String>> dataToWrite = new ArrayList<ArrayList<String>>();
@@ -108,7 +117,25 @@ public class RoundRobin extends Tournament {
           "", "Length of game " + (i + 1), Integer.toString(returnGameLengths().get(i))));
       dataToWrite.add(data);
     }
+    ArrayList<String> spaceData = new ArrayList<>();
+    spaceData.add(" ");
+    dataToWrite.add(spaceData);
 
+    ArrayList<String> titleData = new ArrayList<>(Arrays.asList(
+        "Final Position", 
+        "Strategy", 
+        "Total Points"));
+    dataToWrite.add(titleData);
+    
+    for(int i = 0; i < strategies.size(); i++) {
+      ArrayList<String> resultsData = new ArrayList<>(Arrays.asList(
+          Integer.toString(i + 1), strategies.get(i).nameProperty().getValue(), 
+          Integer.toString(strategies.get(i).getPoints())));
+      dataToWrite.add(resultsData);
+    }
+    dataToWrite.add(spaceData);
+    
+    
     for (int i = 0; i < strategies.size(); i++) {
       for (int j = i; j < strategies.size(); j++) { //creates list of every pairing
         pairings.add(strategies.get(i).nameProperty().getValue());
@@ -138,10 +165,11 @@ public class RoundRobin extends Tournament {
           dataToWrite.add(data2);
         }
       }
+      dataToWrite.add(spaceData);
     }
     
     try {
-      FileWriter csvWriter = new FileWriter("results.csv");
+      FileWriter csvWriter = new FileWriter("RoundRobinResults.csv");
       for (List<String> rowData : dataToWrite) {
         csvWriter.append(String.join(",", rowData));
         csvWriter.append("\n");

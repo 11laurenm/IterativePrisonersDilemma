@@ -143,6 +143,10 @@ public class ResultsController {
     mainn.launchDetailedResults();
   }
   
+  /**
+   * Runs the method responsible for handling the export of the 
+   * results when the corresponding button is pressed.
+   */
   @FXML
   private void exportDetailedResultsButton() {
     mainn.exportDetailedResults();

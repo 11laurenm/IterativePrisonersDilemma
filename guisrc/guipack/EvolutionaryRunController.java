@@ -26,35 +26,81 @@ import strategiespack.Strategy;
 
 public class EvolutionaryRunController {
   
+  /**
+   * The buttons that make up the graph displayed using the GUI.
+   */
   ArrayList<Button> buttons;
+  
+  /**
+   * The nodes that make up the graph conceptually and are used to run the tournament.
+   */
   ArrayList<Node> nodes;
+  
+  /**
+   * The AnchorPane containing the graph.
+   */
   @FXML
   AnchorPane buttonsPane;
   
+  /**
+   * Contains the state of each node during each generation.
+   */
   ArrayList<ArrayList<Node>> allGens;
   
+  /**
+   * The tournament being run.
+   */
   Evolutionary evoTournament;
   
+  /**
+   * The generation being displayed by the GUI.
+   */
   int generationNumber;
   
+  /**
+   * Table containing all the strategies chosen by the user to play in the tournament.
+   */
   @FXML
   private TableView<Strategy> stratsTable;
   
+  /**
+   * Column displaying the strategy's name.
+   */
   @FXML
   private TableColumn<Strategy, String> strategyColumn;
   
+  /**
+   * Column displaying the colour associated with the strategy.
+   */
   @FXML
   private TableColumn<Strategy, String> colourColumn;
   
+  /**
+   * The list of strategies used to populate the TableView.
+   */
   private ObservableList<Strategy> stratsList = FXCollections.observableArrayList();
   
+  /**
+   * The total number of generations run by the tournament.
+   */
   int totalGens;
   
+  /**
+   * The Text Field used to display and set the generation displayed on the graph.
+   */
   @FXML
   private TextField chosenGenNumber;
   
+  /**
+   * Allows the program to access the main function.
+   */
   Main mainn;
   
+  /**
+   * The data passed to the results screen, 
+   * this list is saved so it can include a back button.
+   * To relaunch the configuration screen the run screen must have a list of the strategies used in this screen.
+   */
   int rounds;
   ArrayList<Integer> payoffs;
   ArrayList<Integer> gameLengths;
@@ -105,6 +151,12 @@ public class EvolutionaryRunController {
     setMain(main);
   }
   
+  /**
+   * Sets the value of the main variable so the main class can be accessed and 
+   * also sets which strategies should be displayed in the table.
+
+   * @param mainclass 
+   */
   public void setMain(Main mainclass) {
     this.mainn = mainclass;
   }
@@ -219,6 +271,9 @@ public class EvolutionaryRunController {
     }
   }
   
+  /**
+   * Used to re-launch the evolutionary tournament configuration screen.
+   */
   public void backPressed() {
     mainn.showEvSettings(allStrategies, rounds, payoffs, gameLengths);
   }

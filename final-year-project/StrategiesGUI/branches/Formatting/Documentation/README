@@ -6,7 +6,9 @@ guisrc contains both java and fxml files used to create and control the GUI.
 In my program directory, in the folder labelled Executable, I have created an executable jar file of my program. 
 Running the program requires installation of the Java Runtime Environment which can be found at https://www.oracle.com/uk/java/technologies/javase-jre8-downloads.html but is likely to already be installed on the user's computer. 
 The version present in the build path of this program is JavaSE 1.8.
-The jar file can then be run by navigating to its folder in the command line and entering the command - java -jar ZFAC043.final.jar
+The jar file can then be run by navigating to the folder containing it in the command line and entering the command:
+java --module-path PATH --add-modules javafx.fxml --add-modules javafx.controls -jar ZFAC043.final.jar
+where PATH is replaced with the path to the JavaFX SDK which should end in \lib
 
 It is possible to compile and run the program from the code however there is no difference between the code version and the executable provided. 
 In order to run the program from the code using eclipse the JavaFX package must be installed - https://gluonhq.com/products/javafx/ contains versions for Windows, MacOS and Linux. 

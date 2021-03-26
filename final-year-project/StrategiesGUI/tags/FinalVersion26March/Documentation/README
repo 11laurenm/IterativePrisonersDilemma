@@ -1,0 +1,15 @@
+The project is made up of three packages:
+src contains all strategy classes and those necessary to run tournaments.
+testsrc contains all JUnit test classes.
+guisrc contains both java and fxml files used to create and control the GUI.
+
+In my program directory, in the folder labelled Executable, I have created an executable jar file of my program. 
+Running the program requires installation of the Java Runtime Environment which can be found at https://www.oracle.com/uk/java/technologies/javase-jre8-downloads.html but is likely to already be installed on the user's computer. 
+The JavaFX package must be installed - https://gluonhq.com/products/javafx/ contains versions for Windows, MacOS and Linux. 
+The version present in the build path of this program is JavaSE 1.8.
+The jar file can then be run by navigating to the folder containing it in the command line and entering the command:
+java --module-path PATH --add-modules javafx.fxml --add-modules javafx.controls -jar ZFAC043.final.jar
+where PATH is replaced with the path to the JavaFX SDK which should end in \lib
+
+I have created a user guide to explain the functionality of my program in case the user does not have pre-existing knowledge of the prisoner's dilemma or anything is unclear. 
+This can be accessed through the help menu at the top of the program and I have also included it in the Documentation folder.

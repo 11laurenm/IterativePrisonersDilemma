@@ -10,7 +10,7 @@ import java.util.List;
  * The class representing a tournament of the Iterative Prisoner's Dilemma.
 
  * @author Lauren Moore - zfac043
- * code for creating a CSV file adapted from: https://stackabuse.com/reading-and-writing-csvs-in-java/, author Jean Fernando
+ *      code for creating a CSV file adapted from: https://stackabuse.com/reading-and-writing-csvs-in-java/, author Jean Fernando
  *
  */
 
@@ -86,6 +86,9 @@ public class RoundRobin extends Tournament {
     }
   }
   
+  /**
+   * Method run before the main tournament, ensures each strategy starts with a score of 0.
+   */
   public void setUpTournament() {
     for (int i = 0; i < strategies.size(); i++) {
       Strategy strat = strategies.get(i);
@@ -127,7 +130,7 @@ public class RoundRobin extends Tournament {
         "Total Points"));
     dataToWrite.add(titleData);
     
-    for(int i = 0; i < strategies.size(); i++) {
+    for (int i = 0; i < strategies.size(); i++) {
       ArrayList<String> resultsData = new ArrayList<>(Arrays.asList(
           Integer.toString(i + 1), strategies.get(i).nameProperty().getValue(), 
           Integer.toString(strategies.get(i).getPoints())));

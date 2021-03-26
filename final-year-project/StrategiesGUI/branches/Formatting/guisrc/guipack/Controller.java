@@ -98,6 +98,10 @@ public class Controller {
   @FXML
   private TextField rounds;
   
+  /**
+   * Text fields that allows the user to enter the number of rounds per game
+   * to be played.
+   */
   @FXML
   private TextField game1;
   
@@ -107,19 +111,38 @@ public class Controller {
   @FXML
   private TextField game3;
   
+  /**
+   * Checkbox that lets the user decide whether or not to randomise the number 
+   * of total rounds.
+   */
   @FXML
   private CheckBox roundsCheckBox;
   
+  /**
+   * Checkbox that lets the user decide whether or not to randomise the length of each game.
+   */
   @FXML
   private CheckBox gamesCheckBox;
   
+  /**
+   * Button that allows the user to reset payoffs back to their default value.
+   */
   @FXML
   private Button resetPayoffsButton;
 
+  /**
+   * Used to randomise the number of rounds and/or the length of games.
+   */
   Random random;
   
+  /**
+   * The tournament being run.
+   */
   RoundRobin tournament;
   
+  /**
+   * Contains the number of rounds in each game to be played if they have been set through the GUI.
+   */
   ArrayList<Integer> gameLengths;
   
   /**
@@ -204,7 +227,8 @@ public class Controller {
     gameLengths = new ArrayList<>();
     
     try {
-      if (gameLengths.size() != 0) {
+      if (gameLengths.size() != 0) { 
+        //if there is already data in the gameLengths array it should be overwritten
         gameLengths.set(0, Integer.parseInt(game1.getText()));
         gameLengths.set(1, Integer.parseInt(game2.getText()));
         gameLengths.set(2, Integer.parseInt(game3.getText()));
@@ -244,7 +268,9 @@ public class Controller {
       return;
     }
     
-    try {
+    try { 
+      //instantiates the tournament with either values from GUI or 
+      //random values depending on the user's choice
       if (roundsCheckBox.isSelected()) {
         gameLengths.clear();
         random = new Random();
@@ -272,6 +298,10 @@ public class Controller {
     
   }
   
+  /**
+   * Used to launch the screen for setting up an evolutionary tournament, including
+   * all the choices made by the user in the first screen.
+   */
   @FXML
   private void launchEvolutionary() {
     ObservableList<Strategy> selectedItems = strategyTable.getSelectionModel().getSelectedItems();
@@ -425,9 +455,9 @@ public class Controller {
   private void probabilityEdited(CellEditEvent<Strategy, String> event) {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
-    if (strat.probabilityProperty().getValue() != "0") {
-      if (Double.parseDouble(newValue) <= 1) {
-        if (Double.parseDouble(newValue) >= 0) {
+    if (strat.probabilityProperty().getValue() != "0") { //if the strategy has no rounds property
+      if (Double.parseDouble(newValue) <= 1) { //probability must be less than one
+        if (Double.parseDouble(newValue) >= 0) { //probability must be more than zero
           strat.setProbability(Double.parseDouble(newValue));
         } else {
           Alert alert = new Alert(AlertType.WARNING);
@@ -461,8 +491,8 @@ public class Controller {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
     try {
-      if (strat.roundsProperty().getValue() != "0") {
-        if (Integer.parseInt(newValue) > 0) {
+      if (strat.roundsProperty().getValue() != "0") { //if the strategy has no rounds property
+        if (Integer.parseInt(newValue) > 0) { //number of rounds must be more than 0
           strat.setRounds(Integer.parseInt(newValue));
         } else {
           Alert alert = new Alert(AlertType.WARNING);
@@ -484,6 +514,10 @@ public class Controller {
     }
   }
   
+  /**
+   * Sets the games checkbox to randomise if the rounds checkbox has been.
+   * Also sets the rounds textfield to uneditable if the user has chosen to randomise.
+   */
   @FXML
   private void roundsCheckBoxSelected() {
     if (roundsCheckBox.isSelected()) {
@@ -499,6 +533,9 @@ public class Controller {
     }
   }
   
+  /**
+   * Makes the game length textfields to uneditable if the user has chosen to randomise.
+   */
   @FXML
   private void gamesCheckBoxSelected() {
     if (gamesCheckBox.isSelected()) {
@@ -518,6 +555,9 @@ public class Controller {
     }
   }
   
+  /**
+   * Returns the payoffs to the default if the user presses the reset button.
+   */
   @FXML
   private void resetPayoffs() {
     cc1.setText("3");
@@ -530,6 +570,9 @@ public class Controller {
     dd2.setText("1");
   }
   
+  /**
+   * Opens the user guide pdf if the user selects it from the help menu.
+   */
   @FXML
   private void helpSelected() {
     try {

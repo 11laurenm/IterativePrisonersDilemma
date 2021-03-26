@@ -1,11 +1,11 @@
 package guipack;
 
 import guipack.Main;
+import java.awt.Desktop;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.collections.ObservableList;
-import java.awt.Desktop;
-import java.io.File;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Alert;
@@ -426,8 +426,8 @@ public class Controller {
     String newValue = event.getNewValue();
     Strategy strat = event.getRowValue();
     if (strat.probabilityProperty().getValue() != "0") {
-      if(Double.parseDouble(newValue) <= 1) {
-        if(Double.parseDouble(newValue) >= 0) {
+      if (Double.parseDouble(newValue) <= 1) {
+        if (Double.parseDouble(newValue) >= 0) {
           strat.setProbability(Double.parseDouble(newValue));
         } else {
           Alert alert = new Alert(AlertType.WARNING);
@@ -462,7 +462,7 @@ public class Controller {
     Strategy strat = event.getRowValue();
     try {
       if (strat.roundsProperty().getValue() != "0") {
-        if(Integer.parseInt(newValue) > 0) {
+        if (Integer.parseInt(newValue) > 0) {
           strat.setRounds(Integer.parseInt(newValue));
         } else {
           Alert alert = new Alert(AlertType.WARNING);
@@ -535,15 +535,15 @@ public class Controller {
     try {
       File pdfFile = new File("Documentation/UserGuide.pdf");
       if (pdfFile.exists()) {
-          if (Desktop.isDesktopSupported()) {
-              Desktop.getDesktop().open(pdfFile);
-          } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText("Unable to open user guide");
-            alert.showAndWait();
-            return;
-          }
+        if (Desktop.isDesktopSupported()) {
+          Desktop.getDesktop().open(pdfFile);
+        } else {
+          Alert alert = new Alert(AlertType.ERROR);
+          alert.setTitle("Error Dialog");
+          alert.setContentText("Unable to open user guide");
+          alert.showAndWait();
+          return;
+        }
       } else {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error Dialog");

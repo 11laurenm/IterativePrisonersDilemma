@@ -73,9 +73,9 @@ public class EvolutionaryRunController {
    * @param buttonsList - an ArrayList containing every button created in the previous screen.
    * @param nodesList - an ArrayList containing every node created in the previous screen.
    * @param strats - all the strategies selected by the user.
-   * @param rounds - the total number of rounds selected by the user.
-   * @param payoffs - the payoff values selected by the user.
-   * @param gameLengths - the game lengths selected by the user.
+   * @param setRounds - the total number of rounds selected by the user.
+   * @param setPayoffs - the payoff values selected by the user.
+   * @param setGameLengths - the game lengths selected by the user.
    * @param gens - the total number of generations selected by the user.
    */
   @FXML 
@@ -123,7 +123,7 @@ public class EvolutionaryRunController {
    * of the tournament.
    */
   public void nextGen() {
-    if(generationNumber == totalGens) {
+    if (generationNumber == totalGens) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Error Dialog");
       alert.setContentText("Reached total number of generations run");
@@ -155,14 +155,14 @@ public class EvolutionaryRunController {
     try {
       String oldNum = Integer.toString(generationNumber);
       generationNumber = Integer.parseInt(chosenGenNumber.getText());
-      if(generationNumber > totalGens) {
+      if (generationNumber > totalGens) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error Dialog");
         alert.setContentText("Generation number must be less than " + totalGens);
         alert.showAndWait();
         return;
       }
-      if(generationNumber < 0) {
+      if (generationNumber < 0) {
         chosenGenNumber.setText(oldNum);
         generationNumber = Integer.parseInt(oldNum);
         Alert alert = new Alert(AlertType.ERROR);
@@ -209,8 +209,12 @@ public class EvolutionaryRunController {
     };
   }
   
+  /**
+   * Iterates through the list of buttons and changes their functionality (makes it so 
+   * that the user can no longer interact with them).
+   */
   public void setButtonHandlers() {
-    for(Button b: buttons) {
+    for (Button b : buttons) {
       b.setOnAction(newButtonPressedChangeColour());
     }
   }

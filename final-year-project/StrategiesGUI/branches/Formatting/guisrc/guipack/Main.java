@@ -8,8 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -298,6 +298,10 @@ public class Main extends Application {
     }
   }
   
+  /**
+   * Runs the method in the round robin class responsible for exporting results to a CSV file 
+   * then produces a message for the user confirming this has been completed.
+   */
   public void exportDetailedResults() {
     tournament.writeToCsv();
     Alert alert = new Alert(AlertType.CONFIRMATION);

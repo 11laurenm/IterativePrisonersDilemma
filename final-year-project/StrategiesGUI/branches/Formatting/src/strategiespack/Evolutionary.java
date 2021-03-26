@@ -11,9 +11,25 @@ import java.util.ArrayList;
 
 public class Evolutionary extends Tournament {
   
+  /**
+   * Every node represents a player in the tournament.
+   */
   ArrayList<Node> nodes;
+  
+  /**
+   * Stores the score of each node in the generation currently being run.
+   */
   ArrayList<Integer> genScores;
+  
+  /**
+   * The total number of generations to be run.
+   */
   int generations;
+  
+  /**
+   * An ArrayList of ArrayLists, each representing a generation 
+   * and showing the state of each node at that point.
+   */
   public ArrayList<ArrayList<Node>> allGenerations;
   
   /**
@@ -71,6 +87,7 @@ public class Evolutionary extends Tournament {
     for (int gen = 0; gen < generations; gen++) {
       runGeneration();
       ArrayList<Node> newNodes = new ArrayList<>();
+      //it is necessary to create copies of the nodes each time to save their strategy and score
       for (Node n : nodes) {
         Node newNode = new Node(n.getStrategy());
         newNodes.add(newNode);
@@ -86,7 +103,8 @@ public class Evolutionary extends Tournament {
   public void runGeneration() {
     for (int nodeNumber = 0; nodeNumber < nodes.size(); nodeNumber++) {
       Node currentNode = nodes.get(nodeNumber);
-      currentNode.getStrategy().setPoints(0);
+      currentNode.getStrategy().setPoints(0); 
+      //initialise each player's score for this generation to 0
       currentNode.setPlayedAllGames(false);
     }
     
@@ -115,7 +133,7 @@ public class Evolutionary extends Tournament {
       nodes.get(nodeNumber).setPlayedAllGames(true);
     }
     normaliseScores();
-    setGenerationScores();
+    setGenerationScores(); //saves the scores earned by each node in this generation
     updateNodes();
   }
   
@@ -126,12 +144,12 @@ public class Evolutionary extends Tournament {
   public void updateNodes() {
     for (Node n : nodes) {
       Node highestScoring = n;
-      for (Node neighbour : n.neighbours) {
+      for (Node neighbour : n.neighbours) { //identifies which neighbour has the highest score
         if (neighbour.getStrategy().getPoints() > highestScoring.getStrategy().getPoints()) {
           highestScoring = neighbour;
         }
       }
-      try {
+      try { //updates the strategy of the node to the strategy of its highest scoring neighbour
         Strategy strat = highestScoring.getStrategy().getClass().newInstance();
         strat.setProbability(Double.parseDouble(highestScoring.getStrategy()
             .probabilityProperty().get()));
@@ -162,6 +180,10 @@ public class Evolutionary extends Tournament {
     }
   }
   
+  /**
+   * Getter for the scores in the generation being run.
+   * @return the ArrayList containing the scores
+   */
   public ArrayList<Integer> returnGenerationScores() {
     return genScores;
   }
@@ -178,7 +200,8 @@ public class Evolutionary extends Tournament {
   }
   
   /**
-   * Adds the nodes (and therefore scores) for a generation to the master list.
+   * Adds the nodes (and therefore scores) for a generation to the master list 
+   * used to display results.
 
    * @param nodesToAdd the nodes for the current generation
    */
